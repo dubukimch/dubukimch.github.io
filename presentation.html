@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스마트팜 통합 솔루션 | 웹 프레젠테이션</title>
+  <meta name="description" content="스마트팜 통합 솔루션 포트폴리오를 발표용 흐름으로 재구성한 웹 프레젠테이션" />
+  <link rel="stylesheet" href="assets/css/presentation.css" />
+</head>
+<body>
+  <header class="presentation-header">
+    <a class="presentation-brand" href="index.html">← 포트폴리오 홈</a>
+    <div class="presentation-status">
+      <span id="slide-counter">1 / 8</span>
+    </div>
+  </header>
+
+  <main id="slides" class="slides" aria-label="웹 프레젠테이션">
+    <section class="slide is-active" data-title="표지">
+      <div class="slide-inner hero-slide">
+        <div class="slide-copy">
+          <p class="eyebrow">DIGITAL TWIN / SMART FARM</p>
+          <h1>스마트팜 통합 솔루션</h1>
+          <p class="slide-lead">
+            여러 장비와 프로그램으로 분산된 스마트팜 운영을
+            하나의 디지털 트윈 기반 경험으로 통합하는 프로젝트
+          </p>
+          <div class="slide-tags">
+            <span>이의락</span>
+            <span>Blazor</span>
+            <span>MQTT</span>
+            <span>Unity WebGL</span>
+          </div>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/cover.webp" alt="포트폴리오 표지 슬라이드" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" data-title="문제 정의">
+      <div class="slide-inner">
+        <div class="slide-copy">
+          <p class="eyebrow">01. PROBLEM</p>
+          <h2>왜 통합 솔루션이 필요했나</h2>
+          <ul class="bullet-list">
+            <li>새로운 장비가 기존 장비와 독립적으로 개발되어 호환이 어려움</li>
+            <li>장비마다 별도 제어 소프트웨어를 익혀야 해서 운영 피로도가 높음</li>
+            <li>2D 중심 UI와 전문 용어 중심 사용 방식 때문에 직관성이 떨어짐</li>
+          </ul>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/project-background.webp" alt="프로젝트 배경 슬라이드" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" data-title="솔루션">
+      <div class="slide-inner">
+        <div class="slide-copy">
+          <p class="eyebrow">02. SOLUTION</p>
+          <h2>디지털 트윈 기반 통합 제어</h2>
+          <p class="slide-paragraph">
+            모든 스마트팜 장비를 하나의 프로그램에서 전장 제어할 수 있도록 구성한
+            디지털 트윈 소프트웨어입니다.
+          </p>
+          <div class="highlight-list">
+            <article>
+              <strong>통합 운영</strong>
+              <span>여러 도구를 오가는 대신 단일 흐름으로 제어</span>
+            </article>
+            <article>
+              <strong>시각적 이해</strong>
+              <span>게임처럼 직관적인 3D UI 경험 제공</span>
+            </article>
+            <article>
+              <strong>확장 가능 구조</strong>
+              <span>새로운 장치와 기술 추가에 유리한 계층 설계</span>
+            </article>
+          </div>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/solution-overview.webp" alt="스마트팜 통합 솔루션 소개 슬라이드" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" data-title="기대 효과">
+      <div class="slide-inner">
+        <div class="slide-copy">
+          <p class="eyebrow">03. IMPACT</p>
+          <h2>기대 효과</h2>
+          <div class="highlight-list">
+            <article>
+              <strong>업무 간소화</strong>
+              <span>분산된 프로그램을 하나로 줄여 관리 효율 향상</span>
+            </article>
+            <article>
+              <strong>신기술 확장</strong>
+              <span>표준화된 인터페이스로 새로운 기술 연결 기회 확보</span>
+            </article>
+            <article>
+              <strong>기술 장벽 완화</strong>
+              <span>복잡한 시스템을 친숙한 화면으로 전달</span>
+            </article>
+          </div>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/expected-effects.webp" alt="기대 효과 슬라이드" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" data-title="아키텍처">
+      <div class="slide-inner architecture-slide">
+        <div class="slide-copy">
+          <p class="eyebrow">04. ARCHITECTURE</p>
+          <h2>4계층 소프트웨어 구조</h2>
+          <div class="flow-list">
+            <div><strong>Arduino</strong><span>센서 제어 / 와이파이</span></div>
+            <div><strong>Raspberry Pi</strong><span>입출력 제어 / 프록시</span></div>
+            <div><strong>Linux Server</strong><span>데이터 저장 / 분석</span></div>
+            <div><strong>Client</strong><span>WebAssembly / 다중 OS</span></div>
+          </div>
+          <p class="slide-paragraph">
+            하드웨어는 비닐하우스, LED 스트립, 온습도 센서, 공기질 센서, 아크릴 파이프를 포함한 구조로 구성됩니다.
+          </p>
+        </div>
+        <div class="dual-visual">
+          <figure class="slide-visual compact">
+            <img src="assets/images/architecture-hardware.webp" alt="하드웨어 아키텍처 슬라이드" />
+          </figure>
+          <figure class="slide-visual compact">
+            <img src="assets/images/architecture-software.webp" alt="소프트웨어 아키텍처 슬라이드" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="진행 과정">
+      <div class="slide-inner">
+        <div class="slide-copy">
+          <p class="eyebrow">05. PROCESS</p>
+          <h2>진행 과정</h2>
+          <ol class="number-list">
+            <li>하드웨어 제작</li>
+            <li>Arduino와 Raspberry Pi 연결</li>
+            <li>Raspberry Pi와 Client 연결</li>
+            <li>Blazor UI 개선</li>
+            <li>WebGL 적용</li>
+          </ol>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/process-webgl.webp" alt="WebGL 적용 결과 슬라이드" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" data-title="샘플 코드">
+      <div class="slide-inner">
+        <div class="slide-copy">
+          <p class="eyebrow">06. SAMPLE CODE</p>
+          <h2>샘플 코드 구성</h2>
+          <ul class="bullet-list">
+            <li>Arduino LEDSensor - MQTT 기반 센서/LED 제어 구조</li>
+            <li>Raspberry Pi DeviceController - Ping 기반 장비 탐색과 계층 정보 제공</li>
+            <li>Main Server Devices - Tree UI와 연결 흐름</li>
+            <li>Unity WebGL Interop - Blazor와의 상호작용 처리</li>
+          </ul>
+        </div>
+        <div class="dual-visual">
+          <figure class="slide-visual compact">
+            <img src="assets/images/sample-main-server.webp" alt="메인 서버 Devices 예제 코드 슬라이드" />
+          </figure>
+          <figure class="slide-visual compact">
+            <img src="assets/images/sample-unity-webgl.webp" alt="Unity WebGL 예제 코드 슬라이드" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="마무리">
+      <div class="slide-inner end-slide">
+        <div class="slide-copy">
+          <p class="eyebrow">07. CLOSE</p>
+          <h2>GitHub Pages에 바로 올릴 수 있는 정적 포트폴리오</h2>
+          <p class="slide-paragraph">
+            이 웹 프레젠테이션과 포트폴리오 페이지는 별도 빌드 없이
+            HTML, CSS, JavaScript만으로 구성되어 GitHub Pages에 바로 배포할 수 있습니다.
+          </p>
+          <div class="slide-actions">
+            <a class="button button-primary" href="index.html">포트폴리오 홈 보기</a>
+            <a class="button button-secondary" href="assets/docs/smartfarm-portfolio-source.pdf" target="_blank" rel="noreferrer">원본 PDF 보기</a>
+          </div>
+        </div>
+        <figure class="slide-visual">
+          <img src="assets/images/cover.webp" alt="포트폴리오 표지 슬라이드" />
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <div class="presentation-controls" aria-label="프레젠테이션 이동">
+    <button id="prev-slide" type="button">← 이전</button>
+    <button id="next-slide" type="button">다음 →</button>
+  </div>
+
+  <div class="dot-nav" id="dot-nav" aria-label="슬라이드 목록"></div>
+
+  <script src="assets/js/presentation.js"></script>
+</body>
+</html>

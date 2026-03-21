@@ -1,1 +1,568 @@
-<!doctype html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>front</title><script defer="defer" src="/js/chunk-vendors.3e0d57d4.js"></script><script defer="defer" src="/js/app.33d35d8e.js"></script><link href="/css/app.59335de3.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but front doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body></html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스마트팜 통합 솔루션 | 포트폴리오</title>
+  <meta
+    name="description"
+    content="디지털 트윈 기반 스마트팜 통합 솔루션 포트폴리오. 문제 정의, 아키텍처, 진행 과정, 샘플 코드 설명을 한 번에 보여주는 GitHub Pages용 정적 웹사이트."
+  />
+  <meta property="og:title" content="스마트팜 통합 솔루션 포트폴리오" />
+  <meta property="og:description" content="디지털 트윈 기반 스마트팜 통합 솔루션 웹 포트폴리오" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/cover.webp" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#hero">
+        <span class="brand-mark">SF</span>
+        <span class="brand-text">
+          <strong>Smart Farm</strong>
+          <small>Digital Twin Portfolio</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        메뉴
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="주요 메뉴">
+        <a href="#overview">문제 정의</a>
+        <a href="#solution">솔루션</a>
+        <a href="#architecture">아키텍처</a>
+        <a href="#process">진행 과정</a>
+        <a href="#samples">샘플 코드</a>
+        <a href="#gallery">갤러리</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="hero" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">PORTFOLIO / DIGITAL TWIN / SMART FARM</p>
+          <h1>스마트팜 통합 솔루션</h1>
+          <p class="hero-lead">
+            여러 스마트팜 장비를 하나의 프로그램에서 제어할 수 있도록 설계한
+            디지털 트윈 기반 통합 소프트웨어 포트폴리오입니다.
+          </p>
+
+          <div class="hero-meta">
+            <span class="chip">지원자: 이의락</span>
+            <span class="chip">Blazor · MQTT · WebGL</span>
+            <span class="chip">Arduino · Raspberry Pi · Linux</span>
+          </div>
+
+          <div class="hero-stats">
+            <article class="stat-card">
+              <strong>4 Layers</strong>
+              <span>계층형 소프트웨어 구조</span>
+            </article>
+            <article class="stat-card">
+              <strong>End-to-End</strong>
+              <span>HW에서 SW까지 구현</span>
+            </article>
+            <article class="stat-card">
+              <strong>MQTT · WebGL</strong>
+              <span>실시간 제어, 3D 시각화</span>
+            </article>
+          </div>
+
+        <div class="button-row">
+          <a class="button button-primary" href="presentation.html">웹 프레젠테이션 보기</a>
+        </div>
+        </div>
+
+        <div class="hero-visual">
+          <a
+            class="image-card image-card-large hero-pdf-card"
+            href="assets/docs/smartfarm-portfolio-source.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="assets/images/cover.webp" alt="스마트팜 통합 솔루션 포트폴리오 표지 슬라이드" />
+            <span class="image-caption">원본 PDF 열기</span>
+          </a>
+        </div>
+    </section>
+
+    <section class="section summary-band">
+      <div class="container">
+        <div class="summary-grid">
+          <article class="summary-card">
+            <p class="summary-label">문제</p>
+            <h2>장비별로 분리된 운영 경험</h2>
+            <p>새로운 장비가 들어올 때마다 별도 프로그램과 학습 비용이 계속 증가하는 구조였습니다.</p>
+          </article>
+          <article class="summary-card">
+            <p class="summary-label">해결</p>
+            <h2>디지털 트윈 기반 통합 제어</h2>
+            <p>현장 장비와 웹 클라이언트를 하나의 흐름으로 연결해 제어와 확인 경험을 통합했습니다.</p>
+          </article>
+          <article class="summary-card">
+            <p class="summary-label">효과</p>
+            <h2>효율성 · 확장성 · 사용성 개선</h2>
+            <p>유지 관리 포인트를 줄이고, 새로운 기술을 붙이기 쉬운 구조를 제안했습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">01. PROBLEM DEFINITION</p>
+          <h2>기존 스마트팜 운영의 세 가지 문제</h2>
+          <p>
+            원본 자료에서는 기존 스마트팜 환경의 핵심 문제를 확장성, 제어성, 사용성으로 정리합니다.
+          </p>
+        </div>
+
+        <div class="card-grid three">
+          <article class="surface-card icon-card">
+            <div class="icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <h3>확장성 부족</h3>
+            <p>
+              새로운 스마트팜 장비가 기존 장비와 독립적으로 개발되어 있어,
+              장비가 추가될수록 호환성과 운영 부담이 커지는 문제가 있었습니다.
+            </p>
+          </article>
+          <article class="surface-card icon-card">
+            <div class="icon">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <h3>제어 도구 분산</h3>
+            <p>
+              새로운 장비를 제어하려면 별도 소프트웨어를 추가로 익혀야 했고,
+              현장 사용자는 기능보다 도구 적응에 더 많은 시간을 써야 했습니다.
+            </p>
+          </article>
+          <article class="surface-card icon-card">
+            <div class="icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <h3>사용성 한계</h3>
+            <p>
+              2D 중심의 옛 UI는 실제 장비와 대응시키기 어렵고,
+              전문 용어나 제품명을 외워야 해서 진입 장벽이 높았습니다.
+            </p>
+          </article>
+        </div>
+
+        <div class="image-panel two-up">
+          <a class="image-card" href="assets/images/project-background.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/project-background.webp" alt="프로젝트 배경과 기존 스마트팜 문제점을 설명하는 슬라이드" />
+            <span class="image-caption">프로젝트 배경</span>
+          </a>
+          <a class="image-card" href="assets/images/solution-overview.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/solution-overview.webp" alt="스마트팜 통합 솔루션 개요를 보여주는 슬라이드" />
+            <span class="image-caption">솔루션 개요</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section alt-section">
+      <div class="container">
+        <div class="solution-head">
+          <div class="section-heading left">
+            <p class="eyebrow">02. SOLUTION OVERVIEW</p>
+            <h2>전체 장비 통합 제어 경험</h2>
+          </div>
+
+          <p class="body-copy solution-intro">
+            이 프로젝트는 “모든 스마트팜 장비를 하나의 프로그램에서 전장 제어할 수 있는
+            디지털 트윈 소프트웨어”라는 방향으로 정리되어 있습니다.
+            즉, 장비 제어, 상태 확인, UI 경험, 확장성을 한 번에 해결하는 통합 솔루션입니다.
+          </p>
+        </div>
+
+        <div class="solution-body">
+          <div class="feature-list solution-feature-list">
+            <article class="feature-item">
+              <h3>통합 운영</h3>
+              <p>장비별 프로그램을 따로 유지하지 않고 하나의 흐름으로 묶어 운영 복잡도를 줄입니다.</p>
+            </article>
+            <article class="feature-item">
+              <h3>게임형 UI 경험</h3>
+              <p>디지털 트윈과 WebGL 시각화로 실제 공간을 더 직관적으로 이해할 수 있도록 구성합니다.</p>
+            </article>
+            <article class="feature-item">
+              <h3>확장 가능한 구조</h3>
+              <p>표준화된 인터페이스와 계층형 연결 방식으로 새로운 장치나 기술을 붙이기 쉽습니다.</p>
+            </article>
+          </div>
+
+          <a class="image-card image-card-emphasis" href="assets/images/expected-effects.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/expected-effects.webp" alt="업무 간소화, 신기술 확장, 기술 장벽 완화의 기대 효과를 보여주는 슬라이드" />
+            <span class="image-caption">기대 효과</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">03. EXPECTED IMPACT</p>
+          <h2>포트폴리오에서 강조한 기대 효과</h2>
+        </div>
+
+        <div class="card-grid three">
+          <article class="surface-card">
+            <p class="card-kicker">Operational</p>
+            <h3>업무 간소화</h3>
+            <p>
+              스마트팜 장비별로 흩어져 있던 운영 포인트를 하나로 모아
+              시간 절약과 관리 효율을 높이는 방향을 제시합니다.
+            </p>
+          </article>
+          <article class="surface-card">
+            <p class="card-kicker">Scalability</p>
+            <h3>신기술 확장</h3>
+            <p>
+              다양한 장치와 프로그램이 원활하게 통신하도록 표준화된 인터페이스를 지향하며,
+              새로운 기술을 확장할 수 있는 구조를 목표로 합니다.
+            </p>
+          </article>
+          <article class="surface-card">
+            <p class="card-kicker">Usability</p>
+            <h3>기술 장벽 완화</h3>
+            <p>
+              복잡한 시스템을 게임처럼 친화적인 화면으로 전달해
+              현장 사용자가 더 쉽게 배우고 사용할 수 있도록 설계했습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section alt-section">
+      <div class="container">
+        <div class="architecture-head">
+          <div class="section-heading">
+            <p class="eyebrow">04. ARCHITECTURE</p>
+            <h2>4계층 통합 아키텍처</h2>
+          </div>
+          <p class="architecture-intro">
+            Arduino → Raspberry Pi → Linux Server → Client로 이어지는 계층형 구조를 통해
+            하드웨어와 소프트웨어를 하나의 흐름으로 통합합니다.
+          </p>
+        </div>
+
+        <div class="architecture-body">
+          <div class="architecture-left">
+            <div class="architecture-grid">
+              <article class="surface-card architecture-summary">
+                <h3>Hardware Layout</h3>
+                <ul class="check-list">
+                  <li>비닐하우스 구조</li>
+                  <li>LED 스트립</li>
+                  <li>온습도 센서</li>
+                  <li>공기질 센서</li>
+                  <li>아크릴 파이프</li>
+                </ul>
+              </article>
+
+              <article class="surface-card architecture-summary">
+                <h3>Software Stack</h3>
+                <ul class="check-list">
+                  <li><strong>Arduino</strong> - 센서 제어, 와이파이 통신</li>
+                  <li><strong>Raspberry Pi</strong> - HW 입출력 제어, 프록시 역할</li>
+                  <li><strong>Linux Server</strong> - 데이터 저장 및 분석</li>
+                  <li><strong>Client</strong> - WebAssembly 기반 다중 OS 접근</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="architecture-right">
+            <div class="image-panel two-up architecture-images">
+              <a class="image-card" href="assets/images/architecture-hardware.webp" target="_blank" rel="noreferrer">
+                <img src="assets/images/architecture-hardware.webp" alt="비닐하우스와 센서, LED 스트립을 포함한 하드웨어 아키텍처 슬라이드" />
+                <span class="image-caption">하드웨어 아키텍처</span>
+              </a>
+              <a class="image-card" href="assets/images/architecture-software.webp" target="_blank" rel="noreferrer">
+                <img src="assets/images/architecture-software.webp" alt="Arduino, Raspberry Pi, Linux Server, Client로 구성된 소프트웨어 아키텍처 슬라이드" />
+                <span class="image-caption">소프트웨어 아키텍처</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack-flow" aria-label="소프트웨어 계층 흐름">
+          <div class="stack-node">
+            <span>01</span>
+            <strong>Arduino</strong>
+            <small>센서 제어 / 와이파이</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="stack-node">
+            <span>02</span>
+            <strong>Raspberry Pi</strong>
+            <small>입출력 제어 / 프록시</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="stack-node">
+            <span>03</span>
+            <strong>Linux Server</strong>
+            <small>저장 / 분석</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="stack-node">
+            <span>04</span>
+            <strong>Client</strong>
+            <small>WebAssembly / 다중 OS</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section id="process" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">05. PROCESS</p>
+      <h2>프로토타입 제작부터 WebGL 적용까지</h2>
+      <p>
+        프로젝트는 하드웨어 제작, 장치 간 연결, 클라이언트 연동, UI 개선,
+        그리고 WebGL 기반 디지털 트윈 적용까지 5단계로 확장되었습니다.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-card">
+        <div class="timeline-step">1</div>
+        <div class="timeline-copy">
+          <h3>하드웨어 제작</h3>
+          <p>
+            센서, LED, 구동 부품과 비닐하우스 구조를 실제 테스트 가능한 형태로 조립해
+            디지털 트윈 제어의 기반 환경을 먼저 구축했습니다.
+          </p>
+          <ul class="process-points">
+            <li>비닐하우스 프레임과 내부 배치 구조 설계</li>
+            <li>센서 및 LED 스트립 배선, 전원 구성 점검</li>
+            <li>실물 장비와 이후 소프트웨어 연동을 위한 테스트 환경 확보</li>
+          </ul>
+        </div>
+        <a class="image-card" href="assets/images/process-hardware-build.webp" target="_blank" rel="noreferrer">
+          <img src="assets/images/process-hardware-build.webp" alt="하드웨어 제작 과정을 보여주는 슬라이드" />
+        </a>
+      </article>
+
+      <article class="timeline-card">
+        <div class="timeline-step">2</div>
+        <div class="timeline-copy">
+          <h3>Arduino ↔ Raspberry Pi 연결</h3>
+          <p>
+            센서와 액추에이터를 담당하는 Arduino, 상위 제어와 중계 역할을 담당하는 Raspberry Pi를
+            연결해 장치 간 제어 흐름을 구성했습니다.
+          </p>
+          <ul class="process-points">
+            <li>센서 입력과 장치 제어 신호 송수신 구조 설계</li>
+            <li>Raspberry Pi를 상위 제어 노드로 두는 계층형 연결 구성</li>
+            <li>하드웨어 간 통신 안정성과 제어 응답 흐름 검증</li>
+          </ul>
+        </div>
+        <a class="image-card" href="assets/images/process-arduino-rpi.webp" target="_blank" rel="noreferrer">
+          <img src="assets/images/process-arduino-rpi.webp" alt="아두이노와 라즈베리 파이 연결 과정 슬라이드" />
+        </a>
+      </article>
+
+      <article class="timeline-card">
+        <div class="timeline-step">3</div>
+        <div class="timeline-copy">
+          <h3>Raspberry Pi ↔ Client 연결</h3>
+          <p>
+            클라이언트 화면에서 연결 가능한 장비를 조회하고,
+            기본적인 제어와 상태 확인이 가능하도록 사용자 접근 경로를 구성했습니다.
+          </p>
+          <ul class="process-points">
+            <li>연결 가능한 디바이스 목록 조회 기능 구현</li>
+            <li>기본 제어 기능 및 상태 확인 흐름 검증</li>
+            <li>사용자 화면과 실제 장비 사이의 연결 구조 정리</li>
+          </ul>
+        </div>
+        <a class="image-card" href="assets/images/process-rpi-client.webp" target="_blank" rel="noreferrer">
+          <img src="assets/images/process-rpi-client.webp" alt="라즈베리 파이와 클라이언트 연결을 보여주는 슬라이드" />
+        </a>
+      </article>
+
+      <article class="timeline-card">
+        <div class="timeline-step">4</div>
+        <div class="timeline-copy">
+          <h3>Blazor UI 개선</h3>
+          <p>
+            단순 제어 중심 화면을 대시보드 형태로 재구성해
+            장비 상태와 센서 데이터를 더 직관적으로 파악할 수 있도록 개선했습니다.
+          </p>
+          <ul class="process-points">
+            <li>제어 화면을 정보 중심의 대시보드 UI로 재정리</li>
+            <li>센서 데이터와 장비 상태를 한눈에 확인할 수 있도록 구성</li>
+            <li>현장 사용자가 빠르게 적응할 수 있는 사용 흐름 강화</li>
+          </ul>
+        </div>
+        <a class="image-card" href="assets/images/process-blazor-ui.webp" target="_blank" rel="noreferrer">
+          <img src="assets/images/process-blazor-ui.webp" alt="Blazor UI 개선 결과 슬라이드" />
+        </a>
+      </article>
+
+      <article class="timeline-card">
+        <div class="timeline-step">5</div>
+        <div class="timeline-copy">
+          <h3>WebGL 적용</h3>
+          <p>
+            Unity WebGL 기반 3D 화면을 도입해
+            디지털 트윈과 장비 제어 UI를 더 직관적이고 몰입감 있는 사용자 경험으로 연결했습니다.
+          </p>
+          <ul class="process-points">
+            <li>3D 공간 시각화로 실제 장비와 화면 간 대응성 강화</li>
+            <li>제어 기능과 디지털 트윈 화면의 연결 경험 개선</li>
+            <li>기존 2D UI 대비 높은 직관성과 이해도 확보</li>
+          </ul>
+        </div>
+        <a class="image-card" href="assets/images/process-webgl.webp" target="_blank" rel="noreferrer">
+          <img src="assets/images/process-webgl.webp" alt="WebGL 적용 결과를 보여주는 슬라이드" />
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <section id="samples" class="section alt-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">06. SAMPLE CODE SUMMARY</p>
+          <h2>워크 플로우 바탕으로 정리한 샘플 코드 영역</h2>
+          <p>
+            PDF에는 코드 스크린샷과 설명이 포함되어 있습니다.
+            아래 내용은 해당 설명을 웹 포트폴리오용으로 재구성한 요약입니다.
+          </p>
+        </div>
+
+        <div class="card-grid two">
+          <article class="surface-card sample-card">
+            <div class="sample-head">
+              <div>
+                <p class="card-kicker">Arduino</p>
+                <h3>LEDSensor 예제</h3>
+              </div>
+              <span class="pill">MQTT</span>
+            </div>
+            <ul class="check-list">
+              <li>LED와 조도센서, MQTT 설정을 라이브러리화해 재사용성 강화</li>
+              <li>초기 연결은 HTTP 기반으로 구성하고 이후 MQTT 데이터 송수신</li>
+              <li>저전력, 발행/구독 유연성, 대역폭 절약, 실시간성 향상에 초점</li>
+            </ul>
+            <a class="image-card" href="assets/images/sample-arduino.webp" target="_blank" rel="noreferrer">
+              <img src="assets/images/sample-arduino.webp" alt="아두이노 LEDSensor 예제 코드 슬라이드" />
+            </a>
+          </article>
+
+          <article class="surface-card sample-card">
+            <div class="sample-head">
+              <div>
+                <p class="card-kicker">Raspberry Pi</p>
+                <h3>DeviceController 예제</h3>
+              </div>
+              <span class="pill">Device Discovery</span>
+            </div>
+            <ul class="check-list">
+              <li>같은 네트워크 대역의 장비에 Ping을 보내 연결 가능 장비 탐색</li>
+              <li>라즈베리 파이 정보를 클라이언트로 전달하고 하위 아두이노 정보를 계층화</li>
+              <li>MQTT 토픽 정보는 연결 시 HTTP 통신으로 가져오는 구조</li>
+            </ul>
+            <a class="image-card" href="assets/images/sample-raspberrypi.webp" target="_blank" rel="noreferrer">
+              <img src="assets/images/sample-raspberrypi.webp" alt="라즈베리 파이 DeviceController 예제 코드 슬라이드" />
+            </a>
+          </article>
+
+          <article class="surface-card sample-card">
+            <div class="sample-head">
+              <div>
+                <p class="card-kicker">Main Server</p>
+                <h3>Devices 예제</h3>
+              </div>
+              <span class="pill">Tree UI</span>
+            </div>
+            <ul class="check-list">
+              <li>null 같은 불완전한 장비 정보는 “알 수 없음”으로 표시</li>
+              <li>자식 디바이스가 있는 경우 동일 객체를 확장 구조로 재구성</li>
+              <li>토픽을 Tree 구조로 모아 사용자가 연결 버튼으로 선택할 수 있도록 설계</li>
+            </ul>
+            <a class="image-card" href="assets/images/sample-main-server.webp" target="_blank" rel="noreferrer">
+              <img src="assets/images/sample-main-server.webp" alt="메인 서버 Devices 예제 코드 슬라이드" />
+            </a>
+          </article>
+
+          <article class="surface-card sample-card">
+            <div class="sample-head">
+              <div>
+                <p class="card-kicker">Unity WebGL</p>
+                <h3>unityInstanceLoader 예제</h3>
+              </div>
+              <span class="pill">JS Interop</span>
+            </div>
+            <ul class="check-list">
+              <li>Unity WebGL 버튼 이벤트와 Blazor WebAssembly 간 상호작용 구성</li>
+              <li>C# 메서드를 호출해 Dialog를 열도록 설계한 JavaScript Interop 예시</li>
+              <li>Unity 라이브러리 객체에 기능을 병합해 다양한 컨트롤 함수를 연결</li>
+            </ul>
+            <a class="image-card" href="assets/images/sample-unity-webgl.webp" target="_blank" rel="noreferrer">
+              <img src="assets/images/sample-unity-webgl.webp" alt="유니티 WebGL unityInstanceLoader 예제 코드 슬라이드" />
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">07. VISUAL GALLERY</p>
+          <h2>프로젝트 화면과 결과물을 한눈에 보기</h2>
+        </div>
+
+        <div class="masonry-grid">
+          <a class="image-card" href="assets/images/process-blazor-ui.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/process-blazor-ui.webp" alt="Blazor UI 대시보드 슬라이드" />
+          </a>
+          <a class="image-card" href="assets/images/process-webgl.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/process-webgl.webp" alt="WebGL 디지털 트윈 화면 슬라이드" />
+          </a>
+          <a class="image-card" href="assets/images/architecture-software.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/architecture-software.webp" alt="소프트웨어 아키텍처 슬라이드" />
+          </a>
+          <a class="image-card" href="assets/images/solution-overview.webp" target="_blank" rel="noreferrer">
+            <img src="assets/images/solution-overview.webp" alt="스마트팜 통합 솔루션 개요 슬라이드" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>스마트팜 통합 솔루션 포트폴리오</strong>
+      </div>
+      <div class="footer-links">
+        <a href="presentation.html">Presentation</a>
+        <a href="assets/docs/smartfarm-portfolio-source.pdf" target="_blank" rel="noreferrer">Source PDF</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
