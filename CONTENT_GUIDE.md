@@ -1,61 +1,35 @@
-# CONTENT GUIDE
+# PORTFOLIO CONTENT GUIDE
 
-웹사이트를 빠르게 수정하려면 아래 순서로 보면 됩니다.
+## 메인 서사
 
-## 1. 메인 페이지
-`index.html`
+`index.html`은 **현장 신호를 운영 가능한 데이터로 연결한다**는 메시지를 중심으로 다음 순서로 구성했습니다.
 
-여기서 수정하는 항목:
-- Hero 제목
-- 지원자 이름
-- 섹션 소개 문장
-- 문제 정의 / 솔루션 / 기대 효과 / 아키텍처 / 진행 과정 / 샘플 코드 설명
+1. Hero — PLC → OPC UA → MES → Digital Twin 핵심 메시지
+2. Platform — 세 제품의 역할과 통합 데이터 흐름
+3. Projects — 14개 실제 화면과 프로젝트별 구현 범위
+4. Evidence — Data Access, Alarm & Condition, Client 연동 테스트
+5. Engineering Principles — 정보 모델, 관측성, 안전한 제어, 재현 가능한 검증 원칙
 
-## 2. 발표 페이지
-`presentation.html`
+## 이미지와 기능
 
-여기서 수정하는 항목:
-- 발표 순서
-- 슬라이드 제목
-- 발표용 핵심 문장
-- 이전/다음 버튼으로 보여줄 흐름
+| 파일 접두사 | 프로젝트 | 설명 |
+|---|---|---|
+| `plc-01` ~ `plc-05` | PLC Simulation | 대시보드, 노드, 드라이버, 라이브 태그, 데이터 매핑 |
+| `gateway-01` ~ `gateway-05` | IIoT Gateway | 채널, 디바이스, OPC UA 태그, 알람, 보안 |
+| `twin-01` ~ `twin-04` | TwinForge | MES, 설비, 워크플로, 3D Digital Twin |
+| `og-industrial-platform.png` | 대표 이미지 | SNS 및 링크 공유용 Open Graph 이미지 |
 
-## 3. 디자인
-`assets/css/styles.css`
-`assets/css/presentation.css`
+이미지는 `assets/images/industrial-portfolio/`에 있습니다. 갤러리 이미지를 선택하면 원본 비율의 라이트박스가 열립니다.
 
-여기서 수정하는 항목:
-- 색상
-- 카드 모양
-- 글자 크기
-- 레이아웃 간격
-- 모바일 반응형 스타일
+## 수정 위치
 
-## 4. 동작
-`assets/js/main.js`
-`assets/js/presentation.js`
+- 콘텐츠와 이미지 순서: `index.html`
+- 색상, 카드, 반응형 레이아웃: `assets/css/styles.css`
+- 모바일 메뉴, 애니메이션, 라이트박스: `assets/js/main.js`
 
-여기서 수정하는 항목:
-- 메뉴 토글
-- 섹션 활성화 표시
-- 발표 페이지 키보드 이동
-- 슬라이드 이동 버튼 동작
+## 디자인 기준
 
-## 5. 원본 자료
-`assets/docs/smartfarm-portfolio-source.pdf`
-
-사이트에서 “원본 PDF 보기” 버튼이 이 파일을 가리킵니다.
-
-## 6. 이미지 규칙
-이미지를 쉽게 교체하려면 파일명은 유지하고 내용만 바꾸는 것이 편합니다.
-
-예:
-- `assets/images/cover.webp`
-- `assets/images/process-webgl.webp`
-
-## 7. 가장 먼저 바꾸면 좋은 부분
-1. 지원자 이름
-2. 프로젝트 소개 문장
-3. 각 섹션의 강조 문장
-4. 푸터 링크
-5. 추가하고 싶은 GitHub / 블로그 / 연락처 링크
+- Industrial navy 기반의 어두운 화면
+- Cyan은 데이터 흐름, Lime은 정상 상태와 핵심 행동을 표시
+- 1240px 데스크톱 레이아웃과 680px 이하 모바일 레이아웃 지원
+- 키보드 포커스, reduced-motion, 시맨틱 섹션과 대체 텍스트 적용

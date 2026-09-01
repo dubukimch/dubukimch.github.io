@@ -1,327 +1,129 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>이의락 | Smart Factory · Digital Twin Portfolio</title>
-  <meta name="description" content="C#, WPF, OPC UA, PLC, MQTT, Blazor, Unity WebGL 기반 스마트팩토리·디지털트윈 개발자 이의락 포트폴리오" />
-  <meta property="og:title" content="이의락 | Smart Factory · Digital Twin Portfolio" />
-  <meta property="og:description" content="공정 데이터 시각화, OPC UA/PLC 연동, 스마트팜 디지털트윈 통합 솔루션 포트폴리오" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/images/smartfarm-cover.webp" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <script defer src="assets/js/main.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071019">
+  <title>Industrial Data Platform Portfolio</title>
+  <meta name="description" content="가상 PLC, OPC UA Gateway, MES와 3D Digital Twin을 하나의 데이터 흐름으로 구현한 산업 소프트웨어 포트폴리오">
+  <meta property="og:title" content="Industrial Data Platform Portfolio">
+  <meta property="og:description" content="PLC → OPC UA → MES → Digital Twin. 현장 신호를 운영 가능한 데이터로 연결합니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/industrial-portfolio/og-industrial-platform.png">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260901-2">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
-
   <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#hero" aria-label="이의락 포트폴리오 홈">
-        <span class="brand-mark">YR</span>
-        <span class="brand-text">
-          <strong>이의락</strong>
-          <small>Industrial Software Developer</small>
-        </span>
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
-      <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
-        <a href="#about">소개</a>
-        <a href="#skills">기술</a>
-        <a href="#experience">경력</a>
-        <a href="#projects">프로젝트</a>
-        <a href="#case-study">대표작</a>
-        <a href="#contact">연락</a>
-      </nav>
-    </div>
+    <a class="brand" href="#hero" aria-label="홈"><span>IDP</span><b>Industrial Data Platform<small>PLC · OPC UA · DIGITAL TWIN</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="주요 메뉴">
+      <a href="#platform">Platform</a><a href="#projects">Projects</a><a href="#evidence">Evidence</a><a href="#principles">Principles</a>
+      <a class="nav-cta" href="#projects">View Projects ↓</a>
+    </nav>
   </header>
 
   <main id="main">
     <section class="hero" id="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">C# · OPC UA · PLC · MQTT · Digital Twin</p>
-          <h1>현장 데이터를 연결해<br><span>쓸 수 있는 시스템</span>으로 만듭니다.</h1>
-          <p class="hero-lead">
-            반도체 공정 데이터 시각화, OPC UA 서버 개발, PLC 통신 환경 구성, Blazor·MQTT·Unity WebGL 기반 디지털트윈까지 산업 현장과 소프트웨어 사이의 연결 지점을 구현해왔습니다.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#case-study">대표 프로젝트 보기</a>
-            <a class="button button-ghost" href="assets/docs/smartfarm-digital-twin-portfolio.pdf" target="_blank" rel="noreferrer">원본 PDF 열기</a>
-          </div>
-          <div class="hero-tags" aria-label="핵심 기술">
-            <span>C# / WPF</span>
-            <span>ASP.NET Core / Blazor</span>
-            <span>OPC UA</span>
-            <span>PLC</span>
-            <span>MQTT</span>
-            <span>Unity</span>
-          </div>
-        </div>
+      <div class="hero-copy reveal">
+        <p class="kicker">PLC · OPC UA · MES · DIGITAL TWIN</p>
+        <h1>현장 신호를<br><em>운영 가능한 데이터</em>로.</h1>
+        <p class="hero-lead">가상 PLC에서 발생한 값을 산업용 Gateway가 표준화하고, MES 대시보드와 3D Digital Twin이 활용하는 전 과정을 직접 설계하고 검증했습니다.</p>
+        <div class="actions"><a class="button primary" href="#platform">플랫폼 살펴보기</a><a class="button secondary" href="#projects">프로젝트 화면 보기</a></div>
+        <dl class="metrics"><div><dt>03</dt><dd>연동 애플리케이션</dd></div><div><dt>14</dt><dd>검증된 주요 화면</dd></div><div><dt>100%</dt><dd>End-to-end 흐름</dd></div></dl>
+      </div>
+      <aside class="hero-visual reveal" aria-label="TwinForge 디지털 트윈 미리보기">
+        <div class="visual-top"><span class="live"><i></i> LIVE PIPELINE</span><span>PORTFOLIO / 2026</span></div>
+        <img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 설비 모니터링 화면">
+        <div class="floating-tag plc">PLC<br><b>Speed_SP 2500</b></div>
+        <div class="floating-tag twin">TWINFORGE<br><b>6 equipment online</b></div>
+        <div class="visual-bottom"><span>DATA ACCESS</span><span>ALARM &amp; CONDITION</span><span>CLIENT</span></div>
+      </aside>
+    </section>
 
-        <aside class="profile-panel reveal" aria-label="프로필 요약">
-          <div class="panel-topline">
-            <span>Portfolio Snapshot</span>
-            <strong>2026</strong>
-          </div>
-          <div class="profile-main">
-            <span class="avatar">YR</span>
-            <div>
-              <h2>이의락</h2>
-              <p>Smart Factory · Digital Twin · Industrial Software</p>
-            </div>
-          </div>
-          <dl class="profile-stats">
-            <div><dt>총 경력</dt><dd>4년차</dd></div>
-            <div><dt>현 직무</dt><dd>풀스택 개발</dd></div>
-            <div><dt>전공</dt><dd>전자공학</dd></div>
-            <div><dt>핵심 역량</dt><dd>시각화 · 연동 · 트러블슈팅</dd></div>
-          </dl>
-          <div class="orbit-card" aria-hidden="true">
-            <span>C#</span><span>OPC UA</span><span>PLC</span><span>Unity</span>
-          </div>
-        </aside>
+    <section class="section platform" id="platform">
+      <header class="section-head reveal"><p class="kicker">ONE CONNECTED SYSTEM</p><h2>세 개의 제품, 하나의 데이터 흐름</h2><p>데모용 화면 모음이 아니라 데이터 발생, 표준화, 운영 활용까지 실제 경로를 보여주는 포트폴리오입니다.</p></header>
+      <div class="pipeline reveal" aria-label="통합 플랫폼 데이터 흐름">
+        <article><span>01 / SOURCE</span><b>PLC Simulation</b><p>가상 공정과 태그를 생성하고 실시간 값을 제공합니다.</p><small>Modbus TCP · Live Tags</small></article>
+        <i>→</i>
+        <article><span>02 / STANDARDIZE</span><b>IIoT Gateway</b><p>장비 데이터를 OPC UA 노드와 알람으로 모델링합니다.</p><small>Data Access · A&amp;C · Security</small></article>
+        <i>→</i>
+        <article><span>03 / OPERATE</span><b>TwinForge</b><p>MES 워크플로와 3D 현장 화면에서 데이터를 활용합니다.</p><small>MES · Workflow · Digital Twin</small></article>
+      </div>
+      <div class="bento">
+        <article class="bento-main reveal"><p class="card-label">LIVE SIGNAL</p><div class="signal-value"><span>Speed_SP</span><strong>2,500</strong><small>rpm</small></div><div class="spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><footer><span class="ok">● Good</span><span>NodeId ns=2;s=Machine.Speed_SP</span></footer></article>
+        <article class="bento-alarm reveal"><p class="card-label">ACTIVE CONDITION</p><strong>SpeedHigh</strong><span class="major">MAJOR</span><p>Setpoint exceeds operational threshold.</p><footer>ACKNOWLEDGEMENT READY</footer></article>
+        <article class="bento-stack reveal"><p class="card-label">IMPLEMENTED STACK</p><div><span>.NET 8</span><span>ASP.NET Core</span><span>OPC UA</span><span>Modbus TCP</span><span>SignalR</span><span>Three.js</span><span>Docker</span><span>Blazor</span></div></article>
       </div>
     </section>
 
-    <section class="section summary-strip" aria-label="핵심 요약">
-      <div class="container summary-grid">
-        <article class="summary-card reveal"><strong>01</strong><span>공정 데이터 분석 화면과 대시보드 개발</span></article>
-        <article class="summary-card reveal"><strong>02</strong><span>OPC UA 서버와 PLC 통신 환경 구성</span></article>
-        <article class="summary-card reveal"><strong>03</strong><span>Blazor·Unity WebGL 기반 디지털트윈 구현</span></article>
+    <section class="section projects" id="projects">
+      <header class="section-head reveal"><p class="kicker">PRODUCT WALKTHROUGH</p><h2>주요 화면으로 보는 구현 범위</h2><p>이미지를 선택하면 원본 크기로 세부 UI와 데이터 상태를 확인할 수 있습니다.</p></header>
+      <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a></nav>
+
+      <article class="project-block" id="plc">
+        <div class="project-intro reveal"><div><p class="project-no">PROJECT 01</p><h3>PLC Simulation</h3><p>실제 장비 없이도 산업 데이터 흐름을 검증할 수 있는 가상 PLC 웹 애플리케이션입니다. 드라이버 구성부터 실시간 태그, 메모리 매핑까지 한곳에서 관리합니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Data source</dd></div><div><dt>Protocol</dt><dd>Modbus TCP</dd></div></dl></div>
+        <div class="feature-strip reveal"><span>Dashboard</span><span>Node catalog</span><span>Driver config</span><span>Live monitoring</span><span>Data mapping</span></div>
+        <div class="gallery gallery-five">
+          <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/plc-01-dashboard.png" data-caption="PLC Simulation — 운영 대시보드"><img src="assets/images/industrial-portfolio/plc-01-dashboard.png" alt="PLC Simulation 대시보드" loading="lazy"><span><b>01</b> 운영 대시보드</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-02-node-catalog.png" data-caption="PLC Simulation — 노드 카탈로그"><img src="assets/images/industrial-portfolio/plc-02-node-catalog.png" alt="PLC 노드 카탈로그" loading="lazy"><span><b>02</b> 노드 카탈로그</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-03-driver-config.png" data-caption="PLC Simulation — 통신 드라이버 설정"><img src="assets/images/industrial-portfolio/plc-03-driver-config.png" alt="PLC 드라이버 설정" loading="lazy"><span><b>03</b> 드라이버 설정</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png" data-caption="PLC Simulation — 실시간 태그 모니터"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC 실시간 태그" loading="lazy"><span><b>04</b> 실시간 태그</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-05-data-mapping.png" data-caption="PLC Simulation — 데이터 메모리 매핑"><img src="assets/images/industrial-portfolio/plc-05-data-mapping.png" alt="PLC 데이터 매핑" loading="lazy"><span><b>05</b> 데이터 매핑</span></button>
+        </div>
+      </article>
+
+      <article class="project-block" id="gateway">
+        <div class="project-intro reveal"><div><p class="project-no">PROJECT 02</p><h3>IIoT Gateway</h3><p>PLC 데이터를 OPC UA 정보 모델로 변환하고 외부 클라이언트에 안전하게 제공하는 산업용 Gateway입니다. Data Access, Alarms &amp; Conditions, 보안 설정을 포함합니다.</p></div><dl><div><dt>Role</dt><dd>Core developer</dd></div><div><dt>Focus</dt><dd>Interoperability</dd></div><div><dt>Protocol</dt><dd>OPC UA</dd></div></dl></div>
+        <div class="feature-strip reveal"><span>Channel</span><span>Device</span><span>Tag model</span><span>Alarm condition</span><span>Security</span></div>
+        <div class="gallery gallery-five">
+          <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/gateway-01-channels.png" data-caption="IIoT Gateway — 채널 관리"><img src="assets/images/industrial-portfolio/gateway-01-channels.png" alt="Gateway 채널 관리" loading="lazy"><span><b>01</b> 채널 관리</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-02-device.png" data-caption="IIoT Gateway — 디바이스 설정"><img src="assets/images/industrial-portfolio/gateway-02-device.png" alt="Gateway 디바이스 설정" loading="lazy"><span><b>02</b> 디바이스 설정</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-03-tags.png" data-caption="IIoT Gateway — OPC UA 태그"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="Gateway OPC UA 태그" loading="lazy"><span><b>03</b> OPC UA 태그</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-04-alarm.png" data-caption="IIoT Gateway — Alarms & Conditions"><img src="assets/images/industrial-portfolio/gateway-04-alarm.png" alt="Gateway 알람 조건" loading="lazy"><span><b>04</b> Alarm &amp; Condition</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-05-security.png" data-caption="IIoT Gateway — OPC UA 보안 설정"><img src="assets/images/industrial-portfolio/gateway-05-security.png" alt="Gateway 보안 설정" loading="lazy"><span><b>05</b> 보안 정책</span></button>
+        </div>
+      </article>
+
+      <article class="project-block" id="twinforge">
+        <div class="project-intro reveal"><div><p class="project-no">PROJECT 03</p><h3>TwinForge</h3><p>표준화된 설비 데이터를 생산 운영 정보로 전환하는 MES·Digital Twin 애플리케이션입니다. 설비 현황, 워크플로, 3D 공간 모니터링을 하나의 UX로 구성했습니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Operations UX</dd></div><div><dt>Visual</dt><dd>Three.js</dd></div></dl></div>
+        <div class="feature-strip reveal"><span>MES dashboard</span><span>Equipment</span><span>Workflow</span><span>3D Digital Twin</span></div>
+        <div class="gallery gallery-four">
+          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" data-caption="TwinForge — MES 운영 대시보드"><img src="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" alt="TwinForge MES 대시보드" loading="lazy"><span><b>01</b> MES 대시보드</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-02-equipment.png" data-caption="TwinForge — 설비 관리"><img src="assets/images/industrial-portfolio/twin-02-equipment.png" alt="TwinForge 설비 관리" loading="lazy"><span><b>02</b> 설비 관리</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-03-workflow.png" data-caption="TwinForge — 생산 워크플로"><img src="assets/images/industrial-portfolio/twin-03-workflow.png" alt="TwinForge 워크플로" loading="lazy"><span><b>03</b> 생산 워크플로</span></button>
+          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-04-3d.png" data-caption="TwinForge — 3D Digital Twin"><img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 디지털 트윈" loading="lazy"><span><b>04</b> 3D Digital Twin</span></button>
+        </div>
+      </article>
+    </section>
+
+    <section class="section evidence" id="evidence">
+      <header class="section-head reveal"><p class="kicker">INTEGRATION EVIDENCE</p><h2>연동 시나리오, 끝까지 확인했습니다</h2><p>Docker 기반 테스트 환경에서 값 읽기·쓰기, OPC UA 태그, 알람 조건, TwinForge 수신 경로를 순서대로 검증했습니다.</p></header>
+      <div class="evidence-grid">
+        <div class="terminal reveal"><header><i></i><i></i><i></i><span>integration-test / pipeline.log</span></header><ol><li><time>00:00.0</time><b>Virtual PLC started</b><span>PASS</span></li><li><time>00:02.4</time><b>Speed_SP / Temp_PV read</b><span>GOOD</span></li><li><time>00:04.1</time><b>OPC UA write-through · 2500</b><span>PASS</span></li><li><time>00:05.8</time><b>SpeedHigh · Major · Active</b><span>ACTIVE</span></li><li><time>00:07.2</time><b>TwinForge ingestion</b><span>PASS</span></li></ol><footer><b>5/5 checks passed</b><span>End-to-end verified</span></footer></div>
+        <div class="evidence-notes reveal"><article><span>DATA ACCESS</span><h3>Read / Write</h3><p>실시간 품질 코드와 값을 읽고, 클라이언트 쓰기가 PLC 메모리까지 전달되는 흐름을 확인했습니다.</p></article><article><span>ALARM &amp; CONDITION</span><h3>Event lifecycle</h3><p>임계치 초과 시 Active 이벤트가 발생하고 상태·심각도·확인 흐름이 노출되는지 검증했습니다.</p></article><article><span>CLIENT</span><h3>Consume &amp; visualize</h3><p>TwinForge가 태그와 이벤트를 운영 화면과 디지털 트윈에서 활용할 수 있는 구조를 확인했습니다.</p></article></div>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container two-column">
-        <div class="section-heading reveal">
-          <p class="eyebrow">About</p>
-          <h2>장비, 데이터, 사용자를 하나의 흐름으로 연결하는 개발자</h2>
-        </div>
-        <div class="body-copy reveal">
-          <p>
-            단순히 화면을 만드는 것보다, 현장의 장비와 데이터가 사용자에게 어떻게 전달되고 제어되는지를 중요하게 봅니다. 공정 데이터 처리, 설비 통신, 웹 기반 시각화, 3D 디지털트윈을 하나의 서비스 경험으로 묶는 데 강점이 있습니다.
-          </p>
-        </div>
+    <section class="section principles" id="principles">
+      <header class="principles-head reveal"><p class="kicker">ENGINEERING PRINCIPLES</p><h2>연결보다 중요한 것은<br>신뢰할 수 있는 흐름입니다.</h2><p>세 프로젝트에서 반복해 적용한 설계 기준입니다. 장비 연결 자체보다 데이터의 품질, 추적 가능성, 안전한 제어와 재현 가능한 검증을 제품의 기준으로 삼았습니다.</p></header>
+      <div class="principle-grid">
+        <article class="reveal"><span>01 / MODEL</span><h3>Protocol first</h3><p>장비별 차이를 OPC UA 정보 모델로 흡수하고, 클라이언트가 일관된 태그와 상태를 사용하도록 설계합니다.</p></article>
+        <article class="reveal"><span>02 / OBSERVE</span><h3>Observable by default</h3><p>연결 상태, 품질 코드, 현재 값과 이벤트 이력을 화면에서 즉시 판단할 수 있게 노출합니다.</p></article>
+        <article class="reveal"><span>03 / CONTROL</span><h3>Safe by design</h3><p>쓰기 경로와 알람 수명주기를 분리해 제어 결과와 이상 상태를 명확하게 확인할 수 있도록 구성합니다.</p></article>
+        <article class="reveal"><span>04 / VERIFY</span><h3>Reproducible demo</h3><p>Docker와 가상 PLC 데이터로 동일한 시나리오를 반복 실행하고 결과를 화면과 로그로 검증합니다.</p></article>
       </div>
-      <div class="container value-grid">
-        <article class="value-card reveal">
-          <span class="card-number">01</span>
-          <h3>공정 데이터 시각화</h3>
-          <p>설비 로그와 수율 데이터를 차트, 대시보드, 분석 화면으로 구성해 사용자가 빠르게 판단할 수 있도록 만듭니다.</p>
-        </article>
-        <article class="value-card reveal">
-          <span class="card-number">02</span>
-          <h3>산업 통신 연동</h3>
-          <p>OPC UA, PLC, MQTT 기반으로 장비와 서버, 클라이언트 사이의 데이터 흐름을 설계하고 구현합니다.</p>
-        </article>
-        <article class="value-card reveal">
-          <span class="card-number">03</span>
-          <h3>디지털트윈 UX</h3>
-          <p>실제 장비 상태와 제어 흐름을 직관적으로 이해할 수 있도록 WebGL 기반 3D 경험을 연결합니다.</p>
-        </article>
-      </div>
+      <div class="skill-wall reveal" aria-label="구현 기술"><span>C#</span><span>.NET 8</span><span>ASP.NET Core</span><span>Blazor</span><span>OPC UA</span><span>PLC</span><span>Modbus TCP</span><span>SignalR</span><span>Three.js</span><span>Docker</span></div>
     </section>
 
-    <section class="section muted-section" id="skills">
-      <div class="container skills-layout">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Skills</p>
-          <h2>직무와 바로 연결되는 기술 스택</h2>
-          <p>이력서와 프로젝트 내용에서 지원 직무에 강하게 어필되는 기술을 중심으로 재배치했습니다.</p>
-        </div>
-        <div class="skill-grid">
-          <article class="skill-card reveal">
-            <h3>Industrial & Factory</h3>
-            <div class="chip-cloud"><span>OPC UA</span><span>PLC</span><span>Melsec</span><span>LS PLC</span><span>MES</span><span>Data Access</span><span>Alarms & Conditions</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Application</h3>
-            <div class="chip-cloud"><span>C#</span><span>WPF</span><span>ASP.NET Core</span><span>Blazor WebAssembly</span><span>Unity</span><span>Unity WebGL</span><span>JavaScript Interop</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Data & Server</h3>
-            <div class="chip-cloud"><span>MySQL</span><span>MariaDB</span><span>MSSQL</span><span>SQLite</span><span>Linux Server</span><span>MQTT</span><span>Python</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Work Style</h3>
-            <div class="chip-cloud"><span>유지보수</span><span>기술지원</span><span>트러블슈팅</span><span>프로젝트 관리</span><span>문서화</span><span>협업</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
-      <div class="container two-column section-intro">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Experience</p>
-          <h2>산업용 소프트웨어 중심의 경력 흐름</h2>
-        </div>
-      </div>
-      <div class="container timeline">
-        <article class="timeline-item reveal">
-          <time>2023.04 - 현재</time>
-          <div><h3>응용소프트웨어 개발</h3><p>반도체 공정 데이터 분석 솔루션, 회사 홈페이지, OPC UA 서비스 제품 개발을 수행했습니다.</p></div>
-        </article>
-        <article class="timeline-item reveal">
-          <time>2022.05 - 2022.10</time>
-          <div><h3>게임 클라이언트 개발</h3><p>Unity3D/C# 기반 모바일 야구 게임 개발과 운영 이슈 대응을 담당했습니다.</p></div>
-        </article>
-        <article class="timeline-item reveal">
-          <time>2019.03 - 2021.06</time>
-          <div><h3>육군 통신소대장 복무</h3><p>조직 운영, 일정 관리, 커뮤니케이션 경험을 통해 책임감과 문제 해결 태도를 축적했습니다.</p></div>
-        </article>
-        <article class="timeline-item reveal">
-          <time>2015.02 - 2019.02</time>
-          <div><h3>전자공학 전공</h3><p>학점 3.97/4.5. 임베디드 시스템 및 프로그래밍 기반을 공부하였습니다.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section muted-section" id="projects">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Projects</p>
-          <h2>주요 프로젝트</h2>
-          <p>역할, 기술, 기여가 한눈에 보이도록 카드형으로 정리했습니다.</p>
-        </div>
-        <div class="project-grid">
-          <article class="project-card featured reveal">
-            <p class="project-kicker">OPC UA / PLC / C#</p>
-            <h3>OPC UA 서비스 제품 개발</h3>
-            <p>OPC UA 서버 개발자로 참여하여 Data Access 기능 개선, Alarms & Conditions 기능 개발, PLC 통신 환경 구성을 담당했습니다.</p>
-            <ul><li>Melsec, LS 등 PLC 통신 환경 구성</li><li>Ladder 기반 테스트 태그값 생성</li><li>산업 현장 데이터 수집·이벤트 처리 기반 설계</li></ul>
-          </article>
-          <article class="project-card reveal">
-            <p class="project-kicker">WPF / C# / MySQL</p>
-            <h3>반도체 공정 데이터 분석 프로그램</h3>
-            <p>반도체 공정 데이터를 시각화하고 분석하는 응용 프로그램 개발 및 유지보수를 수행했습니다.</p>
-            <ul><li>데이터 시각화 기능 개발</li><li>차트 분석 기능 및 대시보드 개선</li><li>운영 중 발생하는 버그 대응</li></ul>
-          </article>
-          <article class="project-card reveal">
-            <p class="project-kicker">Blazor / MQTT / Unity WebGL</p>
-            <h3>스마트팜 디지털트윈 통합 솔루션</h3>
-            <p>스마트팜 장비를 하나의 프로그램에서 관리하기 위한 통합 제어 솔루션입니다. 경기 청년 갭이어 프로그램 우수상을 수상했습니다.</p>
-            <ul><li>Arduino·Raspberry Pi 기반 센서 데이터 수집</li><li>MQTT 제어 및 웹 차트 시각화</li><li>Unity WebGL 기반 3D 디지털트윈 구현</li></ul>
-          </article>
-          <article class="project-card reveal">
-            <p class="project-kicker">Unity3D / C#</p>
-            <h3>모바일 야구 게임</h3>
-            <p>모바일 게임 클라이언트 개발자로 콘텐츠 개발 및 운영 이슈 대응을 수행했습니다.</p>
-            <ul><li>랭킹 미션 제작</li><li>가이드 팝업 제작</li><li>강화 확률 및 선수 카드 관련 버그 대응</li></ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section case-study" id="case-study">
-      <div class="container case-hero reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Featured Case Study</p>
-          <h2>스마트팜 통합 솔루션</h2>
-          <p>여러 스마트팜 장비를 하나의 환경에서 관리하기 위해 제작한 디지털트윈 기반 통합 제어 솔루션입니다. 장비별로 분산된 제어 방식을 줄이고, 사용자가 상태 확인과 제어 흐름을 직관적으로 파악할 수 있도록 구성했습니다.</p>
-          <div class="case-meta"><span>2024.06.10 - 2024.11.09</span><span>2인 프로젝트</span><span>경기도지사 우수상</span></div>
-        </div>
-        <a class="image-card hero-image" href="assets/images/smartfarm-cover.webp" target="_blank" rel="noreferrer"><img src="assets/images/smartfarm-cover.webp" alt="스마트팜 통합 솔루션 포트폴리오 표지" loading="lazy" /></a>
-      </div>
-
-      <div class="container problem-solution-grid">
-        <article class="value-card reveal"><span class="card-number">P</span><h3>Problem</h3><p>새 장비가 기존 장비와 독립적으로 개발되어 호환이 어렵고, 장비별 소프트웨어 학습 부담이 커졌습니다.</p></article>
-        <article class="value-card reveal"><span class="card-number">S</span><h3>Solution</h3><p>장비 제어, 상태 확인, 데이터 수집, 3D 시각화를 하나의 흐름으로 묶어 사용성과 확장성을 높였습니다.</p></article>
-        <article class="value-card reveal"><span class="card-number">I</span><h3>Impact</h3><p>유지관리 포인트를 줄이고, 표준화된 인터페이스 기반으로 새 장비와 기술을 붙이기 쉬운 구조를 제안했습니다.</p></article>
-      </div>
-
-      <div class="container image-showcase">
-        <a class="image-card reveal" href="assets/images/smartfarm-problem.webp" target="_blank" rel="noreferrer"><img src="assets/images/smartfarm-problem.webp" alt="스마트팜 기존 문제점 분석 슬라이드" loading="lazy"><span>문제 정의</span></a>
-        <a class="image-card reveal" href="assets/images/smartfarm-solution.webp" target="_blank" rel="noreferrer"><img src="assets/images/smartfarm-solution.webp" alt="스마트팜 통합 솔루션 개요 슬라이드" loading="lazy"><span>솔루션 개요</span></a>
-        <a class="image-card reveal" href="assets/images/smartfarm-effects.webp" target="_blank" rel="noreferrer"><img src="assets/images/smartfarm-effects.webp" alt="스마트팜 솔루션 기대 효과 슬라이드" loading="lazy"><span>기대 효과</span></a>
-      </div>
-    </section>
-
-    <section class="section muted-section" id="architecture">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Architecture</p>
-          <h2>Arduino에서 Client까지 이어지는 4계층 구조</h2>
-          <p>하드웨어 입력부터 웹 클라이언트 표현까지 역할을 나누어 확장 가능한 흐름으로 구성했습니다.</p>
-        </div>
-        <div class="architecture-flow reveal" aria-label="아키텍처 흐름">
-          <article><strong>Arduino</strong><span>센서 제어 · Wi-Fi 통신</span></article>
-          <article><strong>Raspberry Pi</strong><span>HW 입출력 제어 · 프록시</span></article>
-          <article><strong>Linux Server</strong><span>데이터 저장 · 분석</span></article>
-          <article><strong>Client</strong><span>WebAssembly · 다중 OS 접근</span></article>
-        </div>
-        <div class="architecture-images">
-          <a class="image-card reveal" href="assets/images/architecture-hardware.webp" target="_blank" rel="noreferrer"><img src="assets/images/architecture-hardware.webp" alt="하드웨어 아키텍처" loading="lazy"><span>하드웨어 아키텍처</span></a>
-          <a class="image-card reveal" href="assets/images/architecture-software.webp" target="_blank" rel="noreferrer"><img src="assets/images/architecture-software.webp" alt="소프트웨어 아키텍처" loading="lazy"><span>소프트웨어 아키텍처</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Build Process</p>
-          <h2>프로토타입 제작부터 WebGL 적용까지</h2>
-        </div>
-        <div class="process-grid">
-          <article class="process-card reveal"><img src="assets/images/process-hardware.webp" alt="하드웨어 제작 과정" loading="lazy"><div><span>01</span><h3>하드웨어 제작</h3><p>센서와 LED, 비닐하우스 구조를 실제 테스트 가능한 형태로 구성했습니다.</p></div></article>
-          <article class="process-card reveal"><img src="assets/images/process-arduino-raspberry.webp" alt="아두이노와 라즈베리파이 연결" loading="lazy"><div><span>02</span><h3>Arduino ↔ Raspberry Pi</h3><p>센서 입력과 제어 신호를 상위 장치로 전달하는 흐름을 구성했습니다.</p></div></article>
-          <article class="process-card reveal"><img src="assets/images/process-raspberry-client.webp" alt="라즈베리파이와 클라이언트 연결" loading="lazy"><div><span>03</span><h3>Raspberry Pi ↔ Client</h3><p>클라이언트가 장치 정보를 조회하고 제어할 수 있도록 연결 구조를 확장했습니다.</p></div></article>
-          <article class="process-card reveal"><img src="assets/images/process-blazor-ui.webp" alt="Blazor UI 개선" loading="lazy"><div><span>04</span><h3>Blazor UI 개선</h3><p>상태 확인과 제어를 웹 화면에서 직관적으로 볼 수 있도록 UI를 개선했습니다.</p></div></article>
-          <article class="process-card reveal wide"><img src="assets/images/process-webgl.webp" alt="Unity WebGL 적용" loading="lazy"><div><span>05</span><h3>Unity WebGL 적용</h3><p>디지털트윈 화면과 Blazor WebAssembly를 연결해 사용자가 공간과 장비 상태를 함께 이해하도록 구성했습니다.</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section muted-section" id="samples">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Implementation</p>
-          <h2>구현 포인트</h2>
-        </div>
-        <div class="sample-grid">
-          <article class="sample-card reveal"><h3>Arduino LEDSensor</h3><p>LED, 조도센서, MQTT 설정을 라이브러리화해 재사용성과 유지보수성을 높였습니다.</p></article>
-          <article class="sample-card reveal"><h3>Raspberry Pi DeviceController</h3><p>동일 망의 장비를 Ping으로 탐색하고, 하위 아두이노 장치 정보를 클라이언트에 전달했습니다.</p></article>
-          <article class="sample-card reveal"><h3>Main Server Devices</h3><p>장비와 자식 디바이스를 트리 구조로 보여주고, 토픽 및 장비 정보를 기반으로 연결할 수 있도록 구성했습니다.</p></article>
-          <article class="sample-card reveal"><h3>Unity WebGL Interop</h3><p>Unity WebGL의 클릭 이벤트와 Blazor WebAssembly의 C# 메서드를 JavaScript Interop으로 연결했습니다.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="awards">
-      <div class="container awards-layout">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Awards & Certificates</p>
-          <h2>수상 및 자격</h2>
-        </div>
-        <div class="award-list">
-          <article class="award-item reveal"><time>2024.11</time><strong>경기청년 갭이어 프로그램 경기도지사 우수상</strong><span>경기일자리재단</span></article>
-          <article class="award-item reveal"><time>2024.09</time><strong>정보처리기사</strong><span>한국산업인력공단</span></article>
-          <article class="award-item reveal"><time>2017.11</time><strong>안동지역 산업기반 ICT&SW 융합 공공 아이디어 공모전 우수상</strong><span>안동시</span></article>
-          <article class="award-item reveal"><time>2017.05</time><strong>창업 아이디어 경진대회 장려상</strong><span>안동대학교</span></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section contact-section" id="contact">
-      <div class="container contact-card reveal">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2>현장에 실제로 쓰이는 시스템을 만들고 싶습니다.</h2>
-        </div>
-        <div class="contact-actions">
-          <a class="button button-primary" href="https://dubukimch.github.io/" target="_blank" rel="noreferrer">GitHub Pages 열기</a>
-          <a class="button button-ghost" href="mailto:ddf****@naver.com">이메일 문의</a>
-        </div>
-          <p>공정 데이터 처리, 설비 연동, 시각화, 디지털트윈 프로젝트에 관심이 있습니다.</p>
-      </div>
+    <section class="contact">
+      <p class="kicker">PORTFOLIO DELIVERABLE</p><h2>세 제품이 증명하는<br>하나의 산업 데이터 플랫폼.</h2><p>데이터 생성, 표준화, 알람, 클라이언트 활용까지 각 구현 화면과 통합 테스트 근거를 함께 제공합니다.</p><div class="actions"><a class="button light" href="#projects">프로젝트 화면 다시 보기 ↑</a><a class="button ghost" href="#evidence">통합 테스트 근거 보기 ↑</a></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner"><p>© <span id="year"></span> 이의락 Portfolio</p><a href="#hero">맨 위로</a></div>
-  </footer>
+  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM PORTFOLIO</span><span>PLC · OPC UA · MES · DIGITAL TWIN</span><a href="#hero">BACK TO TOP ↑</a></footer>
+
+  <dialog class="lightbox" id="lightbox" aria-label="프로젝트 이미지 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="" alt=""><figcaption></figcaption></figure></dialog>
 </body>
 </html>

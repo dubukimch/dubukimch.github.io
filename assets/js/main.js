@@ -1,40 +1,61 @@
 const navToggle = document.querySelector('.nav-toggle');
-const siteNav = document.querySelector('.site-nav');
-const navLinks = [...document.querySelectorAll('.site-nav a')];
+const nav = document.querySelector('#nav');
 
 navToggle?.addEventListener('click', () => {
-  const isOpen = siteNav.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', String(isOpen));
+  const open = nav.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', String(open));
 });
 
-navLinks.forEach((link) => {
+nav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
-    siteNav.classList.remove('open');
+    nav.classList.remove('open');
     navToggle?.setAttribute('aria-expanded', 'false');
   });
 });
 
-const sections = navLinks
-  .map((link) => document.querySelector(link.getAttribute('href')))
-  .filter(Boolean);
-
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-  });
-}, { rootMargin: '-42% 0px -50% 0px', threshold: 0.01 });
-sections.forEach((section) => navObserver.observe(section));
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
       entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach((element) => revealObserver.observe(element));
+} else {
+  reveals.forEach((element) => element.classList.add('visible'));
+}
 
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-const year = document.getElementById('year');
-if (year) year.textContent = new Date().getFullYear();
+const sections = [...document.querySelectorAll('main section[id]')];
+const sectionLinks = [...document.querySelectorAll('#nav a[href^="#"]')];
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    const current = entries.find((entry) => entry.isIntersecting);
+    if (!current) return;
+    sectionLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current.target.id}`);
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach((section) => navObserver.observe(section));
+}
+
+const lightbox = document.querySelector('#lightbox');
+const lightboxImage = lightbox?.querySelector('img');
+const lightboxCaption = lightbox?.querySelector('figcaption');
+const lightboxClose = lightbox?.querySelector('.lightbox-close');
+
+document.querySelectorAll('[data-lightbox]').forEach((button) => {
+  button.addEventListener('click', () => {
+    if (!lightbox || !lightboxImage || !lightboxCaption) return;
+    lightboxImage.src = button.dataset.lightbox;
+    lightboxImage.alt = button.dataset.caption || '프로젝트 상세 화면';
+    lightboxCaption.textContent = button.dataset.caption || '';
+    lightbox.showModal();
+  });
+});
+
+lightboxClose?.addEventListener('click', () => lightbox.close());
+lightbox?.addEventListener('click', (event) => {
+  if (event.target === lightbox) lightbox.close();
+});
