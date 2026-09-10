@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PLC Simulation, IIoT Gateway, TwinForge 통합 기술 문서">
+  <title>통합 기술 문서 · Industrial Data Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-docs">
+</head>
+<body class="technical-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="포트폴리오 홈"><span>IDP</span><b>Technical Documentation<small>PLC · OPC UA · DIGITAL TWIN</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="기술 문서 메뉴">
+      <a href="#overview">Overview</a><a href="#plc">PLC</a><a href="#gateway">Gateway</a><a href="#twinforge">TwinForge</a>
+      <a class="nav-cta" href="assets/docs/industrial-platform-technical-document.pdf">PDF ↓</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="doc-hero" id="top">
+      <p class="kicker">TECHNICAL DOCUMENTATION · 2026</p>
+      <h1>현장의 신호가<br><em>운영의 판단</em>이 되기까지.</h1>
+      <p>PLC 데이터 생성부터 Gateway 표준화, OPC UA 제공, MES와 3D Digital Twin 반영까지 세 제품의 실제 실행 흐름과 장애 처리 기준을 설명합니다.</p>
+      <div class="actions"><a class="button primary" href="#overview">전체 흐름 읽기</a><a class="button secondary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오 홈</a></div>
+      <dl class="doc-metrics"><div><dt>03</dt><dd>Connected products</dd></div><div><dt>100ms</dt><dd>Fastest runtime cycle</dd></div><div><dt>14</dt><dd>Verified product screens</dd></div></dl>
+    </section>
+
+    <section class="doc-section doc-overview" id="overview">
+      <header class="doc-heading"><p class="kicker">00 · SYSTEM OVERVIEW</p><h2>세 제품, 하나의 데이터 경로</h2><p>각 제품은 독립적으로 실행되지만 함께 연결하면 장비 신호의 생성, 표준화, 분석과 시각화를 담당하는 하나의 산업 데이터 플랫폼이 됩니다.</p></header>
+      <div class="doc-flow">
+        <article><span>01 · ACQUIRE</span><h3>PLC Simulation</h3><p>프로토콜 프레임과 레지스터 값을 생성하고 태그 읽기·쓰기를 재현합니다.</p><small>Modbus · MELSEC · FINS · S7 · MQTT</small></article>
+        <i>→</i>
+        <article><span>02 · NORMALIZE</span><h3>IIoT Gateway</h3><p>장치 주소를 표준 경로로 만들고 품질, 알람, 이력과 OPC UA를 제공합니다.</p><small>Cache · Alarm · Historian · HA</small></article>
+        <i>→</i>
+        <article><span>03 · OPERATE</span><h3>TwinForge</h3><p>설비 데이터를 MES 지표, 실행 워크플로와 3D 공장 상태로 변환합니다.</p><small>SignalR · MES · Workflow · Three.js</small></article>
+      </div>
+      <ol class="doc-steps">
+        <li><b>PLC 값 생성</b><p>시뮬레이터가 실제 PLC 프로토콜 요청을 처리하고 값, 품질 코드와 타임스탬프를 만듭니다.</p></li>
+        <li><b>수집과 표준화</b><p>Gateway가 태그별 Scan Rate에 맞춰 값을 읽고 <code>DataAccess.Channel.Device.Tag</code> 경로로 정규화합니다.</p></li>
+        <li><b>운영 기능 분배</b><p>하나의 실시간 캐시가 OPC UA 주소 공간, 한계 알람과 Historian의 공통 입력이 됩니다.</p></li>
+        <li><b>Digital Twin 적용</b><p>TwinForge가 OPC UA 값을 구독하고 Scale과 Offset을 적용해 대상 설비의 속성으로 변환합니다.</p></li>
+        <li><b>화면 갱신</b><p>장비 이벤트가 SignalR을 거쳐 설비 카드, MES 지표와 3D 오브젝트를 동시에 갱신합니다.</p></li>
+      </ol>
+      <aside class="doc-scenario"><span>VERIFIED SCENARIO</span><strong>Speed_SP write → Gateway cache → OPC UA → Twin property</strong><p>Modbus 주소 40001에 속도 값을 쓰고, 실시간 태그 반영과 GOOD 품질, 표준 태그 경로와 Twin 수신 흐름을 순서대로 검증했습니다.</p></aside>
+    </section>
+
+    <section class="doc-section" id="plc">
+      <div class="doc-project-intro">
+        <header class="doc-heading"><p class="kicker">01 · DEVICE CONNECTIVITY</p><h2>PLC Simulation</h2><p>제조사별 통신 구현을 DLL 플러그인으로 분리하고 DriverHost가 설정, 연결, 태그와 최신 값을 하나의 실행 모델로 관리합니다.</p></header>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC Simulation 실시간 태그 화면"><figcaption><b>LIVE TAG MONITOR</b><span>읽기·쓰기·품질 상태를 WebSocket으로 실시간 표시</span></figcaption></figure>
+      </div>
+      <div class="doc-grid">
+        <article><span>STARTUP</span><h3>플러그인 검색과 프로파일 적용</h3><p>시작 시 공통 <code>IPlcDriver</code> 구현을 DLL에서 찾습니다. PLC 모델을 선택하면 프로토콜, 모델, 통신 모듈 기본값을 병합하고 드라이버를 재구성한 뒤 태그를 검색합니다.</p></article>
+        <article><span>READ LOOP</span><h3>1초 주기 폴링</h3><p><code>MonitorBackgroundService</code>가 활성 드라이버를 순회합니다. 연결이 끊긴 드라이버는 재연결하고, 발견한 태그 목록을 읽어 ID별 최신 값과 품질을 갱신합니다.</p></article>
+        <article><span>WRITE PATH</span><h3>태그 쓰기와 확인</h3><p>API가 태그 ID 또는 주소를 찾고 드라이버가 데이터 형식과 PLC 바이트 순서에 맞춰 값을 변환합니다. 성공 응답 뒤 캐시를 GOOD 품질로 갱신합니다.</p></article>
+        <article><span>LIVE UI</span><h3>WebSocket 스냅샷</h3><p><code>/ws/monitor</code>가 드라이버 상태, 태그 값, 데이터 매핑과 통신 로그를 전송합니다. 화면은 전체 새로고침 없이 연결 배지와 숫자를 갱신합니다.</p></article>
+      </div>
+      <div class="doc-detail">
+        <h3>읽기 순서</h3><ol><li>활성 드라이버의 연결 상태를 확인하고 필요하면 재연결합니다.</li><li>태그가 없으면 드라이버에서 주소와 데이터 형식을 검색합니다.</li><li>프로토콜별 Read 프레임을 보내고 응답을 공통 TagValue로 변환합니다.</li><li>태그 ID별 최신 값, 품질, 시각을 저장하고 WebSocket으로 전달합니다.</li></ol>
+        <h3>오류 처리</h3><p>한 드라이버의 통신 실패는 로그에 남기고 다른 드라이버 폴링은 계속합니다. 비활성 드라이버 쓰기와 존재하지 않는 태그 요청은 서버에서 거부하며, 다음 폴링 주기에 재연결을 시도합니다.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="gateway">
+      <div class="doc-project-intro">
+        <header class="doc-heading"><p class="kicker">02 · EDGE INTEGRATION</p><h2>IIoT Gateway</h2><p>Channel·Device·Tag 설정을 실제 통신으로 변환하고, 수집된 하나의 실시간 캐시를 OPC UA·알람·Historian이 공유합니다.</p></header>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="IIoT Gateway 태그 설정 화면"><figcaption><b>HIERARCHICAL TAG MODEL</b><span>주소·형식·권한·Scan Rate를 장치 구조로 관리</span></figcaption></figure>
+      </div>
+      <div class="doc-grid">
+        <article><span>CONFIGURATION</span><h3>Channel → Device → Tag</h3><p>Channel이 드라이버를 선택하고 Device가 엔드포인트를, Tag가 PLC 주소, 형식, 권한과 Scan Rate를 정의합니다. Repository가 이 구성을 MySQL에 저장합니다.</p></article>
+        <article><span>ACQUISITION</span><h3>Scan Rate 기반 수집</h3><p>Active 노드가 읽을 시점이 된 태그만 선택합니다. 드라이버 응답의 값, 품질, 형식과 Source Timestamp를 표준 DataAccess 경로에 저장합니다.</p></article>
+        <article><span>ALARM + HISTORY</span><h3>캐시에서 파생되는 기능</h3><p>알람은 1초마다 HiHi·High·LoLo·Low를 평가하고 상태 전환 때만 이벤트를 냅니다. Historian은 최소 100ms 주기로 값을 샘플링합니다.</p></article>
+        <article><span>OPC UA + HA</span><h3>안전한 외부 제공</h3><p>OPC UA가 계층형 주소 공간과 인증서 정책을 제공합니다. Active/Standby와 fencing token은 수집, 서버와 저장이 한 노드에서만 실행되도록 제어합니다.</p></article>
+      </div>
+      <div class="doc-detail">
+        <h3>수집에서 OPC UA까지</h3><ol><li>설정 저장소에서 활성 Channel, Device와 통신 태그를 읽습니다.</li><li>Driver Key로 프로토콜 DLL을 선택하고 장치 연결 옵션을 구성합니다.</li><li>성공한 값을 <code>DataAccess.Channel.Device.Tag</code> 경로의 캐시에 기록합니다.</li><li>OPC UA Read가 같은 캐시를 조회해 값과 품질을 외부 클라이언트에 제공합니다.</li></ol>
+        <h3>품질과 장애 처리</h3><p>PLC 읽기 실패 시 해당 태그를 Bad 품질로 바꾸어 오래된 값을 정상으로 오해하지 않게 합니다. Historian cache miss도 0으로 저장하지 않습니다. 설정 변경 신호가 발생하면 OPC UA 서버가 주소 공간을 다시 생성합니다.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="twinforge">
+      <div class="doc-project-intro">
+        <header class="doc-heading"><p class="kicker">03 · OPERATIONAL INTELLIGENCE</p><h2>TwinForge</h2><p>100ms 장비 시뮬레이션, OPC UA 외부 신호, MES와 실행 그래프를 하나의 장비 모델과 이벤트 경로에 연결합니다.</p></header>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
+      </div>
+      <div class="doc-grid">
+        <article><span>SIMULATION</span><h3>100ms 장비 틱</h3><p>Industry Factory가 장비와 위치를 만들고 엔진이 각 장비의 Update를 호출합니다. 값, 위치, 상태와 알람 변경은 Event Bus에 발행됩니다.</p></article>
+        <article><span>REAL TIME</span><h3>SignalR과 3D 동기화</h3><p>이벤트를 WebSocket으로 받은 Zustand Store가 설비 카드와 3D Scene의 공통 상태를 갱신합니다. 최근 텔레메트리 20개와 알람 100개를 유지합니다.</p></article>
+        <article><span>MES</span><h3>작업지시와 생산 진행</h3><p>우선순위에 따라 최대 2개 작업을 동시에 Release합니다. 공정 진행에 따라 양품, 불량, WIP, OEE와 스테이션 상태가 갱신됩니다.</p></article>
+        <article><span>WORKFLOW</span><h3>위상 정렬 실행</h3><p>노드를 연결 순서로 정렬하고 선행 Output을 후속 Input으로 전달합니다. 각 Executor의 Running, Success, Error 상태와 로그를 표시합니다.</p></article>
+      </div>
+      <div class="doc-detail">
+        <h3>외부 OPC UA 적용</h3><ol><li>OPC UA Client가 200ms Publishing Interval로 Gateway 노드를 구독합니다.</li><li>Equipment Binding이 노드 경로와 Twin 장비 속성을 연결합니다.</li><li>정상 숫자에 <code>value × scale + offset</code>을 적용합니다.</li><li>엔진이 값을 적용하고 SignalR 이벤트로 카드와 3D 오브젝트를 갱신합니다.</li></ol>
+        <h3>데이터 품질</h3><p>연결 실패, 초기값 대기와 형식 오류를 서로 다른 Bad 품질로 구분합니다. 외부 모드에서는 내부 시뮬레이션 Update가 수신 값을 덮어쓰지 않습니다.</p>
+      </div>
+    </section>
+
+    <section class="doc-section doc-reference" id="reference">
+      <header class="doc-heading"><p class="kicker">04 · OPERATING REFERENCE</p><h2>실행 주소와 검증 범위</h2></header>
+      <div class="reference-table"><div><b>PLC Simulation</b><code>http://localhost:5088</code><span>11 drivers · 4 connected · 24 live tags</span></div><div><b>IIoT Gateway ConfigUI</b><code>http://localhost:5279</code><span>Channel · Device · Tag · Alarm · OPC UA</span></div><div><b>TwinForge</b><code>http://localhost:5173</code><span>6 equipment · MES · Workflow · 3D factory</span></div></div>
+      <p class="doc-disclaimer">Gateway 설정 화면 일부는 인메모리 구성 모드에서 촬영했습니다. 알람·OPC UA 보안 화면은 Docker 통합 실행에서 검증한 자료이며, TwinForge 워크플로 캡처는 내장 실행 시뮬레이터의 성공 결과입니다.</p>
+      <div class="actions"><a class="button primary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오로 돌아가기</a></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM · TECHNICAL DOCUMENT</span><span>PLC · OPC UA · MES · DIGITAL TWIN</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</body>
+</html>

@@ -5,6 +5,8 @@
 ## 포트폴리오 구성
 
 - `index.html`: 통합 포트폴리오 메인 페이지
+- `technical.html`: 세 프로젝트의 런타임 구조와 전체 데이터 흐름을 설명하는 통합 기술 문서
+- `assets/docs/industrial-platform-technical-document.pdf`: 인쇄와 제출용 통합 기술 문서 PDF
 - `assets/css/styles.css`: 메인 페이지 디자인과 반응형 레이아웃
 - `assets/js/main.js`: 메뉴, 등장 효과, 현재 섹션 표시, 이미지 라이트박스
 - `assets/images/industrial-portfolio/`: 3개 프로젝트 주요 화면 14장과 OG 이미지
