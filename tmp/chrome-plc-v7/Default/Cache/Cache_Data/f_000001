@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PLC Simulation의 대시보드, 드라이버 설정, 실시간 태그 쓰기와 데이터 매핑을 화면별로 설명합니다.">
+  <title>PLC Simulation 기능 가이드 · Industrial Data Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</head>
+<body class="product-page" data-product="plc">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#projects" aria-label="포트폴리오 프로젝트 목록"><span>01</span><b>PLC Simulation<small>PRODUCT FEATURE WALKTHROUGH</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="PLC Simulation 기능 메뉴">
+      <a href="#dashboard">Dashboard</a><a href="#configuration">Configuration</a><a href="#monitor">Live Tags</a><a href="#mapping">Mapping</a>
+      <a class="nav-cta" href="iiot-gateway.html">Next · Gateway →</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="product-hero" id="top">
+      <div class="product-hero-copy reveal">
+        <div class="product-crumbs"><a href="index.html">Portfolio</a><span>/</span><span>Project 01</span></div>
+        <p class="kicker">DEVICE CONNECTIVITY · USER WALKTHROUGH</p>
+        <h1>PLC를 고르고,<em>값을 직접 제어합니다.</em></h1>
+        <p class="product-lead">운영자는 제조사별 드라이버와 PLC 모델을 선택하고 접속 정보를 설정한 뒤, 실시간 태그를 읽거나 쓰고 상위 시스템용 표준 경로까지 관리할 수 있습니다. 아래 다섯 화면은 그 작업 순서를 실제 UI 기준으로 설명합니다.</p>
+        <div class="product-actions"><a class="button primary" href="#dashboard">화면별 동작 보기 ↓</a><a class="button secondary" href="assets/docs/industrial-products-feature-guide.pdf">기능 가이드 PDF</a><a class="button secondary" href="technical.html#plc">구현 구조 보기</a><a class="button secondary" href="index.html#plc">메인으로 돌아가기</a></div>
+        <dl class="product-proof"><div><dt>11</dt><dd>Driver plugins loaded</dd></div><div><dt>41</dt><dd>PLC model profiles</dd></div><div><dt>1s</dt><dd>Live polling cycle</dd></div></dl>
+      </div>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC Simulation 실시간 태그 모니터"><figcaption><b>OPERATOR VIEW</b><span>읽기·쓰기·품질·갱신 시각을 한 테이블에서 확인</span></figcaption></figure>
+    </section>
+
+    <div class="product-shell">
+      <aside class="feature-nav" aria-label="화면 목차">
+        <span>05 FEATURE SCREENS</span>
+        <a href="#dashboard"><b>01</b><span>운영 대시보드</span></a>
+        <a href="#catalog"><b>02</b><span>PLC 노드 카탈로그</span></a>
+        <a href="#configuration"><b>03</b><span>드라이버 설정</span></a>
+        <a href="#monitor"><b>04</b><span>실시간 태그 제어</span></a>
+        <a href="#mapping"><b>05</b><span>표준 데이터 매핑</span></a>
+        <footer><a href="iiot-gateway.html">다음 제품: Gateway →</a><a href="technical.html">통합 기술 문서</a></footer>
+      </aside>
+
+      <div class="feature-content">
+        <section class="feature-chapter" id="dashboard">
+          <header class="feature-heading reveal"><span class="feature-number">01</span><div><p class="kicker">OPERATIONS OVERVIEW</p><h2>드라이버 상태와 통신 로그를 한눈에</h2><p class="feature-purpose">Dashboard는 시작 직후 시스템이 어떤 드라이버를 불러왔고, 무엇이 연결되어 있으며, 태그 통신이 정상인지 판단하는 운영 시작점입니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-01-dashboard.png" data-caption="PLC Simulation — 운영 대시보드와 실시간 통신 로그"><img src="assets/images/industrial-portfolio/plc-01-dashboard.png" alt="11개 드라이버, 연결 상태, 실시간 통신 로그가 표시된 PLC Simulation 대시보드"><span><b>01 · DASHBOARD</b><small>캡처 상태: 11 loaded · 4 connected · 24 live tags · 41 profiles</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 사용하는 항목</h3><p><strong>Manage</strong>는 Driver Configuration으로, <strong>Open Logs</strong>는 전체 로그 화면으로 이동합니다. WS Online과 카드의 스위치 모양은 이 화면에서 상태를 읽기 위한 표시입니다.</p><div class="control-tags"><span>Manage</span><span>Open Logs</span><span>WS Online</span><span>Driver status</span><span>Dashboard menu</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>Dashboard에서 Loaded Drivers와 Connected 수를 확인합니다.</li><li>Driver Health에서 연결·비활성 드라이버를 구분합니다.</li><li>설정 변경이 필요하면 Manage로 이동합니다.</li><li>Live Communication Log에서 TX·RX·SYS 요청과 응답을 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>구성 변경이 대시보드에 반영되는 과정</h3><div class="behavior-flow"><div><b>Driver 설정 저장</b><span>Configuration 화면에서 활성 상태와 접속값을 저장합니다.</span></div><div><b>DriverHost 재구성</b><span>드라이버를 연결하고 태그를 검색·폴링합니다.</span></div><div><b>WebSocket 갱신</b><span>상태·카운트·통신 로그를 Dashboard에 전송합니다.</span></div></div><ul class="result-list"><li>캡처에서 MQTT·FINS·Modbus·S7의 4개 연결을 확인합니다.</li><li>한 드라이버가 실패해도 나머지 폴링은 계속됩니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>단순 상태 카드가 아니라 드라이버 활성화, 연결 복구, 태그 탐색과 로그 관찰을 하나의 운영 화면에 묶은 장애 진단 UX입니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="catalog">
+          <header class="feature-heading reveal"><span class="feature-number">02</span><div><p class="kicker">DRIVER CATALOG</p><h2>제조사와 프로토콜을 같은 방식으로 탐색</h2><p class="feature-purpose">PLC Nodes 화면은 플러그인 DLL에서 읽은 제조사, 프로토콜, 연결 주소와 태그 규모를 카드로 보여줍니다. 새 드라이버가 추가돼도 UI 구조는 그대로 유지됩니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-02-node-catalog.png" data-caption="PLC Simulation — 제조사별 PLC 노드 카탈로그"><img src="assets/images/industrial-portfolio/plc-02-node-catalog.png" alt="Modbus, EtherCAT, EtherNet/IP, LS, MELSEC, MQTT, OMRON 드라이버 카드"><span><b>02 · PLC NODES</b><small>제조사별 드라이버 메타데이터와 활성 상태 비교</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>화면에서 확인하는 정보</h3><p>각 카드의 상태 배지, Endpoint, Vendor, Tags와 활동 표시를 비교해 구성할 드라이버를 고릅니다. 활동 표시는 연결·태그 상태를 요약하며 실측 성능 지표가 아닙니다.</p><div class="control-tags"><span>Status badge</span><span>Endpoint</span><span>Vendor</span><span>Tag count</span><span>Activity</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>사이드바의 PLC Nodes를 선택합니다.</li><li>프로토콜 또는 제조사 카드의 Endpoint를 확인합니다.</li><li>상태 배지와 태그 수로 현재 사용 가능 여부를 판단합니다.</li><li>구성이 필요하면 Driver Configuration으로 이동합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>카탈로그가 만들어지는 방식</h3><div class="behavior-flow"><div><b>DLL 탐색</b><span><code>IPlcDriver</code> 구현과 메타데이터를 찾습니다.</span></div><div><b>공통 모델 변환</b><span>Vendor·Protocol·Endpoint·Tags로 정규화합니다.</span></div><div><b>카드 렌더링</b><span>서로 다른 프로토콜을 동일한 UI로 표시합니다.</span></div></div><ul class="result-list"><li>통신 방식이 달라도 운영자는 같은 탐색 절차를 사용합니다.</li><li>플러그인 추가가 화면 코드 변경으로 이어지지 않습니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>Modbus TCP, MELSEC, FINS, S7, MQTT 등 이기종 프로토콜을 공통 드라이버 계약과 하나의 웹 UX로 추상화했습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="configuration">
+          <header class="feature-heading reveal"><span class="feature-number">03</span><div><p class="kicker">MODEL + CONNECTION</p><h2>PLC 모델을 선택하고 연결값을 적용</h2><p class="feature-purpose">운영자는 Protocol Profile, PLC Model, Communication Module을 선택해 기본값을 불러온 뒤 호스트·포트·Station 등 실제 접속값을 조정합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-03-driver-config.png" data-caption="PLC Simulation — 모델 카탈로그와 드라이버 연결 설정"><img src="assets/images/industrial-portfolio/plc-03-driver-config.png" alt="PLC 모델 카탈로그, DLL 업로드, 드라이버 설정 폼이 표시된 화면"><span><b>03 · DRIVER CONFIGURATION</b><small>프로파일 선택 → 기본값 병합 → 드라이버 적용</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 입력하는 값</h3><p>프로토콜·모델·통신 모듈 드롭다운, <strong>Apply to Driver</strong>, DLL 업로드, 활성 스위치와 Endpoint·Listen Host·Port·Station 필드를 사용합니다.</p><div class="control-tags"><span>Protocol Profile</span><span>PLC Model</span><span>Communication Module</span><span>Apply to Driver</span><span>Upload DLL</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>왼쪽 Plugin Manager에서 대상 드라이버를 선택합니다.</li><li>프로토콜, PLC 모델과 통신 모듈을 선택합니다.</li><li>Apply to Driver로 추천 기본값을 폼에 반영합니다.</li><li>현장 환경에 맞게 호스트·포트·Station을 수정하고 활성화합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>적용 버튼 이후의 처리</h3><div class="behavior-flow"><div><b>프로파일 병합</b><span>프로토콜·모델·모듈 기본값과 현재 입력을 합칩니다.</span></div><div><b>ConfigureAsync</b><span>캐시를 비우고 드라이버 연결 정보를 갱신합니다.</span></div><div><b>재연결·태그 검색</b><span>활성 드라이버를 다시 연결하고 태그를 발견합니다.</span></div></div><ul class="result-list"><li>선택한 모델에 맞는 통신 기본값이 반복 입력을 줄입니다.</li><li>저장된 구성은 다음 실행 때 다시 복원됩니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>장비 전문가가 아니어도 모델 카탈로그를 기준으로 설정할 수 있고, 필요하면 DLL 플러그인을 추가해 통신 범위를 확장할 수 있습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="monitor">
+          <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">LIVE READ + WRITE</p><h2>실시간 값을 보고, 쓰고, 결과를 확인</h2><p class="feature-purpose">Tag Monitor는 태그 주소, 데이터 형식, 현재 값, 품질과 갱신 시각을 보여주며 쓰기 가능한 태그에는 Write 동작을 제공합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png" data-caption="PLC Simulation — 실시간 태그 읽기와 쓰기"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="Speed_SP, Temp_PV 등의 값과 GOOD 품질, Write 버튼이 표시된 태그 모니터"><span><b>04 · TAG MONITOR</b><small>Address · Value · Quality · Updated · Write action</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>Tag Explorer에서 드라이버를 고르고 <strong>Refresh</strong>로 스냅샷을 요청합니다. R/W 태그의 <strong>Write</strong> 버튼을 눌러 새 값을 입력합니다.</p><div class="control-tags"><span>Tag Explorer</span><span>Refresh</span><span>Write</span><span>Value input</span><span>Quality badge</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>검증한 쓰기 순서</h3><ol class="operator-steps"><li>Modbus TCP Device Simulator를 선택합니다.</li><li><code>Speed_SP</code> 행의 Write를 누르고 1800을 입력합니다.</li><li>완료 알림과 GOOD 품질을 확인합니다.</li><li>다음 실시간 스냅샷에서 변경된 값을 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>입력값이 화면에 돌아오기까지</h3><div class="behavior-flow"><div><b>POST /api/tags/write</b><span>태그 ID·주소와 입력 문자열을 전달합니다.</span></div><div><b>프로토콜 쓰기</b><span>형식과 바이트 순서에 맞춰 PLC 프레임으로 변환합니다.</span></div><div><b>캐시 + WebSocket</b><span>성공 값을 GOOD 품질로 저장하고 화면에 재전송합니다.</span></div></div><ul class="result-list"><li>화면에서 입력한 값이 PLC 메모리까지 전달됩니다.</li><li>품질과 갱신 시각으로 성공 여부를 즉시 판별합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>정적 데모가 아니라 실제 프로토콜 Read/Write, 데이터 형식 변환, 최신 값 캐시와 WebSocket UI 갱신을 하나의 사용자 동작으로 검증했습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="mapping">
+          <header class="feature-heading reveal"><span class="feature-number">05</span><div><p class="kicker">SEMANTIC MAPPING</p><h2>PLC 주소를 상위 시스템용 경로로 변환</h2><p class="feature-purpose">Data Mapping은 40001, D100처럼 프로토콜에 종속된 주소를 MES와 Gateway가 읽을 수 있는 표준 경로와 별칭으로 관리합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-05-data-mapping.png" data-caption="PLC Simulation — 물리 태그와 표준 경로 매핑"><img src="assets/images/industrial-portfolio/plc-05-data-mapping.png" alt="태그 매핑 수, 누락 수, 표준 경로와 저장 버튼이 표시된 데이터 매핑 화면"><span><b>05 · DATA MAPPING</b><small>캡처 상태: 24 mappings · 0 missing · CSV export ready</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p><strong>Sync Tags</strong>, 검색창과 드라이버 필터로 대상을 찾고 Alias·표준 경로·활성 상태를 편집한 뒤 행별 Save 또는 Delete를 실행합니다.</p><div class="control-tags"><span>Sync Tags</span><span>Search</span><span>Driver filter</span><span>Alias</span><span>Standard path</span><span>Export CSV</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>Sync Tags로 현재 드라이버의 태그를 불러옵니다.</li><li>Missing 지표와 필터로 미매핑 항목을 찾습니다.</li><li>업무용 Alias와 표준 경로를 입력하고 활성화합니다.</li><li>Save로 저장하거나 Export CSV로 검토 자료를 만듭니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>매핑이 상위 시스템에 주는 효과</h3><div class="behavior-flow"><div><b>원본 태그 발견</b><span>프로토콜 주소와 데이터 형식을 수집합니다.</span></div><div><b>표준 경로 저장</b><span>별칭·경로·활성 상태를 Mapping Store에 기록합니다.</span></div><div><b>상위 시스템 사용</b><span>주소 체계를 몰라도 동일한 의미 경로로 조회합니다.</span></div></div><ul class="result-list"><li>누락 매핑 수가 즉시 집계되어 배포 전 오류를 찾습니다.</li><li>CSV로 내보내 현장 태그 목록을 리뷰할 수 있습니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>프로토콜 연결에서 끝나지 않고, 물리 주소를 업무 의미가 있는 데이터 계약으로 바꾸는 통합 경계를 구현했습니다.</p></aside>
+        </section>
+      </div>
+    </div>
+
+    <section class="product-next reveal"><div><p class="kicker">NEXT PRODUCT</p><h2>IIoT Gateway에서 수집 경로를 구성합니다.</h2><p>Channel → Device → Tag → Alarm → OPC UA Security 순서의 운영 화면을 이어서 확인하세요.</p></div><div class="actions"><a class="button primary" href="iiot-gateway.html">Gateway 기능 보기 →</a></div></section>
+  </main>
+
+  <footer class="site-footer"><span>PLC SIMULATION · FEATURE WALKTHROUGH</span><span>CONFIGURE · MONITOR · WRITE · MAP</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="PLC Simulation 화면 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="" alt=""><figcaption></figcaption></figure></dialog>
+</body>
+</html>

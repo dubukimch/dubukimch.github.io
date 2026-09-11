@@ -10,7 +10,7 @@
   <meta property="og:description" content="PLC → OPC UA → MES → Digital Twin. 현장 신호를 운영 가능한 데이터로 연결합니다.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/industrial-portfolio/og-industrial-platform.png">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-1">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
   <script defer src="assets/js/main.js?v=20260901-2"></script>
 </head>
 <body>
@@ -35,7 +35,7 @@
       </div>
       <aside class="hero-visual reveal" aria-label="TwinForge 디지털 트윈 미리보기">
         <div class="visual-top"><span class="live"><i></i> LIVE PIPELINE</span><span>PORTFOLIO / 2026</span></div>
-        <img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 설비 모니터링 화면">
+        <img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 설비 모니터링 화면">
         <div class="floating-tag plc">PLC<br><b>Speed_SP 2500</b></div>
         <div class="floating-tag twin">TWINFORGE<br><b>6 equipment online</b></div>
         <div class="visual-bottom"><span>DATA ACCESS</span><span>ALARM &amp; CONDITION</span><span>CLIENT</span></div>
@@ -59,12 +59,13 @@
     </section>
 
     <section class="section projects" id="projects">
-      <header class="section-head reveal"><p class="kicker">PRODUCT WALKTHROUGH</p><h2>주요 화면으로 보는 구현 범위</h2><p>이미지를 선택하면 원본 크기로 세부 UI와 데이터 상태를 확인할 수 있습니다.</p></header>
+      <header class="section-head reveal"><p class="kicker">PRODUCT WALKTHROUGH</p><h2>화면을 보고, 조작을 따라가고, 결과를 확인합니다</h2><p>각 제품의 상세 가이드에서 화면별 목적, 사용자가 누르는 버튼과 입력값, 처리 순서, UI에 돌아오는 결과까지 확인할 수 있습니다.</p></header>
       <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a></nav>
 
       <article class="project-block" id="plc">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 01</p><h3>PLC Simulation</h3><p>실제 장비 없이도 산업 데이터 흐름을 검증할 수 있는 가상 PLC 웹 애플리케이션입니다. 드라이버 구성부터 실시간 태그, 메모리 매핑까지 한곳에서 관리합니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Data source</dd></div><div><dt>Protocol</dt><dd>Modbus TCP</dd></div></dl></div>
         <div class="feature-strip reveal"><span>Dashboard</span><span>Node catalog</span><span>Driver config</span><span>Live monitoring</span><span>Data mapping</span></div>
+        <a class="project-guide-link reveal" href="plc-simulation.html"><span>FULL FEATURE WALKTHROUGH</span><b>5개 화면의 설정·실시간 쓰기·매핑 동작 보기</b><i>상세 가이드 →</i></a>
         <div class="gallery gallery-five">
           <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/plc-01-dashboard.png" data-caption="PLC Simulation — 운영 대시보드"><img src="assets/images/industrial-portfolio/plc-01-dashboard.png" alt="PLC Simulation 대시보드" loading="lazy"><span><b>01</b> 운영 대시보드</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-02-node-catalog.png" data-caption="PLC Simulation — 노드 카탈로그"><img src="assets/images/industrial-portfolio/plc-02-node-catalog.png" alt="PLC 노드 카탈로그" loading="lazy"><span><b>02</b> 노드 카탈로그</span></button>
@@ -77,6 +78,7 @@
       <article class="project-block" id="gateway">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 02</p><h3>IIoT Gateway</h3><p>PLC 데이터를 OPC UA 정보 모델로 변환하고 외부 클라이언트에 안전하게 제공하는 산업용 Gateway입니다. Data Access, Alarms &amp; Conditions, 보안 설정을 포함합니다.</p></div><dl><div><dt>Role</dt><dd>Core developer</dd></div><div><dt>Focus</dt><dd>Interoperability</dd></div><div><dt>Protocol</dt><dd>OPC UA</dd></div></dl></div>
         <div class="feature-strip reveal"><span>Channel</span><span>Device</span><span>Tag model</span><span>Alarm condition</span><span>Security</span></div>
+        <a class="project-guide-link reveal" href="iiot-gateway.html"><span>FULL FEATURE WALKTHROUGH</span><b>5개 화면의 수집 계층·알람·보안 설정 보기</b><i>상세 가이드 →</i></a>
         <div class="gallery gallery-five">
           <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/gateway-01-channels.png" data-caption="IIoT Gateway — 채널 관리"><img src="assets/images/industrial-portfolio/gateway-01-channels.png" alt="Gateway 채널 관리" loading="lazy"><span><b>01</b> 채널 관리</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-02-device.png" data-caption="IIoT Gateway — 디바이스 설정"><img src="assets/images/industrial-portfolio/gateway-02-device.png" alt="Gateway 디바이스 설정" loading="lazy"><span><b>02</b> 디바이스 설정</span></button>
@@ -89,11 +91,12 @@
       <article class="project-block" id="twinforge">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 03</p><h3>TwinForge</h3><p>표준화된 설비 데이터를 생산 운영 정보로 전환하는 MES·Digital Twin 애플리케이션입니다. 설비 현황, 워크플로, 3D 공간 모니터링을 하나의 UX로 구성했습니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Operations UX</dd></div><div><dt>Visual</dt><dd>Three.js</dd></div></dl></div>
         <div class="feature-strip reveal"><span>MES dashboard</span><span>Equipment</span><span>Workflow</span><span>3D Digital Twin</span></div>
+        <a class="project-guide-link reveal" href="twinforge.html"><span>FULL FEATURE WALKTHROUGH</span><b>4개 화면의 MES·설비 제어·워크플로·3D 동작 보기</b><i>상세 가이드 →</i></a>
         <div class="gallery gallery-four">
           <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" data-caption="TwinForge — MES 운영 대시보드"><img src="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" alt="TwinForge MES 대시보드" loading="lazy"><span><b>01</b> MES 대시보드</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-02-equipment.png" data-caption="TwinForge — 설비 관리"><img src="assets/images/industrial-portfolio/twin-02-equipment.png" alt="TwinForge 설비 관리" loading="lazy"><span><b>02</b> 설비 관리</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-03-workflow.png" data-caption="TwinForge — 생산 워크플로"><img src="assets/images/industrial-portfolio/twin-03-workflow.png" alt="TwinForge 워크플로" loading="lazy"><span><b>03</b> 생산 워크플로</span></button>
-          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-04-3d.png" data-caption="TwinForge — 3D Digital Twin"><img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 디지털 트윈" loading="lazy"><span><b>04</b> 3D Digital Twin</span></button>
+          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-04-3d-factory.png" data-caption="TwinForge — 3D Digital Twin"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 디지털 트윈" loading="lazy"><span><b>04</b> 3D Digital Twin</span></button>
         </div>
       </article>
     </section>
@@ -118,12 +121,12 @@
     </section>
 
     <section class="contact">
-      <p class="kicker">PORTFOLIO DELIVERABLE</p><h2>세 제품이 증명하는<br>하나의 산업 데이터 플랫폼.</h2><p>데이터 생성, 표준화, 알람, 클라이언트 활용까지 각 구현 화면과 통합 테스트 근거를 함께 제공합니다.</p><div class="actions"><a class="button light" href="technical.html">통합 기술 문서 보기 →</a><a class="button ghost" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드 ↓</a></div>
+      <p class="kicker">PORTFOLIO DELIVERABLE</p><h2>세 제품이 증명하는<br>하나의 산업 데이터 플랫폼.</h2><p>데이터 생성, 표준화, 알람, 클라이언트 활용까지 각 구현 화면과 통합 테스트 근거를 함께 제공합니다.</p><div class="actions"><a class="button light" href="plc-simulation.html">제품 기능 가이드 →</a><a class="button ghost" href="assets/docs/industrial-products-feature-guide.pdf">기능 가이드 PDF ↓</a><a class="button ghost" href="technical.html">통합 기술 문서 →</a></div>
     </section>
   </main>
 
   <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM PORTFOLIO</span><span>PLC · OPC UA · MES · DIGITAL TWIN</span><a href="#hero">BACK TO TOP ↑</a></footer>
 
-  <dialog class="lightbox" id="lightbox" aria-label="프로젝트 이미지 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="" alt=""><figcaption></figcaption></figure></dialog>
+  <dialog class="lightbox" id="lightbox" aria-label="프로젝트 이미지 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""><figcaption></figcaption></figure></dialog>
 </body>
 </html>

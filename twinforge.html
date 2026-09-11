@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TwinForge의 MES, 실시간 설비, 워크플로와 3D 가상 공장을 사용자 조작과 상태 변화로 설명합니다.">
+  <title>TwinForge 기능 가이드 · Industrial Data Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</head>
+<body class="product-page" data-product="twinforge">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#projects" aria-label="포트폴리오 프로젝트 목록"><span>03</span><b>TwinForge<small>PRODUCT FEATURE WALKTHROUGH</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="TwinForge 기능 메뉴">
+      <a href="#mes">MES</a><a href="#equipment">Equipment</a><a href="#workflow">Workflow</a><a href="#factory">3D Factory</a>
+      <a class="nav-cta" href="plc-simulation.html">Loop · PLC →</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="product-hero" id="top">
+      <div class="product-hero-copy reveal">
+        <div class="product-crumbs"><a href="index.html">Portfolio</a><span>/</span><span>Project 03</span></div>
+        <p class="kicker">OPERATIONAL INTELLIGENCE · USER WALKTHROUGH</p>
+        <h1>설비 데이터를 보고,<em>생산을 직접 운영합니다.</em></h1>
+        <p class="product-lead">운영자는 업종별 생산 시나리오를 시작하고 작업지시와 OEE를 확인하며, 개별 설비를 제어하고 데이터 흐름을 워크플로로 설계합니다. 같은 장비 상태는 2D 카드와 3D 공장에 함께 반영됩니다.</p>
+        <div class="product-actions"><a class="button primary" href="#mes">화면별 동작 보기 ↓</a><a class="button secondary" href="assets/docs/industrial-products-feature-guide.pdf">기능 가이드 PDF</a><a class="button secondary" href="technical.html#twinforge">구현 구조 보기</a><a class="button secondary" href="index.html#twinforge">메인으로 돌아가기</a></div>
+        <dl class="product-proof"><div><dt>06</dt><dd>Automotive equipment</dd></div><div><dt>100ms</dt><dd>Equipment simulation tick</dd></div><div><dt>05</dt><dd>Workflow nodes verified</dd></div></dl>
+      </div>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 자동차 제조 3D 디지털 트윈"><figcaption><b>OPERATOR VIEW</b><span>검색·시점·상태·설비 제어가 결합된 가상 공장</span></figcaption></figure>
+    </section>
+
+    <div class="product-shell">
+      <aside class="feature-nav" aria-label="화면 목차">
+        <span>04 FEATURE SCREENS</span>
+        <a href="#mes"><b>01</b><span>MES 생산 운영</span></a>
+        <a href="#equipment"><b>02</b><span>설비 텔레메트리</span></a>
+        <a href="#workflow"><b>03</b><span>워크플로 설계</span></a>
+        <a href="#factory"><b>04</b><span>3D 가상 공장</span></a>
+        <footer><a href="iiot-gateway.html">← 이전: IIoT Gateway</a><a href="plc-simulation.html">처음: PLC Simulation</a><a href="technical.html">통합 기술 문서</a></footer>
+      </aside>
+
+      <div class="feature-content">
+        <section class="feature-chapter" id="mes">
+          <header class="feature-heading reveal"><span class="feature-number">01</span><div><p class="kicker">MES OPERATIONS</p><h2>생산 계획부터 라인 실적까지 제어</h2><p class="feature-purpose">MES Dashboard는 업종별 작업지시와 라인 스테이션을 생성하고, 생산 진행에 따른 Plan/Actual, WIP, OEE와 Scrap을 한 화면에서 보여줍니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" data-caption="TwinForge — Automotive MES 작업지시와 라인 KPI"><img src="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" alt="Automotive MES의 3개 작업지시, WIP 854, 평균 OEE 43.2 퍼센트가 표시된 화면"><span><b>01 · MES DASHBOARD</b><small>2 InProgress · 1 Planned · WIP 854 · Average OEE 43.2%</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>MES 업종 선택과 <strong>Start MES</strong>, Stop, Reset, Refresh로 생산 엔진을 제어합니다. 상단 공장 시뮬레이션 Start/Stop/Reset은 MES와 독립된 제어입니다.</p><div class="control-tags"><span>Industry</span><span>Start MES</span><span>Stop</span><span>Reset</span><span>Refresh</span><span>Factory Start</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>MES 영역에서 Automotive 업종을 선택합니다.</li><li>Start MES로 작업지시와 라인 스테이션을 로드합니다.</li><li>InProgress·Planned 상태와 현재 공정을 확인합니다.</li><li>WIP·OEE·Scrap과 스테이션 부하를 보고 Stop 또는 Reset합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>버튼 입력이 생산 KPI가 되는 과정</h3><div class="behavior-flow"><div><b>POST /api/mes/start</b><span>선택 업종의 계획과 스테이션을 생성합니다.</span></div><div><b>MES 1초 Tick</b><span>우선순위에 따라 최대 2개 작업을 진행합니다.</span></div><div><b>Status Snapshot</b><span>수량·WIP·TPH·OEE를 계산해 3초 주기로 표시합니다.</span></div></div><ul class="result-list"><li>작업은 Planned → Released → InProgress → Completed로 이동합니다.</li><li>Body Weld는 Running, 후속 공정은 작업물 대기로 Starved를 표시합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>차트만 배치한 대시보드가 아니라 사용자 제어, 작업 우선순위, 공정 상태 전이와 KPI 계산을 하나의 MES 도메인 흐름으로 구현했습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="equipment">
+          <header class="feature-heading reveal"><span class="feature-number">02</span><div><p class="kicker">LIVE EQUIPMENT</p><h2>설비 상태와 센서 값을 실시간으로 추적</h2><p class="feature-purpose">각 설비 카드는 상태, 위치와 장비별 속성을 보여주고 Start/Stop 제어를 제공합니다. 오른쪽 Telemetry와 Alarm 패널은 선택 설비의 이벤트를 시간순으로 좁혀 봅니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/twin-02-equipment.png" data-caption="TwinForge — 설비 카드, Telemetry 이력과 Alarm 필터"><img src="assets/images/industrial-portfolio/twin-02-equipment.png" alt="로봇, 조립 장비, AGV와 센서의 Running 상태와 텔레메트리가 표시된 설비 화면"><span><b>02 · EQUIPMENT TELEMETRY</b><small>Equipment cards · Recent telemetry · Alarm filters</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>설비 카드별 Start·Stop, Telemetry 설비 선택, Alarm Severity·Equipment 필터와 전체 시뮬레이션 제어를 사용합니다.</p><div class="control-tags"><span>Equipment Start</span><span>Equipment Stop</span><span>Telemetry selector</span><span>Severity filter</span><span>Equipment filter</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>업종을 선택하고 전체 시뮬레이션을 시작합니다.</li><li>설비 카드의 Running 상태와 최신 속성을 확인합니다.</li><li>Telemetry 목록에서 추적할 설비를 선택합니다.</li><li>개별 Stop 또는 Start 후 상태·값·이력이 함께 바뀌는지 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>100ms 설비 변화가 브라우저에 도착하는 과정</h3><div class="behavior-flow"><div><b>Equipment Update</b><span>엔진이 100ms마다 값·위치·상태를 갱신합니다.</span></div><div><b>Event + SignalR</b><span>TelemetryUpdate와 StateChanged를 WebSocket으로 방송합니다.</span></div><div><b>Zustand Store</b><span>카드와 이력 패널의 공통 상태를 부분 갱신합니다.</span></div></div><ul class="result-list"><li>최근 텔레메트리 20건과 최근 알람 100건을 유지합니다.</li><li>개별 제어 결과가 연결된 모든 브라우저에 다시 방송됩니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>Conveyor, Robot, AGV, Sensor처럼 속성이 다른 장비를 공통 상태 모델로 제어하면서 각 장비의 고유 텔레메트리를 유지합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="workflow">
+          <header class="feature-heading reveal"><span class="feature-number">03</span><div><p class="kicker">LOW-CODE WORKFLOW</p><h2>제조 데이터 흐름을 배치하고 실행 상태를 검증</h2><p class="feature-purpose">Workflow Designer에서 PLC, Data Mapping, Condition, Equipment와 Logger 노드를 연결하고 실행 순서, 상태와 로그를 시각적으로 검사합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/twin-03-workflow.png" data-caption="TwinForge — 5개 노드 제조 데이터 워크플로 실행"><img src="assets/images/industrial-portfolio/twin-03-workflow.png" alt="Modbus PLC Source부터 Telemetry Historian까지 연결된 5개 워크플로 노드와 실행 로그"><span><b>03 · WORKFLOW DESIGNER</b><small>5 nodes · 4 connections · 10 execution log entries</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>New·Save·Copy·Delete, Run·Pause·Stop·Step, Import·Export와 Node Palette 드래그, 포트 연결, 속성 패널, 줌·미니맵을 사용합니다.</p><div class="control-tags"><span>Drag &amp; Drop</span><span>Connect ports</span><span>Run</span><span>Pause</span><span>Step</span><span>Export JSON</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>New 또는 기존 워크플로를 선택합니다.</li><li>노드를 캔버스에 끌어놓고 입출력 포트를 연결합니다.</li><li>노드 속성과 Enabled 상태를 설정하고 Save합니다.</li><li>Run 후 WAITING → RUNNING → SUCCESS와 하단 로그를 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>현재 화면의 실행 시뮬레이션</h3><div class="behavior-flow"><div><b>연결 검증</b><span>포트 타입 호환과 순환 참조를 검사합니다.</span></div><div><b>위상 정렬</b><span>선행 노드부터 실행 순서를 계산합니다.</span></div><div><b>상태 시각화</b><span>각 노드를 Running·Success로 바꾸고 로그를 추가합니다.</span></div></div><ul class="result-list"><li>5개 노드와 4개 연결이 모두 성공 상태로 표시됩니다.</li><li>노드마다 시작·완료 로그가 남아 총 10건을 확인합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>IMPLEMENTED SCOPE</b><p>이 캡처의 Run은 브라우저 Store에서 동작하는 <strong>클라이언트 실행 시뮬레이션</strong>입니다. 연결 유효성과 실행 UX를 검증하며, 실제 PLC·OPC UA·Historian 호출이 수행된 것으로 과장하지 않습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="factory">
+          <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">3D DIGITAL TWIN</p><h2>공간에서 설비를 찾고 상태를 직접 제어</h2><p class="feature-purpose">가상 공장은 설비 배치와 상태를 3D로 표현하면서 검색, 상태 필터, 카메라 시점, 선택 설비 상세와 Start/Stop 제어를 같은 작업 공간에 제공합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/twin-04-3d-factory.png" data-caption="TwinForge — 자동차 제조 3D 가상 공장과 설비 상세"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="자동차 제조 공장의 6개 설비, 100퍼센트 가동률과 MainConveyor 상세가 표시된 3D 화면"><span><b>04 · 3D FACTORY</b><small>6/6 running · 100% availability · MainConveyor selected</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>업종·시뮬레이션 제어, 설비 검색·상태 필터, 설비 목록과 3D 오브젝트 선택, 전체 조망·현장 시점·평면 보기, 선택 설비로 이동과 Start/Stop을 사용합니다.</p><div class="control-tags"><span>Industry</span><span>Simulation Start</span><span>Search</span><span>Status filter</span><span>Camera view</span><span>Focus asset</span><span>Asset Start/Stop</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>자동차 제조 업종을 선택하고 시뮬레이션을 시작합니다.</li><li>검색이나 상태 필터로 설비를 좁힙니다.</li><li>목록 또는 3D 오브젝트에서 MainConveyor를 선택합니다.</li><li>카메라를 이동하고 상세값을 확인한 뒤 설비 Start/Stop을 실행합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>하나의 상태가 2D와 3D에 함께 반영</h3><div class="behavior-flow"><div><b>SignalR 수신</b><span>설비 값·위치·상태를 공통 Store에 반영합니다.</span></div><div><b>Scene 동기화</b><span>Mesh 위치·색상·라벨과 KPI를 다시 렌더링합니다.</span></div><div><b>Raycaster 선택</b><span>오브젝트 ID로 오른쪽 상세와 제어 대상을 연결합니다.</span></div></div><ul class="result-list"><li>캡처에서 6/6 가동, 가동률 100%, 점검 필요 0대를 확인합니다.</li><li>실시간 위치 변경은 카메라를 강제로 움직이지 않고 선택 설비 이동 때만 초점을 바꿉니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>3D를 장식으로 사용하지 않고 설비 검색, 운영 상태, 실시간 데이터, 카메라 탐색과 직접 제어를 연결한 현장 운영 UX입니다.</p></aside>
+        </section>
+      </div>
+    </div>
+
+    <section class="product-next reveal"><div><p class="kicker">END-TO-END LOOP</p><h2>이제 세 제품을 하나의 흐름으로 읽을 수 있습니다.</h2><p>PLC 값 생성 → Gateway 수집·표준화 → TwinForge 운영 화면 반영의 전체 기술 경로를 확인하세요.</p></div><div class="actions"><a class="button primary" href="technical.html">통합 기술 문서 →</a><a class="button secondary" href="index.html">포트폴리오 홈</a></div></section>
+  </main>
+
+  <footer class="site-footer"><span>TWINFORGE · FEATURE WALKTHROUGH</span><span>MES · TELEMETRY · WORKFLOW · 3D FACTORY</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="TwinForge 화면 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""><figcaption></figcaption></figure></dialog>
+</body>
+</html>

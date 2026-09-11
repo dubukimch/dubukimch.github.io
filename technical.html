@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="PLC Simulation, IIoT Gateway, TwinForge 통합 기술 문서">
   <title>통합 기술 문서 · Industrial Data Platform</title>
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-docs">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
 </head>
 <body class="technical-page">
   <header class="site-header">
@@ -22,7 +22,7 @@
       <p class="kicker">TECHNICAL DOCUMENTATION · 2026</p>
       <h1>현장의 신호가<br><em>운영의 판단</em>이 되기까지.</h1>
       <p>PLC 데이터 생성부터 Gateway 표준화, OPC UA 제공, MES와 3D Digital Twin 반영까지 세 제품의 실제 실행 흐름과 장애 처리 기준을 설명합니다.</p>
-      <div class="actions"><a class="button primary" href="#overview">전체 흐름 읽기</a><a class="button secondary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오 홈</a></div>
+      <div class="actions"><a class="button primary" href="#overview">전체 흐름 읽기</a><a class="button secondary" href="plc-simulation.html">제품 기능 가이드</a><a class="button secondary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오 홈</a></div>
       <dl class="doc-metrics"><div><dt>03</dt><dd>Connected products</dd></div><div><dt>100ms</dt><dd>Fastest runtime cycle</dd></div><div><dt>14</dt><dd>Verified product screens</dd></div></dl>
     </section>
 
@@ -50,6 +50,7 @@
         <header class="doc-heading"><p class="kicker">01 · DEVICE CONNECTIVITY</p><h2>PLC Simulation</h2><p>제조사별 통신 구현을 DLL 플러그인으로 분리하고 DriverHost가 설정, 연결, 태그와 최신 값을 하나의 실행 모델로 관리합니다.</p></header>
         <figure class="doc-figure"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC Simulation 실시간 태그 화면"><figcaption><b>LIVE TAG MONITOR</b><span>읽기·쓰기·품질 상태를 WebSocket으로 실시간 표시</span></figcaption></figure>
       </div>
+      <a class="doc-product-link" href="plc-simulation.html"><b>화면별 기능 가이드</b><span>5개 UI에서 드라이버 설정, 태그 쓰기와 데이터 매핑이 동작하는 과정 보기 →</span></a>
       <div class="doc-grid">
         <article><span>STARTUP</span><h3>플러그인 검색과 프로파일 적용</h3><p>시작 시 공통 <code>IPlcDriver</code> 구현을 DLL에서 찾습니다. PLC 모델을 선택하면 프로토콜, 모델, 통신 모듈 기본값을 병합하고 드라이버를 재구성한 뒤 태그를 검색합니다.</p></article>
         <article><span>READ LOOP</span><h3>1초 주기 폴링</h3><p><code>MonitorBackgroundService</code>가 활성 드라이버를 순회합니다. 연결이 끊긴 드라이버는 재연결하고, 발견한 태그 목록을 읽어 ID별 최신 값과 품질을 갱신합니다.</p></article>
@@ -67,6 +68,7 @@
         <header class="doc-heading"><p class="kicker">02 · EDGE INTEGRATION</p><h2>IIoT Gateway</h2><p>Channel·Device·Tag 설정을 실제 통신으로 변환하고, 수집된 하나의 실시간 캐시를 OPC UA·알람·Historian이 공유합니다.</p></header>
         <figure class="doc-figure"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="IIoT Gateway 태그 설정 화면"><figcaption><b>HIERARCHICAL TAG MODEL</b><span>주소·형식·권한·Scan Rate를 장치 구조로 관리</span></figcaption></figure>
       </div>
+      <a class="doc-product-link" href="iiot-gateway.html"><b>화면별 기능 가이드</b><span>5개 UI에서 Channel·Device·Tag·Alarm·OPC UA 보안을 설정하는 과정 보기 →</span></a>
       <div class="doc-grid">
         <article><span>CONFIGURATION</span><h3>Channel → Device → Tag</h3><p>Channel이 드라이버를 선택하고 Device가 엔드포인트를, Tag가 PLC 주소, 형식, 권한과 Scan Rate를 정의합니다. Repository가 이 구성을 MySQL에 저장합니다.</p></article>
         <article><span>ACQUISITION</span><h3>Scan Rate 기반 수집</h3><p>Active 노드가 읽을 시점이 된 태그만 선택합니다. 드라이버 응답의 값, 품질, 형식과 Source Timestamp를 표준 DataAccess 경로에 저장합니다.</p></article>
@@ -82,8 +84,9 @@
     <section class="doc-section" id="twinforge">
       <div class="doc-project-intro">
         <header class="doc-heading"><p class="kicker">03 · OPERATIONAL INTELLIGENCE</p><h2>TwinForge</h2><p>100ms 장비 시뮬레이션, OPC UA 외부 신호, MES와 실행 그래프를 하나의 장비 모델과 이벤트 경로에 연결합니다.</p></header>
-        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d.png" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
       </div>
+      <a class="doc-product-link" href="twinforge.html"><b>화면별 기능 가이드</b><span>4개 UI에서 MES·설비·워크플로·3D 공장을 제어하는 과정 보기 →</span></a>
       <div class="doc-grid">
         <article><span>SIMULATION</span><h3>100ms 장비 틱</h3><p>Industry Factory가 장비와 위치를 만들고 엔진이 각 장비의 Update를 호출합니다. 값, 위치, 상태와 알람 변경은 Event Bus에 발행됩니다.</p></article>
         <article><span>REAL TIME</span><h3>SignalR과 3D 동기화</h3><p>이벤트를 WebSocket으로 받은 Zustand Store가 설비 카드와 3D Scene의 공통 상태를 갱신합니다. 최근 텔레메트리 20개와 알람 100개를 유지합니다.</p></article>

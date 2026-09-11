@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IIoT Gateway의 Channel, Device, Tag, Alarm과 OPC UA 보안 설정을 사용자 조작과 런타임 동작으로 설명합니다.">
+  <title>IIoT Gateway 기능 가이드 · Industrial Data Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</head>
+<body class="product-page" data-product="gateway">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#projects" aria-label="포트폴리오 프로젝트 목록"><span>02</span><b>IIoT Gateway<small>PRODUCT FEATURE WALKTHROUGH</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="IIoT Gateway 기능 메뉴">
+      <a href="#channel">Channel</a><a href="#device">Device</a><a href="#tag">Tag</a><a href="#alarm">Alarm</a><a href="#security">Security</a>
+      <a class="nav-cta" href="twinforge.html">Next · TwinForge →</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="product-hero" id="top">
+      <div class="product-hero-copy reveal">
+        <div class="product-crumbs"><a href="index.html">Portfolio</a><span>/</span><span>Project 02</span></div>
+        <p class="kicker">EDGE INTEGRATION · USER WALKTHROUGH</p>
+        <h1>수집 경로를 만들고,<em>운영 규칙을 설정합니다.</em></h1>
+        <p class="product-lead">운영자는 Channel → Device → Tag 계층으로 PLC 수집 계약을 만들고, 같은 데이터에 임계값 알람과 OPC UA 서버 식별·인증서 저장소 정책을 적용합니다. 다섯 화면은 설정 입력이 런타임 수집과 표준 제공으로 이어지는 과정을 보여줍니다.</p>
+        <div class="product-actions"><a class="button primary" href="#channel">화면별 동작 보기 ↓</a><a class="button secondary" href="assets/docs/industrial-products-feature-guide.pdf">기능 가이드 PDF</a><a class="button secondary" href="technical.html#gateway">구현 구조 보기</a><a class="button secondary" href="index.html#gateway">메인으로 돌아가기</a></div>
+        <dl class="product-proof"><div><dt>05</dt><dd>Operator configuration screens</dd></div><div><dt>100ms</dt><dd>Configured tag scan rate</dd></div><div><dt>1s</dt><dd>Alarm evaluation cycle</dd></div></dl>
+      </div>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/gateway-02-device.png" alt="IIoT Gateway PLC 장치 편집 화면"><figcaption><b>CONFIGURATION VIEW</b><span>접속점·Station·상하위 PLC 라우팅을 하나의 폼으로 설정</span></figcaption></figure>
+    </section>
+
+    <div class="product-shell">
+      <aside class="feature-nav" aria-label="화면 목차">
+        <span>05 FEATURE SCREENS</span>
+        <a href="#channel"><b>01</b><span>수집 채널 구성</span></a>
+        <a href="#device"><b>02</b><span>PLC 장치 연결</span></a>
+        <a href="#tag"><b>03</b><span>태그 수집 계약</span></a>
+        <a href="#alarm"><b>04</b><span>임계값 알람</span></a>
+        <a href="#security"><b>05</b><span>OPC UA 보안 설정</span></a>
+        <footer><a href="plc-simulation.html">← 이전: PLC Simulation</a><a href="twinforge.html">다음: TwinForge →</a><a href="technical.html">통합 기술 문서</a></footer>
+      </aside>
+
+      <div class="feature-content">
+        <section class="feature-chapter" id="channel">
+          <header class="feature-heading reveal"><span class="feature-number">01</span><div><p class="kicker">CHANNEL</p><h2>라인별 통신 방식과 드라이버를 정의</h2><p class="feature-purpose">Channel은 공장이나 생산 라인의 수집 단위입니다. 운영자는 이름, Communication 방식, 설명과 드라이버 파라미터를 저장하고 행을 선택해 하위 장치로 이동합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/gateway-01-channels.png" data-caption="IIoT Gateway — FactoryLine01 Modbus TCP 채널 구성"><img src="assets/images/industrial-portfolio/gateway-01-channels.png" alt="FactoryLine01과 Modbus TCP, Stopped 상태가 표시된 Channel List"><span><b>01 · CHANNEL LIST</b><small>구성 캡처: FactoryLine01 · Modbus TCP · Stopped</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p><strong>Add Channel</strong>과 연필 버튼에서 Channel Name, Communication, Description, Driver Parameters JSON을 입력합니다. 행을 누르면 Device 목록으로 이동합니다.</p><div class="control-tags"><span>Add Channel</span><span>Edit</span><span>Delete</span><span>Channel Name</span><span>Communication</span><span>Custom Tags</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>Data Access에서 Add Channel을 누릅니다.</li><li><code>FactoryLine01</code>과 Modbus TCP를 선택합니다.</li><li>설명과 필요한 드라이버 JSON을 입력하고 Save합니다.</li><li>저장된 채널 행을 눌러 하위 Device 화면으로 이동합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>저장된 채널이 수집 단위가 되는 과정</h3><div class="behavior-flow"><div><b>ConfigUI Save</b><span>입력을 Domain Channel 모델로 검증합니다.</span></div><div><b>Repository 저장</b><span>구성 DB 또는 촬영용 인메모리 저장소에 반영합니다.</span></div><div><b>Active Worker 조회</b><span>Enabled 채널의 Driver Key로 통신 플러그인을 선택합니다.</span></div></div><ul class="result-list"><li>채널명·프로토콜·설명·상태를 목록에서 검토합니다.</li><li>목록의 Enabled 스위치는 이 캡처 구현에서 상태 표시용입니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>CAPTURE CONTEXT</b><p>이 화면은 MySQL을 사용하지 않는 인메모리 구성 모드에서 촬영했습니다. <strong>Stopped</strong>는 설정만 준비하고 런타임 수집을 시작하지 않은 상태이며, 실제 연결 성공을 뜻하지 않습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="device">
+          <header class="feature-heading reveal"><span class="feature-number">02</span><div><p class="kicker">DEVICE + ROUTING</p><h2>PLC 접속점과 네트워크 계층을 입력</h2><p class="feature-purpose">Device는 선택한 채널 아래의 실제 PLC Endpoint입니다. 대표 PLC에 직접 연결하거나, 상위 PLC 뒤에 있는 하위 장치로 라우팅할 수 있습니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/gateway-02-device.png" data-caption="IIoT Gateway — ProcessPLC01 장치 연결 정보 편집"><img src="assets/images/industrial-portfolio/gateway-02-device.png" alt="ProcessPLC01의 PLC Type, IP, Port, Station ID, Parent PLC를 입력하는 Edit Device 모달"><span><b>02 · EDIT DEVICE</b><small>ProcessPLC01 · 127.0.0.1:1502 · Station 1 · Representative PLC</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 입력하는 값</h3><p>Device Name, PLC Type, IP Address, Port, Station ID, Parent PLC과 제조사별 Device Parameters JSON을 입력합니다.</p><div class="control-tags"><span>Add Device</span><span>PLC Type</span><span>IP Address</span><span>Port</span><span>Station ID</span><span>Parent PLC</span><span>Save</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>FactoryLine01 채널을 선택합니다.</li><li>Add Device 또는 연필 버튼으로 편집창을 엽니다.</li><li>ProcessPLC01, Modbus, 127.0.0.1, 1502와 Station 1을 입력합니다.</li><li>직접 연결은 Representative PLC, 하위 장치는 Parent PLC를 지정하고 Save합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>장치 계층을 실제 접속 정보로 해석</h3><div class="behavior-flow"><div><b>Device 저장</b><span>Endpoint와 계층·제조사 옵션을 Repository에 기록합니다.</span></div><div><b>PlcDeviceRouting</b><span>대표 PLC의 IP·Port와 하위 Station·JSON을 병합합니다.</span></div><div><b>Driver 연결</b><span>계산된 옵션으로 통신 세션을 만들고 태그를 폴링합니다.</span></div></div><ul class="result-list"><li>단일 PLC와 대표 PLC 뒤 하위 PLC를 같은 모델로 관리합니다.</li><li>캡처의 Disconnected는 구성 촬영 당시 런타임 미연결 상태입니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>IP와 포트만 저장하는 단순 장치 목록을 넘어, 산업 네트워크의 대표 PLC·하위 PLC 구조와 제조사별 라우팅 옵션을 표현합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="tag">
+          <header class="feature-heading reveal"><span class="feature-number">03</span><div><p class="kicker">TAG CONTRACT</p><h2>주소·형식·주기·권한을 수집 계약으로</h2><p class="feature-purpose">Tag는 PLC 메모리 주소에 사람이 읽는 이름과 데이터 형식, Scan Rate, Read/Write 권한을 부여합니다. 이 설정이 수집 스케줄과 OPC UA 쓰기 허용 여부를 결정합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/gateway-03-tags.png" data-caption="IIoT Gateway — Speed_SP와 Temp_PV 태그 정의"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="Speed_SP 40001 Int16 R/W와 Temp_PV 40003 Float R 태그 목록"><span><b>03 · TAG CONFIGURATION</b><small>Speed_SP · 40001 · Int16 · 100ms · R/W</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 입력하는 값</h3><p>Add Tag 또는 연필 버튼에서 Tag Name, Address, Data Type, Scan Rate, Access와 Tag Parameters JSON을 편집합니다.</p><div class="control-tags"><span>Add Tag</span><span>Address</span><span>Data Type</span><span>Scan Rate</span><span>R / R/W</span><span>Tag Parameters</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>ProcessPLC01 장치 행을 선택합니다.</li><li>Speed_SP를 40001, Int16, 100ms, R/W로 등록합니다.</li><li>Temp_PV를 40003, Float, 100ms, R로 등록합니다.</li><li>목록에서 주소·형식·주기·권한을 비교하고 필요한 항목을 수정합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>100ms 설정이 실시간 캐시가 되기까지</h3><div class="behavior-flow"><div><b>Due Tag 선택</b><span>마지막 읽기 시각과 Scan Rate를 비교합니다.</span></div><div><b>Driver ReadAsync</b><span>주소와 데이터 형식에 맞춰 PLC 값을 읽습니다.</span></div><div><b>표준 캐시 기록</b><span>값·품질·형식·UTC 시각을 DataAccess 경로에 저장합니다.</span></div></div><ul class="result-list"><li>R/W 태그만 OPC UA 쓰기 경로를 통과할 수 있습니다.</li><li>통신 실패 시 오래된 값을 정상으로 두지 않고 Bad 품질을 기록합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>SCREEN SCOPE</b><p>이 화면은 <strong>태그 정의</strong>를 보여주며 실시간 현재값 화면은 아닙니다. 실제 값·GOOD 품질·쓰기 결과는 PLC Simulation의 Live Tag 화면과 Docker 통합 테스트에서 별도로 검증했습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="alarm">
+          <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">ALARM CONDITION</p><h2>PLC 값을 운영 임계값 이벤트로 변환</h2><p class="feature-purpose">운영자는 수집 태그를 Target Node로 지정하고 Level 임계값, Severity와 메시지를 설정합니다. 런타임은 값이 경계를 넘거나 복귀할 때만 상태 전환 이벤트를 만듭니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/gateway-04-alarm.png" data-caption="IIoT Gateway — SpeedHigh Level 알람과 Major 심각도"><img src="assets/images/industrial-portfolio/gateway-04-alarm.png" alt="DataAccess DockerModbus PlcSimulation 40001을 대상으로 하는 SpeedHigh Major 알람"><span><b>04 · ALARM SOURCE</b><small>SpeedHigh · Level · Major · Enabled</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 설정하는 규칙</h3><p>Add Alarm 또는 연필 버튼에서 Alarm Name, Target Node, Level Type, Severity, Message와 HiHi·High·Low·LoLo 값을 입력합니다.</p><div class="control-tags"><span>Add Alarm</span><span>Target Node</span><span>Level</span><span>Major</span><span>High = 2000</span><span>Save</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>검증한 설정 순서</h3><ol class="operator-steps"><li>Alarm &amp; Condition에서 DockerAlarms를 엽니다.</li><li>SpeedHigh 규칙의 Target을 40001 속도 태그로 지정합니다.</li><li>Level, Major, High 2000과 메시지를 저장합니다.</li><li>목록에서 Target·Type·Severity·Enabled 상태를 검토합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>숫자 값이 AlarmCondition이 되는 과정</h3><div class="behavior-flow"><div><b>1초 평가</b><span>Active 노드가 실시간 캐시의 숫자값을 조회합니다.</span></div><div><b>경계 비교</b><span>HiHi → High → LoLo → Low 순서로 Level을 계산합니다.</span></div><div><b>상태 전환 발행</b><span>변경 시에만 Severity·Message·Quality를 OPC UA 이벤트로 보냅니다.</span></div></div><ul class="result-list"><li>통합 검증에서 2498 ≥ High 2000의 Active 상태를 확인했습니다.</li><li>같은 상태가 계속될 때 중복 이벤트를 만들지 않습니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>IMPLEMENTED SCOPE</b><p>현재 런타임에서 검증된 평가 방식은 숫자 <strong>Level</strong> 한계입니다. ROC·Deviation 선택지는 UI에 존재하지만 이 포트폴리오에서는 구현 기능으로 주장하지 않습니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="security">
+          <header class="feature-heading reveal"><span class="feature-number">05</span><div><p class="kicker">OPC UA IDENTITY + PKI</p><h2>외부 클라이언트가 신뢰할 서버 정보를 설정</h2><p class="feature-purpose">System Configuration은 OPC UA Application Identity와 인증서 저장소 위치, Subject, 수명 등 운영 환경별 보안 설정을 입력하는 화면입니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/gateway-05-security.png" data-caption="IIoT Gateway — OPC UA 애플리케이션 식별과 인증서 저장소 설정"><img src="assets/images/industrial-portfolio/gateway-05-security.png" alt="Application Name과 URI, 인증서 저장 경로, Subject, Key Size가 표시된 System Configuration"><span><b>05 · SYSTEM CONFIGURATION</b><small>Application identity · Certificate store · Subject · Lifetime</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 입력하는 값</h3><p>General 탭에서 Application Name·URI·Product URI, Certificate Store Path·Subject·Lifetime과 Key Size 설정 항목을 관리하고 Save 또는 Reset을 사용합니다.</p><div class="control-tags"><span>General</span><span>Application URI</span><span>Store Path</span><span>Subject</span><span>Lifetime</span><span>Save</span><span>Reset</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>System 메뉴의 General 탭을 엽니다.</li><li>서버 이름과 Application·Product URI를 입력합니다.</li><li>인증서 저장소 경로, Subject와 수명을 지정합니다.</li><li>Save로 저장합니다. Reset 사용 후 영구 반영하려면 다시 Save합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>설정이 OPC UA 서버에 적용되는 방식</h3><div class="behavior-flow"><div><b>구성 저장</b><span>General과 기능별 설정 모델을 Configuration Store에 기록합니다.</span></div><div><b>PKI 준비</b><span>서버 시작 시 own·trusted·issuer·rejected 저장소를 구성합니다.</span></div><div><b>서버 식별</b><span>Name·URI·Subject로 Endpoint와 인증서를 구성합니다.</span></div></div><ul class="result-list"><li>외부 클라이언트가 서버 Identity와 Trust 상태를 구분합니다.</li><li>Gateway Configuration API 경로의 저장은 주소 공간 재시작 신호를 발생시킵니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>APPLY SCOPE</b><p>ConfigUI가 DB에 직접 저장한 변경은 Gateway 재시작 후 반영됩니다. 프로세스 내부 Reload Signal을 사용하는 즉시 재구성은 Gateway Configuration API 경로에서 검증했습니다.</p></aside>
+        </section>
+      </div>
+    </div>
+
+    <section class="product-next reveal"><div><p class="kicker">NEXT PRODUCT</p><h2>TwinForge에서 표준 데이터를 운영 화면으로 바꿉니다.</h2><p>작업지시, 설비 텔레메트리, 워크플로와 3D 공장 UI가 같은 상태를 어떻게 사용하는지 확인하세요.</p></div><div class="actions"><a class="button primary" href="twinforge.html">TwinForge 기능 보기 →</a></div></section>
+  </main>
+
+  <footer class="site-footer"><span>IIoT GATEWAY · FEATURE WALKTHROUGH</span><span>CHANNEL · DEVICE · TAG · ALARM · OPC UA</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="IIoT Gateway 화면 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="" alt=""><figcaption></figcaption></figure></dialog>
+</body>
+</html>
