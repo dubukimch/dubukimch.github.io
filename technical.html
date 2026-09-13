@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="PLC Simulation, IIoT Gateway, TwinForge 통합 기술 문서">
+  <meta name="description" content="PLC Simulation, IIoT Gateway, OEEAnalyzer, TwinForge의 실행 흐름과 데이터 계약을 설명하는 통합 기술 문서">
   <title>통합 기술 문서 · Industrial Data Platform</title>
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260910-2">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260912-2">
 </head>
 <body class="technical-page">
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="포트폴리오 홈"><span>IDP</span><b>Technical Documentation<small>PLC · OPC UA · DIGITAL TWIN</small></b></a>
+    <a class="brand" href="index.html" aria-label="포트폴리오 홈"><span>IDP</span><b>Technical Documentation<small>PLC · OPC UA · OEE · DIGITAL TWIN</small></b></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
     <nav id="nav" aria-label="기술 문서 메뉴">
-      <a href="#overview">Overview</a><a href="#plc">PLC</a><a href="#gateway">Gateway</a><a href="#twinforge">TwinForge</a>
+      <a href="#overview">Overview</a><a href="#plc">PLC</a><a href="#gateway">Gateway</a><a href="#oee">OEE</a><a href="#twinforge">TwinForge</a>
       <a class="nav-cta" href="assets/docs/industrial-platform-technical-document.pdf">PDF ↓</a>
     </nav>
   </header>
@@ -21,28 +21,31 @@
     <section class="doc-hero" id="top">
       <p class="kicker">TECHNICAL DOCUMENTATION · 2026</p>
       <h1>현장의 신호가<br><em>운영의 판단</em>이 되기까지.</h1>
-      <p>PLC 데이터 생성부터 Gateway 표준화, OPC UA 제공, MES와 3D Digital Twin 반영까지 세 제품의 실제 실행 흐름과 장애 처리 기준을 설명합니다.</p>
+      <p>PLC 생산 신호 생성부터 Gateway 표준화, OEEAnalyzer의 품질 기반 기간 계산, TwinForge의 MES 맥락 제공과 결과 표시까지 네 제품의 실제 실행 흐름과 장애 처리 기준을 설명합니다.</p>
       <div class="actions"><a class="button primary" href="#overview">전체 흐름 읽기</a><a class="button secondary" href="plc-simulation.html">제품 기능 가이드</a><a class="button secondary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오 홈</a></div>
-      <dl class="doc-metrics"><div><dt>03</dt><dd>Connected products</dd></div><div><dt>100ms</dt><dd>Fastest runtime cycle</dd></div><div><dt>14</dt><dd>Verified product screens</dd></div></dl>
+      <dl class="doc-metrics"><div><dt>04</dt><dd>Connected products</dd></div><div><dt>4</dt><dd>OEE production signals</dd></div><div><dt>A×P×Q</dt><dd>Quality-aware result</dd></div></dl>
     </section>
 
     <section class="doc-section doc-overview" id="overview">
-      <header class="doc-heading"><p class="kicker">00 · SYSTEM OVERVIEW</p><h2>세 제품, 하나의 데이터 경로</h2><p>각 제품은 독립적으로 실행되지만 함께 연결하면 장비 신호의 생성, 표준화, 분석과 시각화를 담당하는 하나의 산업 데이터 플랫폼이 됩니다.</p></header>
-      <div class="doc-flow">
+      <header class="doc-heading"><p class="kicker">00 · SYSTEM OVERVIEW</p><h2>네 제품, 두 입력이 만나는 폐루프</h2><p>계측 경로는 PLC → Gateway → OEEAnalyzer로 흐르고, 업무 경로는 TwinForge → OEEAnalyzer로 들어갑니다. 계산 결과는 다시 TwinForge로 돌아가 MES 작업지시와 같은 화면에서 사용됩니다.</p></header>
+      <div class="doc-flow doc-flow-four">
         <article><span>01 · ACQUIRE</span><h3>PLC Simulation</h3><p>프로토콜 프레임과 레지스터 값을 생성하고 태그 읽기·쓰기를 재현합니다.</p><small>Modbus · MELSEC · FINS · S7 · MQTT</small></article>
         <i>→</i>
         <article><span>02 · NORMALIZE</span><h3>IIoT Gateway</h3><p>장치 주소를 표준 경로로 만들고 품질, 알람, 이력과 OPC UA를 제공합니다.</p><small>Cache · Alarm · Historian · HA</small></article>
         <i>→</i>
-        <article><span>03 · OPERATE</span><h3>TwinForge</h3><p>설비 데이터를 MES 지표, 실행 워크플로와 3D 공장 상태로 변환합니다.</p><small>SignalR · MES · Workflow · Three.js</small></article>
+        <article><span>03 · ANALYZE</span><h3>OEEAnalyzer</h3><p>네 생산 신호와 작업 맥락을 결합해 기간별 A/P/Q/OEE와 계산 신뢰도를 만듭니다.</p><small>Kafka · TimescaleDB · Coverage</small></article>
+        <i>↔</i>
+        <article><span>04 · OPERATE</span><h3>TwinForge</h3><p>작업지시 맥락을 보내고 External 분석 결과를 MES·설비·3D 운영 화면과 함께 표시합니다.</p><small>SignalR · MES · Workflow · Three.js</small></article>
       </div>
       <ol class="doc-steps">
-        <li><b>PLC 값 생성</b><p>시뮬레이터가 실제 PLC 프로토콜 요청을 처리하고 값, 품질 코드와 타임스탬프를 만듭니다.</p></li>
-        <li><b>수집과 표준화</b><p>Gateway가 태그별 Scan Rate에 맞춰 값을 읽고 <code>DataAccess.Channel.Device.Tag</code> 경로로 정규화합니다.</p></li>
-        <li><b>운영 기능 분배</b><p>하나의 실시간 캐시가 OPC UA 주소 공간, 한계 알람과 Historian의 공통 입력이 됩니다.</p></li>
-        <li><b>Digital Twin 적용</b><p>TwinForge가 OPC UA 값을 구독하고 Scale과 Offset을 적용해 대상 설비의 속성으로 변환합니다.</p></li>
-        <li><b>화면 갱신</b><p>장비 이벤트가 SignalR을 거쳐 설비 카드, MES 지표와 3D 오브젝트를 동시에 갱신합니다.</p></li>
+        <li><b>생산 신호 생성</b><p>PLC Simulation이 Total Count 40020, Reject Count 40022, Machine State 40024와 Counter Epoch 40025를 Modbus 메모리에서 갱신합니다.</p></li>
+        <li><b>수집과 표준화</b><p>Gateway가 네 주소를 읽고 <code>DataAccess.DockerModbus.PlcSimulation.*</code> OPC UA 노드로 제공하며 값·StatusCode·Source Timestamp를 유지합니다.</p></li>
+        <li><b>이벤트 보존</b><p>OEE Worker가 네 노드를 한 번에 읽어 하나의 sample로 정규화하고 <code>oee.integration.v1</code> Kafka 토픽으로 전달합니다.</p></li>
+        <li><b>작업 맥락 동기화</b><p>TwinForge가 활성 작업지시, 제품, UTC 구간과 ideal cycle을 같은 <code>equipmentKey</code>의 production context로 전송합니다.</p></li>
+        <li><b>기간 OEE 계산</b><p>OEEAnalyzer가 계획정지를 제외한 구간에서 가동시간과 카운터 증가분을 계산하고 coverage·status·reasons·revision을 함께 저장합니다.</p></li>
+        <li><b>운영 화면 반영</b><p>TwinForge가 최신 window를 다시 조회해 External A/P/Q/OEE, coverage, 작업지시와 context ID를 MES 화면에 표시합니다.</p></li>
       </ol>
-      <aside class="doc-scenario"><span>VERIFIED SCENARIO</span><strong>Speed_SP write → Gateway cache → OPC UA → Twin property</strong><p>Modbus 주소 40001에 속도 값을 쓰고, 실시간 태그 반영과 GOOD 품질, 표준 태그 경로와 Twin 수신 흐름을 순서대로 검증했습니다.</p></aside>
+      <aside class="doc-scenario"><span>REPRODUCIBLE DOCKER SCENARIO</span><strong>Production counters → OPC UA → Kafka sample + MES context → OEE window → TwinForge</strong><p>통합 스크립트는 네 Gateway 경로의 Good 품질, OEEAnalyzer의 OPC UA 연결, TwinForge context 동기화와 coverage가 확보된 기간 결과를 순서대로 검사합니다. 기존 Speed_SP 쓰기·알람·Twin 수신 시나리오도 같은 스택에서 유지됩니다.</p></aside>
     </section>
 
     <section class="doc-section" id="plc">
@@ -60,6 +63,7 @@
       <div class="doc-detail">
         <h3>읽기 순서</h3><ol><li>활성 드라이버의 연결 상태를 확인하고 필요하면 재연결합니다.</li><li>태그가 없으면 드라이버에서 주소와 데이터 형식을 검색합니다.</li><li>프로토콜별 Read 프레임을 보내고 응답을 공통 TagValue로 변환합니다.</li><li>태그 ID별 최신 값, 품질, 시각을 저장하고 WebSocket으로 전달합니다.</li></ol>
         <h3>오류 처리</h3><p>한 드라이버의 통신 실패는 로그에 남기고 다른 드라이버 폴링은 계속합니다. 비활성 드라이버 쓰기와 존재하지 않는 태그 요청은 서버에서 거부하며, 다음 폴링 주기에 재연결을 시도합니다.</p>
+        <h3>OEE 생산 신호</h3><p>Docker 데모의 Modbus 드라이버는 기존 속도·온도 태그와 분리된 누적 생산 계약을 제공합니다. Total Count와 Reject Count, Counter Epoch는 2-register Int32이고 Machine State는 Int16입니다. Counter Epoch가 바뀌면 Analyzer는 이전·이후 증가분을 이어 붙이지 않습니다.</p>
       </div>
     </section>
 
@@ -78,35 +82,57 @@
       <div class="doc-detail">
         <h3>수집에서 OPC UA까지</h3><ol><li>설정 저장소에서 활성 Channel, Device와 통신 태그를 읽습니다.</li><li>Driver Key로 프로토콜 DLL을 선택하고 장치 연결 옵션을 구성합니다.</li><li>성공한 값을 <code>DataAccess.Channel.Device.Tag</code> 경로의 캐시에 기록합니다.</li><li>OPC UA Read가 같은 캐시를 조회해 값과 품질을 외부 클라이언트에 제공합니다.</li></ol>
         <h3>품질과 장애 처리</h3><p>PLC 읽기 실패 시 해당 태그를 Bad 품질로 바꾸어 오래된 값을 정상으로 오해하지 않게 합니다. Historian cache miss도 0으로 저장하지 않습니다. 설정 변경 신호가 발생하면 OPC UA 서버가 주소 공간을 다시 생성합니다.</p>
+        <h3>OEEAnalyzer 제공 경로</h3><p>통합 binding은 namespace URI <code>http://examples.org/UA/DataAccess/</code>를 세션의 namespace table에서 해석하고 Total 40020, Reject 40022, State 40024, Epoch 40025 노드를 함께 읽습니다. 이때 값만 넘기지 않고 각 노드의 StatusCode와 Source Timestamp를 계산 입력에 포함합니다.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="oee">
+      <div class="doc-project-intro">
+        <header class="doc-heading"><p class="kicker">03 · PRODUCTION ANALYTICS</p><h2>OEEAnalyzer</h2><p>Gateway의 네 생산 신호와 TwinForge의 MES 맥락을 이벤트 시간 기준으로 결합합니다. 계산값과 함께 coverage, 상태, 원인과 revision을 반환해 결과를 사용할 수 있는 조건까지 설명합니다.</p></header>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png" alt="OEEAnalyzer 기간별 A/P/Q/OEE와 Window Ledger"><figcaption><b>4-SYSTEM OEE CONTROL ROOM</b><span>설비·UTC 구간을 조회하고 계산값과 신뢰도를 함께 확인</span></figcaption></figure>
+      </div>
+      <a class="doc-product-link" href="oee-analyzer.html"><b>화면별 기능 가이드</b><span>5개 화면에서 연동 경로, 기간 계산, TwinForge 결과, Window Ledger와 처리 규칙이 동작하는 과정 보기 →</span></a>
+      <div class="doc-grid">
+        <article><span>ACQUISITION</span><h3>네 노드 batch read</h3><p>Worker가 1초 목표 주기로 Total, Reject, State와 Epoch를 같은 OPC UA 세션에서 읽습니다. namespace index를 고정하지 않고 namespace URI를 연결마다 해석합니다.</p></article>
+        <article><span>EVENT CONTRACT</span><h3>품질과 시각을 포함한 sample</h3><p>equipmentKey, source instance·mode, mapping version, 원본·수신 UTC, 네 StatusCode와 source path를 eventId와 함께 Kafka에 보존합니다. UInt64 범위 카운터는 문자열로 직렬화합니다.</p></article>
+        <article><span>EVENT-TIME WINDOW</span><h3>계획 구간과 카운터 증가분</h3><p>계획정지를 제외한 시간에서 Running 초를 합산하고 동일 epoch·source·mapping의 Good 표본 사이 증가분만 생산·불량으로 인정합니다.</p></article>
+        <article><span>EXPLAINABLE RESULT</span><h3>숫자와 신뢰도 동시 반환</h3><p><code>A = Run / Planned</code>, <code>P = ΔTotal × IdealCycle / Run</code>, <code>Q = (ΔTotal-ΔReject) / ΔTotal</code>을 계산하고 OEE와 coverage, status, reasons, revision을 같은 window로 저장합니다.</p></article>
+      </div>
+      <div class="doc-detail">
+        <h3>Production context 계약</h3><ol><li>TwinForge가 MES 시작 이후 수집된 표본을 조회해 Source Timestamp를 계산 시작 경계로 선택합니다.</li><li><code>twinforge-{orderId}</code> context에 equipment key, order, product, UTC 시작·종료, ideal cycle, planned stops, Source Mode와 version을 담습니다.</li><li><code>PUT /api/integration/v1/production-contexts/{contextId}</code>에 <code>Idempotency-Key: contextId:version</code>을 보냅니다.</li><li>같은 version의 내용 충돌은 409, 기존 context와 기간이 겹치면 422로 거부됩니다.</li></ol>
+        <h3>완전성과 상태 판정</h3><p>Good 표본이 stale 허용시간을 넘거나 timestamp가 충돌하고 epoch·source·mapping이 바뀌면 해당 구간 또는 증가분을 제외합니다. 부분 coverage에는 정상 OEE 값을 만들지 않습니다. 비율 위반은 Invalid, 데이터 근거가 부족하면 Incomplete, 늦은 이벤트 허용시간 전은 Provisional, 계산 분모가 없으면 NotApplicable, 조건을 모두 통과한 닫힌 구간은 Final입니다.</p>
+        <h3>API 권한과 조회</h3><p>모든 integration API는 JWT 인증 뒤 <code>equipment_key</code> claim과 기능별 scope를 검사합니다. 조회에는 <code>integration:read</code>, 맥락 저장에는 <code>integration:context</code>, 직접 sample 입력에는 <code>integration:ingest</code>가 필요합니다. 슬래시가 포함된 설비 키는 reverse proxy에서 깨지지 않도록 query parameter 형태도 제공합니다.</p>
       </div>
     </section>
 
     <section class="doc-section" id="twinforge">
       <div class="doc-project-intro">
-        <header class="doc-heading"><p class="kicker">03 · OPERATIONAL INTELLIGENCE</p><h2>TwinForge</h2><p>100ms 장비 시뮬레이션, OPC UA 외부 신호, MES와 실행 그래프를 하나의 장비 모델과 이벤트 경로에 연결합니다.</p></header>
+        <header class="doc-heading"><p class="kicker">04 · OPERATIONAL INTELLIGENCE</p><h2>TwinForge</h2><p>100ms 장비 시뮬레이션, OPC UA 외부 신호, MES와 실행 그래프를 하나의 장비 모델과 이벤트 경로에 연결하고 OEEAnalyzer의 External 결과를 작업 맥락과 함께 표시합니다.</p></header>
         <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
       </div>
-      <a class="doc-product-link" href="twinforge.html"><b>화면별 기능 가이드</b><span>4개 UI에서 MES·설비·워크플로·3D 공장을 제어하는 과정 보기 →</span></a>
+      <a class="doc-product-link" href="twinforge.html"><b>화면별 기능 가이드</b><span>5개 UI에서 MES·External OEE·설비·워크플로·3D 공장을 제어하는 과정 보기 →</span></a>
       <div class="doc-grid">
         <article><span>SIMULATION</span><h3>100ms 장비 틱</h3><p>Industry Factory가 장비와 위치를 만들고 엔진이 각 장비의 Update를 호출합니다. 값, 위치, 상태와 알람 변경은 Event Bus에 발행됩니다.</p></article>
         <article><span>REAL TIME</span><h3>SignalR과 3D 동기화</h3><p>이벤트를 WebSocket으로 받은 Zustand Store가 설비 카드와 3D Scene의 공통 상태를 갱신합니다. 최근 텔레메트리 20개와 알람 100개를 유지합니다.</p></article>
         <article><span>MES</span><h3>작업지시와 생산 진행</h3><p>우선순위에 따라 최대 2개 작업을 동시에 Release합니다. 공정 진행에 따라 양품, 불량, WIP, OEE와 스테이션 상태가 갱신됩니다.</p></article>
+        <article><span>EXTERNAL OEE</span><h3>맥락 동기화와 분석 결과</h3><p>Released 또는 InProgress 작업 중 우선순위가 높은 작업을 선택해 OEEAnalyzer에 맥락을 보냅니다. 반환된 A/P/Q/OEE, coverage와 reasons는 자체 MES OEE와 구분된 패널에 표시합니다.</p></article>
         <article><span>WORKFLOW</span><h3>위상 정렬 실행</h3><p>노드를 연결 순서로 정렬하고 선행 Output을 후속 Input으로 전달합니다. 각 Executor의 Running, Success, Error 상태와 로그를 표시합니다.</p></article>
       </div>
       <div class="doc-detail">
         <h3>외부 OPC UA 적용</h3><ol><li>OPC UA Client가 200ms Publishing Interval로 Gateway 노드를 구독합니다.</li><li>Equipment Binding이 노드 경로와 Twin 장비 속성을 연결합니다.</li><li>정상 숫자에 <code>value × scale + offset</code>을 적용합니다.</li><li>엔진이 값을 적용하고 SignalR 이벤트로 카드와 3D 오브젝트를 갱신합니다.</li></ol>
         <h3>데이터 품질</h3><p>연결 실패, 초기값 대기와 형식 오류를 서로 다른 Bad 품질로 구분합니다. 외부 모드에서는 내부 시뮬레이션 Update가 수신 값을 덮어쓰지 않습니다.</p>
+        <h3>OEEAnalyzer 동기화</h3><p>Docker 프로필의 백그라운드 서비스는 3초마다 활성 MES 작업과 latest sample 경계를 맞추고 context를 upsert한 뒤 현재 UTC까지의 OEE window를 조회합니다. 사용자는 <strong>Sync now</strong>로 같은 과정을 즉시 실행할 수 있고, 브라우저는 통합 상태를 5초마다 갱신합니다. 결과가 Incomplete 또는 AwaitingSamples이면 충분한 Good 표본이 모일 때까지 OEE를 확정값처럼 표시하지 않습니다.</p>
       </div>
     </section>
 
     <section class="doc-section doc-reference" id="reference">
-      <header class="doc-heading"><p class="kicker">04 · OPERATING REFERENCE</p><h2>실행 주소와 검증 범위</h2></header>
-      <div class="reference-table"><div><b>PLC Simulation</b><code>http://localhost:5088</code><span>11 drivers · 4 connected · 24 live tags</span></div><div><b>IIoT Gateway ConfigUI</b><code>http://localhost:5279</code><span>Channel · Device · Tag · Alarm · OPC UA</span></div><div><b>TwinForge</b><code>http://localhost:5173</code><span>6 equipment · MES · Workflow · 3D factory</span></div></div>
-      <p class="doc-disclaimer">Gateway 설정 화면 일부는 인메모리 구성 모드에서 촬영했습니다. 알람·OPC UA 보안 화면은 Docker 통합 실행에서 검증한 자료이며, TwinForge 워크플로 캡처는 내장 실행 시뮬레이터의 성공 결과입니다.</p>
+      <header class="doc-heading"><p class="kicker">05 · OPERATING REFERENCE</p><h2>통합 Docker 실행 주소와 검증 범위</h2></header>
+      <div class="reference-table"><div><b>PLC Simulation</b><code>http://localhost:5088</code><span>Web UI · Modbus TCP 1502</span></div><div><b>IIoT Gateway</b><code>http://localhost:18080</code><span>UI/API · OPC UA 17312</span></div><div><b>OEEAnalyzer</b><code>http://localhost:18083</code><span>React UI · Web API 18082</span></div><div><b>TwinForge</b><code>http://localhost:18081</code><span>MES · External OEE · Workflow · 3D factory</span></div></div>
+      <p class="doc-disclaimer">OEE 통합 binding은 Docker 환경 변수로 적용되며 Processing Rules 화면의 3-tag OEE Logic Builder와 역할이 다릅니다. Gateway 설정 화면 일부는 인메모리 구성 모드에서 촬영했고, TwinForge 워크플로 Run은 브라우저 Store 기반 실행 시뮬레이션입니다. External OEE 패널은 OEEAnalyzer API의 실제 context 동기화와 window 조회 결과를 사용합니다.</p>
       <div class="actions"><a class="button primary" href="assets/docs/industrial-platform-technical-document.pdf">PDF 다운로드</a><a class="button secondary" href="index.html">포트폴리오로 돌아가기</a></div>
     </section>
   </main>
-  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM · TECHNICAL DOCUMENT</span><span>PLC · OPC UA · MES · DIGITAL TWIN</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM · TECHNICAL DOCUMENT</span><span>PLC · OPC UA · OEE · MES · DIGITAL TWIN</span><a href="#top">BACK TO TOP ↑</a></footer>
   <script defer src="assets/js/main.js?v=20260901-2"></script>
 </body>
 </html>

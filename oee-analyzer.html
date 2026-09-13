@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OEEAnalyzer의 4개 제품 연동, 기간 OEE, TwinForge 생산 맥락, 품질 진단과 처리 규칙을 화면별로 설명합니다.">
+  <title>OEEAnalyzer 기능 가이드 · Industrial Data Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260912-2">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</head>
+<body class="product-page" data-product="oee">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#projects" aria-label="포트폴리오 프로젝트 목록"><span>04</span><b>OEEAnalyzer<small>PRODUCT FEATURE WALKTHROUGH</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="OEEAnalyzer 기능 메뉴">
+      <a href="#overview">Integration</a><a href="#live-oee">Live OEE</a><a href="#context">TwinForge</a><a href="#data-sources">Data Sources</a><a href="#processing">Rules</a>
+      <a class="nav-cta" href="twinforge.html">Next · TwinForge →</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="product-hero" id="top">
+      <div class="product-hero-copy reveal">
+        <div class="product-crumbs"><a href="index.html">Portfolio</a><span>/</span><span>Project 04</span></div>
+        <h1>생산 신호를,<em>판단 가능한 OEE로.</em></h1>
+        <p class="product-lead">OEEAnalyzer는 Gateway가 제공하는 생산 누적량·불량 누적량·설비 상태·카운터 세대와 TwinForge의 작업지시 맥락을 결합합니다. 유효한 관측 구간만으로 A/P/Q/OEE를 계산하고, coverage와 결측 원인을 결과에 함께 남깁니다.</p>
+        <div class="product-actions"><a class="button primary" href="#overview">화면별 동작 보기 ↓</a><a class="button secondary" href="technical.html#oee">구현 구조 보기</a><a class="button secondary" href="index.html#oee">메인으로 돌아가기</a></div>
+        <dl class="product-proof"><div><dt>4</dt><dd>Production signal contract</dd></div><div><dt>1s</dt><dd>Integration polling target</dd></div><div><dt>A×P×Q</dt><dd>Period OEE formula</dd></div></dl>
+      </div>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png" alt="OEEAnalyzer 기간별 A/P/Q/OEE와 데이터 coverage 화면"><figcaption><b>ANALYTICS VIEW</b><span>계산값과 상태·coverage·원인을 같은 결과로 확인</span></figcaption></figure>
+    </section>
+
+    <section class="product-shell">
+      <aside class="feature-nav" aria-label="화면 목차">
+        <span>SCREEN-BY-SCREEN GUIDE</span>
+        <a href="#overview"><b>01</b><span>4자 연동 개요</span></a>
+        <a href="#live-oee"><b>02</b><span>기간별 Live OEE</span></a>
+        <a href="#context"><b>03</b><span>TwinForge 결과 패널</span></a>
+        <a href="#data-sources"><b>04</b><span>OPC UA 데이터 소스</span></a>
+        <a href="#processing"><b>05</b><span>처리 규칙 설정</span></a>
+        <footer><a href="iiot-gateway.html">← 이전: IIoT Gateway</a><a href="twinforge.html">다음: TwinForge →</a><a href="technical.html">통합 기술 문서</a></footer>
+      </aside>
+
+      <div class="feature-content">
+        <section class="feature-chapter" id="overview">
+          <header class="feature-heading reveal"><span class="feature-number">01</span><div><p class="kicker">FOUR-SYSTEM INTEGRATION</p><h2>계측 경로와 생산 맥락을 한 설비 키로 결합</h2><p class="feature-purpose">Integration Overview는 PLC → Gateway → OEEAnalyzer의 계측 경로와 TwinForge → OEEAnalyzer → TwinForge의 맥락·결과 경로를 분리해 보여줍니다. 두 경로는 불변 <code>equipmentKey</code>로 만납니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/oee-01-integration-overview.png" data-caption="OEEAnalyzer — PLC·Gateway·TwinForge 4자 연동 개요"><img src="assets/images/industrial-portfolio/oee-01-integration-overview.png" alt="OEEAnalyzer의 Gateway 수집, Kafka 처리, TwinForge 맥락과 OEE 결과 흐름"><span><b>01 · INTEGRATION OVERVIEW</b><small>Measurement plane · Context plane · Analytics result</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조회하는 항목</h3><p><strong>Equipment Key</strong>, UTC From·To와 Refresh Analysis를 사용합니다. 네 Route 카드는 선택 기간의 최신 window에서 생산량, coverage, context ID, 상태와 revision을 가져옵니다.</p><div class="control-tags"><span>Equipment key</span><span>UTC From</span><span>UTC To</span><span>Refresh Analysis</span><span>Revision</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li><code>demo/automotive/main-conveyor</code>와 조회 기간을 입력합니다.</li><li>Refresh Analysis로 현재 계산 revision을 요청합니다.</li><li>PLC 생산량, Gateway coverage와 TwinForge context ID를 Route 카드에서 확인합니다.</li><li>OEEAnalyzer 카드와 Ledger에서 상태·revision·진단 사유를 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>네 제품이 역할을 나누는 방식</h3><div class="behavior-flow"><div><b>PLC + Gateway</b><span>생산·불량 누적계수, 상태와 counter epoch를 OPC UA 값·품질·시각으로 제공합니다.</span></div><div><b>OEEAnalyzer</b><span>1초 목표 주기로 읽어 <code>oee.integration.v1</code> Kafka 이벤트와 기간 결과를 저장합니다.</span></div><div><b>TwinForge</b><span>작업·제품·계획 구간·ideal cycle을 보내고 같은 설비·기간의 최신 revision 결과를 조회합니다.</span></div></div><ul class="result-list"><li>계측값과 MES 맥락의 출처와 버전을 각각 추적할 수 있습니다.</li><li>OEEAnalyzer는 분석 참여자이며 기존 TwinForge → Gateway → PLC 제어 경로를 변경하지 않습니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>SCOPE · PORTFOLIO VALUE</b><p>같은 생산 신호를 여러 서비스가 각자 수집하지 않고 Gateway OPC UA를 계측 경로로 고정했습니다. TwinForge는 작업 맥락을 제공하고 결과를 소비하며, <strong>External</strong>과 <strong>Demo</strong> 결과는 Source Mode로 분리합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="live-oee">
+          <header class="feature-heading reveal"><span class="feature-number">02</span><div><p class="kicker">PERIOD ANALYTICS</p><h2>A/P/Q/OEE와 계산 신뢰도를 함께 조회</h2><p class="feature-purpose">Live OEE는 선택한 설비와 UTC 기간의 가용성, 성능, 품질, OEE를 보여줍니다. 숫자만 표시하지 않고 coverage, 결과 상태, reasons와 revision을 함께 제공합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/oee-02-live-oee.png" data-caption="OEEAnalyzer — 기간별 A/P/Q/OEE 분석 결과"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png" alt="OEEAnalyzer의 Availability, Performance, Quality, OEE와 coverage"><span><b>02 · LIVE OEE</b><small>Availability · Performance · Quality · OEE · Coverage</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>조회 조건과 결과 필드</h3><p>Equipment Key, From, To와 Refresh를 사용해 기간을 조회합니다. 다섯 지표 카드는 status, A/P/Q/OEE와 coverage를 보여주고, Ledger는 생산·불량 증가분, revision, 계산 시각과 diagnostics를 행별로 표시합니다.</p><div class="control-tags"><span>Equipment</span><span>UTC window</span><span>Refresh</span><span>Coverage</span><span>Revision</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>분석할 설비와 작업 기간을 선택합니다.</li><li>A/P/Q 카드와 생산·불량 증가분을 비교합니다.</li><li>coverage가 100% 미만이면 reasons에서 결측 원인을 확인합니다.</li><li>Provisional 결과는 지연 허용 시간이 지난 뒤 더 높은 revision의 Final 결과로 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>기간 결과가 계산되는 방식</h3><div class="behavior-flow"><div><b>Availability</b><span><code>RunSeconds ÷ PlannedProductionSeconds</code>로 계획 생산시간 중 실제 가동 비율을 구합니다.</span></div><div><b>Performance + Quality</b><span><code>ΔTotal × IdealCycle ÷ RunSeconds</code>와 <code>(ΔTotal-ΔReject) ÷ ΔTotal</code>을 계산합니다.</span></div><div><b>OEE + confidence</b><span><code>A × P × Q</code>와 유효 관측시간 비율을 반환하고, 결측이면 OEE를 정상 숫자로 꾸미지 않습니다.</span></div></div><ul class="result-list"><li>분모가 0이면 0%로 단정하지 않고 NotApplicable 사유를 반환합니다.</li><li>비율 위반은 100%로 잘라 숨기지 않고 Invalid와 원인을 표시합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>SCOPE · PORTFOLIO VALUE</b><p>교대·작업·제품 경계와 누적 카운터 증가분을 기준으로 기간 OEE를 계산합니다. 여러 설비 OEE의 단순 평균을 라인 OEE로 표현하지 않으며, 집계 정책이 없는 값은 별도 지표로 유지합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="context">
+          <header class="feature-heading reveal"><span class="feature-number">03</span><div><p class="kicker">TWINFORGE RESULT PANEL</p><h2>MES 작업 맥락을 보내고 External OEE를 다시 표시</h2><p class="feature-purpose">TwinForge의 External OEEAnalyzer 패널은 활성 작업지시를 계산 맥락으로 동기화하고, 같은 설비·기간에서 계산된 A/P/Q/OEE와 coverage를 기존 MES 화면 안에 표시합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/oee-03-production-context.png" data-caption="TwinForge — External OEEAnalyzer 결과와 생산 맥락"><img src="assets/images/industrial-portfolio/oee-03-production-context.png" alt="TwinForge MES의 External OEEAnalyzer 지표, coverage, 작업지시와 context ID"><span><b>03 · TWINFORGE OEE PANEL</b><small>Order · Product · Context ID · A/P/Q/OEE · Coverage</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 보는 결과와 맥락</h3><p>External 상태, A/P/Q/OEE, coverage, Equipment, Work order, Product, Context ID와 Last sync를 확인합니다. <strong>Sync now</strong>는 백그라운드 동기화를 즉시 다시 실행합니다.</p><div class="control-tags"><span>Sync now</span><span>External status</span><span>Work order</span><span>Context ID</span><span>Coverage</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>사용 순서</h3><ol class="operator-steps"><li>TwinForge에서 Automotive MES를 시작합니다.</li><li>활성 작업지시가 선택되고 자동 동기화될 때까지 상태를 확인합니다.</li><li>필요하면 Sync now를 눌러 맥락 전송과 결과 조회를 즉시 실행합니다.</li><li>coverage와 calculation status, 최대 세 개의 reasons로 결과 사용 가능 여부를 판단합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>작업지시에서 분석 결과까지</h3><div class="behavior-flow"><div><b>Boundary lookup</b><span>MES 시작 이후 Gateway에서 수집된 표본의 source timestamp를 찾아 계산 시작 경계로 맞춥니다.</span></div><div><b>PUT context</b><span><code>twinforge-{orderId}</code>와 <code>Idempotency-Key: contextId:version</code>으로 작업·제품·종료·ideal cycle을 전송합니다.</span></div><div><b>GET result</b><span>같은 equipment key와 UTC 구간의 최신 window를 조회해 TwinForge snapshot과 패널에 반영합니다.</span></div></div><ul class="result-list"><li>백그라운드 서비스는 Docker 데모에서 3초마다 동기화하고, 브라우저는 상태를 5초마다 갱신합니다.</li><li>맥락은 UTC·최대 31일·양수 cycle·비중첩 계획정지 규칙을 통과해야 저장됩니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>SCOPE · PORTFOLIO VALUE</b><p>TwinForge의 현재 자체 MES OEE는 Demo 출처로 구분합니다. External 분석 모드에서는 Analyzer 결과와 평균하거나 합산하지 않고, 설비·기간·revision이 일치하는 결과만 표시합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="data-sources">
+          <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">DATA SOURCES</p><h2>OPC UA endpoint와 업무 태그를 화면에서 등록</h2><p class="feature-purpose">Configuration Workspace는 OPC UA 장치 이름, 보안 정책, endpoint와 node-to-tag 매핑을 관리합니다. 연결 시험과 저장 결과, 현재 등록된 프로토콜 태그를 같은 화면에서 확인할 수 있습니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/oee-04-data-sources.png" data-caption="OEEAnalyzer — OPC UA Data Sources 설정"><img src="assets/images/industrial-portfolio/oee-04-data-sources.png" alt="OEEAnalyzer OPC UA 장치, endpoint, mapped nodes와 connection test 화면"><span><b>04 · DATA SOURCES</b><small>Device · Endpoint · Security · Mapped nodes · Test connection</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 입력하는 항목</h3><p>OPC UA 탭에서 Device Name, Security Policy와 Endpoint URL을 입력합니다. 각 node row에는 Node ID, Data Type과 Custom Tag를 지정하고 Add Node·Remove로 행을 관리합니다.</p><div class="control-tags"><span>OPC UA tab</span><span>Endpoint URL</span><span>Security policy</span><span>Add Node</span><span>Custom Tag</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>연결 시험과 저장</h3><ol class="operator-steps"><li>Gateway endpoint와 보안 정책을 입력합니다.</li><li>수집할 Node ID마다 데이터 형식과 업무 태그 이름을 지정합니다.</li><li>Test Connection으로 현재 endpoint 접속 결과를 확인합니다.</li><li>Save Configuration 후 Mapped Tags 테이블에서 저장된 태그와 프로토콜을 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>설정이 수집 태그가 되는 과정</h3><div class="behavior-flow"><div><b>POST test</b><span><code>/api/protocols/opcua/test</code>가 endpoint 연결을 시도하고 성공 여부를 배너로 돌려줍니다.</span></div><div><b>POST config</b><span>장치와 OPC UA 구성, node 매핑을 저장하고 protocol tag 목록을 다시 불러옵니다.</span></div><div><b>Polling</b><span>일반 OPC UA Worker가 저장된 활성 설정을 읽어 node 값을 protocol data pipeline에 발행합니다.</span></div></div><ul class="result-list"><li>MQTT·Modbus·Kafka/Redis 탭은 같은 workspace에서 환경별 경로를 구분합니다.</li><li>이 화면의 일반 데이터 소스 설정과 Docker의 External 4신호 binding은 서로 다른 설정 경로입니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>IMPLEMENTED BOUNDARY</b><p>Data Sources는 범용 프로토콜 태그를 등록하는 운영 UI입니다. 4-System OEE 데모의 Total·Reject·State·Epoch, Source Mode와 stale·skew 정책은 재현 가능한 Docker 환경 변수로 고정하고 Integration 화면에서 실행 결과를 검증합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="processing">
+          <header class="feature-heading reveal"><span class="feature-number">05</span><div><p class="kicker">PROCESSING RULES</p><h2>화면의 처리 규칙과 외부 수집 binding을 구분</h2><p class="feature-purpose">Processing Rules의 OEE Logic Builder는 등록된 프로토콜 태그를 설비의 생산량·불량·상태와 ideal cycle에 매핑합니다. 4-System 데모가 사용하는 Gateway endpoint, counter epoch와 품질 정책은 Docker의 <code>Integration</code> binding으로 별도 관리합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/oee-05-processing-rules.png" data-caption="OEEAnalyzer — OEE Logic Builder 처리 규칙"><img src="assets/images/industrial-portfolio/oee-05-processing-rules.png" alt="OEEAnalyzer의 설비 ID, 생산·불량·상태 태그와 ideal cycle 처리 규칙"><span><b>05 · PROCESSING RULES</b><small>Equipment · Total · Defect · Status · Ideal cycle</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>UI CONTROL</span><h3>OEE Logic Builder 입력값</h3><p>Equipment ID를 입력하고, 등록된 태그에서 totalTag·defectTag·statusTag를 선택한 뒤 Ideal Cycle Time을 지정합니다. 모든 값이 유효하면 Save OEE Mapping이 활성화됩니다.</p><div class="control-tags"><span>Equipment ID</span><span>Total tag</span><span>Defect tag</span><span>Status tag</span><span>Ideal cycle</span><span>Save</span></div></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>처리 규칙 저장</h3><ol class="operator-steps"><li>Data Sources에서 OPC UA 등 프로토콜 태그를 먼저 등록합니다.</li><li>Processing의 OEE Logic Builder에서 설비와 세 업무 태그를 선택합니다.</li><li>양수 Ideal Cycle Time을 입력하고 Save OEE Mapping을 누릅니다.</li><li>성공·실패 배너로 저장 결과를 확인합니다. MCC 임계값 규칙은 옆 패널에서 별도로 관리합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>설정에서 분석 이벤트까지</h3><div class="behavior-flow"><div><b>OPC UA batch read</b><span><code>http://examples.org/UA/DataAccess/</code> namespace를 연결마다 해석하고 네 노드를 함께 읽습니다.</span></div><div><b>Envelope + Kafka</b><span>UInt64 카운터를 문자열로 보존하고 eventId, 품질, 원본 경로, 시각, epoch와 version을 Kafka에 발행합니다.</span></div><div><b>Store + query</b><span>중복 eventId를 제거해 sample·context·revision을 저장하고 설비·UTC 기간별 OEE window API로 제공합니다.</span></div></div><ul class="result-list"><li>Modbus 40020·40022·40025는 Int32 2-register, 40024는 Int16 상태 태그입니다.</li><li>기존 속도 40001과 온도 40003을 생산 카운터로 재사용하지 않습니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>SCOPE · PORTFOLIO VALUE</b><p>이 화면의 3태그 OEE 규칙과 External 4신호 분석 계약을 같은 기능으로 과장하지 않습니다. 통합 binding은 Total 40020, Reject 40022, State 40024, Epoch 40025를 1초 주기로 batch read하고, stale 3초·skew 1초·late 5초 정책을 적용합니다.</p></aside>
+        </section>
+      </div>
+    </section>
+
+    <section class="product-next reveal"><div><p class="kicker">NEXT PRODUCT</p><h2>TwinForge에서 작업 맥락과 분석 결과를 연결합니다.</h2><p>MES가 계산 경계를 제공하고 OEEAnalyzer가 반환한 External A/P/Q/OEE·coverage·revision을 운영 화면과 3D 설비에 표시하는 흐름을 확인하세요.</p></div><div class="actions"><a class="button primary" href="twinforge.html">TwinForge 기능 보기 →</a><a class="button secondary" href="technical.html">통합 기술 문서</a></div></section>
+  </main>
+
+  <footer class="site-footer"><span>OEEANALYZER · FEATURE WALKTHROUGH</span><span>INGEST · CONTEXT · CALCULATE · EXPLAIN</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="OEEAnalyzer 화면 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""><figcaption></figcaption></figure></dialog>
+</body>
+</html>
