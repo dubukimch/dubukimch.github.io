@@ -31,12 +31,12 @@
         <h1>현장 신호를<br><em>운영 가능한 데이터</em>로.</h1>
         <p class="hero-lead">가상 PLC의 생산 신호를 산업용 Gateway가 표준화하고, OEEAnalyzer가 가용성·성능·품질을 계산해 TwinForge의 MES와 3D Digital Twin에 돌려주는 전체 경로를 설계했습니다.</p>
         <div class="actions"><a class="button primary" href="#platform">플랫폼 살펴보기</a><a class="button secondary" href="#projects">프로젝트 화면 보기</a><a class="button secondary" href="technical.html">통합 기술 문서</a></div>
-        <dl class="metrics"><div><dt>04</dt><dd>연동 애플리케이션</dd></div><div><dt>19</dt><dd>주요 기능 화면</dd></div><div><dt>A×P×Q</dt><dd>OEE calculation</dd></div></dl>
+        <dl class="metrics"><div><dt>04</dt><dd>연동 애플리케이션</dd></div><div><dt>20</dt><dd>주요 기능 화면</dd></div><div><dt>A×P×Q</dt><dd>OEE calculation</dd></div></dl>
       </div>
       <aside class="hero-visual reveal" aria-label="TwinForge 디지털 트윈 미리보기">
         <div class="visual-top"><span class="live"><i></i> LIVE PIPELINE</span><span>PORTFOLIO / 2026</span></div>
-        <img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 설비 모니터링 화면">
-        <div class="floating-tag plc">PLC<br><b>Speed_SP 2500</b></div>
+        <img src="assets/images/industrial-portfolio/twin-04-3d-factory.png?v=20260916" alt="TwinForge 3D 설비 모니터링 화면">
+        <div class="floating-tag plc">PLC<br><b>Speed PV 1.8 m/s</b></div>
         <div class="floating-tag oee">OEE ANALYZER<br><b>A · P · Q · Coverage</b></div>
         <div class="floating-tag twin">TWINFORGE<br><b>6 equipment online</b></div>
         <div class="visual-bottom"><span>DATA ACCESS</span><span>ALARM &amp; CONDITION</span><span>CLIENT</span></div>
@@ -46,17 +46,17 @@
     <section class="section platform" id="platform">
       <header class="section-head reveal"><p class="kicker">ONE CONNECTED SYSTEM</p><h2>네 개의 제품, 하나의 폐루프 데이터 흐름</h2><p>데이터 발생과 표준화, 기간 OEE 분석, 생산 맥락과 현장 시각화가 어떻게 연결되는지 제품별 UI와 계약으로 설명합니다.</p></header>
       <div class="pipeline pipeline-four reveal" aria-label="통합 플랫폼 데이터 흐름">
-        <article><span>FLOW 01 / SOURCE</span><b>PLC Simulation</b><p>가상 공정과 태그를 생성하고 실시간 값을 제공합니다.</p><small>Modbus TCP · Live Tags</small></article>
+        <article><span>FLOW 01 / SOURCE</span><b>PLC Simulation</b><p>명령을 처리하고 실제 상태·PV·생산 카운터의 원본을 제공합니다.</p><small>Command Ack · Feedback · Live Tags</small></article>
         <i>→</i>
-        <article><span>FLOW 02 / STANDARDIZE</span><b>IIoT Gateway</b><p>장비 데이터를 OPC UA 노드와 알람으로 모델링합니다.</p><small>Data Access · A&amp;C · Security</small></article>
+        <article><span>FLOW 02 / STANDARDIZE</span><b>IIoT Gateway</b><p>명령 태그만 R/W로 열고 상태·PV·생산 근거는 읽기 전용으로 표준화합니다.</p><small>Access boundary · OPC UA · Quality</small></article>
         <i>→</i>
         <article><span>FLOW 03 / ANALYZE</span><b>OEEAnalyzer</b><p>생산 카운터와 상태, MES 맥락을 결합해 기간별 A/P/Q/OEE를 계산합니다.</p><small>Kafka · TimescaleDB · Coverage</small></article>
         <i>↔</i>
-        <article><span>FLOW 04 / OPERATE</span><b>TwinForge</b><p>작업 맥락을 제공하고 분석 결과를 MES와 3D 현장 화면에서 활용합니다.</p><small>MES · Workflow · Digital Twin</small></article>
+        <article><span>FLOW 04 / OPERATE</span><b>TwinForge</b><p>제한된 명령을 쓰고 PLC Ack·feedback 이후 상태를 확정하며 OEE 결과를 활용합니다.</p><small>MES · Ack confirmed control · Digital Twin</small></article>
       </div>
       <div class="bento">
-        <article class="bento-main reveal"><p class="card-label">LIVE SIGNAL</p><div class="signal-value"><span>Speed_SP</span><strong>2,500</strong><small>rpm</small></div><div class="spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><footer><span class="ok">● Good</span><span>NodeId ns=2;s=Machine.Speed_SP</span></footer></article>
-        <article class="bento-alarm reveal"><p class="card-label">ACTIVE CONDITION</p><strong>SpeedHigh</strong><span class="major">MAJOR</span><p>Setpoint exceeds operational threshold.</p><footer>ACKNOWLEDGEMENT READY</footer></article>
+        <article class="bento-main reveal"><p class="card-label">PLC-OWNED FEEDBACK</p><div class="signal-value"><span>Speed_PV</span><strong>1.8</strong><small>m/s</small></div><div class="spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><footer><span class="ok">● Good</span><span>DataAccess.DockerModbus.PlcSimulation.40002</span></footer></article>
+        <article class="bento-alarm reveal"><p class="card-label">COMMAND RESULT</p><strong>Ack Completed</strong><span class="major">SEQ 2</span><p>RunFeedback와 MachineState가 일치한 뒤 Running을 표시합니다.</p><footer>FAIL-CLOSED CONTROL</footer></article>
         <article class="bento-stack reveal"><p class="card-label">IMPLEMENTED STACK</p><div><span>.NET 8</span><span>ASP.NET Core</span><span>OPC UA</span><span>Modbus TCP</span><span>Kafka</span><span>TimescaleDB</span><span>Redis</span><span>SignalR</span><span>React</span><span>Three.js</span><span>Docker</span><span>Blazor</span></div></article>
       </div>
     </section>
@@ -73,7 +73,7 @@
           <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/plc-01-dashboard.png" data-caption="PLC Simulation — 운영 대시보드"><img src="assets/images/industrial-portfolio/plc-01-dashboard.png" alt="PLC Simulation 대시보드" loading="lazy"><span><b>01</b> 운영 대시보드</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-02-node-catalog.png" data-caption="PLC Simulation — 노드 카탈로그"><img src="assets/images/industrial-portfolio/plc-02-node-catalog.png" alt="PLC 노드 카탈로그" loading="lazy"><span><b>02</b> 노드 카탈로그</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-03-driver-config.png" data-caption="PLC Simulation — 통신 드라이버 설정"><img src="assets/images/industrial-portfolio/plc-03-driver-config.png" alt="PLC 드라이버 설정" loading="lazy"><span><b>03</b> 드라이버 설정</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png" data-caption="PLC Simulation — 실시간 태그 모니터"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC 실시간 태그" loading="lazy"><span><b>04</b> 실시간 태그</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" data-caption="PLC Simulation — 실시간 태그 모니터"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" alt="PLC 실시간 태그" loading="lazy"><span><b>04</b> 실시간 태그</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/plc-05-data-mapping.png" data-caption="PLC Simulation — 데이터 메모리 매핑"><img src="assets/images/industrial-portfolio/plc-05-data-mapping.png" alt="PLC 데이터 매핑" loading="lazy"><span><b>05</b> 데이터 매핑</span></button>
         </div>
       </article>
@@ -85,7 +85,7 @@
         <div class="gallery gallery-five">
           <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/gateway-01-channels.png" data-caption="IIoT Gateway — 채널 관리"><img src="assets/images/industrial-portfolio/gateway-01-channels.png" alt="Gateway 채널 관리" loading="lazy"><span><b>01</b> 채널 관리</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-02-device.png" data-caption="IIoT Gateway — 디바이스 설정"><img src="assets/images/industrial-portfolio/gateway-02-device.png" alt="Gateway 디바이스 설정" loading="lazy"><span><b>02</b> 디바이스 설정</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-03-tags.png" data-caption="IIoT Gateway — OPC UA 태그"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="Gateway OPC UA 태그" loading="lazy"><span><b>03</b> OPC UA 태그</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-03-tags.png?v=20260916" data-caption="IIoT Gateway — OPC UA 태그"><img src="assets/images/industrial-portfolio/gateway-03-tags.png?v=20260916" alt="Gateway OPC UA 태그" loading="lazy"><span><b>03</b> OPC UA 태그</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-04-alarm.png" data-caption="IIoT Gateway — Alarms & Conditions"><img src="assets/images/industrial-portfolio/gateway-04-alarm.png" alt="Gateway 알람 조건" loading="lazy"><span><b>04</b> Alarm &amp; Condition</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/gateway-05-security.png" data-caption="IIoT Gateway — OPC UA 보안 설정"><img src="assets/images/industrial-portfolio/gateway-05-security.png" alt="Gateway 보안 설정" loading="lazy"><span><b>05</b> 보안 정책</span></button>
         </div>
@@ -96,24 +96,24 @@
         <div class="feature-strip reveal"><span>MES dashboard</span><span>External OEE</span><span>Equipment</span><span>Workflow</span><span>3D Digital Twin</span></div>
         <a class="project-guide-link reveal" href="twinforge.html"><span>FULL FEATURE WALKTHROUGH</span><b>5개 화면의 MES·OEE 연동·설비 제어·워크플로·3D 동작 보기</b><i>상세 가이드 →</i></a>
         <div class="gallery gallery-five">
-          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" data-caption="TwinForge — MES 운영 대시보드"><img src="assets/images/industrial-portfolio/twin-01-mes-dashboard.png" alt="TwinForge MES 대시보드" loading="lazy"><span><b>01</b> MES 대시보드</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-03-production-context.png" data-caption="TwinForge — External OEEAnalyzer 결과와 생산 맥락"><img src="assets/images/industrial-portfolio/oee-03-production-context.png" alt="TwinForge External OEEAnalyzer 결과와 작업지시 맥락" loading="lazy"><span><b>02</b> External OEE</span></button>
+          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-01-mes-dashboard.png?v=20260916" data-caption="TwinForge — MES 운영 대시보드"><img src="assets/images/industrial-portfolio/twin-01-mes-dashboard.png?v=20260916" alt="TwinForge MES 대시보드" loading="lazy"><span><b>01</b> MES 대시보드</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-03-production-context.png?v=20260916" data-caption="TwinForge — External OEEAnalyzer 결과와 생산 맥락"><img src="assets/images/industrial-portfolio/oee-03-production-context.png?v=20260916" alt="TwinForge External OEEAnalyzer 결과와 작업지시 맥락" loading="lazy"><span><b>02</b> External OEE</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-02-equipment.png" data-caption="TwinForge — 설비 관리"><img src="assets/images/industrial-portfolio/twin-02-equipment.png" alt="TwinForge 설비 관리" loading="lazy"><span><b>03</b> 설비 관리</span></button>
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/twin-03-workflow.png" data-caption="TwinForge — 생산 워크플로"><img src="assets/images/industrial-portfolio/twin-03-workflow.png" alt="TwinForge 워크플로" loading="lazy"><span><b>04</b> 생산 워크플로</span></button>
-          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-04-3d-factory.png" data-caption="TwinForge — 3D Digital Twin"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 디지털 트윈" loading="lazy"><span><b>05</b> 3D Digital Twin</span></button>
+          <button class="shot wide reveal" data-lightbox="assets/images/industrial-portfolio/twin-04-3d-factory.png?v=20260916" data-caption="TwinForge — 3D Digital Twin"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png?v=20260916" alt="TwinForge 3D 디지털 트윈" loading="lazy"><span><b>05</b> 3D Digital Twin</span></button>
         </div>
       </article>
 
       <article class="project-block" id="oee">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 04</p><h3>OEEAnalyzer</h3><p>Gateway의 생산 카운터·상태와 TwinForge의 작업지시 맥락을 결합해 기간별 가용성, 성능, 품질과 OEE를 계산하는 제조 분석 애플리케이션입니다. 데이터 결측과 품질 문제도 결과와 함께 노출합니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Production analytics</dd></div><div><dt>Data</dt><dd>Kafka · TimescaleDB</dd></div></dl></div>
-        <div class="feature-strip reveal"><span>Integration route</span><span>Live OEE</span><span>TwinForge result</span><span>Window ledger</span><span>Processing rules</span></div>
-        <a class="project-guide-link reveal" href="oee-analyzer.html"><span>FULL FEATURE WALKTHROUGH</span><b>5개 화면의 수집 계약·A/P/Q 계산·TwinForge 결과·품질 진단 동작 보기</b><i>상세 가이드 →</i></a>
+        <div class="feature-strip reveal"><span>Integration route</span><span>Live OEE</span><span>TwinForge result</span><span>Data sources</span><span>Processing rules</span></div>
+        <a class="project-guide-link reveal" href="oee-analyzer.html"><span>FULL FEATURE WALKTHROUGH</span><b>5개 화면의 수집 계약·A/P/Q 계산·TwinForge 결과·데이터 소스·처리 규칙 보기</b><i>상세 가이드 →</i></a>
         <div class="gallery gallery-five">
-          <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/oee-01-integration-overview.png" data-caption="OEEAnalyzer — 4자 연동 개요"><img src="assets/images/industrial-portfolio/oee-01-integration-overview.png" alt="OEEAnalyzer 통합 상태와 데이터 경로" loading="lazy"><span><b>01</b> Integration Overview</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-02-live-oee.png" data-caption="OEEAnalyzer — 실시간 OEE"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png" alt="OEEAnalyzer 가용성 성능 품질 OEE 화면" loading="lazy"><span><b>02</b> Live OEE</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-03-production-context.png" data-caption="TwinForge — External OEEAnalyzer 결과와 생산 맥락"><img src="assets/images/industrial-portfolio/oee-03-production-context.png" alt="TwinForge External OEE와 작업지시 맥락 화면" loading="lazy"><span><b>03</b> TwinForge Result</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-04-quality-diagnostics.png" data-caption="OEEAnalyzer — Window Ledger 진단"><img src="assets/images/industrial-portfolio/oee-04-quality-diagnostics.png" alt="OEEAnalyzer Window Ledger의 coverage와 diagnostics" loading="lazy"><span><b>04</b> Window Ledger</span></button>
-          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-05-processing-config.png" data-caption="OEEAnalyzer — OEE 처리 규칙"><img src="assets/images/industrial-portfolio/oee-05-processing-config.png" alt="OEEAnalyzer OEE Logic Builder 처리 규칙 화면" loading="lazy"><span><b>05</b> Processing Rules</span></button>
+          <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/oee-01-integration-overview.png?v=20260916" data-caption="OEEAnalyzer — 4자 연동 개요"><img src="assets/images/industrial-portfolio/oee-01-integration-overview.png?v=20260916" alt="OEEAnalyzer 통합 상태와 데이터 경로" loading="lazy"><span><b>01</b> Integration Overview</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-02-live-oee.png?v=20260916" data-caption="OEEAnalyzer — 실시간 OEE"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png?v=20260916" alt="OEEAnalyzer 가용성 성능 품질 OEE 화면" loading="lazy"><span><b>02</b> Live OEE</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-03-production-context.png?v=20260916" data-caption="TwinForge — External OEEAnalyzer 결과와 생산 맥락"><img src="assets/images/industrial-portfolio/oee-03-production-context.png?v=20260916" alt="TwinForge External OEE와 작업지시 맥락 화면" loading="lazy"><span><b>03</b> TwinForge Result</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-04-data-sources.png?v=20260916" data-caption="OEEAnalyzer — OPC UA 데이터 소스와 업무 태그"><img src="assets/images/industrial-portfolio/oee-04-data-sources.png?v=20260916" alt="OEEAnalyzer OPC UA 데이터 소스와 생산 업무 태그" loading="lazy"><span><b>04</b> Data Sources</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-05-processing-rules.png?v=20260916" data-caption="OEEAnalyzer — OEE 처리 규칙"><img src="assets/images/industrial-portfolio/oee-05-processing-rules.png?v=20260916" alt="OEEAnalyzer OEE Logic Builder 처리 규칙 화면" loading="lazy"><span><b>05</b> Processing Rules</span></button>
         </div>
       </article>
     </section>
@@ -122,7 +122,7 @@
       <header class="section-head reveal"><p class="kicker">INTEGRATION EVIDENCE</p><h2>네 제품의 경계를 Docker 시나리오로 검사합니다</h2><p>통합 실행은 PLC 생산 신호, Gateway OPC UA 품질, Kafka·TimescaleDB sample, TwinForge production context와 OEE window를 차례로 확인합니다. 계산 수치만 보지 않고 coverage와 연결 상태도 acceptance 조건에 포함합니다.</p></header>
       <div class="evidence-grid">
         <div class="terminal reveal"><header><i></i><i></i><i></i><span>integration-test / 4-system-oee.log</span></header><ol><li><time>STEP 01</time><b>PLC OEE production signals</b><span>GOOD</span></li><li><time>STEP 02</time><b>Gateway OPC UA batch read</b><span>GOOD</span></li><li><time>STEP 03</time><b>Kafka → Timescale samples</b><span>PASS</span></li><li><time>STEP 04</time><b>TwinForge production context</b><span>SYNC</span></li><li><time>STEP 05</time><b>Coverage + non-null OEE window</b><span>ACCEPT</span></li></ol><footer><b>Repeatable acceptance path</b><span>PLC · Gateway · OEEAnalyzer · TwinForge</span></footer></div>
-        <div class="evidence-notes reveal"><article><span>DATA ACCESS</span><h3>Read / Write</h3><p>실시간 품질 코드와 값을 읽고, 클라이언트 쓰기가 PLC 메모리까지 전달되는 흐름을 확인했습니다.</p></article><article><span>OEE ANALYTICS CONTRACT</span><h3>Count · state · context</h3><p>Total, Reject, State, Counter Epoch를 Kafka로 보존하고 TwinForge의 작업·제품·계획 구간·ideal cycle을 기간 계산에 결합합니다.</p></article><article><span>QUALITY-AWARE RESULT</span><h3>Coverage · reasons · revision</h3><p>결측 구간은 정상값으로 채우지 않습니다. 결과와 함께 coverage, Provisional·Incomplete·Final 상태, 원인과 revision을 반환합니다.</p></article></div>
+        <div class="evidence-notes reveal"><article><span>CONTROL BOUNDARY</span><h3>Command / Feedback</h3><p>SpeedSetpoint·CommandType·CommandSequence만 쓰고, Ack·RunFeedback·MachineState·SpeedPV를 확인해 결과를 확정합니다.</p></article><article><span>OEE ANALYTICS CONTRACT</span><h3>Count · state · context</h3><p>Total, Reject, State, Counter Epoch를 Kafka로 보존하고 TwinForge의 작업·제품·계획 구간·ideal cycle을 기간 계산에 결합합니다.</p></article><article><span>QUALITY-AWARE RESULT</span><h3>Coverage · reasons · revision</h3><p>결측 구간은 정상값으로 채우지 않습니다. 결과와 함께 coverage, Provisional·Incomplete·Final 상태, 원인과 revision을 반환합니다.</p></article></div>
       </div>
     </section>
 

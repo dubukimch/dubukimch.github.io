@@ -45,13 +45,13 @@
         <li><b>기간 OEE 계산</b><p>OEEAnalyzer가 계획정지를 제외한 구간에서 가동시간과 카운터 증가분을 계산하고 coverage·status·reasons·revision을 함께 저장합니다.</p></li>
         <li><b>운영 화면 반영</b><p>TwinForge가 최신 window를 다시 조회해 External A/P/Q/OEE, coverage, 작업지시와 context ID를 MES 화면에 표시합니다.</p></li>
       </ol>
-      <aside class="doc-scenario"><span>REPRODUCIBLE DOCKER SCENARIO</span><strong>Production counters → OPC UA → Kafka sample + MES context → OEE window → TwinForge</strong><p>통합 스크립트는 네 Gateway 경로의 Good 품질, OEEAnalyzer의 OPC UA 연결, TwinForge context 동기화와 coverage가 확보된 기간 결과를 순서대로 검사합니다. 기존 Speed_SP 쓰기·알람·Twin 수신 시나리오도 같은 스택에서 유지됩니다.</p></aside>
+      <aside class="doc-scenario"><span>REPRODUCIBLE DOCKER SCENARIO</span><strong>TwinForge command → PLC Ack/feedback + production evidence → OEE window → TwinForge</strong><p>통합 스크립트는 Start·Stop·Reset sequence와 Ack, SpeedSetpoint 1.8 m/s와 PLC 소유 SpeedPV, 네 Gateway 생산 경로의 Good 품질, OEEAnalyzer context·coverage를 순서대로 검사합니다.</p></aside>
     </section>
 
     <section class="doc-section" id="plc">
       <div class="doc-project-intro">
         <header class="doc-heading"><p class="kicker">01 · DEVICE CONNECTIVITY</p><h2>PLC Simulation</h2><p>제조사별 통신 구현을 DLL 플러그인으로 분리하고 DriverHost가 설정, 연결, 태그와 최신 값을 하나의 실행 모델로 관리합니다.</p></header>
-        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC Simulation 실시간 태그 화면"><figcaption><b>LIVE TAG MONITOR</b><span>읽기·쓰기·품질 상태를 WebSocket으로 실시간 표시</span></figcaption></figure>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" alt="PLC Simulation 실시간 태그 화면"><figcaption><b>LIVE TAG MONITOR</b><span>읽기·쓰기·품질 상태를 WebSocket으로 실시간 표시</span></figcaption></figure>
       </div>
       <a class="doc-product-link" href="plc-simulation.html"><b>화면별 기능 가이드</b><span>5개 UI에서 드라이버 설정, 태그 쓰기와 데이터 매핑이 동작하는 과정 보기 →</span></a>
       <div class="doc-grid">
@@ -70,7 +70,7 @@
     <section class="doc-section" id="gateway">
       <div class="doc-project-intro">
         <header class="doc-heading"><p class="kicker">02 · EDGE INTEGRATION</p><h2>IIoT Gateway</h2><p>Channel·Device·Tag 설정을 실제 통신으로 변환하고, 수집된 하나의 실시간 캐시를 OPC UA·알람·Historian이 공유합니다.</p></header>
-        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/gateway-03-tags.png" alt="IIoT Gateway 태그 설정 화면"><figcaption><b>HIERARCHICAL TAG MODEL</b><span>주소·형식·권한·Scan Rate를 장치 구조로 관리</span></figcaption></figure>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/gateway-03-tags.png?v=20260916" alt="IIoT Gateway 태그 설정 화면"><figcaption><b>HIERARCHICAL TAG MODEL</b><span>주소·형식·권한·Scan Rate를 장치 구조로 관리</span></figcaption></figure>
       </div>
       <a class="doc-product-link" href="iiot-gateway.html"><b>화면별 기능 가이드</b><span>5개 UI에서 Channel·Device·Tag·Alarm·OPC UA 보안을 설정하는 과정 보기 →</span></a>
       <div class="doc-grid">
@@ -89,7 +89,7 @@
     <section class="doc-section" id="oee">
       <div class="doc-project-intro">
         <header class="doc-heading"><p class="kicker">03 · PRODUCTION ANALYTICS</p><h2>OEEAnalyzer</h2><p>Gateway의 네 생산 신호와 TwinForge의 MES 맥락을 이벤트 시간 기준으로 결합합니다. 계산값과 함께 coverage, 상태, 원인과 revision을 반환해 결과를 사용할 수 있는 조건까지 설명합니다.</p></header>
-        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png" alt="OEEAnalyzer 기간별 A/P/Q/OEE와 Window Ledger"><figcaption><b>4-SYSTEM OEE CONTROL ROOM</b><span>설비·UTC 구간을 조회하고 계산값과 신뢰도를 함께 확인</span></figcaption></figure>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/oee-02-live-oee.png?v=20260916" alt="OEEAnalyzer 기간별 A/P/Q/OEE와 Window Ledger"><figcaption><b>4-SYSTEM OEE CONTROL ROOM</b><span>설비·UTC 구간을 조회하고 계산값과 신뢰도를 함께 확인</span></figcaption></figure>
       </div>
       <a class="doc-product-link" href="oee-analyzer.html"><b>화면별 기능 가이드</b><span>5개 화면에서 연동 경로, 기간 계산, TwinForge 결과, Window Ledger와 처리 규칙이 동작하는 과정 보기 →</span></a>
       <div class="doc-grid">
@@ -108,7 +108,7 @@
     <section class="doc-section" id="twinforge">
       <div class="doc-project-intro">
         <header class="doc-heading"><p class="kicker">04 · OPERATIONAL INTELLIGENCE</p><h2>TwinForge</h2><p>100ms 장비 시뮬레이션, OPC UA 외부 신호, MES와 실행 그래프를 하나의 장비 모델과 이벤트 경로에 연결하고 OEEAnalyzer의 External 결과를 작업 맥락과 함께 표시합니다.</p></header>
-        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
+        <figure class="doc-figure"><img src="assets/images/industrial-portfolio/twin-04-3d-factory.png?v=20260916" alt="TwinForge 3D 공장 화면"><figcaption><b>INTERACTIVE 3D FACTORY</b><span>설비 상태와 텔레메트리를 공간 정보로 시각화</span></figcaption></figure>
       </div>
       <a class="doc-product-link" href="twinforge.html"><b>화면별 기능 가이드</b><span>5개 UI에서 MES·External OEE·설비·워크플로·3D 공장을 제어하는 과정 보기 →</span></a>
       <div class="doc-grid">

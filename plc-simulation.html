@@ -29,7 +29,7 @@
         <div class="product-actions"><a class="button primary" href="#dashboard">화면별 동작 보기 ↓</a><a class="button secondary" href="assets/docs/industrial-products-feature-guide.pdf">기능 가이드 PDF</a><a class="button secondary" href="technical.html#plc">구현 구조 보기</a><a class="button secondary" href="index.html#plc">메인으로 돌아가기</a></div>
         <dl class="product-proof"><div><dt>11</dt><dd>Driver plugins loaded</dd></div><div><dt>41</dt><dd>PLC model profiles</dd></div><div><dt>1s</dt><dd>Live polling cycle</dd></div></dl>
       </div>
-      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="PLC Simulation 실시간 태그 모니터"><figcaption><b>OPERATOR VIEW</b><span>읽기·쓰기·품질·갱신 시각을 한 테이블에서 확인</span></figcaption></figure>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" alt="PLC Simulation 실시간 태그 모니터"><figcaption><b>OPERATOR VIEW</b><span>읽기·쓰기·품질·갱신 시각을 한 테이블에서 확인</span></figcaption></figure>
     </section>
 
     <div class="product-shell">
@@ -79,13 +79,13 @@
 
         <section class="feature-chapter" id="monitor">
           <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">LIVE READ + WRITE</p><h2>실시간 값을 보고, 쓰고, 결과를 확인</h2><p class="feature-purpose">Tag Monitor는 태그 주소, 데이터 형식, 현재 값, 품질과 갱신 시각을 보여주며 쓰기 가능한 태그에는 Write 동작을 제공합니다.</p></div></header>
-          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png" data-caption="PLC Simulation — 실시간 태그 읽기와 쓰기"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png" alt="Speed_SP, Temp_PV 등의 값과 GOOD 품질, Write 버튼이 표시된 태그 모니터"><span><b>04 · TAG MONITOR</b><small>Address · Value · Quality · Updated · Write action</small></span></button>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" data-caption="PLC Simulation — 명령·Ack·피드백 태그와 접근 경계"><img src="assets/images/industrial-portfolio/plc-04-live-tags.png?v=20260916" alt="Speed Setpoint와 PV, Command와 Ack, 생산 카운터의 GOOD 품질 및 읽기 쓰기 경계가 표시된 태그 모니터"><span><b>04 · TAG MONITOR</b><small>Setpoint / PV · Command / Ack · Read-only evidence</small></span></button>
           <div class="feature-explainer">
             <article class="walk-card reveal"><span>UI CONTROL</span><h3>운영자가 조작하는 항목</h3><p>Tag Explorer에서 드라이버를 고르고 <strong>Refresh</strong>로 스냅샷을 요청합니다. R/W 태그의 <strong>Write</strong> 버튼을 눌러 새 값을 입력합니다.</p><div class="control-tags"><span>Tag Explorer</span><span>Refresh</span><span>Write</span><span>Value input</span><span>Quality badge</span></div></article>
-            <article class="walk-card reveal"><span>USER FLOW</span><h3>검증한 쓰기 순서</h3><ol class="operator-steps"><li>Modbus TCP Device Simulator를 선택합니다.</li><li><code>Speed_SP</code> 행의 Write를 누르고 1800을 입력합니다.</li><li>완료 알림과 GOOD 품질을 확인합니다.</li><li>다음 실시간 스냅샷에서 변경된 값을 확인합니다.</li></ol></article>
-            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>입력값이 화면에 돌아오기까지</h3><div class="behavior-flow"><div><b>POST /api/tags/write</b><span>태그 ID·주소와 입력 문자열을 전달합니다.</span></div><div><b>프로토콜 쓰기</b><span>형식과 바이트 순서에 맞춰 PLC 프레임으로 변환합니다.</span></div><div><b>캐시 + WebSocket</b><span>성공 값을 GOOD 품질로 저장하고 화면에 재전송합니다.</span></div></div><ul class="result-list"><li>화면에서 입력한 값이 PLC 메모리까지 전달됩니다.</li><li>품질과 갱신 시각으로 성공 여부를 즉시 판별합니다.</li></ul></article>
+            <article class="walk-card reveal"><span>USER FLOW</span><h3>검증한 쓰기 순서</h3><ol class="operator-steps"><li>Modbus TCP Device Simulator를 선택합니다.</li><li><code>Speed_Setpoint</code>에 1800(raw, 1.8 m/s)을 씁니다.</li><li>PLC 소유 <code>Speed_PV</code>가 목표값을 추종하는지 확인합니다.</li><li>Start·Stop·Reset은 Command Type 뒤 Sequence를 commit하고 Ack·feedback을 확인합니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>WHAT HAPPENS</span><h3>명령과 실제 상태를 분리하는 과정</h3><div class="behavior-flow"><div><b>Command payload</b><span>SpeedSetpoint·CommandType·CommandSequence만 쓰기를 허용합니다.</span></div><div><b>PLC ownership</b><span>새 sequence를 한 번 처리해 Ack·RunFeedback·MachineState를 갱신합니다.</span></div><div><b>Read-only evidence</b><span>SpeedPV·상태·알람·생산 카운터는 PLC만 변경합니다.</span></div></div><ul class="result-list"><li>FC6/FC16은 명시된 명령 레지스터 이외 쓰기를 거부합니다.</li><li>품질과 갱신 시각으로 명령 이후 실제 결과를 판별합니다.</li></ul></article>
           </div>
-          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>정적 데모가 아니라 실제 프로토콜 Read/Write, 데이터 형식 변환, 최신 값 캐시와 WebSocket UI 갱신을 하나의 사용자 동작으로 검증했습니다.</p></aside>
+          <aside class="portfolio-value reveal"><b>PORTFOLIO VALUE</b><p>정적 데모가 아니라 제한된 명령 쓰기, PLC 소유 피드백, 데이터 형식 변환, 최신 값 캐시와 WebSocket UI 갱신을 하나의 흐름으로 검증했습니다.</p></aside>
         </section>
 
         <section class="feature-chapter" id="mapping">
