@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DataNexus Analytics가 PLC Simulation, IIoT Gateway, OEEAnalyzer, TwinForge와 연동되는 제조 데이터 분석 포트폴리오입니다.">
+  <title>DataNexus Analytics · 5자 제조 솔루션 연동</title>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260917-1">
+  <script defer src="assets/js/main.js?v=20260901-2"></script>
+</head>
+<body class="product-page" data-product="datanexus">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html#projects" aria-label="포트폴리오 프로젝트 목록"><span>05</span><b>DataNexus Analytics<small>5-SYSTEM INTEGRATION</small></b></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav id="nav" aria-label="DataNexus 기능 메뉴">
+      <a href="#integration">Integration</a><a href="#context">MES Context</a><a href="#oee-evidence">OEE Evidence</a><a href="#verification">Verification</a>
+      <a class="nav-cta" href="index.html#datanexus">Portfolio →</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="product-hero" id="top">
+      <div class="product-hero-copy reveal">
+        <div class="product-crumbs"><a href="index.html">Portfolio</a><span>/</span><span>Project 05</span></div>
+        <h1>생산 데이터의 흐름을,<em>검증 가능한 증거로.</em></h1>
+        <p class="product-lead">DataNexus는 PLC나 Gateway를 제어하거나 OEE를 다시 계산하지 않습니다. Kafka 원본 표본과 OEEAnalyzer의 권위 있는 Window를 독립적으로 읽어 연결 상태, 품질, 설비 상태, A/P/Q/OEE와 데이터 계보를 한 화면에서 확인합니다.</p>
+        <div class="product-actions"><a class="button primary" href="#integration">연동 결과 보기 ↓</a><a class="button secondary" href="technical.html">전체 기술 구조</a><a class="button secondary" href="index.html#datanexus">메인으로 돌아가기</a></div>
+        <dl class="product-proof"><div><dt>05</dt><dd>Connected applications</dd></div><div><dt>100%</dt><dd>Captured data coverage</dd></div><div><dt>0</dt><dd>Rejected valid samples</dd></div></dl>
+      </div>
+      <figure class="product-hero-visual reveal"><img src="assets/images/industrial-portfolio/datanexus-01-integration.png?v=20260917" alt="DataNexus 5자 제조 솔루션 통합 화면"><figcaption><b>READ-ONLY ANALYTICS</b><span>Kafka evidence · OEE window · quality lineage</span></figcaption></figure>
+    </section>
+
+    <section class="product-shell">
+      <aside class="feature-nav" aria-label="화면 목차">
+        <span>INTEGRATION CASE STUDY</span>
+        <a href="#integration"><b>01</b><span>5자 통합 상태</span></a>
+        <a href="#context"><b>02</b><span>TwinForge 생산 맥락</span></a>
+        <a href="#oee-evidence"><b>03</b><span>OEEAnalyzer 권위 결과</span></a>
+        <a href="#verification"><b>04</b><span>Docker 검증 증거</span></a>
+        <footer><a href="oee-analyzer.html">← 이전: OEEAnalyzer</a><a href="index.html#projects">전체 프로젝트</a><a href="technical.html">통합 기술 문서</a></footer>
+      </aside>
+
+      <div class="feature-content">
+        <section class="feature-chapter" id="integration">
+          <header class="feature-heading reveal"><span class="feature-number">01</span><div><p class="kicker">5-SYSTEM INTEGRATION</p><h2>연결 상태와 분석 결과를 한 화면에서 확인</h2><p class="feature-purpose">PLC Simulation, IIoT Gateway, TwinForge, OEEAnalyzer와 DataNexus의 경로를 설비 키 하나로 연결합니다. 실시간 표본과 기간 분석을 섞지 않고 각각의 출처와 시각을 보존합니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/datanexus-01-integration.png?v=20260917" data-caption="DataNexus Analytics — 5자 제조 솔루션 연동"><img src="assets/images/industrial-portfolio/datanexus-01-integration.png?v=20260917" alt="DataNexus 5개 시스템 연결, A P Q OEE와 Kafka 표본 화면"><span><b>01 · INDUSTRIAL INTEGRATION</b><small>5 systems connected · Good quality · 100% coverage</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>WHAT THE UI SHOWS</span><h3>운영 판단에 필요한 핵심 증거</h3><p>시스템별 연결 상태, Availability·Performance·Quality·OEE, coverage, 분석 status와 revision을 표시합니다. Kafka 표본에서는 machine state, total/reject count, quality와 source timestamp를 별도로 확인합니다.</p><div class="control-tags"><span>equipmentKey</span><span>A/P/Q/OEE</span><span>coverage</span><span>quality</span><span>partition/offset</span><span>revision</span></div></article>
+            <article class="walk-card reveal"><span>CAPTURED RESULT</span><h3>실행 화면의 검증 값</h3><ol class="operator-steps"><li>다섯 시스템의 연결 상태가 모두 Connected로 표시됐습니다.</li><li>Kafka 표본 품질은 Good, 설비 상태는 Running이었습니다.</li><li>OEE Window coverage는 100%였습니다.</li><li>캡처 시점에 71건 소비, 0건 거부를 확인했습니다.</li></ol></article>
+            <article class="walk-card wide reveal"><span>IMPLEMENTATION</span><h3>읽기 전용 통합이 동작하는 방식</h3><div class="behavior-flow"><div><b>Kafka consumer</b><span>독립 consumer group으로 OEE v1 표본을 읽고 key·payload 설비 키와 schema를 검증합니다.</span></div><div><b>OEE REST reader</b><span>JWT service login 후 동일한 설비와 기간의 권위 있는 OEE Window를 조회합니다.</span></div><div><b>Unified snapshot</b><span>원본 시각·수신 시각·quality·offset·revision을 보존해 UI와 상태 API에 제공합니다.</span></div></div><ul class="result-list"><li>합성 uptime이나 클라이언트 OEE 재계산을 사용하지 않습니다.</li><li>잘못된 payload는 commit 전 전용 DLQ로 분리합니다.</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>DESIGN BOUNDARY</b><p>DataNexus는 PLC 쓰기와 생산 제어 경로에 참여하지 않습니다. 실시간 Kafka 표본은 현장 상태의 증거이고, KPI 수치는 OEEAnalyzer 결과를 그대로 사용합니다.</p></aside>
+        </section>
+
+        <section class="feature-chapter" id="context">
+          <header class="feature-heading reveal"><span class="feature-number">02</span><div><p class="kicker">MES PRODUCTION CONTEXT</p><h2>TwinForge의 작업 맥락과 External OEE를 연결</h2><p class="feature-purpose">TwinForge가 작업지시, 제품과 계획 구간을 OEEAnalyzer에 제공하고, 계산된 External 결과를 다시 조회하는 경계를 실제 운영 화면으로 확인했습니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/datanexus-02-twinforge-context.png?v=20260917" data-caption="TwinForge — 생산 맥락과 External OEEAnalyzer 결과"><img src="assets/images/industrial-portfolio/datanexus-02-twinforge-context.png?v=20260917" alt="TwinForge MO-A1001 작업 맥락과 External OEE 결과"><span><b>02 · TWINFORGE CONTEXT</b><small>Work order · Product · Context ID · External OEE</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>BUSINESS CONTEXT</span><h3>계측값에 업무 의미를 추가</h3><p><code>MO-A1001</code> 작업지시와 <code>EDU-400</code> 제품, 계획 구간과 ideal cycle을 설비 키에 연결합니다. OEEAnalyzer는 이 맥락을 생산 표본의 기간 계산 경계로 사용합니다.</p></article>
+            <article class="walk-card reveal"><span>RESULT CONTRACT</span><h3>자체 Demo OEE와 외부 결과 분리</h3><p>External 모드에서는 Analyzer 결과를 TwinForge 자체 지표와 평균하거나 합산하지 않습니다. 설비·기간·context·revision이 맞는 결과만 별도 패널에 표시합니다.</p></article>
+          </div>
+        </section>
+
+        <section class="feature-chapter" id="oee-evidence">
+          <header class="feature-heading reveal"><span class="feature-number">03</span><div><p class="kicker">AUTHORITATIVE OEE WINDOW</p><h2>수치와 함께 coverage·상태·revision을 보존</h2><p class="feature-purpose">OEEAnalyzer를 A/P/Q/OEE의 단일 계산 주체로 유지합니다. DataNexus는 계산 결과를 바꾸지 않고 진단 정보와 함께 제시해 재현 가능한 비교 기준을 만듭니다.</p></div></header>
+          <button class="feature-shot reveal" type="button" data-lightbox="assets/images/industrial-portfolio/datanexus-03-oee-evidence.png?v=20260917" data-caption="OEEAnalyzer — 권위 있는 OEE 계산 Window"><img src="assets/images/industrial-portfolio/datanexus-03-oee-evidence.png?v=20260917" alt="OEEAnalyzer Final OEE, coverage와 revision 화면"><span><b>03 · OEE CONTROL ROOM</b><small>Final · 100% coverage · revisioned result</small></span></button>
+          <div class="feature-explainer">
+            <article class="walk-card reveal"><span>CAPTURED RESULT</span><h3>독립 화면에서 확인한 계산값</h3><p>캡처된 Final Window는 Availability 100.0%, Performance 88.7%, Quality 96.4%, OEE 85.5%, coverage 100.0%와 revision 345를 표시했습니다.</p></article>
+            <article class="walk-card reveal"><span>TIME-AWARE COMPARISON</span><h3>캡처 시점이 다르면 revision도 다릅니다</h3><p>생산 이벤트가 계속 유입되는 동안 Window가 재계산되므로 화면별 수치가 달라질 수 있습니다. 비교할 때는 equipmentKey, contextId, UTC 구간과 revision을 함께 사용합니다.</p></article>
+          </div>
+        </section>
+
+        <section class="feature-chapter" id="verification">
+          <header class="feature-heading reveal"><span class="feature-number">04</span><div><p class="kicker">DOCKER ACCEPTANCE</p><h2>화면이 아니라 전체 데이터 경로를 자동 검증</h2><p class="feature-purpose">단일 Docker Compose 환경에서 PLC 신호부터 Gateway 품질, TwinForge 제어 Ack, OEE 계산과 DataNexus 소비 상태까지 순서대로 검사했습니다.</p></div></header>
+          <div class="feature-explainer">
+            <article class="walk-card wide reveal"><span>VERIFIED PATH</span><h3>자동 통합 테스트 결과</h3><div class="behavior-flow"><div><b>Field + control</b><span>PLC online, Gateway 4개 생산 태그 Good, Start/Stop/Reset Ack와 SpeedPV readback을 확인했습니다.</span></div><div><b>Context + analytics</b><span>TwinForge MES context, Kafka·Timescale 저장과 coverage 0.95 이상 OEE Window를 확인했습니다.</span></div><div><b>Independent observer</b><span>DataNexus Kafka/OEE API 연결, latest sample/window, equipment key와 rejected 0을 확인했습니다.</span></div></div><ul class="result-list"><li>Release 빌드 경고 0, 오류 0</li><li>DataNexus 단위 테스트 14/14 통과</li><li>Docker Compose 구성 검증 통과</li><li>외부 유료 서비스 없이 로컬 환경만 사용</li></ul></article>
+          </div>
+          <aside class="portfolio-value reveal"><b>OPERATIONS NOTE</b><p>공개 포트폴리오는 검증 시점의 정적 증거를 제공합니다. 운영 배포에서는 Kafka TLS/SASL, secret store 기반 서비스 계정, 사용자·equipment claim 접근 제어와 DLQ 보존·재처리 정책이 추가로 필요합니다.</p></aside>
+        </section>
+      </div>
+    </section>
+
+    <section class="product-next reveal"><div><p class="kicker">EXPLORE THE PLATFORM</p><h2>다섯 제품의 전체 흐름을 확인하세요.</h2><p>각 제품의 역할, 구현 화면과 Docker 검증 경계를 메인 포트폴리오에서 이어서 볼 수 있습니다.</p></div><div class="actions"><a class="button primary" href="index.html#projects">전체 프로젝트 →</a><a class="button secondary" href="technical.html">통합 기술 문서</a></div></section>
+  </main>
+
+  <footer class="site-footer"><span>DATANEXUS ANALYTICS · INTEGRATION CASE STUDY</span><span>KAFKA · OEE REST · SIGNALR · DOCKER</span><a href="#top">BACK TO TOP ↑</a></footer>
+  <dialog class="lightbox" id="lightbox" aria-label="DataNexus 화면 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""><figcaption></figcaption></figure></dialog>
+</body>
+</html>

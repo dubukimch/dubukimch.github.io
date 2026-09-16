@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071019">
   <title>Industrial Data Platform Portfolio</title>
-  <meta name="description" content="가상 PLC, OPC UA Gateway, OEEAnalyzer, MES와 3D Digital Twin을 하나의 데이터 흐름으로 구현한 산업 소프트웨어 포트폴리오">
+  <meta name="description" content="가상 PLC, OPC UA Gateway, OEEAnalyzer, TwinForge와 DataNexus를 하나의 데이터 흐름으로 구현한 산업 소프트웨어 포트폴리오">
   <meta property="og:title" content="Industrial Data Platform Portfolio">
-  <meta property="og:description" content="PLC → OPC UA → OEE 분석 → MES·Digital Twin. 현장 신호를 운영 판단으로 연결합니다.">
+  <meta property="og:description" content="PLC → OPC UA → OEE 분석 → MES·Digital Twin → 통합 분석. 현장 신호를 운영 판단으로 연결합니다.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/industrial-portfolio/og-industrial-platform.png">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260912-2">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260917-1">
   <script defer src="assets/js/main.js?v=20260901-2"></script>
 </head>
 <body>
@@ -29,23 +29,23 @@
       <div class="hero-copy reveal">
         <p class="kicker">PLC · OPC UA · OEE · MES · DIGITAL TWIN</p>
         <h1>현장 신호를<br><em>운영 가능한 데이터</em>로.</h1>
-        <p class="hero-lead">가상 PLC의 생산 신호를 산업용 Gateway가 표준화하고, OEEAnalyzer가 가용성·성능·품질을 계산해 TwinForge의 MES와 3D Digital Twin에 돌려주는 전체 경로를 설계했습니다.</p>
+        <p class="hero-lead">가상 PLC의 생산 신호를 산업용 Gateway가 표준화하고, OEEAnalyzer가 가용성·성능·품질을 계산해 TwinForge와 DataNexus가 운영·분석에 활용하는 전체 경로를 설계했습니다.</p>
         <div class="actions"><a class="button primary" href="#platform">플랫폼 살펴보기</a><a class="button secondary" href="#projects">프로젝트 화면 보기</a><a class="button secondary" href="technical.html">통합 기술 문서</a></div>
-        <dl class="metrics"><div><dt>04</dt><dd>연동 애플리케이션</dd></div><div><dt>20</dt><dd>주요 기능 화면</dd></div><div><dt>A×P×Q</dt><dd>OEE calculation</dd></div></dl>
+        <dl class="metrics"><div><dt>05</dt><dd>연동 애플리케이션</dd></div><div><dt>23</dt><dd>주요 기능 화면</dd></div><div><dt>A×P×Q</dt><dd>OEE calculation</dd></div></dl>
       </div>
       <aside class="hero-visual reveal" aria-label="TwinForge 디지털 트윈 미리보기">
         <div class="visual-top"><span class="live"><i></i> LIVE PIPELINE</span><span>PORTFOLIO / 2026</span></div>
         <img src="assets/images/industrial-portfolio/twin-04-3d-factory.png?v=20260916" alt="TwinForge 3D 설비 모니터링 화면">
         <div class="floating-tag plc">PLC<br><b>Speed PV 1.8 m/s</b></div>
         <div class="floating-tag oee">OEE ANALYZER<br><b>A · P · Q · Coverage</b></div>
-        <div class="floating-tag twin">TWINFORGE<br><b>6 equipment online</b></div>
+        <div class="floating-tag twin">TWINFORGE<br><b>MainConveyor mapped</b></div>
         <div class="visual-bottom"><span>DATA ACCESS</span><span>ALARM &amp; CONDITION</span><span>CLIENT</span></div>
       </aside>
     </section>
 
     <section class="section platform" id="platform">
-      <header class="section-head reveal"><p class="kicker">ONE CONNECTED SYSTEM</p><h2>네 개의 제품, 하나의 폐루프 데이터 흐름</h2><p>데이터 발생과 표준화, 기간 OEE 분석, 생산 맥락과 현장 시각화가 어떻게 연결되는지 제품별 UI와 계약으로 설명합니다.</p></header>
-      <div class="pipeline pipeline-four reveal" aria-label="통합 플랫폼 데이터 흐름">
+      <header class="section-head reveal"><p class="kicker">ONE CONNECTED SYSTEM</p><h2>다섯 개의 제품, 하나의 검증 가능한 데이터 흐름</h2><p>데이터 발생과 표준화, 기간 OEE 분석, 생산 맥락, 현장 시각화와 통합 관측이 어떻게 연결되는지 제품별 UI와 계약으로 설명합니다.</p></header>
+      <div class="pipeline pipeline-five reveal" aria-label="통합 플랫폼 데이터 흐름">
         <article><span>FLOW 01 / SOURCE</span><b>PLC Simulation</b><p>명령을 처리하고 실제 상태·PV·생산 카운터의 원본을 제공합니다.</p><small>Command Ack · Feedback · Live Tags</small></article>
         <i>→</i>
         <article><span>FLOW 02 / STANDARDIZE</span><b>IIoT Gateway</b><p>명령 태그만 R/W로 열고 상태·PV·생산 근거는 읽기 전용으로 표준화합니다.</p><small>Access boundary · OPC UA · Quality</small></article>
@@ -53,6 +53,8 @@
         <article><span>FLOW 03 / ANALYZE</span><b>OEEAnalyzer</b><p>생산 카운터와 상태, MES 맥락을 결합해 기간별 A/P/Q/OEE를 계산합니다.</p><small>Kafka · TimescaleDB · Coverage</small></article>
         <i>↔</i>
         <article><span>FLOW 04 / OPERATE</span><b>TwinForge</b><p>제한된 명령을 쓰고 PLC Ack·feedback 이후 상태를 확정하며 OEE 결과를 활용합니다.</p><small>MES · Ack confirmed control · Digital Twin</small></article>
+        <i>→</i>
+        <article><span>FLOW 05 / OBSERVE</span><b>DataNexus</b><p>Kafka 원본 표본과 OEE Window를 독립적으로 읽어 품질·계보·분석 결과를 함께 제시합니다.</p><small>Read-only analytics · SignalR · DLQ</small></article>
       </div>
       <div class="bento">
         <article class="bento-main reveal"><p class="card-label">PLC-OWNED FEEDBACK</p><div class="signal-value"><span>Speed_PV</span><strong>1.8</strong><small>m/s</small></div><div class="spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><footer><span class="ok">● Good</span><span>DataAccess.DockerModbus.PlcSimulation.40002</span></footer></article>
@@ -63,7 +65,7 @@
 
     <section class="section projects" id="projects">
       <header class="section-head reveal"><p class="kicker">PRODUCT WALKTHROUGH</p><h2>화면을 보고, 조작을 따라가고, 결과를 확인합니다</h2><p>각 제품의 상세 가이드에서 화면별 목적, 사용자가 누르는 버튼과 입력값, 처리 순서, UI에 돌아오는 결과까지 확인할 수 있습니다.</p></header>
-      <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a><a href="#oee">04 OEEAnalyzer</a></nav>
+      <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a><a href="#oee">04 OEEAnalyzer</a><a href="#datanexus">05 DataNexus</a></nav>
 
       <article class="project-block" id="plc">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 01</p><h3>PLC Simulation</h3><p>실제 장비 없이도 산업 데이터 흐름을 검증할 수 있는 가상 PLC 웹 애플리케이션입니다. 드라이버 구성부터 실시간 태그, 메모리 매핑까지 한곳에서 관리합니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Data source</dd></div><div><dt>Protocol</dt><dd>Modbus TCP</dd></div></dl></div>
@@ -116,18 +118,29 @@
           <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/oee-05-processing-rules.png?v=20260916" data-caption="OEEAnalyzer — OEE 처리 규칙"><img src="assets/images/industrial-portfolio/oee-05-processing-rules.png?v=20260916" alt="OEEAnalyzer OEE Logic Builder 처리 규칙 화면" loading="lazy"><span><b>05</b> Processing Rules</span></button>
         </div>
       </article>
+
+      <article class="project-block" id="datanexus">
+        <div class="project-intro reveal"><div><p class="project-no">PROJECT 05</p><h3>DataNexus Analytics</h3><p>Kafka의 원본 생산 표본과 OEEAnalyzer의 권위 있는 Window를 독립적으로 읽어 설비 상태, 데이터 품질, A/P/Q/OEE와 계보를 한 화면에서 확인하는 읽기 전용 제조 분석 애플리케이션입니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Integration observability</dd></div><div><dt>Data</dt><dd>Kafka · REST · SignalR</dd></div></dl></div>
+        <div class="feature-strip reveal"><span>5-system status</span><span>Kafka evidence</span><span>OEE window</span><span>Quality lineage</span><span>Docker acceptance</span></div>
+        <a class="project-guide-link reveal" href="datanexus-analytics.html"><span>FULL FEATURE WALKTHROUGH</span><b>5자 연동 화면·TwinForge 맥락·OEE 권위 결과와 검증 증거 보기</b><i>상세 가이드 →</i></a>
+        <div class="gallery">
+          <button class="shot featured reveal" data-lightbox="assets/images/industrial-portfolio/datanexus-01-integration.png?v=20260917" data-caption="DataNexus — 5자 제조 솔루션 통합 화면"><img src="assets/images/industrial-portfolio/datanexus-01-integration.png?v=20260917" alt="DataNexus Kafka와 OEEAnalyzer 통합 분석 화면" loading="lazy"><span><b>01</b> 5-System Integration</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/datanexus-02-twinforge-context.png?v=20260917" data-caption="TwinForge — External OEE와 생산 맥락"><img src="assets/images/industrial-portfolio/datanexus-02-twinforge-context.png?v=20260917" alt="TwinForge 작업지시와 External OEE 결과" loading="lazy"><span><b>02</b> MES Context</span></button>
+          <button class="shot reveal" data-lightbox="assets/images/industrial-portfolio/datanexus-03-oee-evidence.png?v=20260917" data-caption="OEEAnalyzer — 권위 있는 OEE Window"><img src="assets/images/industrial-portfolio/datanexus-03-oee-evidence.png?v=20260917" alt="OEEAnalyzer A P Q OEE와 coverage 결과" loading="lazy"><span><b>03</b> OEE Evidence</span></button>
+        </div>
+      </article>
     </section>
 
     <section class="section evidence" id="evidence">
-      <header class="section-head reveal"><p class="kicker">INTEGRATION EVIDENCE</p><h2>네 제품의 경계를 Docker 시나리오로 검사합니다</h2><p>통합 실행은 PLC 생산 신호, Gateway OPC UA 품질, Kafka·TimescaleDB sample, TwinForge production context와 OEE window를 차례로 확인합니다. 계산 수치만 보지 않고 coverage와 연결 상태도 acceptance 조건에 포함합니다.</p></header>
+      <header class="section-head reveal"><p class="kicker">INTEGRATION EVIDENCE</p><h2>다섯 제품의 경계를 Docker 시나리오로 검사합니다</h2><p>통합 실행은 PLC 생산 신호, Gateway OPC UA 품질, Kafka·TimescaleDB sample, TwinForge production context, OEE window와 DataNexus의 독립 소비 상태를 차례로 확인합니다.</p></header>
       <div class="evidence-grid">
-        <div class="terminal reveal"><header><i></i><i></i><i></i><span>integration-test / 4-system-oee.log</span></header><ol><li><time>STEP 01</time><b>PLC OEE production signals</b><span>GOOD</span></li><li><time>STEP 02</time><b>Gateway OPC UA batch read</b><span>GOOD</span></li><li><time>STEP 03</time><b>Kafka → Timescale samples</b><span>PASS</span></li><li><time>STEP 04</time><b>TwinForge production context</b><span>SYNC</span></li><li><time>STEP 05</time><b>Coverage + non-null OEE window</b><span>ACCEPT</span></li></ol><footer><b>Repeatable acceptance path</b><span>PLC · Gateway · OEEAnalyzer · TwinForge</span></footer></div>
+        <div class="terminal reveal"><header><i></i><i></i><i></i><span>integration-test / 5-system-oee.log</span></header><ol><li><time>STEP 01</time><b>PLC OEE production signals</b><span>GOOD</span></li><li><time>STEP 02</time><b>Gateway OPC UA batch read</b><span>GOOD</span></li><li><time>STEP 03</time><b>Kafka → Timescale samples</b><span>PASS</span></li><li><time>STEP 04</time><b>TwinForge production context</b><span>SYNC</span></li><li><time>STEP 05</time><b>Coverage + non-null OEE window</b><span>ACCEPT</span></li><li><time>STEP 06</time><b>DataNexus Kafka + OEE API evidence</b><span>PASS</span></li></ol><footer><b>Repeatable acceptance path</b><span>PLC · Gateway · OEEAnalyzer · TwinForge · DataNexus</span></footer></div>
         <div class="evidence-notes reveal"><article><span>CONTROL BOUNDARY</span><h3>Command / Feedback</h3><p>SpeedSetpoint·CommandType·CommandSequence만 쓰고, Ack·RunFeedback·MachineState·SpeedPV를 확인해 결과를 확정합니다.</p></article><article><span>OEE ANALYTICS CONTRACT</span><h3>Count · state · context</h3><p>Total, Reject, State, Counter Epoch를 Kafka로 보존하고 TwinForge의 작업·제품·계획 구간·ideal cycle을 기간 계산에 결합합니다.</p></article><article><span>QUALITY-AWARE RESULT</span><h3>Coverage · reasons · revision</h3><p>결측 구간은 정상값으로 채우지 않습니다. 결과와 함께 coverage, Provisional·Incomplete·Final 상태, 원인과 revision을 반환합니다.</p></article></div>
       </div>
     </section>
 
     <section class="section principles" id="principles">
-      <header class="principles-head reveal"><p class="kicker">ENGINEERING PRINCIPLES</p><h2>연결보다 중요한 것은<br>신뢰할 수 있는 흐름입니다.</h2><p>네 프로젝트에서 반복해 적용한 설계 기준입니다. 장비 연결 자체보다 데이터의 품질, 추적 가능성, 안전한 제어와 재현 가능한 검증을 제품의 기준으로 삼았습니다.</p></header>
+      <header class="principles-head reveal"><p class="kicker">ENGINEERING PRINCIPLES</p><h2>연결보다 중요한 것은<br>신뢰할 수 있는 흐름입니다.</h2><p>다섯 프로젝트에서 반복해 적용한 설계 기준입니다. 장비 연결 자체보다 데이터의 품질, 추적 가능성, 안전한 제어와 재현 가능한 검증을 제품의 기준으로 삼았습니다.</p></header>
       <div class="principle-grid">
         <article class="reveal"><span>01 / MODEL</span><h3>Protocol first</h3><p>장비별 차이를 OPC UA 정보 모델로 흡수하고, 클라이언트가 일관된 태그와 상태를 사용하도록 설계합니다.</p></article>
         <article class="reveal"><span>02 / OBSERVE</span><h3>Observable by default</h3><p>연결 상태, 품질 코드, 현재 값과 이벤트 이력을 화면에서 즉시 판단할 수 있게 노출합니다.</p></article>
@@ -138,7 +151,7 @@
     </section>
 
     <section class="contact">
-      <p class="kicker">PORTFOLIO DELIVERABLE</p><h2>네 제품이 만드는<br>하나의 산업 데이터 플랫폼.</h2><p>데이터 생성, 표준화, 품질 기반 OEE 분석, MES와 3D 활용까지 각 구현 화면과 기술 계약을 함께 제공합니다.</p><div class="actions"><a class="button light" href="oee-analyzer.html">OEEAnalyzer 기능 가이드 →</a><a class="button ghost" href="assets/docs/industrial-products-feature-guide.pdf">제품 기능 PDF ↓</a><a class="button ghost" href="technical.html">통합 기술 문서 →</a></div>
+      <p class="kicker">PORTFOLIO DELIVERABLE</p><h2>다섯 제품이 만드는<br>하나의 산업 데이터 플랫폼.</h2><p>데이터 생성, 표준화, 품질 기반 OEE 분석, MES·3D 활용과 통합 관측까지 실제 구현 화면과 검증 증거를 함께 제공합니다.</p><div class="actions"><a class="button light" href="datanexus-analytics.html">DataNexus 연동 결과 →</a><a class="button ghost" href="assets/docs/industrial-products-feature-guide.pdf">제품 기능 PDF ↓</a><a class="button ghost" href="technical.html">통합 기술 문서 →</a></div>
     </section>
   </main>
 
