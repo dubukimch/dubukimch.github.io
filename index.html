@@ -7,7 +7,7 @@
   <title>Industrial Data Platform Portfolio</title>
   <meta name="description" content="가상 PLC, OPC UA Gateway, OEEAnalyzer, TwinForge와 DataNexus를 하나의 데이터 흐름으로 구현한 산업 소프트웨어 포트폴리오">
   <meta property="og:title" content="Industrial Data Platform Portfolio">
-  <meta property="og:description" content="PLC → OPC UA → OEE 분석 → MES·Digital Twin → 통합 분석. 현장 신호를 운영 판단으로 연결합니다.">
+  <meta property="og:description" content="PLC → OPC UA → OEE 분석 → MES·Digital Twin → DataNexus 통합 관측. 현장 신호를 운영 판단으로 연결합니다.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/industrial-portfolio/og-industrial-platform.png">
   <link rel="stylesheet" href="assets/css/styles.css?v=20260917-1">
@@ -16,7 +16,7 @@
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
   <header class="site-header">
-    <a class="brand" href="#hero" aria-label="홈"><span>IDP</span><b>Industrial Data Platform<small>PLC · OPC UA · OEE · DIGITAL TWIN</small></b></a>
+    <a class="brand" href="#hero" aria-label="홈"><span>IDP</span><b>Industrial Data Platform<small>PLC · OPC UA · OEE · DIGITAL TWIN · ANALYTICS</small></b></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">MENU</button>
     <nav id="nav" aria-label="주요 메뉴">
       <a href="#platform">Platform</a><a href="#projects">Projects</a><a href="#evidence">Evidence</a><a href="technical.html">Technical Docs</a>
@@ -65,7 +65,7 @@
 
     <section class="section projects" id="projects">
       <header class="section-head reveal"><p class="kicker">PRODUCT WALKTHROUGH</p><h2>화면을 보고, 조작을 따라가고, 결과를 확인합니다</h2><p>각 제품의 상세 가이드에서 화면별 목적, 사용자가 누르는 버튼과 입력값, 처리 순서, UI에 돌아오는 결과까지 확인할 수 있습니다.</p></header>
-      <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a><a href="#oee">04 OEEAnalyzer</a><a href="#datanexus">05 DataNexus</a></nav>
+      <nav class="project-index reveal" aria-label="프로젝트 바로가기"><a href="#plc">01 PLC Simulation</a><a href="#gateway">02 IIoT Gateway</a><a href="#twinforge">03 TwinForge</a><a href="#oee">04 OEEAnalyzer</a><a href="#datanexus">05 DataNexus</a><a href="#evidence">검증 근거</a></nav>
 
       <article class="project-block" id="plc">
         <div class="project-intro reveal"><div><p class="project-no">PROJECT 01</p><h3>PLC Simulation</h3><p>실제 장비 없이도 산업 데이터 흐름을 검증할 수 있는 가상 PLC 웹 애플리케이션입니다. 드라이버 구성부터 실시간 태그, 메모리 매핑까지 한곳에서 관리합니다.</p></div><dl><div><dt>Role</dt><dd>Full-stack</dd></div><div><dt>Focus</dt><dd>Data source</dd></div><div><dt>Protocol</dt><dd>Modbus TCP</dd></div></dl></div>
@@ -135,7 +135,7 @@
       <header class="section-head reveal"><p class="kicker">INTEGRATION EVIDENCE</p><h2>다섯 제품의 경계를 Docker 시나리오로 검사합니다</h2><p>통합 실행은 PLC 생산 신호, Gateway OPC UA 품질, Kafka·TimescaleDB sample, TwinForge production context, OEE window와 DataNexus의 독립 소비 상태를 차례로 확인합니다.</p></header>
       <div class="evidence-grid">
         <div class="terminal reveal"><header><i></i><i></i><i></i><span>integration-test / 5-system-oee.log</span></header><ol><li><time>STEP 01</time><b>PLC OEE production signals</b><span>GOOD</span></li><li><time>STEP 02</time><b>Gateway OPC UA batch read</b><span>GOOD</span></li><li><time>STEP 03</time><b>Kafka → Timescale samples</b><span>PASS</span></li><li><time>STEP 04</time><b>TwinForge production context</b><span>SYNC</span></li><li><time>STEP 05</time><b>Coverage + non-null OEE window</b><span>ACCEPT</span></li><li><time>STEP 06</time><b>DataNexus Kafka + OEE API evidence</b><span>PASS</span></li></ol><footer><b>Repeatable acceptance path</b><span>PLC · Gateway · OEEAnalyzer · TwinForge · DataNexus</span></footer></div>
-        <div class="evidence-notes reveal"><article><span>CONTROL BOUNDARY</span><h3>Command / Feedback</h3><p>SpeedSetpoint·CommandType·CommandSequence만 쓰고, Ack·RunFeedback·MachineState·SpeedPV를 확인해 결과를 확정합니다.</p></article><article><span>OEE ANALYTICS CONTRACT</span><h3>Count · state · context</h3><p>Total, Reject, State, Counter Epoch를 Kafka로 보존하고 TwinForge의 작업·제품·계획 구간·ideal cycle을 기간 계산에 결합합니다.</p></article><article><span>QUALITY-AWARE RESULT</span><h3>Coverage · reasons · revision</h3><p>결측 구간은 정상값으로 채우지 않습니다. 결과와 함께 coverage, Provisional·Incomplete·Final 상태, 원인과 revision을 반환합니다.</p></article></div>
+        <div class="evidence-notes reveal"><article><span>CONTROL BOUNDARY</span><h3>Command / Feedback</h3><p>SpeedSetpoint·CommandType·CommandSequence만 쓰고, Ack·RunFeedback·MachineState·SpeedPV를 확인해 결과를 확정합니다.</p></article><article><span>OEE ANALYTICS CONTRACT</span><h3>Count · state · context</h3><p>Total, Reject, State, Counter Epoch를 Kafka로 보존하고 TwinForge의 작업·제품·계획 구간·ideal cycle을 기간 계산에 결합합니다.</p></article><article><span>INDEPENDENT OBSERVER</span><h3>Evidence · Window · lineage</h3><p>DataNexus는 제어하거나 다시 계산하지 않습니다. 독립 Kafka group과 읽기 전용 OEE API로 실시간 근거와 권위 결과를 대조합니다.</p></article><article><span>QUALITY-AWARE RESULT</span><h3>Coverage · reasons · revision</h3><p>결측 구간은 정상값으로 채우지 않습니다. 결과와 함께 coverage, Provisional·Incomplete·Final 상태, 원인과 revision을 반환합니다.</p></article></div>
       </div>
     </section>
 
@@ -155,7 +155,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM PORTFOLIO</span><span>PLC · OPC UA · OEE · MES · DIGITAL TWIN</span><a href="#hero">BACK TO TOP ↑</a></footer>
+  <footer class="site-footer"><span>INDUSTRIAL DATA PLATFORM PORTFOLIO</span><span>PLC · OPC UA · OEE · MES · DIGITAL TWIN · ANALYTICS</span><a href="#hero">BACK TO TOP ↑</a></footer>
 
   <dialog class="lightbox" id="lightbox" aria-label="프로젝트 이미지 확대 보기"><button class="lightbox-close" type="button" aria-label="닫기">×</button><figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""><figcaption></figcaption></figure></dialog>
 </body>

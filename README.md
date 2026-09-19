@@ -16,7 +16,7 @@ TwinForge의 제한된 명령 → OPC UA Gateway → PLC Ack·feedback과 생산
 - `assets/css/styles.css`: 메인 페이지 디자인과 반응형 레이아웃
 - `assets/js/main.js`: 메뉴, 등장 효과, 현재 섹션 표시, 이미지 라이트박스
 - `assets/images/industrial-portfolio/`: 다섯 프로젝트 주요 화면과 OG 이미지
-- `scripts/capture-industrial-portfolio.mjs`: 실행 중인 로컬 4자 시스템에서 최신 화면을 다시 캡처하는 Playwright 스크립트
+- `scripts/capture-industrial-portfolio.mjs`: 실행 중인 로컬 산업 시스템에서 최신 화면을 다시 캡처하는 Playwright 스크립트
 
 ## 로컬 실행
 

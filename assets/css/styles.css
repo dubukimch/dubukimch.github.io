@@ -91,7 +91,7 @@
 }
 
 @media print{
-  @page{size:A4;margin:14mm}
+  @page{size:A4;margin:14mm 14mm 20mm}
   body{background:#fff!important;color:#17212b!important;font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body::before,.technical-page .site-header,.technical-page .site-footer,.technical-page .actions,.technical-page .doc-product-link{display:none!important}
   .doc-hero,.doc-section{width:100%;max-width:none}
@@ -297,14 +297,22 @@
 .doc-flow.doc-flow-four{grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr}
 .doc-flow.doc-flow-four article{min-height:270px;padding:24px}
 .doc-flow.doc-flow-four h3{font-size:1.2rem}
+.doc-flow.doc-flow-five{grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr 24px 1fr}
+.doc-flow.doc-flow-five article{min-height:286px;padding:20px}
+.doc-flow.doc-flow-five h3{font-size:1.08rem}
+.doc-flow.doc-flow-five p{font-size:.82rem}
+.doc-flow.doc-flow-five small{font-size:.66rem}
 .floating-tag.oee{right:7%;top:58%;color:var(--orange);border-color:rgba(255,155,101,.32)}
 
 @media(max-width:1000px){
-  .pipeline.pipeline-four,.pipeline.pipeline-five,.doc-flow.doc-flow-four{grid-template-columns:1fr}
-  .pipeline.pipeline-four article,.pipeline.pipeline-five article,.doc-flow.doc-flow-four article{min-height:0}
+  .pipeline.pipeline-four,.pipeline.pipeline-five,.doc-flow.doc-flow-four,.doc-flow.doc-flow-five{grid-template-columns:1fr}
+  .pipeline.pipeline-four article,.pipeline.pipeline-five article,.doc-flow.doc-flow-four article,.doc-flow.doc-flow-five article{min-height:0}
 }
 
 @media print{
   .doc-flow.doc-flow-four{grid-template-columns:1fr 5mm 1fr 5mm 1fr 5mm 1fr}
   .doc-flow.doc-flow-four article{min-height:48mm;padding:4mm}
+  .doc-flow.doc-flow-five{grid-template-columns:repeat(2,1fr);gap:3mm}
+  .doc-flow.doc-flow-five article{min-height:43mm;padding:3.5mm}
+  .doc-flow.doc-flow-five>i{display:none}
 }
