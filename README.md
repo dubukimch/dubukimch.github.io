@@ -12,7 +12,8 @@ TwinForge의 제한된 명령 → OPC UA Gateway → PLC Ack·feedback과 생산
 - `oee-analyzer.html`: OEEAnalyzer 5개 화면의 연동 경로·기간 OEE·데이터 소스·처리 규칙
 - `datanexus-analytics.html`: DataNexus의 5자 연동 상태·Kafka 표본·OEE 권위 결과와 Docker 검증 증거
 - `assets/docs/industrial-platform-technical-document.pdf`: 인쇄와 제출용 통합 기술 문서 PDF
-- `assets/docs/industrial-products-feature-guide.pdf`: 제품별 화면을 묶은 기능 포트폴리오 PDF
+- `assets/docs/industrial-products-feature-guide.pdf`: 다섯 프로젝트의 해결 과제·구현 범위·설계 판단·검증 근거를 실제 화면 15개와 함께 정리한 11쪽 프로젝트 포트폴리오
+- `scripts/build-portfolio-pdfs.py`: 개인정보 없이 프로젝트 기술서와 화면 10개를 포함한 12쪽 상세 기술 문서를 재생성하는 스크립트
 - `assets/css/styles.css`: 메인 페이지 디자인과 반응형 레이아웃
 - `assets/js/main.js`: 메뉴, 등장 효과, 현재 섹션 표시, 이미지 라이트박스
 - `assets/images/industrial-portfolio/`: 다섯 프로젝트 주요 화면과 OG 이미지
@@ -46,3 +47,13 @@ node .\scripts\capture-industrial-portfolio.mjs
 환경에 따라 `PORTFOLIO_PLAYWRIGHT_MODULE`, `PORTFOLIO_CHROMIUM_PATH`와 각 `PORTFOLIO_*_URL`을 지정할 수 있습니다. 스크립트는 실제 태그·Ack·OEE context가 화면에 표시된 뒤 이미지를 저장하므로 빈 로딩 화면을 결과로 남기지 않습니다.
 
 공개 사이트에는 전화번호와 주소 등 개인정보를 포함하지 않습니다.
+
+## 제출용 PDF 재생성
+
+`reportlab`, `pypdf`가 설치된 Python에서 `python scripts/build-portfolio-pdfs.py`를 실행합니다.
+기본 글꼴은 Windows의 맑은 고딕이며 다른 환경에서는 `PDF_FONT_DIR`에 `malgun.ttf`, `malgunbd.ttf`가 있는 폴더를 지정합니다.
+기술 설명은 `technical.html`에서 읽고, 프로젝트별 요약과 검증 해석은 스크립트에서 관리합니다.
+생성 후 두 PDF의 모든 페이지를 렌더링해 표·한글·페이지 경계를 확인합니다. 페이지 수 검사는 자동 수행됩니다.
+기존 제품 화면을 원본 비율로 삽입하고 기능·설계 근거를 캡션으로 연결합니다. 개인 연락처와 개인 작성자 메타데이터는 포함하지 않으며, 화면에도 개인 식별정보가 없는지 확인합니다.
+`industrial-platform-technical-document1.pdf`는 사용자 제공 참고본으로 유지하며 생성 대상이 아닙니다.
+검증 수치는 기존 문서의 기록이며 PDF 생성이 서비스 테스트를 다시 실행하지는 않습니다.
