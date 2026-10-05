@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-05",
+  "scope": "내부 네트워크의 HTTP/WebSocket·MySQL 인증과 로컬 UI fixture를 검증했습니다. 실장비, 전체 6개 출처의 데이터 통합, 외부 AI 품질은 이번 검증 범위에 포함하지 않습니다.",
+  "projects": [
+    {
+      "id": "plc", "name": "PLC_Simulation", "label": "PLC Simulation", "page": "plc-simulation.html", "category": "SOURCE / PROTOCOL LAB", "role": "원본 상태·생산 카운터·명령 Ack", "stack": ".NET 8 · ASP.NET Core · Modbus TCP",
+      "headline": "장비 없이 시작하는 산업 프로토콜 실험실",
+      "problem": "상위 수집·분석 시스템을 만들 때 실제 PLC의 접속 환경과 동작 상태를 반복 재현하기 어렵습니다.",
+      "solution": "가상 설비와 Ladder 실행 화면, 드라이버·태그·메모리 매핑을 하나의 웹 작업 공간에서 다룹니다. 생산 상태와 명령 수락 결과의 원본을 소유합니다.",
+      "decisions": ["원본 상태와 제어 명령을 구분합니다.", "통신 드라이버와 태그 구성을 분리합니다.", "가상 설비 동작을 실제 장비 데이터로 표시하지 않습니다."],
+      "features": ["가상 제조 셀과 Ladder 입력/출력", "PLC 노드와 드라이버 설정", "태그 모니터와 메모리 매핑", "명령 수락과 상태 피드백"],
+      "verified": "Docker 웹 응답과 업로드 거부 경로 PASS. 브라우저에서 가상 RUN → X0 입력 ON → 모터 Y0 ON 반응을 확인했습니다.",
+      "caption": "현재 가상 설비 화면. X0 입력에 따른 모터·컨베이어 ON 반응이며 실제 PLC 접속은 없습니다.",
+      "improvement": "프로토콜별 경계·결측·지연 시험을 확대하고 명령 UUID/TTL와 감사 증거를 강화합니다."
+    },
+    {
+      "id": "gateway", "name": "IIoT.Gateway.Solution", "label": "IIoT Gateway", "page": "iiot-gateway.html", "category": "CONNECT / STANDARDIZE", "role": "수집·품질·원본 시각·namespace·라우팅", "stack": ".NET · Blazor · OPC UA · Modbus",
+      "headline": "현장의 주소를 품질이 있는 데이터로",
+      "problem": "장치별 프로토콜과 주소 표현이 다르면 상위 서비스가 같은 연결 로직을 반복 구현하게 됩니다.",
+      "solution": "Channel·Device·Tag 설정 계층과 OPC UA 정보 모델로 수집 경계를 제공합니다. UI에서는 연결·알람·이력·집계·시스템 설정을 탐색합니다.",
+      "decisions": ["수집·품질·라우팅을 소유합니다.", "OEE 계산과 자연어 설명은 다른 제품에 맡깁니다.", "SmartFactorySim의 구형 OPC UA/Debug 참조를 MIT 버전으로 전환했습니다."],
+      "features": ["Channel·Device·Tag 모델", "Historian·Aggregation·Alarm 설정", "OPC UA 정보 모델과 품질", "검증 콘솔과 역할 안내"],
+      "verified": "Docker ConfigUI와 역할 안내 경로 PASS. 채널 추가 폼을 브라우저에서 확인했습니다. SmartFactorySim MIT OPC UA 전환 후 빌드 오류 0.",
+      "caption": "격리된 ConfigUI의 채널 추가 폼. 빈 메모리 DB를 사용하며 실제 드라이버나 장비를 연결하지 않았습니다.",
+      "improvement": "비명령 노드의 writable 기본값과 binding 없는 cache Write 경로를 점검하고 읽기 identity의 서버측 쓰기 거부를 검증해야 합니다."
+    },
+    {
+      "id": "oee", "name": "OEEAnalyzer", "label": "OEEAnalyzer", "page": "oee-analyzer.html", "category": "CALCULATE / EXPLAIN", "role": "기간 A/P/Q/OEE·coverage·revision 계산", "stack": ".NET 8 · React · MySQL · TimescaleDB",
+      "headline": "생산 효율에 계산 근거를 더하다",
+      "problem": "효율 수치 하나만으로는 결측, 품질 저하, 생산 맥락과 계산 구간의 신뢰도를 설명하기 어렵습니다.",
+      "solution": "원본 카운터·상태와 생산 맥락을 결합하는 계산 경계를 두고 기간 결과와 coverage/revision을 제공합니다. 인증과 역할에 따라 조회·관리 기능을 구분합니다.",
+      "decisions": ["다른 제품이 OEE를 다시 계산하지 않도록 소유권을 둡니다.", "Bootstrap은 기본 비활성, 빈 Users에만 명시적 관리자를 생성합니다.", "손상된 암호 해시는 로그인 거부로 처리하고 기존 정상 해시는 보존합니다."],
+      "features": ["기간별 A/P/Q/OEE와 신뢰도", "데이터 소스·계산 규칙 관리", "관리자·Viewer 역할 경계", "허용 origin 목록 기반 CORS"],
+      "verified": "실제 MySQL 인증·권한·계정 보존·정리 25개 PASS, .NET 테스트 35개 PASS. Docker 401/400/503 및 CORS 경계 PASS.",
+      "caption": "현재 로그인 UI. 인증 동작은 별도 내부 MySQL fixture에서 확인했으며 이 화면에 운영 지표를 만들어 넣지 않았습니다.",
+      "improvement": "정상 Timescale/Redis 경로와 지연·중복·결측에 대한 계산 근거 및 6개 출처 통합 검증이 남아 있습니다."
+    },
+    {
+      "id": "twin", "name": "TwinForge", "label": "TwinForge", "page": "twinforge.html", "category": "CONTEXT / DIGITAL TWIN", "role": "3D·워크플로·MES 생산 맥락", "stack": ".NET 8 · React · Three.js · OPC UA",
+      "headline": "생산 맥락과 공간을 연결하는 가상 공장",
+      "problem": "설비 데이터와 작업 흐름, 생산 맥락이 분리되어 있으면 상태를 공간·공정 단위로 이해하기 어렵습니다.",
+      "solution": "설비 탐색과 3D 현장, 운영 대시보드 및 워크플로 UI를 제공합니다. External 데이터가 없으면 실시간 수치를 비워 두고 시설 미리보기로 구분합니다.",
+      "decisions": ["MES 맥락을 제공하고 OEE 권위 결과를 활용합니다.", "미수신 External 값에 임의 수치를 대입하지 않습니다.", "OPC UA를 MIT 버전으로 전환하고 테스트 인증서 최소 키 2048비트를 보존했습니다."],
+      "features": ["Three.js 3D 제조 현장", "설비 탐색과 운영 데이터 패널", "워크플로와 노드 매핑", "External 상태와 결측 표시"],
+      "verified": "실제 두 로컬 OPC UA 서버를 포함한 테스트 45개 PASS. Docker 웹/health PASS. 브라우저에서 3D 미리보기·미수신 표시·제어 비활성을 확인했습니다.",
+      "caption": "현재 시설 미리보기. API를 의도적으로 연결하지 않아 수치가 비어 있고 제어가 비활성입니다. 실시간 제조 데이터 화면으로 해석하지 않습니다.",
+      "improvement": "UUID/TTL/ACK 감사 회귀, 장애 중 재연결·중복 방지 및 큰 프런트엔드 번들 분리가 남아 있습니다."
+    },
+    {
+      "id": "data", "name": "DataNexus-Analytics", "label": "DataNexus Analytics", "page": "datanexus-analytics.html", "category": "EXPLORE / REPORT", "role": "읽기 전용 탐색·비교·보고서", "stack": ".NET 8 · Blazor · SignalR · SVG",
+      "headline": "데이터를 탐색하고 출처를 비교하다",
+      "problem": "파일·DB·스트림의 데이터를 비교하면서 원본 품질과 계산 제공자를 놓치기 쉽습니다.",
+      "solution": "CSV/JSON 수집, 분석 그리드, DB 탐색, 스트림 관측과 보고서 화면을 제공합니다. OEE 계산을 중복하지 않고 데이터와 출처를 확인하는 읽기 작업 공간으로 설계했습니다.",
+      "decisions": ["외부 LLM 없이 분석과 템플릿 보고서를 제공합니다.", "데모 데이터에는 DEMO 출처를 표시합니다.", ".NET 8에 맞는 SignalR 버전으로 CSV 업로드 ABI 오류를 해결했습니다."],
+      "features": ["CSV/JSON 수집과 SVG 차트", "분석 그리드와 데이터 탐색", "제조 데이터·스트림 관측", "템플릿 보고서와 출처 표시"],
+      "verified": "Docker 웹/BlazorPack 바인딩 PASS. 브라우저에서 합성 CSV 4행 업로드·SVG 차트 생성·분석 그리드 반영을 확인했습니다.",
+      "caption": "자체 작성한 CSV 4행의 SVG 차트. 실제 생산 데이터나 외부 서비스 결과가 아닙니다.",
+      "improvement": "대용량·취소·동시 import와 사용자별 범위, 캐시 상한, 파일 드롭 및 상세 모바일 동작을 확대 검증합니다."
+    },
+    {
+      "id": "assistant", "name": "industrial-ai-assistant", "label": "Industrial Assistant", "page": "industrial-ai-assistant.html", "category": "READ / EXPLAIN", "role": "읽기 전용 근거 조회·출처 설명", "stack": ".NET 10 · Python · Fake/Mock adapters",
+      "headline": "현장의 질문에 출처가 있는 답변을",
+      "problem": "설비 상태·알람·이력·효율을 질문할 때 답변의 출처와 품질, 불확실성을 함께 확인해야 합니다.",
+      "solution": "여섯 제품별 읽기 adapter와 조회 도구 경계를 둡니다. 이번 실행은 Fake/Mock만 사용하며 외부 LLM API, 모델 다운로드, 음성·아바타 생성 기능을 호출하지 않습니다.",
+      "decisions": ["설비 제어 도구를 제공하지 않습니다.", "출처·품질·Mock/불확실성 표기를 유지합니다.", "client key·세션 일치·입력 길이를 검사합니다."],
+      "features": ["역할·논리 자산 선택", "상태·알람·이력·OEE 조회 adapter", "출처와 품질을 보여주는 채팅 UI", "인증·세션·길이·CSP 경계"],
+      "verified": "Docker Fake/Mock의 일반 대화·설비 상태·알람 경로와 잘못된 키·세션·길이 제한 PASS. 브라우저에서 조회 전용/Mock 안내와 빈 키 입력 보호를 확인했습니다.",
+      "caption": "현재 읽기 전용 채팅 UI. 화면 캡처는 정적 미리보기이고 실제 응답 검사는 Docker Fake/Mock fixture에서 수행했습니다.",
+      "improvement": "실제 읽기 출처의 provenance·결측·staleness 연결과 로컬 지식 저장소의 라이선스·데이터 권한 검토가 남아 있습니다."
+    }
+  ]
+}

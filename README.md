@@ -1,59 +1,53 @@
-# Industrial Data Platform Portfolio
+# Industrial Systems Portfolio
 
-TwinForge의 제한된 명령 → OPC UA Gateway → PLC Ack·feedback과 생산 근거 → OEEAnalyzer → TwinForge 운영 화면과 DataNexus 통합 관측으로 이어지는 산업 데이터 플랫폼 포트폴리오입니다. GitHub Pages에서 별도 빌드 없이 실행되는 HTML/CSS/JavaScript 정적 사이트입니다.
+여섯 산업 소프트웨어 프로젝트의 역할, 설계 판단, 현재 화면과 실제 검증 범위를 소개하는 정적 포트폴리오다. 현재판은 **2026-10-05** 기준이다. 로컬 검증을 실제 설비 또는 여섯 출처의 전체 데이터 통합 성공으로 표현하지 않는다.
 
-## 포트폴리오 구성
+## 구성
 
-- `index.html`: 통합 포트폴리오 메인 페이지
-- `technical.html`: 산업 솔루션의 런타임 구조와 전체 데이터 흐름을 설명하는 통합 기술 문서
-- `plc-simulation.html`: PLC Simulation 5개 화면의 사용자 조작과 처리 결과
-- `iiot-gateway.html`: IIoT Gateway 5개 설정 화면의 입력·저장·런타임 동작
-- `twinforge.html`: TwinForge 5개 화면의 MES·External OEE·설비·워크플로·3D 제어 흐름
-- `oee-analyzer.html`: OEEAnalyzer 5개 화면의 연동 경로·기간 OEE·데이터 소스·처리 규칙
-- `datanexus-analytics.html`: DataNexus의 5자 연동 상태·Kafka 표본·OEE 권위 결과와 Docker 검증 증거
-- `assets/docs/industrial-platform-technical-document.pdf`: 인쇄와 제출용 통합 기술 문서 PDF
-- `assets/docs/industrial-products-feature-guide.pdf`: 다섯 프로젝트의 해결 과제·구현 범위·설계 판단·검증 근거를 실제 화면 15개와 함께 정리한 11쪽 프로젝트 포트폴리오
-- `scripts/build-portfolio-pdfs.py`: 개인정보 없이 프로젝트 기술서와 화면 10개를 포함한 12쪽 상세 기술 문서를 재생성하는 스크립트
-- `assets/css/styles.css`: 메인 페이지 디자인과 반응형 레이아웃
-- `assets/js/main.js`: 메뉴, 등장 효과, 현재 섹션 표시, 이미지 라이트박스
-- `assets/images/industrial-portfolio/`: 다섯 프로젝트 주요 화면과 OG 이미지
-- `scripts/capture-industrial-portfolio.mjs`: 실행 중인 로컬 산업 시스템에서 최신 화면을 다시 캡처하는 Playwright 스크립트
+- `index.html`: 여섯 역할, 프로젝트 카드와 검증 근거
+- PLC / Gateway / OEE / Twin / DataNexus / Assistant: 프로젝트별 상세 페이지
+- `technical.html`: 역할 경계, 검증과 미완료 범위, 비용·라이선스 기준
+- `presentation.html`: 현재 제출용 PDF 안내
+- `assets/docs/industrial-platform-portfolio-2026-10-05.pdf`: 10쪽 PDF. 상위 `포트폴리오` 폴더의 현재판과 동일
+- `content/projects.json`: 웹과 PDF에서 공유하는 콘텐츠 원본
+- `assets/images/current-2026-10-05/`: 직접 실행하여 캡처한 여섯 프로젝트 화면
+- `작업진행현황/`: 검증 결과, 수정 사항과 다음 작업 프롬프트
 
-## 로컬 실행
+기존 화면, PDF와 이전 생성 스크립트는 이력 보존을 위해 유지한다. 현재 페이지는 새 PDF와 새 화면만 참조한다. `scripts/build-portfolio-pdfs.py`와 기존 캡처 스크립트는 현재판 재생성 도구가 아니다.
+
+## 로컬 실행과 검사
+
+저장소 루트에서 실행한다. Python 표준 라이브러리만 사용하며 외부 API와 연결하지 않는다.
 
 ```powershell
-python -m http.server 4174
+python scripts/serve-local.py
 ```
 
-브라우저에서 `http://127.0.0.1:4174/`를 엽니다. 정적 파일이므로 GitHub Pages 저장소 루트에 그대로 배포할 수 있습니다.
+`http://127.0.0.1:4174/`에서 확인한다. 루프백에만 바인딩하며 `.git` 등 숨김 경로는 GET/HEAD 모두 404다. 미리보기 보안 헤더는 GitHub Pages 배포에 자동 적용되지 않는다.
 
-## 프로젝트
-
-1. **PLC Simulation** — Modbus TCP 기반 가상 데이터 소스, 라이브 태그와 메모리 매핑
-2. **IIoT Gateway** — OPC UA Data Access, Alarms & Conditions, 보안과 클라이언트 연동
-3. **TwinForge** — MES 대시보드, 생산 워크플로, Three.js 기반 3D Digital Twin
-4. **OEEAnalyzer** — 생산 근거와 MES 맥락을 결합한 기간 A/P/Q/OEE, coverage와 revision
-5. **DataNexus Analytics** — Kafka 원본 표본과 OEE Window를 결합한 읽기 전용 품질·계보 관측
-
-## 최신 화면 다시 캡처
-
-PLC Simulation `5088`, Gateway ConfigUI `5279`, TwinForge `18081`, OEEAnalyzer UI `18083`이 실행 중이어야 합니다. Playwright가 설치된 Node.js 환경에서 다음 변수를 지정하고 실행합니다.
+다른 터미널에서 확인하거나 종료한다.
 
 ```powershell
-$env:PORTFOLIO_OEE_PASSWORD = '<local demo password>'
-node .\scripts\capture-industrial-portfolio.mjs
+python scripts/verify-current-site.py
+node --check assets/js/main.js
+python scripts/serve-local.py --stop
 ```
 
-환경에 따라 `PORTFOLIO_PLAYWRIGHT_MODULE`, `PORTFOLIO_CHROMIUM_PATH`와 각 `PORTFOLIO_*_URL`을 지정할 수 있습니다. 스크립트는 실제 태그·Ack·OEE context가 화면에 표시된 뒤 이미지를 저장하므로 빈 로딩 화면을 결과로 남기지 않습니다.
+검사는 9개 HTML, 18개 로컬 리소스, 34개 앵커와 PDF 사본의 SHA256 일치를 확인한다. 외부 링크 9개는 요청하지 않는다. 모바일 메뉴, 확대 화면, 320/390px 모바일과 기본 데스크톱 레이아웃은 브라우저에서 별도로 확인했다.
 
-공개 사이트에는 전화번호와 주소 등 개인정보를 포함하지 않습니다.
+## 콘텐츠 재생성
 
-## 제출용 PDF 재생성
+```powershell
+python scripts/build-current-site.py
+python scripts/build-current-pdf.py
+```
 
-`reportlab`, `pypdf`가 설치된 Python에서 `python scripts/build-portfolio-pdfs.py`를 실행합니다.
-기본 글꼴은 Windows의 맑은 고딕이며 다른 환경에서는 `PDF_FONT_DIR`에 `malgun.ttf`, `malgunbd.ttf`가 있는 폴더를 지정합니다.
-기술 설명은 `technical.html`에서 읽고, 프로젝트별 요약과 검증 해석은 스크립트에서 관리합니다.
-생성 후 두 PDF의 모든 페이지를 렌더링해 표·한글·페이지 경계를 확인합니다. 페이지 수 검사는 자동 수행됩니다.
-기존 제품 화면을 원본 비율로 삽입하고 기능·설계 근거를 캡션으로 연결합니다. 개인 연락처와 개인 작성자 메타데이터는 포함하지 않으며, 화면에도 개인 식별정보가 없는지 확인합니다.
-`industrial-platform-technical-document1.pdf`는 사용자 제공 참고본으로 유지하며 생성 대상이 아닙니다.
-검증 수치는 기존 문서의 기록이며 PDF 생성이 서비스 테스트를 다시 실행하지는 않습니다.
+웹 생성에는 Python 표준 라이브러리만 필요하다. PDF 생성은 기존 ReportLab, Pillow, pypdf와 Windows `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. 이번에는 Codex에 포함된 기존 Python 런타임을 사용했으며 새 패키지를 설치하지 않았다. 글꼴 임베딩 플래그가 허용된 값(0 또는 8)이 아니면 중단한다. 글꼴 파일 자체를 사이트에 복사하지 않는다. 재생성 후 PDF 모든 페이지를 렌더링하여 한글·표·이미지 비율·페이지 경계를 육안 확인해야 한다.
+
+정적 HTML/CSS/JS이므로 GitHub Pages는 별도 npm 빌드 없이 제공할 수 있다. 저장소 커밋과 GitHub 원격 반영은 별도 상태이며, 원격 인증이 확보되지 않은 상태를 배포 완료로 표현하지 않는다.
+
+## 검증 범위와 제약
+
+2026-10-05 재검증: Docker HTTP/WebSocket 30개, 실제 일회성 MySQL 인증 25개, OEE .NET 35개, TwinForge .NET 45개 PASS. Assistant는 Fake/Mock만 시험했다. 여섯 출처 전체 통합, 정상 Timescale/Redis 경로, 실장비 제어 및 실제 LLM 응답은 검증하지 않았다.
+
+새 유료 서비스, CDN, 외부 폰트, 스톡 이미지, 라이브러리 다운로드 및 외부 LLM API를 사용하지 않았다. 기존 제품 의존성의 원문 라이선스 검토 필요 197행은 여전히 후속 과제이며, 전체 배포 권리를 승인했다는 의미가 아니다.
