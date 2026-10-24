@@ -1,0 +1,3441 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "title": "산업 솔루션 사용 매뉴얼",
+  "scope": "로컬 개발 환경에서 촬영한 7개 솔루션의 41개 동작입니다. 각 절차의 확인 범위와 데이터 출처를 함께 읽습니다. 문제 해결 분기 전체의 실행을 뜻하지 않습니다.",
+  "evidenceLegend": {
+    "full": "실제 동작과 화면 근거가 있는 절차. 각 단계의 상세 조건은 원문과 발표자 노트에서 확인합니다.",
+    "partial": "일부 동작만 확인한 절차. 확인한 범위와 남은 동작을 별도 표시합니다.",
+    "unverified": "현재 의존 서비스가 없어 실행하지 못한 절차. 실제 화면이나 성공 근거로 제시하지 않습니다."
+  },
+  "downloads": {
+    "pdf": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf",
+    "pptx": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pptx"
+  },
+  "stats": {
+    "products": 7,
+    "operations": 41,
+    "screenshots": 38,
+    "pdfPages": 56,
+    "full": 37,
+    "partial": 1,
+    "unverified": 3,
+    "icons": 48
+  },
+  "iconLicense": "assets/icons/lucide/LICENSE-Lucide.txt",
+  "iconSources": "assets/icons/lucide/SOURCES.md",
+  "samples": [
+    {
+      "id": "manual-process",
+      "productId": "data",
+      "label": "CSV 가져오기 실습 파일",
+      "note": "교육용 가상 데이터 3행입니다.",
+      "description": "교육용 가상 데이터 3행입니다.",
+      "kind": "csv",
+      "path": "assets/docs/manuals/samples/manual-process.csv",
+      "sha256": "0e6c48fb41cc44e487070532236f9709a5c8552c666d4e2d27fc7b4ba20ff663"
+    },
+    {
+      "id": "twin-robot-filtered",
+      "productId": "twin",
+      "label": "TwinForge 필터 CSV 예시",
+      "note": "로컬 모의 공장 화면에서 저장한 로봇 설비 100행입니다.",
+      "description": "로컬 모의 공장 화면에서 저장한 로봇 설비 100행입니다.",
+      "kind": "csv",
+      "path": "assets/docs/manuals/samples/twin-robot-filtered.csv",
+      "sha256": "8a3c6af62c441febad1feba105bff6431b5efe70b893800b6c332c7adca9d9ab"
+    },
+    {
+      "id": "analytics-temperature",
+      "productId": "data",
+      "label": "분석 그리드 CSV 예시",
+      "note": "로컬 분석 그리드에서 저장한 Temperature 실습 데이터 3행입니다.",
+      "description": "로컬 분석 그리드에서 저장한 Temperature 실습 데이터 3행입니다.",
+      "kind": "csv",
+      "path": "assets/docs/manuals/samples/analytics-temperature.csv",
+      "sha256": "fc0004b0472fb083e77061aa241329788f14b859c63cf299280fc0c83a2a54ca"
+    },
+    {
+      "id": "analytics-temperature",
+      "productId": "data",
+      "label": "분석 그리드 JSON 예시",
+      "note": "같은 실습 데이터의 JSON 3개 레코드입니다.",
+      "description": "같은 실습 데이터의 JSON 3개 레코드입니다.",
+      "kind": "json",
+      "path": "assets/docs/manuals/samples/analytics-temperature.json",
+      "sha256": "3c3719cbfa8f72c47e880cac6536483db89200cd4488504f1decf959db7e83ac"
+    },
+    {
+      "id": "assistant-conversation",
+      "productId": "assistant",
+      "label": "Assistant 대화 내보내기 예시",
+      "note": "Fake 생성과 실제 PLC 읽기 출처가 표시된 로컬 대화 기록입니다. 인증 키는 포함하지 않습니다.",
+      "description": "Fake 생성과 실제 PLC 읽기 출처가 표시된 로컬 대화 기록입니다. 인증 키는 포함하지 않습니다.",
+      "kind": "md",
+      "path": "assets/docs/manuals/samples/assistant-conversation.md",
+      "sha256": "7d0bd806f78eab18237dfdb216167eb251a18f7bff3484ff17fbbccfa66758c1"
+    }
+  ],
+  "products": [
+    {
+      "id": "plc",
+      "sourceId": "01-plc",
+      "manifestChapterId": "01-plc",
+      "order": 1,
+      "label": "PLC Simulation",
+      "title": "PLC Studio 사용 매뉴얼",
+      "shortTitle": "PLC Studio",
+      "subtitle": "장치 연결부터 원본 태그와 가상 Ladder까지",
+      "scope": "가상 PLC의 상태 조회, 원본 태그 관측·검색, 가상 Ladder 단일 스캔과 통신 로그 확인. 설비 시뮬레이션의 모터·컨베이어 그림은 가상 장치이며 물리 설비의 운전을 증명하지 않습니다.",
+      "scopeNote": "로컬 PLC 시뮬레이션 · 가상 I/O 단일 스캔",
+      "prerequisites": [
+        "로컬 PLC Studio 서버가 http://127.0.0.1:5180/ 에서 실행 중이어야 합니다. 파일을 직접 여는 file:// 미리보기에서는 통신할 수 없습니다.",
+        "태그 조회에는 적어도 하나의 활성 드라이버가 필요합니다. 드라이버의 Enabled 상태와 Connected 상태는 서로 다릅니다.",
+        "Ladder 실습은 다른 사용자의 운전과 겹치지 않는 가상 실습 환경에서 진행합니다. 아래 단일 스캔 실습은 PLC 드라이버 태그 연결이 모두 '가상 I/O'인 경우를 전제로 합니다.",
+        "화면 수치와 접속 상태는 캡처 시점의 값입니다. 고정된 드라이버 수나 태그 수를 정상 판정 기준으로 사용하지 않습니다."
+      ],
+      "actions": [
+        "연결 현황 읽기",
+        "태그 근거 확인",
+        "가상 I/O 실습"
+      ],
+      "icon": "assets/icons/lucide/cpu.svg",
+      "accent": "#127C88",
+      "portfolioPage": "plc-simulation.html",
+      "manualPage": "manual-plc.html",
+      "chapterPdfPage": 6,
+      "pdfPageStart": 6,
+      "pdfPageEnd": 11,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=6",
+      "markdown": "assets/docs/manuals/chapters/plc.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/plc-overview.jpg",
+      "counts": {
+        "operations": 5,
+        "screenshots": 5,
+        "full": 5,
+        "partial": 0,
+        "unverified": 0
+      },
+      "samples": [],
+      "localUrl": "http://127.0.0.1:5180/",
+      "sources": [
+        "PLC_Simulation/src/PlcSimulator.Web/wwwroot/index.html",
+        "PLC_Simulation/src/PlcSimulator.Web/wwwroot/js/app.js",
+        "PLC_Simulation/src/PlcSimulator.Web/wwwroot/js/studio.js",
+        "PLC_Simulation/src/PlcSimulator.Web/LadderRuntime.cs",
+        "PLC_Simulation/src/PlcSimulator.Core/Ladder/LadderEngine.cs"
+      ],
+      "operations": [
+        {
+          "id": "plc-overview",
+          "order": 1,
+          "title": "운영 대시보드에서 드라이버와 태그 현황 확인",
+          "shortTitle": "PLC 연결과 태그 현황 읽기",
+          "goal": "서버 연결과 활성 드라이버·연결된 PLC·실시간 태그 수를 구분해 확인합니다.",
+          "oneLineGoal": "서버 연결, 드라이버, 실제 연결 장치를 구분합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/layout-dashboard.svg",
+              "iconName": "layout",
+              "label": "대시보드 열기",
+              "detail": "왼쪽 대시보드"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "연결 배지 확인",
+              "detail": "실시간 연결·재연결·오류"
+            },
+            {
+              "icon": "assets/icons/lucide/database.svg",
+              "iconName": "database",
+              "label": "현황 카드 대조",
+              "detail": "드라이버·PLC·태그 수 비교"
+            },
+            {
+              "icon": "assets/icons/lucide/network.svg",
+              "iconName": "network",
+              "label": "네트워크 살펴보기",
+              "detail": "PLC 네트워크 보기 →"
+            }
+          ],
+          "steps": [
+            "http://127.0.0.1:5180/ 에 접속하고 왼쪽 '대시보드'를 누릅니다. 첫 화면은 마지막 방문 메뉴에 따라 달라질 수 있습니다.",
+            "오른쪽 위 연결 배지에서 '실시간 연결', '재연결 중' 또는 '연결 오류'를 확인합니다.",
+            "'로드된 드라이버', '연결된 PLC', '실시간 태그', 'PLC 모델' 카드와 아래 'Driver Health' 목록의 상태를 읽습니다.",
+            "필요하면 'PLC 네트워크 보기 →'를 눌러 노드별 ENDPOINT와 '정상 품질 태그' 비율을 확인합니다.",
+            "원복: 왼쪽 '대시보드'를 다시 누릅니다. 이 조회와 메뉴 이동은 드라이버 설정이나 태그 값을 바꾸지 않습니다."
+          ],
+          "expected": "서버에서 받은 현재 카운트와 각 드라이버 상태가 표시됩니다. 활성화되어 있어도 미연결일 수 있으며, 모델 카탈로그 수는 실제 연결된 장치 수가 아닙니다.",
+          "resultShort": "현재 카운트와 Driver Health가 표시됩니다.\n모델 카탈로그 수와 실제 연결 수는 다릅니다.",
+          "troubleshooting": [
+            "'파일 미리보기' 또는 '로컬 서버 실행 필요'가 보이면 브라우저에서 HTTP 주소로 다시 접속합니다.",
+            "'연결된 PLC'가 0이면 드라이버 목록과 '로그 및 이벤트'를 함께 확인합니다. 태그 수만으로 통신 성공을 판정하지 않습니다."
+          ],
+          "cautionShort": "드라이버 활성화나 태그 존재만으로 실제 통신 성공을 판단하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 7,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=7",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/plc-overview.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:08:28.046Z",
+            "url": "http://127.0.0.1:5180/",
+            "observed": "대시보드에서4개연결드라이버/24개태그와모의소스표시 확인",
+            "sha256": "cfcd5e9dfea29a1baa0d4081c1229b22cc32faa5e28694dd4358126e5138c0f8"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0,
+            "w": 0.81,
+            "h": 0.79
+          },
+          "focusTargets": [
+            "실시간 연결",
+            "연결된 PLC",
+            "Driver Health"
+          ]
+        },
+        {
+          "id": "plc-tags",
+          "order": 2,
+          "title": "태그의 원본 값·품질·수집 시각 확인",
+          "shortTitle": "태그 값·품질·시각 확인",
+          "goal": "태그 이름뿐 아니라 주소, 데이터 형식, 품질과 갱신 시각을 함께 읽습니다.",
+          "oneLineGoal": "하나의 태그를 값과 근거가 있는 관측값으로 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "태그 모니터 열기",
+              "detail": "Tag Explorer에서 선택"
+            },
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "태그 식별 확인",
+              "detail": "Address·Name·Driver·Type"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "값과 근거 읽기",
+              "detail": "Value·Quality·Timestamp"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "현재 스냅샷 갱신",
+              "detail": "Refresh로 현재값 재조회"
+            }
+          ],
+          "steps": [
+            "왼쪽 '태그 모니터'를 누릅니다. 'Tag Explorer'와 'Data Monitor & Editor'가 나란히 표시됩니다.",
+            "Tag Explorer에서 확인할 태그를 선택하고 표에서 Address, Name, Driver, Type을 대조합니다.",
+            "Value, Quality, Timestamp를 함께 확인합니다. Timestamp는 브라우저의 로컬 시간 표기입니다.",
+            "오른쪽 'Refresh'를 눌러 현재 서버 스냅샷을 다시 가져옵니다. 평상시에는 실시간 연결로 값과 시각이 갱신됩니다.",
+            "원복: 조회만 수행했다면 원복할 설정이 없습니다. 이 절차에서는 'Write'를 누르지 않습니다."
+          ],
+          "expected": "표에 드라이버가 제공한 값과 품질이 표시됩니다. GOOD은 해당 태그의 품질 정보이며, 값이 존재한다는 사실만으로 전체 설비가 정상이라는 뜻은 아닙니다.",
+          "resultShort": "원본 값과 품질, 브라우저 로컬 시각이 보입니다.\n조회 실습에서는 Write를 사용하지 않습니다.",
+          "troubleshooting": [
+            "'No tags discovered'이면 드라이버 활성화와 연결 상태를 먼저 확인합니다.",
+            "시각이 멈추거나 GOOD 이외의 품질이 표시되면 Refresh 후 로그를 확인합니다. 이전에 보인 값을 최신 데이터로 기록하지 않습니다."
+          ],
+          "cautionShort": "GOOD이어도 시각이 오래되면 현재 값으로 단정하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 8,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=8",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/plc-tags.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:08:28.552Z",
+            "url": "http://127.0.0.1:5180/",
+            "observed": "전체24태그의값/품질/타임스탬프 표시",
+            "sha256": "c362c4394d8823b5e799f69d2b1ec10d5829ca03552a48c98089dfb6f7077762"
+          },
+          "focus": {
+            "x": 0.35,
+            "y": 0.1,
+            "w": 0.62,
+            "h": 0.34
+          },
+          "focusTargets": [
+            "Value",
+            "Quality",
+            "Timestamp",
+            "Refresh"
+          ]
+        },
+        {
+          "id": "plc-filter",
+          "order": 3,
+          "title": "태그 이름·주소·품질로 목록 좁히기",
+          "shortTitle": "원하는 태그만 빠르게 찾기",
+          "goal": "필요한 태그 또는 확인이 필요한 품질만 빠르게 찾습니다.",
+          "oneLineGoal": "검색어와 품질을 함께 적용해 목록을 좁힙니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "이름이나 주소 검색",
+              "detail": "태그 검색: Temp_PV"
+            },
+            {
+              "icon": "assets/icons/lucide/filter.svg",
+              "iconName": "filter",
+              "label": "품질 조건 선택",
+              "detail": "정상 또는 확인 필요"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "결과 수 확인",
+              "detail": "표시 건수 / 전체 태그 수"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "reset",
+              "label": "전체 목록 복귀",
+              "detail": "검색 삭제 → 모든 품질"
+            }
+          ],
+          "steps": [
+            "'태그 모니터'에서 '태그 검색' 입력칸을 찾습니다. 자리표시자는 '이름, 주소, 드라이버'입니다.",
+            "현재 표에 있는 태그 이름이나 주소의 일부를 입력합니다. 대소문자를 구분하지 않으며 이름·주소·드라이버·그룹을 함께 검색합니다.",
+            "'품질'을 기본 '모든 품질'에서 '정상' 또는 '확인 필요'로 바꿉니다. '정상'은 GOOD 품질만 남깁니다.",
+            "'표시 건수 / 전체 태그 수'와 결과를 확인합니다. 검색 중에도 값·품질·시각은 갱신됩니다.",
+            "원복: 검색어를 지우고 품질을 '모든 품질'로 되돌립니다."
+          ],
+          "expected": "검색어와 품질 조건을 동시에 만족하는 태그만 남고 결과 건수가 바뀝니다. 검색 결과가 0이면 '검색 조건에 맞는 태그가 없습니다.'가 표시됩니다. 필터는 원본 태그나 드라이버를 변경하지 않습니다.",
+          "resultShort": "캡처 예시는 Temp_PV·정상 조건의 4/24개입니다.\n필터 중에도 값·품질·시각은 갱신됩니다.",
+          "troubleshooting": [
+            "결과가 없으면 검색어를 지우고 '모든 품질'로 돌아가 원본 목록이 있는지 확인합니다.",
+            "'확인 필요' 결과가 0인 것은 필터에 해당하는 태그가 없다는 뜻입니다. 개별 장치의 운전 안전성을 판정한 결과는 아닙니다."
+          ],
+          "cautionShort": "검색 결과 0건은 조건 불일치일 수 있습니다. 원본 태그는 바뀌지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 9,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=9",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/plc-filter.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:08:42.206Z",
+            "url": "http://127.0.0.1:5180/",
+            "observed": "Temp_PV검색+정상품질필터4/24태그확인",
+            "sha256": "742b909fac11fc483964a4f1b599c052169ae47548a72cc5d152abbdcacaa881"
+          },
+          "focus": {
+            "x": 0.35,
+            "y": 0.16,
+            "w": 0.63,
+            "h": 0.32
+          },
+          "focusTargets": [
+            "태그 검색",
+            "품질",
+            "표시 건수"
+          ]
+        },
+        {
+          "id": "plc-ladder",
+          "order": 4,
+          "title": "가상 Ladder를 정지 상태에서 한 번 스캔",
+          "shortTitle": "가상 Ladder 한 번 실행하기",
+          "goal": "연속 운전 없이 접점과 출력 코일의 계산 결과를 관찰합니다.",
+          "oneLineGoal": "가상 I/O에서 접점과 코일의 단일 계산을 관찰합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/file-text.svg",
+              "iconName": "file",
+              "label": "프로그램 확인",
+              "detail": "Ladder 프로그램·내보내기"
+            },
+            {
+              "icon": "assets/icons/lucide/shield-check.svg",
+              "iconName": "shield",
+              "label": "가상 I/O 확인",
+              "detail": "태그 연결이 가상 I/O인지 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/square.svg",
+              "iconName": "stop",
+              "label": "정지 후 초기화",
+              "detail": "■ 정지 → 초기화"
+            },
+            {
+              "icon": "assets/icons/lucide/play.svg",
+              "iconName": "play",
+              "label": "단일 스캔 실행",
+              "detail": "단일 스캔 한 번 후 상태 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "reset",
+              "label": "초기 신호 복귀",
+              "detail": "초기화 → STOP 유지"
+            }
+          ],
+          "steps": [
+            "왼쪽 'Ladder 프로그램'을 누르고 현재 프로그램을 확인합니다. 편집 전 보관이 필요하면 '내보내기'로 ladder-program.json을 저장합니다.",
+            "아래 'PLC 드라이버 태그 연결'에서 실습 대상 I/O가 '가상 I/O'인지 확인합니다. 외부 태그가 연결되어 있다면 이 실습을 진행하지 않고 담당자에게 구성 확인을 요청합니다.",
+            "'■ 정지'를 누르고 상태가 '■ STOP'인지 확인한 뒤 '초기화'를 눌러 가상 신호와 타이머 상태를 초기화합니다.",
+            "'단일 스캔'을 한 번 누르고 Rung의 접점·코일 상태를 확인합니다. 초기 입력이 OFF이면 출력도 OFF일 수 있습니다.",
+            "원복: '초기화'를 눌러 STOP과 초기 신호 상태로 돌아갑니다. 이 절차에서는 프로그램을 편집하거나 '저장 / 다운로드'를 누르지 않습니다."
+          ],
+          "expected": "단일 스캔은 100ms 기준 계산 한 번을 수행하고 STOP 상태를 유지합니다. 초기화는 런타임 신호·타이머를 지우며 저장된 Ladder 프로그램 자체를 삭제하지 않습니다.",
+          "resultShort": "100ms 기준 계산 한 번 후 STOP을 유지합니다.\n입력이 OFF이면 출력도 OFF일 수 있습니다.",
+          "troubleshooting": [
+            "'단일 스캔은 STOP 상태에서 실행하세요.'가 표시되면 먼저 ■ 정지를 누릅니다.",
+            "'편집한 프로그램을 먼저 저장하세요.'가 나오면 의도하지 않은 편집 여부를 확인합니다. 현재 프로그램을 덮어써서 진행하지 말고 보관한 프로그램과 변경 내용을 검토합니다."
+          ],
+          "cautionShort": "외부 태그가 연결되어 있으면 이 실습을 멈춥니다. 저장 / 다운로드는 사용하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 10,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=10",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/plc-ladder.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:08:57.617Z",
+            "url": "http://127.0.0.1:5180/",
+            "observed": "가상I/O 기본프로그램에서 단일스캔 수행, 실제드라이버태그쓰기연결 없음",
+            "sha256": "2da8e084ee8ba5c44411dcf876c1d465d574dfdaf6c180d6cfe5d09a41c0ca0d"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.09,
+            "w": 0.81,
+            "h": 0.63
+          },
+          "focusTargets": [
+            "■ STOP",
+            "단일 스캔",
+            "가상 I/O"
+          ]
+        },
+        {
+          "id": "plc-logs",
+          "order": 5,
+          "title": "통신 로그를 새로고침하고 장애 단서 확인",
+          "shortTitle": "통신 로그에서 장애 단서 찾기",
+          "goal": "드라이버 연결 문제를 시간·대상·오류 메시지로 좁힙니다.",
+          "oneLineGoal": "발생 시각, 대상 드라이버, 오류를 함께 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/list.svg",
+              "iconName": "list",
+              "label": "로그 화면 열기",
+              "detail": "왼쪽 로그 및 이벤트"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "최근 로그 갱신",
+              "detail": "Refresh로 최근 로그 재조회"
+            },
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "통신과 오류 대조",
+              "detail": "TX/RX·오류와 태그 품질 비교"
+            }
+          ],
+          "steps": [
+            "왼쪽 '로그 및 이벤트'를 누릅니다.",
+            "'Live Communication Log'에서 TX/RX 프레임, 시스템 이벤트와 오류·경고 항목을 읽습니다.",
+            "'Refresh'를 눌러 서버가 보관하는 최근 로그를 다시 가져옵니다.",
+            "동일 시각의 드라이버 상태와 태그 품질을 대조합니다. 로그가 없는 경우 그 사실을 그대로 기록합니다.",
+            "원복: 다른 메뉴로 이동하면 됩니다. Refresh는 로그 삭제나 드라이버 재시작을 수행하지 않습니다."
+          ],
+          "expected": "최근 통신·시스템 로그가 표시됩니다. 이 화면은 무제한 감사 기록 보관소가 아니며 최근 로그 범위만 보여줍니다.",
+          "resultShort": "서버가 보관한 최근 통신·시스템 로그가 보입니다.\n조회는 로그 삭제나 드라이버 재시작을 하지 않습니다.",
+          "troubleshooting": [
+            "'No logs yet'이면 아직 기록된 이벤트가 없거나 서버 재시작 직후인지 확인합니다.",
+            "오류가 반복되면 대상 드라이버, 발생 시각과 메시지를 함께 전달합니다. 로그만 보고 포트나 장치 설정을 임의로 바꾸지 않습니다."
+          ],
+          "cautionShort": "빈 로그는 기록이 없다는 뜻일 수 있습니다. 무제한 감사 기록은 아닙니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 11,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=11",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/plc-logs.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:09:43.714Z",
+            "url": "http://127.0.0.1:5180/",
+            "observed": "Refresh 조작후통신송수신로그 표시",
+            "sha256": "078461a403e7fbb6abd8965c68075cc25db782b50f2898d798946999ee0867d5"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.1,
+            "w": 0.8,
+            "h": 0.48
+          },
+          "focusTargets": [
+            "Live Communication Log",
+            "Refresh",
+            "TX",
+            "RX"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gateway",
+      "sourceId": "02-gateway",
+      "manifestChapterId": "02-gateway",
+      "order": 2,
+      "label": "IIoT Gateway",
+      "title": "IIoT Gateway 사용 매뉴얼",
+      "shortTitle": "IIoT Gateway",
+      "subtitle": "수집 구성을 다루고 실제 연결 상태를 구분하기",
+      "scope": "ConfigUI에서 수집 구성을 확인하고 채널 입력 양식을 검토하며 목록 검색·새로고침과 Gateway/OPC UA 상태를 점검합니다. 현재 실습은 UI의 임시 메모리 저장소를 사용합니다. backend http://127.0.0.1:5191 과 실제 OPC UA 수집은 사용 불가 상태이므로 생산 수집 정상 상태로 간주하지 않습니다.",
+      "scopeNote": "임시 메모리 UI 실습 · 수집 backend 미가동",
+      "prerequisites": [
+        "로컬 ConfigUI http://127.0.0.1:5181/ 가 실행 중이어야 합니다.",
+        "현재 화면의 '임시 메모리 저장소'는 MySQL 미연결 상태입니다. 여기서 저장한 설정은 재시작 시 사라질 수 있습니다.",
+        "UI에 접근할 수 있다는 사실과 Gateway backend·OPC UA 연결 성공은 별개입니다. 현재 backend :5191은 사용 불가입니다.",
+        "아래 채널 실습은 격리된 임시 메모리 UI에 교육용 채널 하나를 저장합니다. 실제 장치 주소, 운영 설정 또는 인증서를 변경하지 않습니다."
+      ],
+      "actions": [
+        "교육용 구성 등록",
+        "구성 검색·새로고침",
+        "수집·OPC UA 상태 점검"
+      ],
+      "icon": "assets/icons/lucide/network.svg",
+      "accent": "#2263A2",
+      "portfolioPage": "iiot-gateway.html",
+      "manualPage": "manual-gateway.html",
+      "chapterPdfPage": 12,
+      "pdfPageStart": 12,
+      "pdfPageEnd": 16,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=12",
+      "markdown": "assets/docs/manuals/chapters/gateway.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/gateway-overview.jpg",
+      "counts": {
+        "operations": 4,
+        "screenshots": 4,
+        "full": 4,
+        "partial": 0,
+        "unverified": 0
+      },
+      "samples": [],
+      "localUrl": "http://127.0.0.1:5181/",
+      "sources": [
+        "IIoT.Gateway.Solution/IIoT.Gateway.Solution/IIoT.ConfigUI/Pages/DataAccess.razor",
+        "IIoT.Gateway.Solution/IIoT.Gateway.Solution/IIoT.ConfigUI/Pages/Monitoring.razor",
+        "IIoT.Gateway.Solution/IIoT.Gateway.Solution/IIoT.ConfigUI/Shared/MainLayout.razor",
+        "IIoT.Gateway.Solution/IIoT.Gateway.Solution/IIoT.ConfigUI/Services/GatewayStorageStatus.cs",
+        "IIoT.Gateway.Solution/IIoT.Gateway.Solution/IIoT.Domain/Models/Channel.cs"
+      ],
+      "operations": [
+        {
+          "id": "gateway-overview",
+          "order": 1,
+          "title": "Data Access 구성 현황과 저장소 상태 확인",
+          "shortTitle": "수집 구성과 저장소 확인",
+          "goal": "채널·설비·태그 카운트가 무엇을 의미하는지 구분하고 임시 저장 여부를 확인합니다.",
+          "oneLineGoal": "등록된 구성 수와 실제 연결 상태를 구분합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/layout-dashboard.svg",
+              "iconName": "layout",
+              "label": "Data Access 열기",
+              "detail": "왼쪽 Data Access"
+            },
+            {
+              "icon": "assets/icons/lucide/database.svg",
+              "iconName": "database",
+              "label": "저장소 안내 읽기",
+              "detail": "임시 메모리 저장소 안내"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "구성 수와 상태 대조",
+              "detail": "CHANNELS·DEVICES·TAGS"
+            }
+          ],
+          "steps": [
+            "http://127.0.0.1:5181/ 에 접속한 뒤 왼쪽 'Data Access'를 누릅니다.",
+            "화면 위 '임시 메모리 저장소' 안내를 읽습니다. 이 안내가 보이는 실습에서는 MySQL 영구 저장이 이루어지지 않습니다.",
+            "CHANNELS, DEVICES, TAGS, VALIDATION 카드를 확인합니다. DEVICES와 TAGS는 현재 불러온 데이터 범위의 카운트입니다.",
+            "아래 목록에서 Channel Name, Communication, Description, Status, Enable을 읽습니다. 등록 또는 Enable만으로 수집 성공을 판정하지 않습니다.",
+            "원복: 이 조회는 설정을 변경하지 않습니다. 다른 메뉴에서 돌아올 때는 'Data Access'를 다시 누릅니다."
+          ],
+          "expected": "현재 저장소에서 읽은 구성과 검증 항목 수가 표시됩니다. 빈 목록은 구성 없음 상태이며 실제 PLC가 연결되었다는 뜻이 아닙니다.",
+          "resultShort": "현재 저장소의 구성과 검증 항목 수가 보입니다.\n빈 목록은 등록된 구성이 없는 상태입니다.",
+          "troubleshooting": [
+            "화면 연결 오류가 나오면 ConfigUI 서버와 :5181 주소를 확인합니다.",
+            "임시 메모리 안내가 보이면 운영 구성 저장에 사용하지 않고 MySQL 연결을 담당자가 별도로 복구해야 합니다."
+          ],
+          "cautionShort": "실습은 MySQL 미연결 임시 저장소입니다. Enable이나 등록만으로 수집 성공을 판단하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 13,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=13",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/gateway-overview.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:01:33.422Z",
+            "url": "http://127.0.0.1:5181/",
+            "observed": "Data Access 초기 구성 화면과 임시 메모리 저장 안내 확인",
+            "sha256": "225bf3e1cee604e29f5488e10abfa2f2781150a04abe0ca94d01f09366ee2e57"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.1,
+            "w": 0.81,
+            "h": 0.51
+          },
+          "focusTargets": [
+            "임시 메모리 저장소",
+            "CHANNELS",
+            "VALIDATION"
+          ]
+        },
+        {
+          "id": "gateway-channel",
+          "order": 2,
+          "title": "교육용 Modbus 채널 저장과 목록 확인",
+          "shortTitle": "교육용 Modbus 채널 등록",
+          "goal": "격리된 임시 메모리 저장소에 채널을 등록하고 등록과 실제 연결의 차이를 확인합니다.",
+          "oneLineGoal": "임시 저장소에 실습 채널을 만들고 목록을 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/plus.svg",
+              "iconName": "plus",
+              "label": "채널 입력 열기",
+              "detail": "Add Channel"
+            },
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "고유 이름과 설명 입력",
+              "detail": "Manual_Modbus·실습용 설명"
+            },
+            {
+              "icon": "assets/icons/lucide/settings.svg",
+              "iconName": "settings",
+              "label": "통신과 매개변수 지정",
+              "detail": "Modbus TCP·JSON {}"
+            },
+            {
+              "icon": "assets/icons/lucide/save.svg",
+              "iconName": "save",
+              "label": "저장 결과 확인",
+              "detail": "Save → 목록 1 / 1 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/trash-2.svg",
+              "iconName": "delete",
+              "label": "교육용 채널 정리",
+              "detail": "삭제 아이콘 → 삭제 확인"
+            }
+          ],
+          "steps": [
+            "'Data Access'의 Channel List에서 'Add Channel'을 누릅니다.",
+            "'Channel Name'에 기존 이름과 겹치지 않는 'Manual_Modbus'를 입력합니다. 중복 이름은 OPC UA NodeID 충돌 안내가 표시됩니다.",
+            "'Communication'은 기본값 'Modbus TCP'로 유지하고 'Description'에 '매뉴얼 실습용 임시 구성. 실제 PLC 연결 없음.'을 입력합니다.",
+            "'Driver Parameters JSON'에 '{}'를 입력하고 'Save'를 누릅니다. 이 빈 객체는 등록 실습용이며 실제 드라이버 연결에 충분한 설정이 아닙니다.",
+            "Channel List에 Manual_Modbus가 추가되고 CHANNELS 및 전체 항목 수가 1 증가했는지 확인합니다. 빈 저장소에서 시작한 캡처는 1 / 1 항목입니다. 원복: 실습 종료 시 이 교육용 채널의 삭제 아이콘을 눌러 확인창에서 삭제를 확정합니다. 저장 전 취소하려면 Cancel을 사용합니다."
+          ],
+          "expected": "교육용 채널 한 개가 현재 임시 메모리 목록에 저장됩니다. 새 채널 기본 상태는 Modbus TCP, Enabled=true, Status=Stopped입니다. 등록만으로 실제 PLC/OPC UA가 연결되지는 않습니다.",
+          "resultShort": "채널이 Enabled·Stopped로 등록됩니다.\n등록 결과는 다음 구성 검색 화면에서 확인합니다.",
+          "troubleshooting": [
+            "중복 오류가 보이면 다른 고유 이름을 입력합니다. 기존 채널 이름을 바꾸어 해결하지 않습니다.",
+            "이 실습의 Save는 임시 UI 구성을 변경합니다. 운영 저장소에서는 같은 실습을 반복하지 않습니다. 현재 임시 메모리 저장소의 설정은 재시작 후 지속되지 않을 수 있습니다."
+          ],
+          "cautionShort": "{}는 연결용 구성이 아닙니다. 실제 PLC 연결은 없으며 임시 설정은 재시작 시 사라질 수 있습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 14,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=14",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/gateway-channel.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:02:15.980Z",
+            "url": "http://127.0.0.1:5181/",
+            "observed": "Add Channel 입력값과 Modbus TCP 선택, 실습용 임시 구성 안내",
+            "sha256": "a7f068ce6cb57c923d4924bca7231accc206d16d6d05f687928317278d9c728c"
+          },
+          "focus": {
+            "x": 0.25,
+            "y": 0.24,
+            "w": 0.5,
+            "h": 0.52
+          },
+          "focusTargets": [
+            "Channel Name",
+            "Communication",
+            "Driver Parameters JSON",
+            "Save"
+          ]
+        },
+        {
+          "id": "gateway-filter",
+          "order": 3,
+          "title": "현재 구성 목록 검색과 새로고침",
+          "shortTitle": "구성 검색 후 다시 불러오기",
+          "goal": "목록 범위 안에서 원하는 구성을 찾고 저장소 내용을 다시 읽습니다.",
+          "oneLineGoal": "현재 목록에서 필요한 채널·설비·태그를 찾습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/list.svg",
+              "iconName": "list",
+              "label": "현재 목록 범위 확인",
+              "detail": "채널·설비·태그 범위 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "목록 검색",
+              "detail": "현재 목록 검색: Manual"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "표시 건수 대조",
+              "detail": "표시 건수 / 전체 항목"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "저장 구성 재조회",
+              "detail": "검색 삭제 → 새로고침"
+            }
+          ],
+          "steps": [
+            "'Data Access'에서 현재 목록이 Channel List인지, 특정 채널의 Device 목록인지 먼저 확인합니다.",
+            "'현재 목록 검색'에 화면에 보이는 이름 일부를 입력합니다. 채널은 이름·통신 방식·설명, 설비는 이름·IP·PLC 형식, 태그는 이름·주소를 검색합니다.",
+            "결과 건수와 목록을 확인합니다. 현재 목록이 비어 있으면 임의 검색어를 넣어 '검색 조건에 맞는 항목이 없습니다.'를 확인할 수 있습니다.",
+            "검색어를 지우고 '새로고침'을 누릅니다. 완료 후 '최근 확인 HH:mm:ss · 저장된 구성을 다시 불러왔습니다.'를 확인합니다.",
+            "원복: 검색어를 빈칸으로 유지합니다. 이 작업은 저장된 구성 재조회이며 장치 재시작이나 구성 저장을 수행하지 않습니다."
+          ],
+          "expected": "입력 즉시 현재 목록이 좁혀지고 '표시 건수 / 전체 항목'이 갱신됩니다. 새로고침은 데이터 저장소의 구성을 다시 불러옵니다.",
+          "resultShort": "표시 건수와 최근 확인 시각이 갱신됩니다.\n장치 재시작이나 구성 저장은 수행하지 않습니다.",
+          "troubleshooting": [
+            "검색 결과가 0이면 상위 Channel List로 돌아가 현재 검색 범위를 확인합니다.",
+            "'구성을 불러오지 못했습니다.'가 보이면 현재 화면의 기존 목록을 최신 상태로 간주하지 말고 저장소 연결을 점검합니다."
+          ],
+          "cautionShort": "재조회에 실패하면 기존 목록을 최신 구성으로 간주하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 15,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=15",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/gateway-filter.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:02:32.975Z",
+            "url": "http://127.0.0.1:5181/",
+            "observed": "Manual 검색과 수동 새로고침 후 실습 채널 1/1 표시",
+            "sha256": "3e43c9fc7518c1db011605028a0279dbd5340a0ba7e8ab3cf352c379dbbb416c"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.33,
+            "w": 0.81,
+            "h": 0.38
+          },
+          "focusTargets": [
+            "현재 목록 검색",
+            "새로고침",
+            "최근 확인"
+          ]
+        },
+        {
+          "id": "gateway-monitoring",
+          "order": 4,
+          "title": "Gateway와 OPC UA의 연결 상태 점검",
+          "shortTitle": "Gateway·OPC UA 상태 점검",
+          "goal": "ConfigUI 가용성과 수집 서버·OPC UA 연결 상태를 구분합니다.",
+          "oneLineGoal": "UI 접근, 수집 서버, OPC UA 연결을 따로 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/monitor.svg",
+              "iconName": "monitor",
+              "label": "Monitoring 열기",
+              "detail": "왼쪽 Monitoring"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "수집 서버 상태 갱신",
+              "detail": "Server Status → Refresh"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "OPC UA 연결 읽기",
+              "detail": "Connection Status·Endpoint"
+            }
+          ],
+          "steps": [
+            "왼쪽 'Monitoring'을 누릅니다.",
+            "'Gateway Server Control'의 'Server Status'를 읽고 'Refresh'를 누릅니다. 현재 실습 backend :5191은 사용 불가이므로 Running으로 가정하지 않습니다.",
+            "'OPC UA Server Connection'에서 'Connection Status'와 'Server Endpoint URL'을 확인합니다. UI 기본 입력값은 'opc.tcp://localhost:7312'입니다.",
+            "현재 실습에서는 연결된 OPC UA 서버가 없으므로 'Disconnected'와 미연결 안내를 확인합니다. Start, Restart, Stop 또는 Connect는 누르지 않습니다.",
+            "원복: 조회만 수행했으므로 변경할 설정이 없습니다. 화면에서 임의로 실제 운영 서버 주소를 입력하지 않습니다."
+          ],
+          "expected": "수집 서버 상태와 OPC UA 클라이언트 상태가 따로 표시됩니다. 현재 UI 메모리 실습에서는 실제 데이터 수집 정상 상태를 증명할 수 없습니다.",
+          "resultShort": "Gateway 정지·OPC UA 미연결 상태입니다.\nUI 접근과 실제 수집 성공은 구분합니다.",
+          "troubleshooting": [
+            "ConfigUI가 열려도 Server Status가 Stopped이거나 OPC UA가 Disconnected일 수 있습니다. 두 상태를 같은 것으로 처리하지 않습니다.",
+            "실제 연결 점검에는 backend 실행, 올바른 OPC UA endpoint, 인증서·보안 정책과 포트가 별도로 준비되어야 합니다. UI 기본 :7312와 다른 실습용 :4848을 자동으로 같은 주소라고 가정하지 않습니다."
+          ],
+          "cautionShort": "backend :5191 미가동. 조회 실습에서는 Start·Restart·Stop·Connect를 누르지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 16,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=16",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/gateway-monitoring.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:03:26.975Z",
+            "url": "http://127.0.0.1:5181/monitoring",
+            "observed": "Gateway backend와 OPC UA Disconnected 상태에서 Refresh 동작 확인",
+            "sha256": "49a902030d2dd9762a1ce7de57ab2aeb6b58b32094e01992f0fe3a94eb42b748"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.1,
+            "w": 0.81,
+            "h": 0.72
+          },
+          "focusTargets": [
+            "Server Status",
+            "Connection Status",
+            "Server Endpoint URL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "twin",
+      "sourceId": "03-twin",
+      "manifestChapterId": "03-twin",
+      "order": 3,
+      "label": "TwinForge",
+      "title": "TwinForge — 가상 공장 운영과 작업 공간",
+      "shortTitle": "TwinForge",
+      "subtitle": "3D 모의 공장에서 설비를 찾고 운영 근거 읽기",
+      "scope": "로컬 대규모 공장 시뮬레이션의 연결 상태, 시작·정지, 설비 탐색·제어, 3D 카메라, CSV, 운영 대시보드·워크플로우·매핑 화면을 안내한다. 실제 PLC 제어 또는 외부 OEE 정상 연동을 검증한 문서로 해석하지 않는다.",
+      "scopeNote": "로컬 모의 생산 · 실제 PLC 운전과 구분",
+      "prerequisites": [
+        "TwinForge API가 http://127.0.0.1:5183, React UI가 http://127.0.0.1:5182에서 실행되어야 한다.",
+        "UI의 /api 및 /hubs 요청은 기본적으로 API 5183으로 프록시된다. 별도 API는 TWIN_API_TARGET 또는 VITE_API_URL 설정을 확인한다.",
+        "이 매뉴얼의 대상은 '로컬 시뮬레이션 · 모의 생산 데이터' 모드다. 1,000대 배치는 UseLargeFactory 설정이 활성화된 경우다.",
+        "화면이 이미 실행 중이면 기존 결과를 먼저 확인한다. 초기화는 공장 상태를 변경하므로 기존 기록이 필요한 작업에서는 누르지 않는다.",
+        "브라우저 다운로드를 허용한다. 원본 수신 경과 시간은 선택 설비 텔레메트리 또는 공장 프레임의 시간 기준이며 데이터 품질 전체를 보증하는 지표는 아니다."
+      ],
+      "actions": [
+        "모의 공장 시작·정지",
+        "설비 탐색·시점 이동",
+        "필터 CSV 보관"
+      ],
+      "icon": "assets/icons/lucide/boxes.svg",
+      "accent": "#7256A3",
+      "portfolioPage": "twinforge.html",
+      "manualPage": "manual-twin.html",
+      "chapterPdfPage": 17,
+      "pdfPageStart": 17,
+      "pdfPageEnd": 23,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=17",
+      "markdown": "assets/docs/manuals/chapters/twin.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/twin-overview.jpg",
+      "counts": {
+        "operations": 6,
+        "screenshots": 6,
+        "full": 6,
+        "partial": 0,
+        "unverified": 0
+      },
+      "samples": [
+        {
+          "id": "twin-robot-filtered",
+          "productId": "twin",
+          "label": "TwinForge 필터 CSV 예시",
+          "note": "로컬 모의 공장 화면에서 저장한 로봇 설비 100행입니다.",
+          "description": "로컬 모의 공장 화면에서 저장한 로봇 설비 100행입니다.",
+          "kind": "csv",
+          "path": "assets/docs/manuals/samples/twin-robot-filtered.csv",
+          "sha256": "8a3c6af62c441febad1feba105bff6431b5efe70b893800b6c332c7adca9d9ab"
+        }
+      ],
+      "localUrl": "http://127.0.0.1:5182/",
+      "sources": [
+        "TwinForge/frontend/forgetwin-web/src/components/FactoryWorkspace.tsx",
+        "TwinForge/frontend/forgetwin-web/src/App.tsx",
+        "TwinForge/frontend/forgetwin-web/src/components/TelemetryPanel.tsx",
+        "TwinForge/frontend/forgetwin-web/src/components/MesSimulationPanel.tsx",
+        "TwinForge/frontend/forgetwin-web/src/components/OeeAnalyzerPanel.tsx",
+        "TwinForge/frontend/forgetwin-web/src/components/NodeMappingWorkspace.tsx",
+        "TwinForge/frontend/forgetwin-web/src/workflow/WorkflowDesigner.tsx",
+        "TwinForge/frontend/forgetwin-web/src/workflow/components/Toolbar.tsx",
+        "TwinForge/frontend/forgetwin-web/vite.config.ts",
+        "TwinForge/README.md"
+      ],
+      "operations": [
+        {
+          "id": "twin-overview",
+          "order": 1,
+          "title": "연결 상태와 데이터 출처 확인",
+          "shortTitle": "공장 데이터의 출처 읽기",
+          "goal": "실시간 연결, 미리보기, 모의 생산 데이터를 구분하고 갱신 지연을 파악한다.",
+          "oneLineGoal": "실시간 연결과 모의 생산, 마지막 수신 시각을 구분합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/factory.svg",
+              "iconName": "factory",
+              "label": "가상 공장 열기",
+              "detail": "가상 공장·운영 모니터링"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "연결과 출처 확인",
+              "detail": "연결 배지·로컬 시뮬레이션"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "원본 갱신 지연 확인",
+              "detail": "원본 수신 N초 전·갱신 지연"
+            },
+            {
+              "icon": "assets/icons/lucide/chart.svg",
+              "iconName": "chart",
+              "label": "공장 현황 읽기",
+              "detail": "가동 설비·비율·모의 출하"
+            }
+          ],
+          "steps": [
+            "브라우저에서 http://127.0.0.1:5182/를 연다. 상단 '가상 공장'과 '운영 모니터링'이 선택되었는지 확인한다.",
+            "오른쪽 연결 배지에서 '실시간 연결' 여부를 확인한다. '연결 중', '재연결 중', '연결 끊김'이면 이를 먼저 기록한다.",
+            "상단 안내에서 '로컬 시뮬레이션 · 모의 생산 데이터'를 확인한다. 외부 PLC 모드가 표시되면 이 매뉴얼의 모의 공장 전제를 적용하지 않는다.",
+            "안내 오른쪽의 '원본 수신 N초 전'과 '갱신 지연' 표시를 확인한다. 5초를 초과하면 지연 표시가 나타난다.",
+            "설비 가동 현황·가동 비율·점검 필요 설비·모의 출하 완료 카드를 확인한다. 미리보기의 '—'는 측정값 0과 구분한다."
+          ],
+          "expected": "데이터 출처와 연결 상태를 설명할 수 있고, 미리보기와 수신된 공장 상태를 구분한다. 연결 중단 후 보이는 값은 마지막 수신 상태다.",
+          "resultShort": "모의 공장 현황과 마지막 수신 상태가 표시됩니다.\n미리보기의 ‘—’는 측정값 0과 다릅니다.",
+          "troubleshooting": [
+            "화면이 열리지 않으면 UI 5182 실행 여부를 확인한다.",
+            "UI만 열리고 연결이 끊기면 API 5183과 /hubs 프록시를 확인한 뒤 다시 접속한다.",
+            "원본 시간이 오래되면 실행 정지 여부와 연결 상태를 함께 확인한다. 경과 시간만으로 설비 고장으로 단정하지 않는다."
+          ],
+          "cautionShort": "현재 값은 로컬 모의 생산 데이터입니다. 연결 중단 후 남은 값은 마지막 수신 상태입니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 18,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=18",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-overview.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:40.202Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "로컬 모의 공장1000대, 전체 조망, 원본 수신0초 확인.",
+            "sha256": "efc7277f54638760f21b138ddfc1d08ab064c7793873ad9b04677961550bf676"
+          },
+          "focus": {
+            "x": 0.01,
+            "y": 0,
+            "w": 0.97,
+            "h": 0.74
+          },
+          "focusTargets": [
+            "실시간 연결",
+            "로컬 시뮬레이션",
+            "원본 수신"
+          ]
+        },
+        {
+          "id": "twin-running",
+          "order": 2,
+          "title": "업종 선택 후 공장 시작·정지",
+          "shortTitle": "모의 공장 시작·정지하기",
+          "goal": "선택 업종의 로컬 시뮬레이션을 실행하고 정지 상태를 확인한다.",
+          "oneLineGoal": "선택 업종의 시뮬레이션과 수신 갱신을 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/settings.svg",
+              "iconName": "settings",
+              "label": "현재 업종 확인",
+              "detail": "업종 변경은 정지 상태에서"
+            },
+            {
+              "icon": "assets/icons/lucide/play.svg",
+              "iconName": "play",
+              "label": "시뮬레이션 시작",
+              "detail": "▶ 시뮬레이션 시작 한 번"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "실행과 갱신 확인",
+              "detail": "설비 목록·3D·수신 틱"
+            },
+            {
+              "icon": "assets/icons/lucide/square.svg",
+              "iconName": "stop",
+              "label": "정지 후 필요 시 재시작",
+              "detail": "Ⅱ 정지 → 필요 시 재시작"
+            }
+          ],
+          "steps": [
+            "이미 가동 중이면 업종을 바꾸지 말고 현재 업종과 설비 수를 기록한다. 새 업종으로 시작할 때만 'Ⅱ 정지'를 눌러 정지한다.",
+            "정지 상태에서 '공장 업종' 선택 상자로 업종을 고른다. 가동 중이거나 명령 처리 중이면 업종 변경이 비활성화된다.",
+            "'▶ 시뮬레이션 시작'을 한 번 누르고 명령 처리를 기다린다. 이미 가동 중이면 시작 버튼이 비활성화된다.",
+            "상태가 가동 중으로 바뀌고 설비 목록·3D 장면·수신 틱이 갱신되는지 확인한다. 대규모 모드에서는 1,000대 배치와 제조 구역 필터가 표시된다.",
+            "'Ⅱ 정지'를 눌러 시뮬레이션 정지 표시를 확인한다. 필요하면 같은 업종으로 다시 시작한다.",
+            "'초기화'는 별도 실습에서만 사용한다. 초기화 후에는 설비·누계·상태가 바뀔 수 있으므로 실행 전 필요한 CSV를 먼저 저장한다."
+          ],
+          "expected": "시작 시 선택 업종의 설비와 갱신 상태가 나타나고, 정지 시 시뮬레이션 정지가 표시된다. 수치는 확률적 고장과 공정 진행에 따라 달라질 수 있다.",
+          "resultShort": "로컬 공장이 실행되고 정지 명령을 확인할 수 있습니다.\n설비 수와 상태는 업종·모드에 따라 달라집니다.",
+          "troubleshooting": [
+            "명령 오류 배너가 나타나면 API 응답과 연결 상태를 확인한다. 버튼을 반복해서 누르지 않는다.",
+            "시작 버튼이 비활성화되어 있으면 이미 실행 중인지 확인한다.",
+            "로컬 시뮬레이션 대신 외부 PLC 모드면 제어 허용과 PLC Ack·RunFeedback에 따른 별도 운영 절차가 필요하다."
+          ],
+          "cautionShort": "초기화는 설비·누계·상태를 바꿀 수 있어 별도 실습에서만 사용합니다. 외부 PLC 모드는 별도 절차가 필요합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 19,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=19",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-running.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:12:44.335Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "로컬 시뮬레이션을 정지 후 시작, 1000대 가동 및 수신 틱 증가 확인. 실제 공장 데이터 아님.",
+            "sha256": "2c382c6e6521b3c6f295720ed1bfec2111edeaaa0c6f52d9910a5be22d391dee"
+          },
+          "focus": {
+            "x": 0.01,
+            "y": 0.11,
+            "w": 0.97,
+            "h": 0.63
+          },
+          "focusTargets": [
+            "공장 업종",
+            "▶ 시뮬레이션 시작",
+            "Ⅱ 정지"
+          ]
+        },
+        {
+          "id": "twin-search",
+          "order": 3,
+          "title": "설비 검색·상태·구역 필터 적용",
+          "shortTitle": "설비 검색과 구역 필터",
+          "goal": "대규모 공장에서 원하는 설비 집합을 좁히고 전체 목록으로 복귀한다.",
+          "oneLineGoal": "대규모 공장에서 필요한 설비 집합만 탐색합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "설비 검색",
+              "detail": "이름·종류·구역·셀·공정"
+            },
+            {
+              "icon": "assets/icons/lucide/filter.svg",
+              "iconName": "filter",
+              "label": "상태와 구역 선택",
+              "detail": "상태·제조 구역 함께 선택"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "결과에서 설비 선택",
+              "detail": "결과 수 확인 → 설비 행 선택"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "reset",
+              "label": "전체 설비로 복귀",
+              "detail": "필터 초기화"
+            }
+          ],
+          "steps": [
+            "왼쪽 '설비 탐색'의 검색창에 현재 보이는 설비 이름 일부를 입력한다. 이름·종류·구역·셀·공정 역할을 검색할 수 있다.",
+            "'모든 상태' 선택 상자에서 필요한 설비 상태를 고른다. 검색어와 상태 조건은 함께 적용된다.",
+            "대규모 배치일 때 '전체 10개 제조 구역' 선택 상자에서 구역을 고른다.",
+            "필터 요약의 '검색 결과 수 / 전체 설비 수'를 확인한다. 결과가 50대를 넘으면 목록 아래 '이전'·'다음'을 사용한다.",
+            "원하는 설비 행을 눌러 오른쪽 설비 정보가 해당 항목으로 바뀌는지 확인한다.",
+            "'필터 초기화'를 눌러 검색어·상태·구역 조건을 모두 해제한다."
+          ],
+          "expected": "조건에 맞는 설비만 목록에 남고 결과 수가 바뀐다. 조건 변경 시 목록 페이지는 처음으로 돌아간다. 필터 초기화 후 전체 설비를 탐색할 수 있다.",
+          "resultShort": "조건에 맞는 설비와 결과 수가 표시됩니다.\n50대 초과 시 이전·다음으로 목록을 넘깁니다.",
+          "troubleshooting": [
+            "검색 결과가 없으면 검색어뿐 아니라 상태와 구역 조건도 확인한다.",
+            "구역 선택이 없으면 대규모 공장 배치인지 확인한다.",
+            "검색과 필터는 탐색 목록을 제한한다. 3D 장면에서 전체 설비가 보이는 것은 오류가 아니다."
+          ],
+          "cautionShort": "필터는 탐색 목록을 제한합니다. 3D에 전체 설비가 보일 수 있으며 구역 필터는 대규모 배치에서 표시됩니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 20,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=20",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-search.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:12:55.678Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "robot 검색으로 100/1000대 표시. 검색 결과에만 CSV 적용.",
+            "sha256": "d86e93e2ba85da2f018932bc949949c551658143e898dc91fb0cebea0cdf2992"
+          },
+          "focus": {
+            "x": 0.01,
+            "y": 0.42,
+            "w": 0.97,
+            "h": 0.57
+          },
+          "focusTargets": [
+            "설비 탐색",
+            "모든 상태",
+            "필터 초기화"
+          ]
+        },
+        {
+          "id": "twin-equipment",
+          "order": 4,
+          "title": "설비 상세·카메라·개별 제어",
+          "shortTitle": "설비 상세와 시점 확인",
+          "goal": "선택 설비의 위치와 운영 데이터를 확인하고 가능한 제어를 수행한다.",
+          "oneLineGoal": "선택 설비의 값·위치·제어 조건을 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/mouse-pointer-2.svg",
+              "iconName": "click",
+              "label": "설비 하나 선택",
+              "detail": "목록·3D 선택 후 이름 대조"
+            },
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "운영 데이터 읽기",
+              "detail": "구역·좌표·원본 값·시각"
+            },
+            {
+              "icon": "assets/icons/lucide/camera.svg",
+              "iconName": "camera",
+              "label": "선택 설비로 이동",
+              "detail": "선택 설비로 이동 ↗"
+            },
+            {
+              "icon": "assets/icons/lucide/play.svg",
+              "iconName": "play",
+              "label": "허용된 개별 제어",
+              "detail": "로컬 실행 중 설비 정지·시작"
+            },
+            {
+              "icon": "assets/icons/lucide/list.svg",
+              "iconName": "list",
+              "label": "알람 이력 확인",
+              "detail": "알람 이력의 수신 기록"
+            }
+          ],
+          "steps": [
+            "설비 목록의 한 행 또는 3D 장면의 설비를 클릭한다. 오른쪽 '설비 정보'에서 이름과 설비 종류를 대조한다.",
+            "'설비 구역', 원본 좌표, 데이터 상태와 '운영 데이터'의 시각·값을 확인한다.",
+            "'선택 설비로 이동 ↗'를 눌러 선택 대상을 중심으로 카메라를 이동한다.",
+            "장면 아래 '전체 조망', '현장 시점', '평면 보기'를 차례로 선택한다. 드래그는 회전, 우클릭 드래그는 이동, 휠은 확대·축소다.",
+            "가동 중인 로컬 시뮬레이션에서 선택 설비의 '설비 정지'를 누르고 상태 변화를 확인한다. 정지한 설비를 다시 운전할 때 '설비 시작'을 사용한다.",
+            "'알람 이력' 탭에서 수신 이력을 확인한다. 알람 행을 누르면 현재 배치에 존재하는 설비의 정보로 이동한다."
+          ],
+          "expected": "선택 설비와 상세 정보가 일치하고 카메라 시점이 바뀐다. 허용 조건을 충족하는 경우만 개별 시작·정지 버튼이 활성화된다. 알람은 현재 고장 판정과 별개의 수신 이력이다.",
+          "resultShort": "선택 설비와 정보가 일치하고 카메라가 이동합니다.\n허용 조건을 충족할 때만 개별 제어가 활성화됩니다.",
+          "troubleshooting": [
+            "미리보기에서는 개별 제어를 할 수 없다. 공장 실행 여부를 먼저 확인한다.",
+            "명령 처리 중에는 다른 설비 명령이 비활성화될 수 있다.",
+            "외부 연동에서 버튼 클릭만으로 제어 성공을 단정하지 않는다. PLC Ack와 RunFeedback을 확인한다.",
+            "3D 장면을 표시할 수 없으면 브라우저의 WebGL 지원과 렌더링 오류 안내를 확인한다."
+          ],
+          "cautionShort": "알람은 수신 이력입니다. 외부 PLC 제어 성공은 버튼 클릭과 별도로 Ack·RunFeedback을 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 21,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=21",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-equipment.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:10.310Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "C001 robot 04 선택 및 선택 설비로 카메라 이동. 설비 정보/원본 수신 확인.",
+            "sha256": "054b040bede42df1049b3b86f647e2e4e1e083b29a5f60955beacd7522753300"
+          },
+          "focus": {
+            "x": 0.01,
+            "y": 0.44,
+            "w": 0.97,
+            "h": 0.55
+          },
+          "focusTargets": [
+            "설비 정보",
+            "운영 데이터",
+            "선택 설비로 이동 ↗"
+          ]
+        },
+        {
+          "id": "twin-csv",
+          "order": 5,
+          "title": "현재 필터 결과를 설비 CSV로 저장",
+          "shortTitle": "필터 설비를 CSV로 저장",
+          "goal": "화면에서 선택한 설비 집합을 출처·시간 정보와 함께 내려받는다.",
+          "oneLineGoal": "현재 설비 집합을 출처와 원본 시각까지 보관합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/filter.svg",
+              "iconName": "filter",
+              "label": "내보낼 설비 선택",
+              "detail": "검색·상태·구역 조건 적용"
+            },
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "설비 CSV 다운로드",
+              "detail": "상단 설비 CSV ↓"
+            },
+            {
+              "icon": "assets/icons/lucide/file-text.svg",
+              "iconName": "file",
+              "label": "파일과 행 수 대조",
+              "detail": "CSV 행 수와 결과 수 비교"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "출처와 시각 확인",
+              "detail": "sourceMode·sourceTimestamp"
+            }
+          ],
+          "steps": [
+            "공장을 실행하여 미리보기 상태를 벗어난다. 필요한 검색·상태·구역 조건을 적용한다.",
+            "왼쪽 결과 수를 기록한다. 내보내기는 현재 목록 페이지 50대에 한정되지 않고 필터에 맞는 전체 설비가 대상이다.",
+            "상단 '설비 CSV ↓'를 누른다. 브라우저가 저장 위치를 물으면 다운로드 폴더를 선택한다.",
+            "'forgetwin-equipment-YYYY-MM-DD.csv' 파일이 내려받아졌는지 확인한다.",
+            "파일에서 equipmentId, name, state, zone, cell, sourceMode, sourceTimestamp 열을 확인하고 결과 행 수를 필터 결과 수와 비교한다."
+          ],
+          "expected": "현재 필터 결과가 UTF-8 CSV로 다운로드된다. 출처와 공장 프레임 시간이 포함되며 시간 값이 없는 경우 빈 셀일 수 있다. 날짜가 포함된 파일명은 내보내기 시점 UTC 날짜를 사용한다.",
+          "resultShort": "현재 페이지가 아닌 필터 전체 설비가 저장됩니다.\nCSV 행 수를 화면의 필터 결과 수와 비교합니다.",
+          "troubleshooting": [
+            "CSV 버튼이 비활성화되어 있으면 설비가 없는 미리보기인지 확인한다.",
+            "다운로드가 보이지 않으면 브라우저 다운로드 목록과 차단 표시를 확인한다.",
+            "검색 필터가 0건이면 머리글만 저장될 수 있다. 필터 초기화 후 다시 내보낼 수 있다."
+          ],
+          "cautionShort": "미리보기에서는 버튼이 비활성화됩니다. 원본 시간이 없으면 빈 셀이며 파일명 날짜는 UTC 기준입니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 22,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=22",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-csv.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:20.970Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "robot 검색 상태 CSV 버튼 실행. 다운로드 파일 twin-robot-filtered.csv 보관; 필터100대 확인.",
+            "sha256": "c17816b30d5f7a806cee996a292bcf60c099053e830fbbaef3de45693813484d"
+          },
+          "focus": {
+            "x": 0.01,
+            "y": 0.11,
+            "w": 0.97,
+            "h": 0.73
+          },
+          "focusTargets": [
+            "설비 CSV ↓",
+            "검색 결과"
+          ]
+        },
+        {
+          "id": "twin-navigation",
+          "order": 6,
+          "title": "운영 대시보드·워크플로우·노드 매핑 탐색",
+          "shortTitle": "운영·설계·매핑 화면 둘러보기",
+          "goal": "현장 보기에서 분석·설계·연동 설정 작업 공간으로 이동하고 각 화면의 역할을 구분한다.",
+          "oneLineGoal": "분석, 모의 생산, 설계와 연동 설정의 역할을 구분합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/chart.svg",
+              "iconName": "chart",
+              "label": "운영 대시보드 확인",
+              "detail": "Telemetry 설비·이벤트·시각"
+            },
+            {
+              "icon": "assets/icons/lucide/factory.svg",
+              "iconName": "factory",
+              "label": "모의 MES 구분",
+              "detail": "MES 업종·Plan / Actual"
+            },
+            {
+              "icon": "assets/icons/lucide/workflow.svg",
+              "iconName": "workflow",
+              "label": "워크플로우 탐색",
+              "detail": "New → 연결 → Save → Run"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "노드 매핑 확인",
+              "detail": "서버 → 노드 → 객체·속성"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "reset",
+              "label": "가상 공장 복귀",
+              "detail": "설정 변경 없이 가상 공장으로"
+            }
+          ],
+          "steps": [
+            "상단 '운영 대시보드'를 눌러 공장 상태와 설비 카드, MES Simulation, External OEEAnalyzer, Protocol·Telemetry·Alarm 패널을 찾는다.",
+            "Telemetry의 설비 선택 상자를 바꾸어 선택 설비 이벤트와 시각을 확인한다. External OEEAnalyzer가 비활성화·미연결이면 빈 OEE 값을 정상 연동 결과로 해석하지 않는다.",
+            "MES를 실습할 경우 MES Simulation의 업종을 확인하고 'Start MES'를 누른 뒤 Plan / Actual과 주문·공정 진행을 확인한다. MES는 공장 시뮬레이션과 구분되는 모의 생산 맥락이다.",
+            "상단 '워크플로우'를 눌러 노드 팔레트·캔버스·속성 패널·실행 로그를 확인한다. 새 실습은 'New'로 별도 이름을 지정한 뒤 노드를 배치하고 'Save'로 저장한다.",
+            "워크플로우에서 포트를 연결할 때 자료형과 순환 경고를 확인한다. 'Run'은 워크플로우 시뮬레이션 조작이며 실제 PLC 제어 성공을 의미하지 않는다.",
+            "상단 '노드 매핑'을 눌러 서버 선택→노드 선택→객체·속성 연결 흐름을 확인한다. 현재 서버가 미연결이면 탐색·값 미리보기가 실패할 수 있다.",
+            "설정을 편집했다면 작업 목록 반영과 상단 '설정 저장'을 구분한다. 저장된 서버·매핑 설정은 API 재시작 후 적용된다. 화면 확인만 하는 실습에서는 설정을 변경하지 않고 '가상 공장으로' 복귀한다."
+          ],
+          "expected": "운영·워크플로우·매핑 화면의 용도를 구분하고 가상 공장으로 복귀할 수 있다. 이 메뉴 전환은 동일한 / 주소 안의 화면 상태 전환이며 별도 URL 경로를 만들지 않는다.",
+          "resultShort": "운영·MES·워크플로우·매핑은 서로 다른 작업입니다.\n이 화면 전환은 같은 / 주소 안에서 이루어집니다.",
+          "troubleshooting": [
+            "OEE의 'Sync now'가 비활성화되면 연동 enabled 설정과 외부 API 상태를 확인한다.",
+            "MES·워크플로우·3D 공장 실행 상태를 서로 같은 실행으로 취급하지 않는다.",
+            "노드 매핑 저장 후 즉시 적용되지 않으면 '재시작 후 적용 대기'와 현재 적용 주소를 확인한다.",
+            "저장하지 않은 매핑 변경이 있으면 나갈 때 경고가 나타날 수 있다."
+          ],
+          "cautionShort": "MES·워크플로우 Run은 실제 PLC 제어 증거가 아닙니다. OEE 미연결·매핑 재시작 후 적용 상태를 구분합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 23,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=23",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/twin-navigation.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:22.345Z",
+            "url": "http://127.0.0.1:5182/",
+            "observed": "상단 운영 대시보드로 이동, 로컬 모의 생산 지표 및 API 연결 확인.",
+            "sha256": "1cab64de95eec05f466e26cc5110a6b22b458b32b491957752336986a35debfb"
+          },
+          "focus": {
+            "x": 0.11,
+            "y": 0.77,
+            "w": 0.77,
+            "h": 0.22
+          },
+          "focusTargets": [
+            "운영 대시보드",
+            "워크플로우",
+            "노드 매핑"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oee",
+      "sourceId": "04-oee",
+      "manifestChapterId": "04-oee",
+      "order": 4,
+      "label": "OEEAnalyzer",
+      "title": "OEEAnalyzer — 접근·효율 분석과 미연결 대응",
+      "shortTitle": "OEE Analyzer",
+      "subtitle": "로그인 오류를 구분하고 복구 후 분석 절차 익히기",
+      "scope": "현재 접근 가능한 로그인 화면·개발 계정 선택·API 연결 실패 대응을 안내한다. 분석 기간 조회, 계산 상태별 CSV, 조회 전용 대시보드는 소스에 근거한 API 복구 후 절차이며 현 환경에서 실행 확인하지 않았다.",
+      "scopeNote": "로그인 화면 3개 동작 확인 · 분석 이후 3개는 실행 미검증",
+      "prerequisites": [
+        "React UI는 http://127.0.0.1:5185, 분석 API 목표 주소는 http://127.0.0.1:5184다. /api와 /hubs는 UI 개발 서버에서 API로 프록시된다.",
+        "현재 알려진 환경 제약은 Docker 엔진 시작 실패와 API 미연결이다. 로그인 화면이 열린 사실만으로 인증·계산·데이터 연동이 정상임을 의미하지 않는다.",
+        "정상 분석에는 API와 기존 MySQL·TimescaleDB·Redis 등 구성된 데이터 서비스, 유효 계정과 역할, 생산 증거 및 TwinForge 생산 맥락이 필요하다.",
+        "개발 계정 선택 버튼은 개발 서버(import.meta.env.DEV)에서만 표시된다. 버튼은 입력값을 채우며 계정을 생성하거나 자동 인증하지 않는다. 기존 DB에서 해당 계정의 존재를 보장하지 않는다.",
+        "새 운영 계정 초기화·비밀번호 변경은 관리자가 기존 인증 및 Bootstrap 정책에 따라 수행한다. 본 매뉴얼은 인증 우회나 계정 재생성을 안내하지 않는다."
+      ],
+      "actions": [
+        "역할과 계정 입력",
+        "API 연결 오류 구분",
+        "복구 후 분석·내보내기"
+      ],
+      "icon": "assets/icons/lucide/gauge.svg",
+      "accent": "#B47813",
+      "portfolioPage": "oee-analyzer.html",
+      "manualPage": "manual-oee.html",
+      "chapterPdfPage": 24,
+      "pdfPageStart": 24,
+      "pdfPageEnd": 30,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=24",
+      "markdown": "assets/docs/manuals/chapters/oee.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/oee-login.jpg",
+      "counts": {
+        "operations": 6,
+        "screenshots": 3,
+        "full": 3,
+        "partial": 0,
+        "unverified": 3
+      },
+      "samples": [],
+      "localUrl": "http://127.0.0.1:5185/login",
+      "sources": [
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/pages/LoginPage.tsx",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/pages/AdminIntegrationPage.tsx",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/pages/ViewerPage.tsx",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/components/Layout.tsx",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/App.tsx",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/services/api.ts",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/src/services/types.ts",
+        "OEEAnalyzer/OeeMccSolution/src/Frontend/vite.config.ts",
+        "OEEAnalyzer/README.md"
+      ],
+      "operations": [
+        {
+          "id": "oee-login",
+          "order": 1,
+          "title": "로그인 화면 열기와 접근 역할 확인",
+          "shortTitle": "OEE 로그인 화면 확인",
+          "goal": "분석 작업 공간의 진입 화면과 계정 입력 위치를 확인한다.",
+          "oneLineGoal": "접근 역할과 계정 입력 위치를 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/lock-keyhole.svg",
+              "iconName": "lock",
+              "label": "로그인 화면 열기",
+              "detail": ":5185/login의 Sign in"
+            },
+            {
+              "icon": "assets/icons/lucide/users.svg",
+              "iconName": "users",
+              "label": "역할 안내 읽기",
+              "detail": "Access·Dashboard·Admin"
+            },
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "승인된 계정 입력",
+              "detail": "Username·Password"
+            }
+          ],
+          "steps": [
+            "http://127.0.0.1:5185/login을 연다.",
+            "왼쪽 '생산 효율의 근거를 확인하세요' 안내와 Access·Dashboard·Admin 설명을 확인한다.",
+            "오른쪽 Sign in 영역의 Username, Password, Login 버튼을 확인한다.",
+            "개인에게 부여된 계정이 있으면 Username과 Password에 입력한다. 비밀번호는 가림 표시로 입력된다.",
+            "API가 미연결인 현재 환경에서는 입력 화면 확인과 인증 성공을 구분한다. 인증 결과는 다음 조작에서 확인한다."
+          ],
+          "expected": "로그인 폼과 역할별 작업 영역 안내가 보인다. 비어 있는 필수 입력으로는 제출이 제한된다.",
+          "resultShort": "로그인 폼과 역할 안내를 확인했습니다.\n필수 항목이 비어 있으면 제출이 제한됩니다.",
+          "troubleshooting": [
+            "페이지가 열리지 않으면 UI 5185 프로세스를 확인한다.",
+            "관리 화면 주소로 직접 진입해도 세션이 없으면 로그인으로 이동한다. URL 입력은 인증을 대체하지 않는다.",
+            "세션이 만료되었으면 승인된 계정으로 다시 로그인한다."
+          ],
+          "cautionShort": "현재 API 미연결입니다. 입력 폼이 보인다는 사실은 인증 성공과 다릅니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 25,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=25",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/oee-login.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:55.002Z",
+            "url": "http://127.0.0.1:5185/login",
+            "observed": "OEE 로그인 화면과 역할별 로컬 계정 프리셋 확인.",
+            "sha256": "94926647904c3c88132bdaaa500b72e75f9e87e3c4584facadedf214abe4a328"
+          },
+          "focus": {
+            "x": 0.18,
+            "y": 0.27,
+            "w": 0.64,
+            "h": 0.46
+          },
+          "focusTargets": [
+            "Sign in",
+            "Username",
+            "Password",
+            "Login"
+          ]
+        },
+        {
+          "id": "oee-account",
+          "order": 2,
+          "title": "개발용 관리자·조회 계정 입력 선택",
+          "shortTitle": "개발용 계정 빠르게 채우기",
+          "goal": "개발 환경의 계정 채우기 기능과 역할 차이를 이해한다.",
+          "oneLineGoal": "관리자·조회 계정의 입력값과 역할 차이를 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/users.svg",
+              "iconName": "users",
+              "label": "로컬 계정 영역 찾기",
+              "detail": "로컬 개발용 계정 선택"
+            },
+            {
+              "icon": "assets/icons/lucide/shield-check.svg",
+              "iconName": "shield",
+              "label": "관리자 계정 선택",
+              "detail": "관리자 계정 → admin"
+            },
+            {
+              "icon": "assets/icons/lucide/eye.svg",
+              "iconName": "eye",
+              "label": "조회 계정 선택",
+              "detail": "조회 계정 → viewer"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "작업에 맞는 역할 선택",
+              "detail": "분석·설계 / 조회 역할 구분"
+            }
+          ],
+          "steps": [
+            "로그인 폼 아래 '로컬 개발용 계정 선택' 영역이 표시되는지 확인한다.",
+            "'관리자 계정'을 눌러 Username이 admin으로 채워지고 Password가 가림 표시로 채워지는지 확인한다.",
+            "'조회 계정'을 눌러 Username이 viewer로 바뀌는지 확인한다.",
+            "접근하려는 작업에 맞는 계정을 다시 선택한다. 분석·설계는 관리자 권한, 조회 대시보드는 조회 권한이 필요하다.",
+            "이 단계에서는 버튼 선택과 로그인 성공을 구분한다. 실제 계정 검증은 Login 제출 시 API가 수행한다."
+          ],
+          "expected": "선택 버튼에 따라 입력값이 바뀌고 이전 오류가 지워진다. 인증 성공·계정 생성은 발생하지 않는다.",
+          "resultShort": "버튼 선택으로 입력값과 이전 오류가 갱신됩니다.\n계정 생성이나 인증 성공은 발생하지 않습니다.",
+          "troubleshooting": [
+            "선택 버튼이 없으면 운영 빌드일 수 있다. 승인된 계정 정보를 직접 입력한다.",
+            "자동 입력값으로 인증이 거부되면 해당 DB에 개발 계정이 존재하는지 관리자에게 확인한다.",
+            "계정 선택만으로 페이지가 이동하지 않는 것은 정상이다."
+          ],
+          "cautionShort": "계정 선택 버튼은 개발 환경용입니다. 운영 환경에서는 부여된 계정을 사용합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 26,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=26",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/oee-account.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:13:55.364Z",
+            "url": "http://127.0.0.1:5185/login",
+            "observed": "조회 계정 프리셋으로 입력 필드 채움. 암호는 마스킹된 UI만 캡처.",
+            "sha256": "cf31b8aa0d0942b065ec5fbf6de1ea088f8f6db6a604bc5d5fb514e7404deda4"
+          },
+          "focus": {
+            "x": 0.55,
+            "y": 0.31,
+            "w": 0.26,
+            "h": 0.38
+          },
+          "focusTargets": [
+            "로컬 개발용 계정 선택",
+            "관리자 계정",
+            "조회 계정"
+          ]
+        },
+        {
+          "id": "oee-api-error",
+          "order": 3,
+          "title": "로그인 제출 후 API 오류 구분",
+          "shortTitle": "API 오류와 계정 오류 구분",
+          "goal": "잘못된 계정과 분석 API 미연결을 구분하고 적절한 재시도를 한다.",
+          "oneLineGoal": "로그인 실패 원인에 맞춰 재시도 대상을 정합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "필수 계정 입력",
+              "detail": "개발 또는 승인된 계정"
+            },
+            {
+              "icon": "assets/icons/lucide/mouse-pointer-2.svg",
+              "iconName": "click",
+              "label": "Login 한 번 제출",
+              "detail": "Login → Signing in..."
+            },
+            {
+              "icon": "assets/icons/lucide/alert-triangle.svg",
+              "iconName": "error",
+              "label": "실제 오류 문구 확인",
+              "detail": "분석 API 연결 오류 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "서비스 복구 후 재시도",
+              "detail": "API·DB 복구 후 다시 제출"
+            }
+          ],
+          "steps": [
+            "개발 계정 선택 또는 승인된 계정 입력으로 필수 항목을 채운다.",
+            "'Login'을 한 번 누른다. 처리 중 'Signing in...'과 버튼 비활성화를 확인한다.",
+            "현재 API 미연결 환경에서는 '분석 API에 연결할 수 없습니다. API 및 데이터베이스 실행 상태를 확인한 후 다시 시도하세요.' 안내를 확인한다.",
+            "API가 401을 반환하는 경우에는 '계정 정보가 올바르지 않습니다. 아이디와 비밀번호를 확인하세요.'로 구분된다. 실제 나타난 문구만 기록한다.",
+            "API 또는 데이터 서비스가 복구된 뒤 재시도한다. 응답 대기 제한은 15초지만 연결 거부는 더 빨리 오류가 나타날 수 있다.",
+            "정상 인증 시 관리자는 /admin/dashboard-manager, 조회자는 /viewer로 이동하는지를 별도로 확인한다. 현재의 오류 화면을 인증 성공 근거로 사용하지 않는다."
+          ],
+          "expected": "API 미연결 또는 인증 거부 안내가 표시되고 재시도 가능한 상태로 돌아온다. 401 이외의 서버 오류도 API 연결 오류 안내에 포함되므로 원인 확정에는 서버 상태 확인이 필요하다.",
+          "resultShort": "현재 캡처는 API 미연결 오류입니다.\n401 계정 오류는 다른 문구로 구분됩니다.",
+          "troubleshooting": [
+            "오류가 나면 비밀번호를 반복 변경하기 전에 API 5184와 DB 서비스 상태를 확인한다.",
+            "UI 5185는 열리는데 로그인만 실패하면 프론트엔드 접근 성공과 백엔드 정상 여부를 구분한다.",
+            "API가 살아난 뒤에도 401이면 기존 계정·역할·비밀번호를 관리자에게 확인한다."
+          ],
+          "cautionShort": "API :5184·DB를 먼저 확인합니다. 비 401 오류도 연결 오류로 표시될 수 있으며 대기 한도는 15초입니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 27,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=27",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/oee-api-error.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:01.665Z",
+            "url": "http://127.0.0.1:5185/login",
+            "observed": "조회 계정 로그인 시 분석 API 연결 불가 오류 확인. 로그인 이후 기능 미검증.",
+            "sha256": "c456a31420b5e1e7390957af09ec440991f75c8818190f6bac7a81afe0ae60cd"
+          },
+          "focus": {
+            "x": 0.55,
+            "y": 0.28,
+            "w": 0.26,
+            "h": 0.45
+          },
+          "focusTargets": [
+            "Login",
+            "분석 API에 연결할 수 없습니다."
+          ]
+        },
+        {
+          "id": "oee-analysis",
+          "order": 4,
+          "title": "생산 증거와 OEE 분석 기간 조회",
+          "shortTitle": "설비와 기간으로 OEE 조회",
+          "goal": "API 복구 후 설비 키와 기간에 맞는 계산 창을 조회한다.",
+          "oneLineGoal": "서비스 복구 후 생산 근거와 계산 창을 함께 조회합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "의존 서비스 복구",
+              "detail": "API·DB 복구·관리자 인증"
+            },
+            {
+              "icon": "assets/icons/lucide/chart.svg",
+              "iconName": "chart",
+              "label": "생산 증거와 OEE 열기",
+              "detail": "생산 증거와 OEE"
+            },
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "설비 키와 기간 지정",
+              "detail": "Equipment Key·From / To"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "계산 창 조회",
+              "detail": "Refresh Analysis"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "계산 근거 함께 읽기",
+              "detail": "A/P/Q·OEE·Coverage·상태"
+            }
+          ],
+          "steps": [
+            "API·데이터 서비스와 관리자 인증을 복구한 뒤 관리자 계정으로 로그인한다.",
+            "왼쪽 '생산 증거와 OEE'를 선택하거나 인증 상태에서 http://127.0.0.1:5185/admin/integration으로 이동한다.",
+            "Integration Route에서 PLC Simulation→IIoT Gateway→TwinForge MES→OEEAnalyzer의 책임 구분을 확인한다.",
+            "Analysis Window의 Equipment Key에 등록된 설비 키를 입력한다. 기본 예시는 demo/automotive/main-conveyor다.",
+            "'최근 1시간', '최근 8시간', '최근 24시간' 중 하나를 누르면 기간이 바뀌면서 조회된다. 사용자 지정 기간은 From과 To를 입력하고 'Refresh Analysis'를 누른다.",
+            "Window Status, Availability, Performance, Quality, OEE와 Coverage를 함께 확인한다. 화면의 From·To 입력은 로컬 시각이며 요청 시 UTC로 변환된다.",
+            "Final 여부와 reasons·revision을 확인한다. N/A와 빈 결과를 0% 또는 생산 중단으로 바꾸어 해석하지 않는다."
+          ],
+          "expected": "복구 후에는 선택 기간의 계산 창과 최종 조회 시각이 나타난다. 생산 맥락이 겹치지 않으면 Awaiting production context 안내가 나올 수 있다. 현재 환경에서는 이 절차를 실행 확인하지 않았다.",
+          "resultShort": "복구 후 선택 기간의 계산 창을 확인하는 절차입니다.\n현재 환경에서는 실행하지 못했습니다.",
+          "troubleshooting": [
+            "시작 시각이 종료 시각보다 빠른지, 설비 키가 비어 있지 않은지 확인한다.",
+            "결과가 없으면 TwinForge 생산 맥락과 PLC/Gateway 표본의 설비 키·기간을 맞춘다.",
+            "Incomplete·Invalid·Provisional이면 coverage와 reasons를 읽고 부족·오류 증거를 먼저 해결한다."
+          ],
+          "cautionShort": "실행 미검증. 로컬 입력 시각은 UTC로 변환됩니다. N/A·빈 결과는 0%가 아니며 reasons와 생산 맥락을 확인합니다.",
+          "evidenceState": "unverified",
+          "verified": false,
+          "pdfPage": 28,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=28",
+          "screenshot": null,
+          "screenshotWidth": null,
+          "screenshotHeight": null,
+          "captureNote": null,
+          "evidence": null,
+          "focus": null,
+          "focusTargets": [
+            "Equipment Key",
+            "Analysis Window",
+            "Coverage"
+          ]
+        },
+        {
+          "id": "oee-export",
+          "order": 5,
+          "title": "계산 상태 필터와 OEE CSV 내보내기",
+          "shortTitle": "OEE 상태 필터와 CSV 저장",
+          "goal": "API 복구 후 검토할 계산 상태만 모아 근거와 함께 내보낸다.",
+          "oneLineGoal": "서비스 복구 후 계산 상태별 근거를 파일로 보관합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "분석 조회 준비",
+              "detail": "복구 후 Ledger 결과 필요"
+            },
+            {
+              "icon": "assets/icons/lucide/filter.svg",
+              "iconName": "filter",
+              "label": "계산 상태 선택",
+              "detail": "계산 상태: Final 등"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "필터 수와 근거 확인",
+              "detail": "기간·A/P/Q·Coverage 대조"
+            },
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "CSV 내보내기",
+              "detail": "CSV 내보내기 ↓"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "CSV 값과 행 수 대조",
+              "detail": "UTC·출처·reasons·행 수"
+            }
+          ],
+          "steps": [
+            "관리자 '생산 증거와 OEE'에서 분석 조회가 끝나고 OEE Window Ledger에 결과가 있는지 확인한다.",
+            "'계산 상태'에서 전체 상태 또는 Final·Provisional·Invalid·Incomplete·NotApplicable 중 하나를 고른다.",
+            "필터 결과 수와 전체 계산 창 수를 비교하고, 표의 기간·A/P/Q·OEE·Coverage·Production·Revision·Diagnostics를 확인한다.",
+            "'CSV 내보내기 ↓'를 누르고 oee-windows-YYYY-MM-DD.csv 다운로드를 확인한다.",
+            "CSV에서 contextId, fromUtc, toUtc, status, sourceMode, availability, performance, quality, oee, coverage, total, reject, revision, reasons 열을 확인한다.",
+            "CSV의 비율은 화면의 퍼센트 문자열이 아닌 원래 수치다. null은 빈 셀로 저장될 수 있다. 내보낸 행 수가 필터 결과 수와 맞는지 확인한다."
+          ],
+          "expected": "현재 필터에 맞는 계산 창이 UTC 기간·품질 사유·계산 revision을 포함한 CSV로 저장된다. 결과가 없거나 조회 중이면 내보내기가 비활성화된다. 현재 환경에서는 실행 확인하지 않았다.",
+          "resultShort": "필터 결과 전체를 계산 근거와 함께 저장하는 절차입니다.\n현재 환경에서는 실행하지 못했습니다.",
+          "troubleshooting": [
+            "상태를 고른 뒤 결과가 0개면 '전체 상태'로 돌아가 다른 계산 상태가 있는지 확인한다.",
+            "CSV 버튼이 비활성화되면 조회 중인지 또는 필터 결과가 없는지 확인한다.",
+            "모의 출처 Demo를 External 실측 증거로 표시하지 않는다. Final 여부와 sourceMode를 별도로 확인한다."
+          ],
+          "cautionShort": "실행 미검증. CSV 비율은 원래 수치이며 null은 빈 셀입니다. Demo를 실측 External로 표시하지 않습니다.",
+          "evidenceState": "unverified",
+          "verified": false,
+          "pdfPage": 29,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=29",
+          "screenshot": null,
+          "screenshotWidth": null,
+          "screenshotHeight": null,
+          "captureNote": null,
+          "evidence": null,
+          "focus": null,
+          "focusTargets": [
+            "계산 상태",
+            "CSV 내보내기 ↓",
+            "sourceMode",
+            "reasons"
+          ]
+        },
+        {
+          "id": "oee-viewer",
+          "order": 6,
+          "title": "조회 전용 효율 모니터와 로그아웃",
+          "shortTitle": "조회 대시보드와 로그아웃",
+          "goal": "API 복구 후 조회 권한으로 허용된 위젯·갱신 시각을 읽고 세션을 종료한다.",
+          "oneLineGoal": "서비스 복구 후 허용된 위젯과 갱신 시각을 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/lock-keyhole.svg",
+              "iconName": "lock",
+              "label": "조회 계정 로그인",
+              "detail": "서비스 복구 후 조회 계정"
+            },
+            {
+              "icon": "assets/icons/lucide/monitor.svg",
+              "iconName": "monitor",
+              "label": "조회 위젯 확인",
+              "detail": "Live Dashboard의 위젯"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "갱신 시각 확인",
+              "detail": "Session·Last update"
+            },
+            {
+              "icon": "assets/icons/lucide/log-out.svg",
+              "iconName": "logout",
+              "label": "세션 종료",
+              "detail": "로그아웃 ↗ → /login"
+            }
+          ],
+          "steps": [
+            "API·데이터 서비스가 정상인 환경에서 조회 계정으로 로그인한다.",
+            "/viewer의 Live Dashboard에서 Session active, Last update, Widgets, Loaded Values, Mode를 확인한다.",
+            "Viewer Dashboard의 배정 위젯 값을 읽는다. 조회 모드에서는 위젯을 이동·크기 조절할 수 없다.",
+            "현재값과 추세의 마지막 갱신 시각을 확인한다. 실시간 갱신은 SignalR, 초기 현재값은 REST 응답을 사용한다.",
+            "'No dashboard widgets'가 보이면 현재 계정에 배정된 레이아웃·위젯 권한을 관리자에게 확인한다.",
+            "상단 '로그아웃 ↗'을 누르고 /login으로 돌아가는지 확인한다."
+          ],
+          "expected": "계정에 허용된 위젯을 읽기 전용으로 확인하고 로그아웃 후 로그인 화면으로 돌아온다. 현재 환경에서는 인증과 데이터 조회를 실행 확인하지 않았다.",
+          "resultShort": "읽기 전용 위젯 확인과 세션 종료 절차입니다.\n인증·조회·로그아웃은 현재 환경에서 미검증입니다.",
+          "troubleshooting": [
+            "뷰어 계정으로 관리자 URL에 접근하면 /viewer로 이동할 수 있다. 권한 오류를 우회하지 않는다.",
+            "값이 비거나 No updates이면 데이터 유입·태그 바인딩·세션 상태를 확인한다.",
+            "실시간 갱신이 멈추면 Last update와 연결 상태를 확인하고 필요 시 재로그인한다."
+          ],
+          "cautionShort": "실행 미검증. No dashboard widgets는 배정 권한을, No updates는 데이터·세션 상태를 확인합니다.",
+          "evidenceState": "unverified",
+          "verified": false,
+          "pdfPage": 30,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=30",
+          "screenshot": null,
+          "screenshotWidth": null,
+          "screenshotHeight": null,
+          "captureNote": null,
+          "evidence": null,
+          "focus": null,
+          "focusTargets": [
+            "Live Dashboard",
+            "Last update",
+            "로그아웃 ↗"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "sourceId": "05-data",
+      "manifestChapterId": "05-data",
+      "order": 5,
+      "label": "DataNexus Analytics",
+      "title": "DataNexus Analytics 사용 매뉴얼",
+      "shortTitle": "DataNexus",
+      "subtitle": "교육용 CSV를 차트와 재현 가능한 보고서로",
+      "scope": "로컬 데이터 파일을 차트와 분석 그리드로 살펴보고 입력 요약을 템플릿 보고서로 작성합니다. 제조 연동 화면은 원본 품질·시각과 의존성 상태를 읽기 전용으로 관측합니다. 현재 Kafka/OEE 경로는 미연결 또는 비활성 상태이며 실시간 생산 지표가 준비된 것으로 표시하지 않습니다.",
+      "scopeNote": "가상 CSV 실습 · Kafka/OEE 미연결 · 보고서 저장은 미검증",
+      "prerequisites": [
+        "로컬 DataNexus http://127.0.0.1:5186/ 가 실행 중이어야 합니다.",
+        "현재 실습은 Streaming:EnableDemoStream=false, IndustrialIntegration:Enabled=false로 실행합니다. 로컬 Hub 연결과 제조 이벤트 수신은 서로 다른 상태입니다.",
+        "파일 실습은 아래 교육용 가상 CSV만 사용합니다. 업로드 기본 제한은 10MB이며 CSV/JSON 형식을 지원합니다.",
+        "분석 그리드의 DN- 접두 초기 행은 로컬 데모입니다. 업로드로 추가한 IM- 행 및 실제 제조 연동 데이터와 구분합니다.",
+        "보고서 생성은 입력 요약을 보존하는 로컬 템플릿 처리입니다. 외부 생성형 AI 호출이나 생산 데이터 자동 검증을 수행하지 않습니다."
+      ],
+      "actions": [
+        "CSV 시각화",
+        "지표 필터·비교",
+        "관측 근거 기록"
+      ],
+      "icon": "assets/icons/lucide/chart.svg",
+      "accent": "#287B58",
+      "portfolioPage": "datanexus-analytics.html",
+      "manualPage": "manual-data.html",
+      "chapterPdfPage": 31,
+      "pdfPageStart": 31,
+      "pdfPageEnd": 36,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=31",
+      "markdown": "assets/docs/manuals/chapters/data.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/data-overview.jpg",
+      "counts": {
+        "operations": 5,
+        "screenshots": 5,
+        "full": 4,
+        "partial": 1,
+        "unverified": 0
+      },
+      "samples": [
+        {
+          "id": "manual-process",
+          "productId": "data",
+          "label": "CSV 가져오기 실습 파일",
+          "note": "교육용 가상 데이터 3행입니다.",
+          "description": "교육용 가상 데이터 3행입니다.",
+          "kind": "csv",
+          "path": "assets/docs/manuals/samples/manual-process.csv",
+          "sha256": "0e6c48fb41cc44e487070532236f9709a5c8552c666d4e2d27fc7b4ba20ff663"
+        },
+        {
+          "id": "analytics-temperature",
+          "productId": "data",
+          "label": "분석 그리드 CSV 예시",
+          "note": "로컬 분석 그리드에서 저장한 Temperature 실습 데이터 3행입니다.",
+          "description": "로컬 분석 그리드에서 저장한 Temperature 실습 데이터 3행입니다.",
+          "kind": "csv",
+          "path": "assets/docs/manuals/samples/analytics-temperature.csv",
+          "sha256": "fc0004b0472fb083e77061aa241329788f14b859c63cf299280fc0c83a2a54ca"
+        },
+        {
+          "id": "analytics-temperature",
+          "productId": "data",
+          "label": "분석 그리드 JSON 예시",
+          "note": "같은 실습 데이터의 JSON 3개 레코드입니다.",
+          "description": "같은 실습 데이터의 JSON 3개 레코드입니다.",
+          "kind": "json",
+          "path": "assets/docs/manuals/samples/analytics-temperature.json",
+          "sha256": "3c3719cbfa8f72c47e880cac6536483db89200cd4488504f1decf959db7e83ac"
+        }
+      ],
+      "localUrl": "http://127.0.0.1:5186/",
+      "sources": [
+        "DataNexus-Analytics/src/DataNexus.Web/Components/Pages/Dashboard.razor",
+        "DataNexus-Analytics/src/DataNexus.Web/Components/Pages/FileIngestion.razor",
+        "DataNexus-Analytics/src/DataNexus.Web/Components/Pages/AnalyticsGrid.razor",
+        "DataNexus-Analytics/src/DataNexus.Web/Components/Pages/Report.razor",
+        "DataNexus-Analytics/src/DataNexus.Web/Components/Pages/IndustrialIntegration.razor",
+        "DataNexus-Analytics/src/DataNexus.Infrastructure/Analytics/AnalyticsDataService.cs",
+        "DataNexus-Analytics/src/DataNexus.Infrastructure/Reports/ReportService.cs"
+      ],
+      "operations": [
+        {
+          "id": "data-overview",
+          "order": 1,
+          "title": "분석 개요에서 스트림 연결 상태 확인",
+          "shortTitle": "스트림 연결과 수신 구분",
+          "goal": "화면 연결 성공과 실제 데이터 수신 여부를 분리해 읽습니다.",
+          "oneLineGoal": "Hub 연결 성공과 실제 제조 데이터 수신을 따로 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/chart.svg",
+              "iconName": "chart",
+              "label": "분석 개요 열기",
+              "detail": "수신 건수·Latest Source"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "스트림 연결",
+              "detail": "스트림 연결"
+            },
+            {
+              "icon": "assets/icons/lucide/database.svg",
+              "iconName": "database",
+              "label": "수신 여부 확인",
+              "detail": "실제 이벤트·최근 원본 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/square.svg",
+              "iconName": "stop",
+              "label": "화면 연결 종료",
+              "detail": "Disconnect"
+            }
+          ],
+          "steps": [
+            "http://127.0.0.1:5186/ 에 접속하거나 왼쪽 '분석 개요'를 누릅니다.",
+            "'스트림 대기' 배지와 Stream Messages, Connection Status, Latest Source 카드를 확인합니다.",
+            "'스트림 연결'을 누릅니다. 연결되면 '스트림 연결됨'과 '실제 데이터 수신을 기다립니다.' 안내를 확인합니다.",
+            "현재 데모 스트림과 제조 수집이 비활성인 실습에서는 수신 0건과 Latest Source '—'가 유지될 수 있습니다. 이를 정상 생산 수집으로 기록하지 않습니다.",
+            "원복: 'Disconnect'를 눌러 연결을 닫습니다. 서버나 다른 앱의 수집을 중지하는 동작은 아닙니다."
+          ],
+          "expected": "성공하면 로컬 스트림 Hub 연결 상태만 Active로 바뀝니다. 수신 데이터가 있어야 이벤트와 최근 원본이 채워집니다. 화면은 최근 500개 이벤트만 보관합니다.",
+          "resultShort": "연결 Active와 수신 0건이 함께 보일 수 있습니다.\n수신 이벤트가 있어야 최근 원본이 채워집니다.",
+          "troubleshooting": [
+            "연결 실패 안내가 보이면 :5186 서버가 실행 중인지 확인하고 다시 시도합니다.",
+            "연결됨인데 수신 0건이면 제조 데이터 연동에서 Kafka/OEE 상태를 확인합니다. 연결 배지만으로 수집 완료로 판단하지 않습니다."
+          ],
+          "cautionShort": "이 실습은 데모 스트림·제조 수집이 비활성입니다. 연결 배지로 수집 성공을 판단하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 32,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=32",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/data-overview.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:03:53.337Z",
+            "url": "http://127.0.0.1:5186/live-monitor",
+            "observed": "SignalR 연결과 수신 이벤트 0을 구분, uptime 원본 관측 전 N/A 표시",
+            "sha256": "516fc3c0006e4dfd1ad8261e2e1cd4ce3265935e15bbb501076f025482d7d4cb"
+          },
+          "focus": {
+            "x": 0.18,
+            "y": 0.1,
+            "w": 0.8,
+            "h": 0.44
+          },
+          "focusTargets": [
+            "Stream Messages",
+            "Connection Status",
+            "Latest Source"
+          ]
+        },
+        {
+          "id": "data-ingestion",
+          "order": 2,
+          "title": "교육용 CSV 업로드·차트 작성·그리드로 추가",
+          "shortTitle": "CSV를 차트와 분석 행으로",
+          "goal": "파일 열기부터 숫자 지표 차트와 분석 레코드 추가까지 진행합니다.",
+          "oneLineGoal": "교육용 파일을 열어 숫자 지표를 시각화합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/file-up.svg",
+              "iconName": "upload",
+              "label": "교육용 CSV 열기",
+              "detail": "manual-process.csv 업로드"
+            },
+            {
+              "icon": "assets/icons/lucide/settings.svg",
+              "iconName": "settings",
+              "label": "차트 축 지정",
+              "detail": "Timestamp·Temperature·Line"
+            },
+            {
+              "icon": "assets/icons/lucide/chart.svg",
+              "iconName": "chart",
+              "label": "차트 렌더링",
+              "detail": "Render Chart → 3개 점"
+            },
+            {
+              "icon": "assets/icons/lucide/plus.svg",
+              "iconName": "plus",
+              "label": "분석 그리드 추가",
+              "detail": "Add to Analytics Grid"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "추가한 행 확인",
+              "detail": "Open Analytics Grid"
+            }
+          ],
+          "steps": [
+            "왼쪽 파일 수집 또는 /file-ingestion을 엽니다. 함께 제공한 samples/manual-process.csv를 UTF-8 파일로 준비합니다.",
+            "'Drag & drop your file here / or click to browse' 영역을 눌러 파일을 선택합니다. 업로드 후 Configure Chart의 3 rows와 컬럼 목록을 확인합니다.",
+            "'X-Axis Column'=Timestamp, 'Y-Axis Column'=Temperature, 'Chart Type'=Line으로 선택하고 'Render Chart'를 누릅니다.",
+            "교육용 캐시에 추가할 때만 'Add to Analytics Grid'를 누릅니다. 3행 × 숫자 지표 2개이므로 6개 분석 레코드 추가 안내와 'Added to Grid'를 확인합니다.",
+            "'Open Analytics Grid'로 이동합니다. 화면만 원복하려면 파일 수집으로 돌아가 새 파일을 선택하거나 페이지를 다시 엽니다. 이미 추가한 레코드는 캐시에 남으며 UI에서 개별 삭제하는 기능은 없습니다."
+          ],
+          "expected": "Timestamp에 따른 Temperature 3개 점이 차트로 표시됩니다. 그리드 추가 시 Source는 파일명, ID는 IM- 접두이며 Temperature·Speed 총 6개 레코드가 생성됩니다. 이 수치는 교육용 가상값입니다.",
+          "resultShort": "3행 × 숫자 지표 2개 = 6개 레코드입니다.\nTemperature·Speed는 교육용 가상값입니다.",
+          "troubleshooting": [
+            "빈 파일·지원하지 않는 확장자·기본 10MB 초과 파일은 오류가 표시됩니다. 헤더가 있고 숫자 값이 들어 있는 CSV를 사용합니다.",
+            "'No numeric metric columns were found'이면 시간·식별자 컬럼 외에 숫자 지표가 있는지 확인합니다. 같은 파일의 추가 버튼이 Added to Grid로 바뀌면 중복해서 누르지 않습니다."
+          ],
+          "cautionShort": "추가는 캐시를 변경합니다. Added to Grid 상태에서는 중복 추가하지 않으며 개별 삭제 UI는 없습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 33,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=33",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/data-ingestion.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": "이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.",
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:04:44.289Z",
+            "url": "http://127.0.0.1:5186/file-ingestion",
+            "observed": "교육용 3행 CSV와 Timestamp/Temperature 선택, Line 차트 렌더 및 분석 레코드 6건 추가를 확인.",
+            "sha256": "dc053c065b9e9df35cfedc51d6aa96a5e9fcf3d65083e4ba0323fc9dbcfa87d4"
+          },
+          "focus": {
+            "x": 0.17,
+            "y": 0.31,
+            "w": 0.81,
+            "h": 0.43
+          },
+          "focusTargets": [
+            "Configure Chart",
+            "Render Chart",
+            "Add to Analytics Grid"
+          ]
+        },
+        {
+          "id": "data-grid",
+          "order": 3,
+          "title": "분석 그리드 필터·강조 기준·내보내기",
+          "shortTitle": "분석 행 필터와 강조 비교",
+          "goal": "업로드 지표만 선택해 비교하고 현재 필터 결과를 파일로 보관합니다.",
+          "oneLineGoal": "파일·지표로 좁혀 결과를 비교하고 내보냅니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "파일과 지표 검색",
+              "detail": "manual-process·Temperature"
+            },
+            {
+              "icon": "assets/icons/lucide/filter.svg",
+              "iconName": "filter",
+              "label": "화면 강조 기준 변경",
+              "detail": "Neon threshold ≥: 74"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "값 비교와 정렬",
+              "detail": "Temperature 3건·74.1 강조"
+            },
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "필터 전체 내보내기",
+              "detail": "CSV 또는 JSON"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "reset",
+              "label": "조건 원복",
+              "detail": "Clear → 강조 기준 80"
+            }
+          ],
+          "steps": [
+            "왼쪽 '분석 그리드' 또는 /analytics-grid을 엽니다. DN- 초기 행은 로컬 데모라는 안내를 먼저 읽습니다.",
+            "'Search source…'에 'manual-process'를 입력하고 필요하면 'Search metric…'에 'Temperature'를 입력합니다. 앞 단계에서 파일을 추가했다면 Temperature 3건이 남습니다.",
+            "기본 'Neon threshold ≥'는 80입니다. 교육용 데이터의 강조를 비교하려면 74로 바꿉니다. 이 기준은 화면 강조용이며 PLC 알람이나 OEE 계산을 변경하지 않습니다.",
+            "필요하면 컬럼 제목을 눌러 정렬합니다. 'CSV' 또는 'JSON'을 눌러 analytics-export.csv / analytics-export.json을 다운로드합니다. 내보내기는 현재 페이지뿐 아니라 필터에 맞는 모든 행을 대상으로 합니다.",
+            "원복: 'Clear'를 눌러 검색·정렬 조건을 지우고 강조 기준을 80으로 되돌립니다. 기본 페이지 크기는 25입니다."
+          ],
+          "expected": "파일명·지표 조건에 맞는 행과 수치만 표시됩니다. 임계값 74에서는 예시 Temperature 74.1이 강조됩니다. 원본 레코드 값은 바뀌지 않습니다.",
+          "resultShort": "필터에 맞는 전체 행이 내보내기 대상입니다.\n강조 기준 변경은 원본 값을 바꾸지 않습니다.",
+          "troubleshooting": [
+            "검색 결과가 없으면 Clear 후 Source 열을 확인합니다. 업로드만 하고 Add to Analytics Grid를 누르지 않았다면 IM- 행은 생성되지 않습니다.",
+            "다운로드가 보이지 않으면 브라우저 다운로드 목록을 확인합니다. CSV/JSON 저장은 분석 그리드의 로컬 파일 내보내기입니다."
+          ],
+          "cautionShort": "초기 DN- 행은 로컬 데모입니다. 화면 강조는 PLC 알람이나 OEE 계산을 변경하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 34,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=34",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/data-grid.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": "이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.",
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:17:53.470Z",
+            "url": "http://127.0.0.1:5186/analytics-grid",
+            "observed": "필터Temperature3건, 강조기준74에서74.1강조. CSV/JSON각3건 다운로드 및 값정렬/Clear동작 검증.",
+            "sha256": "589f0c6623c3ec2ab0fb4be82366eb590ce48e12d74a6e08fa8c84483318795f"
+          },
+          "focus": {
+            "x": 0.18,
+            "y": 0.1,
+            "w": 0.8,
+            "h": 0.35
+          },
+          "focusTargets": [
+            "Search source…",
+            "Search metric…",
+            "Neon threshold ≥",
+            "CSV"
+          ]
+        },
+        {
+          "id": "data-report",
+          "order": 4,
+          "title": "로컬 템플릿 보고서 생성과 Markdown 저장",
+          "shortTitle": "관측 결과를 로컬 보고서로",
+          "goal": "관측 결과와 미연결 제한을 남기는 재현 가능한 보고서를 만듭니다.",
+          "oneLineGoal": "입력한 결과와 미연결 한계를 템플릿에 기록합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "제목과 작성자 입력",
+              "detail": "Report Builder 필수 항목"
+            },
+            {
+              "icon": "assets/icons/lucide/file-text.svg",
+              "iconName": "file",
+              "label": "관측 내용과 제한 기록",
+              "detail": "가상 CSV·Kafka/OEE 미연결"
+            },
+            {
+              "icon": "assets/icons/lucide/play.svg",
+              "iconName": "play",
+              "label": "보고서 생성",
+              "detail": "보고서 생성 → 입력 보존"
+            },
+            {
+              "icon": "assets/icons/lucide/eye.svg",
+              "iconName": "eye",
+              "label": "미리보기 확인",
+              "detail": "Markdown·Preview"
+            },
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "복사·저장 절차",
+              "detail": "Copy MD / Download .md"
+            }
+          ],
+          "steps": [
+            "왼쪽 '템플릿 보고서' 또는 /report을 엽니다. Report Builder에서 제목을 '교육용 공정 데이터 확인', 작성자를 실습 담당자로 입력합니다.",
+            "'보고서 유형'은 기본 '분석 보고서 (Analysis)', '언어'는 '한국어'로 둡니다. '목적 및 배경'에 '교육용 CSV 시각화 및 연동 상태 확인'을 입력합니다.",
+            "'데이터 내용 / 분석 결과'에 '교육용 가상 CSV 3행. Temperature 72.5/74.1/73.2, Speed 120/125/122. Kafka/OEE 미연결로 실제 생산 OEE는 확인하지 못함.'을 입력합니다.",
+            "'보고서 생성'을 누르고 'Markdown'과 'Preview' 탭을 전환하여 입력한 요약이 보존되는지 확인합니다.",
+            "'Copy MD'로 복사하거나 'Download .md'로 저장합니다. 원복: 입력을 바꾸어 다시 생성하거나 페이지를 다시 열면 됩니다. 다운로드한 파일은 사용자가 별도로 보관합니다."
+          ],
+          "expected": "입력한 제목·작성자·목적·요약이 로컬 보고서 템플릿에 채워집니다. 이 기능은 외부 AI 분석이나 입력 수치의 진위 검증을 수행하지 않습니다.",
+          "resultShort": "생성과 Preview 표시를 확인했습니다.\nCopy MD·Download .md의 완료 여부는 미검증입니다.",
+          "troubleshooting": [
+            "제목이 비어 있으면 보고서 생성이 비활성입니다.",
+            "Copy MD가 브라우저 권한 때문에 실패하면 Download .md를 사용합니다. 보고서에 없는 생산 지표를 자동으로 보완하거나 추정한 것으로 해석하지 않습니다."
+          ],
+          "cautionShort": "로컬 템플릿은 외부 AI 분석이나 수치의 진위 검증을 하지 않습니다. 확인된 범위는 생성·미리보기까지입니다.",
+          "evidenceState": "partial",
+          "verified": true,
+          "pdfPage": 35,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=35",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/data-report.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": "이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.",
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:08:13.380Z",
+            "url": "http://127.0.0.1:5186/report",
+            "observed": "입력한 교육용 요약을 보존하는 로컬 템플릿 보고서 생성 및 Preview 확인",
+            "sha256": "482508e2538581be6b9d8081f72ba6ce8d7262a8e583848f6dadcbd65d83e396"
+          },
+          "focus": {
+            "x": 0.18,
+            "y": 0.1,
+            "w": 0.8,
+            "h": 0.89
+          },
+          "focusTargets": [
+            "Report Builder",
+            "보고서 생성",
+            "Preview"
+          ]
+        },
+        {
+          "id": "data-integration",
+          "order": 5,
+          "title": "제조 연동 의존성 확인과 화면 갱신 제어",
+          "shortTitle": "제조 연동 근거와 갱신 제어",
+          "goal": "원본 관측 상태를 확인하고 읽는 동안 자동 갱신을 잠시 멈춥니다.",
+          "oneLineGoal": "Kafka·OEE 의존성과 원본 근거를 따로 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "제조 데이터 연동 열기",
+              "detail": "Kafka·OEE API·이벤트 수"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "계산 근거 읽기",
+              "detail": "OEE·A/P/Q·Coverage: N/A"
+            },
+            {
+              "icon": "assets/icons/lucide/pause.svg",
+              "iconName": "pause",
+              "label": "화면 자동 갱신 멈춤",
+              "detail": "자동 갱신 일시정지"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "현재 스냅샷 재조회",
+              "detail": "지금 새로고침"
+            },
+            {
+              "icon": "assets/icons/lucide/play.svg",
+              "iconName": "play",
+              "label": "화면 갱신 재개",
+              "detail": "자동 갱신 재개"
+            }
+          ],
+          "steps": [
+            "왼쪽 '제조 데이터 연동' 또는 /industrial-integration을 엽니다.",
+            "오른쪽 상태 배지, 'Kafka · 미연결', 'OEE API · 미연결', 수신 이벤트 수를 확인합니다. 현재 실습에서는 '연동 수집 비활성' 또는 의존성 대기 상태가 예상됩니다.",
+            "OEE·Availability·Performance·Quality·Coverage가 N/A이면 계산 근거가 없는 상태로 기록합니다. 0%로 바꾸어 해석하지 않습니다.",
+            "'자동 갱신 일시정지'를 누르고 버튼이 '자동 갱신 재개'로 바뀌는지 확인합니다. 필요하면 '지금 새로고침'으로 현재 저장된 스냅샷을 다시 표시합니다.",
+            "원복: '자동 갱신 재개'를 누릅니다. 이 버튼은 화면의 1초 갱신만 제어하며 Kafka/OEE 서버를 시작·중지하거나 강제 재수집하지 않습니다."
+          ],
+          "expected": "의존성별 연결과 원본 시각·품질·계산 근거를 구분해 볼 수 있습니다. 비활성/미연결 환경에서는 데이터와 OEE가 없다는 상태가 그대로 유지됩니다.",
+          "resultShort": "현재는 의존 서비스 미연결·계산 근거 없음입니다.\nN/A는 수치 0%와 구분합니다.",
+          "troubleshooting": [
+            "'화면 확인' 시각과 Source time은 서로 다릅니다. 새로고침한 화면 시각을 원본 데이터 생성 시각으로 사용하지 않습니다.",
+            "진단 오류나 N/A가 지속되면 Kafka 수신 경로와 OEE API를 담당자가 복구해야 합니다. '지금 새로고침'은 미연결 의존성을 연결하는 버튼이 아닙니다."
+          ],
+          "cautionShort": "화면 갱신은 Kafka/OEE 시작·재수집 명령이 아닙니다. 화면 확인 시각과 Source time을 구분합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 36,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=36",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/data-integration.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T16:57:50.626Z",
+            "url": "http://127.0.0.1:5186/industrial-integration",
+            "observed": "수집 비활성, Kafka/OEE 미연결, 자동 갱신 일시정지와 수동 새로고침 확인",
+            "sha256": "3a0fc125bbdd84f68785ab15c73e9680ea3f5aa333b581cc77c88b8f39ffa0f0"
+          },
+          "focus": {
+            "x": 0.18,
+            "y": 0.1,
+            "w": 0.8,
+            "h": 0.61
+          },
+          "focusTargets": [
+            "Kafka · 미연결",
+            "OEE API · 미연결",
+            "자동 갱신 일시정지"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assistant",
+      "sourceId": "06-assistant",
+      "manifestChapterId": "assistant",
+      "order": 6,
+      "label": "Industrial Assistant",
+      "title": "Industrial AI Assistant",
+      "shortTitle": "Industrial Assistant",
+      "subtitle": "상태를 묻고 출처를 검토해 근거와 함께 보관하기",
+      "scope": "PLC HTTP 조회와 결정적 Fake 답변을 사용하는 로컬 읽기 전용 실습. History, Gateway, DataCatalog, OEE는 Mock 구성이다.",
+      "scopeNote": "PLC HTTP 조회 확인 · 답변 문장 생성은 Fake 방식",
+      "prerequisites": [
+        "Assistant Host와 Python 서비스가 실행 중이어야 합니다.",
+        "실행 터미널의 일회성 Client key를 준비합니다. 매뉴얼이나 내보내기에 키를 적지 않습니다.",
+        "PLC 상태 실습은 PLC Simulation :5180 실행과 machine-03의 매핑이 필요합니다."
+      ],
+      "actions": [
+        "선택 자산 상태 조회",
+        "출처·품질·시각 검토",
+        "답변과 대화 보관"
+      ],
+      "icon": "assets/icons/lucide/message-square.svg",
+      "accent": "#A64F75",
+      "portfolioPage": "industrial-ai-assistant.html",
+      "manualPage": "manual-assistant.html",
+      "chapterPdfPage": 37,
+      "pdfPageStart": 37,
+      "pdfPageEnd": 44,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=37",
+      "markdown": "assets/docs/manuals/chapters/assistant.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-connect.jpg",
+      "counts": {
+        "operations": 7,
+        "screenshots": 7,
+        "full": 7,
+        "partial": 0,
+        "unverified": 0
+      },
+      "samples": [
+        {
+          "id": "assistant-conversation",
+          "productId": "assistant",
+          "label": "Assistant 대화 내보내기 예시",
+          "note": "Fake 생성과 실제 PLC 읽기 출처가 표시된 로컬 대화 기록입니다. 인증 키는 포함하지 않습니다.",
+          "description": "Fake 생성과 실제 PLC 읽기 출처가 표시된 로컬 대화 기록입니다. 인증 키는 포함하지 않습니다.",
+          "kind": "md",
+          "path": "assets/docs/manuals/samples/assistant-conversation.md",
+          "sha256": "7d0bd806f78eab18237dfdb216167eb251a18f7bff3484ff17fbbccfa66758c1"
+        }
+      ],
+      "localUrl": "http://127.0.0.1:5187/chat-test/",
+      "sources": [
+        "industrial-ai-assistant/src/server/IndustrialAIAssistant.Host/ChatTest/index.html",
+        "industrial-ai-assistant/src/server/IndustrialAIAssistant.Host/ChatTest/chat.js",
+        "industrial-ai-assistant/scripts/chat-test-host.py"
+      ],
+      "operations": [
+        {
+          "id": "assistant-connect",
+          "order": 1,
+          "title": "접속과 조회 범위 확인",
+          "shortTitle": "비서 접속과 조회 범위 확인",
+          "goal": "선택한 역할과 자산, 실제 소스 구성을 확인합니다.",
+          "oneLineGoal": "역할·자산·소스를 정한 뒤 로컬 Host를 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/lock-keyhole.svg",
+              "iconName": "lock",
+              "label": "현재 실행 키 입력",
+              "detail": "Client key: 현재 터미널 키"
+            },
+            {
+              "icon": "assets/icons/lucide/users.svg",
+              "iconName": "users",
+              "label": "역할과 자산 지정",
+              "detail": "통합 비서·machine-03"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "소스 설정 확인",
+              "detail": "PLC_Simulation·TwinForge"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "Host 응답 확인",
+              "detail": "Host 확인 → HTTP·시각"
+            }
+          ],
+          "steps": [
+            "채팅 주소를 열고 Client key에 실행 터미널의 키를 입력합니다.",
+            "비서 역할을 통합 비서, 논리 자산 ID를 machine-03으로 둡니다.",
+            "소스 설정에서 current: PLC_Simulation, twin: TwinForge를 확인합니다.",
+            "Host 확인을 누르고 HTTP 응답을 확인합니다."
+          ],
+          "expected": "Host 응답 시각과 HTTP 코드가 표시됩니다. 소스 설정은 개별 조회 성공과 별개입니다.",
+          "resultShort": "Host 응답 시각과 HTTP 코드가 표시됩니다.\n소스 선언과 개별 조회 성공은 별개입니다.",
+          "troubleshooting": [
+            "401이면 현재 실행의 Client key를 다시 확인합니다.",
+            "Host 응답이 없으면 로컬 서비스를 실행한 뒤 페이지를 다시 엽니다."
+          ],
+          "cautionShort": "401이면 현재 실행의 Client key를 확인합니다. 키는 문서나 공유 자료에 넣지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 38,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=38",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-connect.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:15.190Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "Client key 마스킹 상태. Host 확인과 PLC_Simulation/TwinForge 실제 소스 설정, 나머지 Mock 확인.",
+            "sha256": "a3b9155c70e5e06e84363203ba3d594e9afa1d0c859037a125f8d78e514c1437"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.0217,
+            "w": 0.78501,
+            "h": 0.24116
+          },
+          "focusTargets": [
+            "Client key",
+            "비서 역할",
+            "논리 자산 ID",
+            "Host 확인"
+          ]
+        },
+        {
+          "id": "assistant-question",
+          "order": 2,
+          "title": "예시 질문과 입력",
+          "shortTitle": "예시 질문을 확인하고 보내기",
+          "goal": "질문을 선택하고 전송 전에 내용을 확인합니다.",
+          "oneLineGoal": "조회할 질문을 선택하고 입력 내용을 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/message-square.svg",
+              "iconName": "message",
+              "label": "현재 상태 예시 선택",
+              "detail": "현재 선택한 설비 상태 어때?"
+            },
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "질문과 글자 수 확인",
+              "detail": "질문 확인·2,000자 이내"
+            },
+            {
+              "icon": "assets/icons/lucide/send.svg",
+              "iconName": "send",
+              "label": "질문 전송",
+              "detail": "Enter 또는 보내기"
+            }
+          ],
+          "steps": [
+            "현재 선택한 설비 상태 어때? 예시 버튼을 누릅니다.",
+            "입력창의 질문과 글자 수를 확인합니다.",
+            "줄바꿈은 Shift+Enter, 전송은 Enter 또는 보내기를 사용합니다."
+          ],
+          "expected": "예시 질문이 입력되고 글자 수가 함께 갱신됩니다. 최대 입력은 2,000자입니다.",
+          "resultShort": "예시 질문과 글자 수가 함께 갱신됩니다.\n줄바꿈은 Shift+Enter를 사용합니다.",
+          "troubleshooting": [
+            "한글 조합 중 Enter는 조합을 먼저 마칩니다.",
+            "설비 제어 요청을 이 실습의 조회 기능으로 실행하지 않습니다."
+          ],
+          "cautionShort": "한글 조합 중 Enter는 조합을 먼저 마칩니다. 이 실습은 설비 상태 조회입니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 39,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=39",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-question.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:15.556Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "예시 질문으로 현재 선택한 설비 상태 질문을 입력; 2000자 제한 안내.",
+            "sha256": "334c072c70b5237444e34734a41024adbc773ac0e6f74e991fdfc4648154238d"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.2709,
+            "w": 0.78501,
+            "h": 0.41801
+          },
+          "focusTargets": [
+            "현재 선택한 설비 상태 어때?",
+            "보내기"
+          ]
+        },
+        {
+          "id": "assistant-answer",
+          "order": 3,
+          "title": "PLC 상태 조회",
+          "shortTitle": "선택 설비의 PLC 상태 조회",
+          "goal": "선택한 설비의 현재 상태를 실제 PLC HTTP 소스에서 읽습니다.",
+          "oneLineGoal": "실제 PLC HTTP 소스로부터 조회한 답변을 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "connect",
+              "label": "PLC 실행 확인",
+              "detail": "로컬 PLC Simulation 실행"
+            },
+            {
+              "icon": "assets/icons/lucide/send.svg",
+              "iconName": "send",
+              "label": "현재 상태 질문 전송",
+              "detail": "현재 상태 질문 → 보내기"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "응답 완료 대기",
+              "detail": "역할·자산·키 변경 대기"
+            },
+            {
+              "icon": "assets/icons/lucide/message-square.svg",
+              "iconName": "message",
+              "label": "답변과 오류 확인",
+              "detail": "상태 답변 또는 조회 오류"
+            }
+          ],
+          "steps": [
+            "PLC Simulation이 실행 중인지 확인합니다.",
+            "현재 상태 질문을 보내기를 눌러 전송합니다.",
+            "답변 대기 중에는 역할, 자산, 키 변경을 기다립니다.",
+            "응답 완료와 답변 내용을 확인합니다."
+          ],
+          "expected": "상태 답변 또는 구체적인 조회 오류가 표시됩니다. 이 판의 답변 생성 방식은 Fake입니다.",
+          "resultShort": "PLC HTTP 소스의 조회 결과를 표시합니다.\n이 판의 문장 생성 방식은 Fake입니다.",
+          "troubleshooting": [
+            "SOURCE_UNAVAILABLE이면 PLC 서비스와 주소를 확인합니다.",
+            "ASSET_NOT_MAPPED이면 선택 자산과 선언된 소스 매핑을 확인합니다."
+          ],
+          "cautionShort": "SOURCE_UNAVAILABLE은 소스 연결, ASSET_NOT_MAPPED는 선택 자산의 매핑을 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 40,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=40",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-answer.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:28.195Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "질문 응답 성공. 실제 PLC 스냅샷과 별도 생성 방식 구분.",
+            "sha256": "7783cac47e0d0cb74fab79189f95a4792796a0dc1c61c06ddcbfe7531bf5bd55"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.34325,
+            "w": 0.78501,
+            "h": 0.23071
+          },
+          "focusTargets": [
+            "응답 완료",
+            "답변",
+            "PLC_Simulation"
+          ]
+        },
+        {
+          "id": "assistant-evidence",
+          "order": 4,
+          "title": "출처와 품질 확인",
+          "shortTitle": "답변의 출처·품질 검토",
+          "goal": "답변의 근거와 생성 방식을 확인합니다.",
+          "oneLineGoal": "답변의 원본 시각과 생성 방식을 함께 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/eye.svg",
+              "iconName": "eye",
+              "label": "근거 영역 펼치기",
+              "detail": "출처 · 품질 · 생성 방식 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "출처와 인용 확인",
+              "detail": "소유자·인용·생성 방식"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "품질과 시각 대조",
+              "detail": "Good·최신 원본 시각"
+            }
+          ],
+          "steps": [
+            "답변 아래 출처 · 품질 · 생성 방식 확인을 펼칩니다.",
+            "생성 방식, 인용 여부, 소스 소유자와 원본 시각을 읽습니다.",
+            "Good 품질과 최신 시각을 함께 확인합니다. Unknown이나 오류는 확인되지 않은 상태로 해석합니다."
+          ],
+          "expected": "PLC_Simulation 출처, 원본 시각, 품질과 Fake 생성 표시를 확인할 수 있습니다.",
+          "resultShort": "PLC_Simulation 출처·원본 시각·품질을 봅니다.\nFake 생성 표시도 함께 확인합니다.",
+          "troubleshooting": [
+            "오래된 Good 값은 현재 값으로 단정하지 않습니다.",
+            "근거 None 또는 Unavailable이면 답변을 현재 설비 사실로 사용하지 않습니다."
+          ],
+          "cautionShort": "오래된 Good은 현재 값이 아닐 수 있습니다. Unknown·None·Unavailable은 사실 확인이 안 된 상태입니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 41,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=41",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-evidence.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:42.113Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "근거 펼침: PLC_Simulation, Good, 원본 시각과 생성 방식Fake 확인.",
+            "sha256": "9bda923d65d7cd6efccea9066766c451daf580b7a336f3fe954d1347e621efd3"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.3746,
+            "w": 0.78501,
+            "h": 0.23633
+          },
+          "focusTargets": [
+            "출처 · 품질 · 생성 방식 확인",
+            "Good",
+            "Fake"
+          ]
+        },
+        {
+          "id": "assistant-copy",
+          "order": 5,
+          "title": "답변과 근거 복사",
+          "shortTitle": "답변과 근거를 함께 복사",
+          "goal": "근거를 포함한 답변을 복사합니다.",
+          "oneLineGoal": "검토한 답변을 출처와 시각까지 보존합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/copy.svg",
+              "iconName": "copy",
+              "label": "답변 복사",
+              "detail": "답변 복사"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "복사됨 확인",
+              "detail": "버튼의 복사됨 표시"
+            },
+            {
+              "icon": "assets/icons/lucide/file-text.svg",
+              "iconName": "file",
+              "label": "문서에 근거 보존",
+              "detail": "소스·관측 시각 유지"
+            }
+          ],
+          "steps": [
+            "확인한 답변의 답변 복사 버튼을 누릅니다.",
+            "버튼이 복사됨으로 바뀌는지 확인합니다.",
+            "필요한 문서에 붙여 넣고 소스와 관측 시각을 함께 보존합니다."
+          ],
+          "expected": "답변 본문과 근거 메타데이터가 함께 복사됩니다. Client key는 포함하지 않습니다.",
+          "resultShort": "답변 본문과 근거 메타데이터를 복사합니다.\nClient key는 포함하지 않습니다.",
+          "troubleshooting": [
+            "복사 실패가 표시되면 브라우저의 클립보드 접근 상태를 확인합니다."
+          ],
+          "cautionShort": "복사 실패가 표시되면 브라우저의 클립보드 접근 상태를 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 42,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=42",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-copy.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:42.493Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "복사 완료 표시, 클립보드 PLC_Simulation 근거 포함 확인.",
+            "sha256": "56d90b81e7dba75b60b744defcbb2344808c25c5c33e0d5e3e92abfb87dd2b90"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.3746,
+            "w": 0.78501,
+            "h": 0.23633
+          },
+          "focusTargets": [
+            "답변 복사",
+            "복사됨"
+          ]
+        },
+        {
+          "id": "assistant-export",
+          "order": 6,
+          "title": "대화 기록 내보내기",
+          "shortTitle": "대화를 Markdown으로 저장",
+          "goal": "현재 대화를 Markdown 파일로 저장합니다.",
+          "oneLineGoal": "현재 질문·답변·근거를 파일로 보관합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "대화 내보내기",
+              "detail": "대화 내보내기"
+            },
+            {
+              "icon": "assets/icons/lucide/file-text.svg",
+              "iconName": "file",
+              "label": "다운로드 파일 열기",
+              "detail": "다운로드한 .md 파일"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "기록과 근거 확인",
+              "detail": "질문·답변·UTC 시각·근거"
+            }
+          ],
+          "steps": [
+            "질문과 답변이 있는 대화에서 대화 내보내기를 누릅니다.",
+            "다운로드된 industrial-assistant-날짜.md 파일을 엽니다.",
+            "질문, 답변, UTC 시각과 근거를 확인합니다."
+          ],
+          "expected": "최대 100개 메시지의 Markdown 기록을 저장합니다. 키와 내부 세션 인증 정보는 제외합니다.",
+          "resultShort": "최대 100개 메시지를 Markdown으로 저장합니다.\n키와 내부 세션 인증 정보는 제외합니다.",
+          "troubleshooting": [
+            "빈 대화에서는 내보내기 버튼이 비활성입니다.",
+            "다운로드가 차단되면 이 로컬 페이지의 다운로드 알림을 확인합니다."
+          ],
+          "cautionShort": "빈 대화에서는 비활성입니다. 파일이 없으면 브라우저 다운로드 알림과 차단 상태를 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 43,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=43",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-export.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:53.455Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "Markdown 다운로드 파일 확인, PLC 출처 포함 및 client key 미포함 검증.",
+            "sha256": "4a8ea6dcd6b292a7fa11ab8cfd390b728f595428946f7a3b03f06d58973f1c5a"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.2709,
+            "w": 0.78501,
+            "h": 0.34003
+          },
+          "focusTargets": [
+            "대화 내보내기"
+          ]
+        },
+        {
+          "id": "assistant-reset",
+          "order": 7,
+          "title": "새 대화 시작",
+          "shortTitle": "대화 맥락 비우고 새로 시작",
+          "goal": "이전 대화 맥락을 끊고 새 조회를 시작합니다.",
+          "oneLineGoal": "이전 대화를 보관한 뒤 새 조회를 시작합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/file-down.svg",
+              "iconName": "download",
+              "label": "보관할 대화 저장",
+              "detail": "필요한 대화 먼저 내보내기"
+            },
+            {
+              "icon": "assets/icons/lucide/plus.svg",
+              "iconName": "plus",
+              "label": "새 대화 시작",
+              "detail": "새 대화 +"
+            },
+            {
+              "icon": "assets/icons/lucide/check.svg",
+              "iconName": "check",
+              "label": "초기 상태 확인",
+              "detail": "빈 목록·내보내기 비활성"
+            }
+          ],
+          "steps": [
+            "보관할 대화가 있으면 먼저 내보냅니다.",
+            "새 대화 +를 누릅니다.",
+            "대화 목록이 비고 내보내기 버튼이 비활성인지 확인합니다."
+          ],
+          "expected": "새 대화를 시작했습니다가 표시됩니다. 역할이나 자산을 바꿀 때도 새 대화를 시작합니다.",
+          "resultShort": "‘새 대화를 시작했습니다’가 표시됩니다.\n역할·자산을 변경할 때도 새 대화가 시작됩니다.",
+          "troubleshooting": [
+            "서버 대화는 세션, 역할, 자산별로 구분하며 메모리에서 15분 유지합니다.",
+            "이 기능은 영구 대화 기록 삭제나 감사 원장 삭제 기능이 아닙니다."
+          ],
+          "cautionShort": "새 대화는 영구 기록·감사 원장 삭제가 아닙니다. 서버 대화는 세션·역할·자산별로 15분 유지됩니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 44,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=44",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assistant-reset.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:14:53.821Z",
+            "url": "http://127.0.0.1:5187/chat-test/",
+            "observed": "새 대화 실행 후 대화 목록 비움, 내보내기 비활성 확인.",
+            "sha256": "fdaa4f257a1043a56d29d30687067409a46171f2eb2b8c750d309c8008e6ee47"
+          },
+          "focus": {
+            "x": 0.19517,
+            "y": 0.20177,
+            "w": 0.78501,
+            "h": 0.31592
+          },
+          "focusTargets": [
+            "새 대화 +",
+            "새 대화를 시작했습니다"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assethub",
+      "sourceId": "07-assethub",
+      "manifestChapterId": "assethub",
+      "order": 7,
+      "label": "Industrial AssetHub",
+      "title": "Industrial AssetHub",
+      "shortTitle": "AssetHub",
+      "subtitle": "자산의 소스와 의미를 연결하고 로컬 상태 확인하기",
+      "scope": "local-workbench / fixture-lab의 모의 초안과 로컬 의미 연결. 운영 승인, AAS 게시, 실제 설비 제어는 제공하지 않습니다.",
+      "scopeNote": "로컬 초안·규칙 기반 조회 · 운영 승인과 실제 데이터는 별도",
+      "prerequisites": [
+        "Workbench를 활성화한 로컬 Host가 실행 중이어야 합니다.",
+        "실습 예제는 원본 설비와 분리된 모의 초안으로 등록합니다."
+      ],
+      "actions": [
+        "원본 소스 선언",
+        "개념·단위·위치 연결",
+        "의미 근거·HTTP 점검"
+      ],
+      "icon": "assets/icons/lucide/waypoints.svg",
+      "accent": "#B66232",
+      "portfolioPage": "industrial-assethub.html",
+      "manualPage": "manual-assethub.html",
+      "chapterPdfPage": 45,
+      "pdfPageStart": 45,
+      "pdfPageEnd": 53,
+      "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=45",
+      "markdown": "assets/docs/manuals/chapters/assethub.md",
+      "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-overview.jpg",
+      "counts": {
+        "operations": 8,
+        "screenshots": 8,
+        "full": 8,
+        "partial": 0,
+        "unverified": 0
+      },
+      "samples": [],
+      "localUrl": "http://127.0.0.1:5189/workbench",
+      "sources": [
+        "Industrial.AssetHub/README.md",
+        "Industrial.AssetHub/src/AssetHub.Host/Pages/Workbench/Index.cshtml",
+        "Industrial.AssetHub/src/AssetHub.Host/Pages/Workbench/_Ontology.cshtml",
+        "Industrial.AssetHub/src/AssetHub.Host/Workbench/SuiteMonitor.cs"
+      ],
+      "operations": [
+        {
+          "id": "assethub-overview",
+          "order": 1,
+          "title": "온톨로지 스튜디오 확인",
+          "shortTitle": "온톨로지 작업공간 둘러보기",
+          "goal": "초안, 의미 연결, 개념 사전의 위치를 파악합니다.",
+          "oneLineGoal": "자산 초안, 의미 연결, 개념 사전의 위치를 파악합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/layout-dashboard.svg",
+              "iconName": "layout",
+              "label": "스튜디오 열기",
+              "detail": "온톨로지 스튜디오"
+            },
+            {
+              "icon": "assets/icons/lucide/database.svg",
+              "iconName": "database",
+              "label": "자산과 연결 확인",
+              "detail": "초안 목록·의미 연결"
+            },
+            {
+              "icon": "assets/icons/lucide/book-open.svg",
+              "iconName": "book",
+              "label": "공통 개념 사전 읽기",
+              "detail": "공통 개념 사전·로컬 검토 안내"
+            }
+          ],
+          "steps": [
+            "온톨로지 스튜디오를 엽니다.",
+            "연결할 자산 목록과 의미 연결 작업공간을 확인합니다.",
+            "공통 개념 사전과 로컬 검토 환경 안내를 확인합니다."
+          ],
+          "expected": "초안 수와 연결 진행률이 표시됩니다. 기존 예제가 있으면 첫 자산을 선택합니다.",
+          "resultShort": "초안 수와 연결 진행률이 표시됩니다.\n기존 예제가 있으면 첫 자산을 선택합니다.",
+          "troubleshooting": [
+            "404이면 Workbench 활성화 프로필과 로컬 주소를 확인합니다."
+          ],
+          "cautionShort": "현재는 로컬 검토 환경입니다. 404이면 Workbench 활성화 프로필과 주소를 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 46,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=46",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-overview.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:02.511Z",
+            "url": "http://127.0.0.1:5189/workbench",
+            "observed": "로컬 모의 자산 환경 및 운영 인증·게시·제어 미연결 배너 확인.",
+            "sha256": "bb87ab2d2fe1eb14de0e687ac72b08dbf3cdbb4cd7b8407448602288ddc9cd90"
+          },
+          "focus": {
+            "x": 0.1626,
+            "y": 0.0763,
+            "w": 0.81301,
+            "h": 0.59416
+          },
+          "focusTargets": [
+            "연결할 자산",
+            "의미 연결",
+            "공통 개념 사전"
+          ]
+        },
+        {
+          "id": "assethub-create",
+          "order": 2,
+          "title": "모의 자산 초안 입력",
+          "shortTitle": "교육용 자산의 원본 선언",
+          "goal": "새 자산의 소스 정보를 선언합니다.",
+          "oneLineGoal": "자산 이름과 소스 범위를 초안에 입력합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/plus.svg",
+              "iconName": "plus",
+              "label": "새 자산 초안 열기",
+              "detail": "새 자산 초안"
+            },
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "이름과 소유자 입력",
+              "detail": "매뉴얼 예제 온도·Gateway"
+            },
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "원본 소스 범위 지정",
+              "detail": "Simulation·manual-local"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "유효 시간과 메모 확인",
+              "detail": "유효 시작 UTC·모의 예제 메모"
+            }
+          ],
+          "steps": [
+            "새 자산 초안을 누릅니다.",
+            "자산명은 매뉴얼 예제 온도, 소스 소유자는 Gateway로 입력합니다.",
+            "원본 모드 Simulation, 소스 인스턴스 manual-local, 원본 소스 키 DataAccess.Manual.Temp_PV를 입력합니다.",
+            "유효 시작 UTC와 모의 예제라는 메모를 확인합니다."
+          ],
+          "expected": "입력 창에 자산명, 소유자, 소스 범위가 표시됩니다. 입력만으로 원본 연결이 생성되지 않습니다.",
+          "resultShort": "자산명과 소스 범위가 입력 창에 표시됩니다.\n키: DataAccess.Manual.Temp_PV",
+          "troubleshooting": [
+            "등록을 취소하려면 취소나 닫기를 누릅니다.",
+            "시간은 UTC로 입력하고 종료는 시작보다 뒤로 지정합니다."
+          ],
+          "cautionShort": "이것은 소스 선언입니다. 입력만으로 원본 연결이 생기지 않으며 취소·닫기로 등록 전 취소할 수 있습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 47,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=47",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-create.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:12.004Z",
+            "url": "http://127.0.0.1:5189/workbench",
+            "observed": "교육용 로컬 자산 필수 필드를 입력한 생성 화면.",
+            "sha256": "c84966501d2379e1f2f01b39942e1a5d7c1a5f6d4292e76426af39510278d8d1"
+          },
+          "focus": {
+            "x": 0.32208,
+            "y": 0.17776,
+            "w": 0.34897,
+            "h": 0.6461
+          },
+          "focusTargets": [
+            "자산명",
+            "소스 소유자",
+            "원본 모드",
+            "원본 소스 키"
+          ]
+        },
+        {
+          "id": "assethub-asset",
+          "order": 3,
+          "title": "초안 저장과 식별자 확인",
+          "shortTitle": "초안 저장과 식별자 확인",
+          "goal": "초안을 저장하고 발급된 ID를 확인합니다.",
+          "oneLineGoal": "로컬 초안을 저장하고 고유 ID와 편집 버전을 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/save.svg",
+              "iconName": "save",
+              "label": "초안 만들기",
+              "detail": "입력 확인 → 초안 만들기"
+            },
+            {
+              "icon": "assets/icons/lucide/table-2.svg",
+              "iconName": "table",
+              "label": "새 자산 행 확인",
+              "detail": "새 행·선택한 자산 상세"
+            },
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "ID와 버전 읽기",
+              "detail": "Global Asset ID·편집 버전"
+            }
+          ],
+          "steps": [
+            "입력값을 확인한 뒤 초안 만들기를 누릅니다.",
+            "자산 작업공간의 새 행과 선택한 자산 상세를 확인합니다.",
+            "Global Asset ID와 편집 버전을 확인합니다."
+          ],
+          "expected": "초안과 식별자를 로컬 파일에 저장합니다. 승인 및 게시 revision은 미제공으로 남습니다.",
+          "resultShort": "초안과 발급된 식별자가 로컬 파일에 저장됩니다.\n승인·게시 revision은 미제공 상태입니다.",
+          "troubleshooting": [
+            "오래된 편집의 412 응답은 최신 초안을 다시 읽고 변경 내용을 비교합니다.",
+            "같은 저장 경로를 여러 Host가 동시에 열지 않습니다."
+          ],
+          "cautionShort": "오래된 편집의 412 응답은 최신 초안과 비교합니다. 같은 저장 경로를 여러 Host가 동시에 열지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 48,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=48",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-asset.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:12.288Z",
+            "url": "http://127.0.0.1:5189/workbench?SelectedId=10919d37-66a3-4d58-8395-f568f13c7aa5&View=assets&Filter=all&notice=saved",
+            "observed": "매뉴얼 예제 온도 초안 생성 성공, 원본 소스와 저장된 자산 확인.",
+            "sha256": "8b99938b7508b00f876431b988645129a7858c02700f9a50541f4f118b42f918"
+          },
+          "focus": {
+            "x": 0.1626,
+            "y": 0.41153,
+            "w": 0.81301,
+            "h": 0.46266
+          },
+          "focusTargets": [
+            "Global Asset ID",
+            "편집 버전",
+            "승인 및 게시"
+          ]
+        },
+        {
+          "id": "assethub-matching",
+          "order": 4,
+          "title": "개념 후보 선택",
+          "shortTitle": "온도 개념 후보 검토",
+          "goal": "이름과 소스 키의 문자열 근거를 검토합니다.",
+          "oneLineGoal": "이름·소스 키의 일치 근거를 보고 개념을 선택합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/mouse-pointer-2.svg",
+              "iconName": "click",
+              "label": "교육용 자산 선택",
+              "detail": "매뉴얼 예제 온도"
+            },
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "후보와 일치 근거 읽기",
+              "detail": "자동 매칭 후보·온도 근거"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "개념 후보 반영",
+              "detail": "선택 → 의미 개념 반영"
+            },
+            {
+              "icon": "assets/icons/lucide/pencil.svg",
+              "iconName": "edit",
+              "label": "단위와 위치 직접 입력",
+              "detail": "원 단위·계측 위치 입력"
+            }
+          ],
+          "steps": [
+            "온톨로지 스튜디오에서 매뉴얼 예제 온도를 선택합니다.",
+            "자동 매칭 후보의 온도와 일치 근거를 읽습니다.",
+            "선택을 눌러 개념을 채우고 원 단위와 계측 위치를 직접 입력합니다."
+          ],
+          "expected": "선택한 개념이 의미 연결 폼에 반영됩니다. 점수는 문자열 순위이며 승인 확률이 아닙니다.",
+          "resultShort": "선택한 개념이 의미 연결 폼에 반영됩니다.\n후보 점수는 문자열 일치 순위입니다.",
+          "troubleshooting": [
+            "후보가 없으면 개념 사전에서 직접 고릅니다.",
+            "이름 일치만으로 서로 다른 계측 지점을 같은 자산으로 병합하지 않습니다."
+          ],
+          "cautionShort": "점수는 승인 확률이 아닙니다. 이름만 같다고 다른 계측 지점을 같은 자산으로 병합하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 49,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=49",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-matching.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:29.887Z",
+            "url": "http://127.0.0.1:5189/workbench?View=ontology",
+            "observed": "온도 후보의 문자열 근거 확인 후 선택, 원 단위°C 및 교육용 위치 입력.",
+            "sha256": "044bd05dd31353fceb69a0e4b7478ae659fc1c767ed592818a853245f63de899"
+          },
+          "focus": {
+            "x": 0.41588,
+            "y": 0.06656,
+            "w": 0.54784,
+            "h": 0.53896
+          },
+          "focusTargets": [
+            "자동 매칭 후보",
+            "온도",
+            "선택"
+          ]
+        },
+        {
+          "id": "assethub-semantic",
+          "order": 5,
+          "title": "의미 연결 저장",
+          "shortTitle": "개념·단위·계측 위치 연결",
+          "goal": "계측 지점의 개념, 단위와 위치를 저장합니다.",
+          "oneLineGoal": "계측 지점의 의미와 단위를 함께 저장합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/tag.svg",
+              "iconName": "tag",
+              "label": "클래스와 개념 지정",
+              "detail": "계측 지점·온도"
+            },
+            {
+              "icon": "assets/icons/lucide/thermometer.svg",
+              "iconName": "thermometer",
+              "label": "단위와 위치 입력",
+              "detail": "°C·실습 모의 계측 지점"
+            },
+            {
+              "icon": "assets/icons/lucide/save.svg",
+              "iconName": "save",
+              "label": "의미 연결 저장",
+              "detail": "의미 연결 저장"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "저장된 관계 확인",
+              "detail": "observes·편집 버전"
+            }
+          ],
+          "steps": [
+            "클래스는 계측 지점, 의미 개념은 온도로 둡니다.",
+            "원 단위 °C, 계측 위치는 실습 모의 계측 지점으로 입력합니다.",
+            "의미 연결 저장을 누르고 저장된 observes 관계를 확인합니다."
+          ],
+          "expected": "의미 연결과 편집 버전을 저장하며 기존 로컬 검토를 무효화합니다.",
+          "resultShort": "의미 연결과 편집 버전이 저장됩니다.\n기존 로컬 검토 결과는 무효화됩니다.",
+          "troubleshooting": [
+            "라인과 설비에는 계측 필드를 비웁니다.",
+            "지원하지 않는 단위나 순환 partOf 관계는 서버가 거부합니다."
+          ],
+          "cautionShort": "라인·설비에는 계측 필드를 비웁니다. 미지원 단위나 순환 partOf 관계는 거부됩니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 50,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=50",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-semantic.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:43.839Z",
+            "url": "http://127.0.0.1:5189/workbench?View=ontology&SelectedId=10919d37-66a3-4d58-8395-f568f13c7aa5&Ask=%EB%A7%A4%EB%89%B4%EC%96%BC+%EC%98%A8%EB%8F%84",
+            "observed": "저장된 관계에서 매뉴얼 예제 온도→온도°C, 위치와 소스 연결 확인.",
+            "sha256": "7c8f4fa8599b9ee632064c7a8ab18c0c1334d8facc910095cb2ccae292d9a4fc"
+          },
+          "focus": {
+            "x": 0.41588,
+            "y": 0.06656,
+            "w": 0.54784,
+            "h": 0.59659
+          },
+          "focusTargets": [
+            "의미 개념",
+            "원 단위",
+            "계측 위치",
+            "의미 연결 저장"
+          ]
+        },
+        {
+          "id": "assethub-assist",
+          "order": 6,
+          "title": "의미 연결 근거 조회",
+          "shortTitle": "키워드로 의미 연결 근거 찾기",
+          "goal": "키워드로 자산과 원본 소스 선언을 찾습니다.",
+          "oneLineGoal": "로컬 초안에 선언한 자산과 소스를 검색합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/search.svg",
+              "iconName": "search",
+              "label": "키워드 입력",
+              "detail": "온톨로지 어시스트: 매뉴얼 온도"
+            },
+            {
+              "icon": "assets/icons/lucide/mouse-pointer-2.svg",
+              "iconName": "click",
+              "label": "근거 조회",
+              "detail": "근거 조회"
+            },
+            {
+              "icon": "assets/icons/lucide/link.svg",
+              "iconName": "link",
+              "label": "선언 근거 대조",
+              "detail": "자산·개념·소스 tuple·버전"
+            }
+          ],
+          "steps": [
+            "온톨로지 어시스트에 매뉴얼 온도를 입력합니다.",
+            "근거 조회를 누릅니다.",
+            "자산, 개념, 위치, 소스 tuple과 편집 버전을 함께 확인합니다."
+          ],
+          "expected": "로컬 초안 snapshot의 근거를 표시합니다. 실제 값, 품질과 원본 시각은 미제공입니다.",
+          "resultShort": "로컬 초안 snapshot의 선언 근거를 보여줍니다.\n실제 값·품질·원본 시각은 미제공입니다.",
+          "troubleshooting": [
+            "검색 결과가 없으면 키워드를 줄이고 먼저 의미 연결을 저장합니다.",
+            "이 어시스트는 규칙 기반 검색이며 외부 AI를 호출하지 않습니다."
+          ],
+          "cautionShort": "규칙 기반 검색이며 외부 AI를 호출하지 않습니다. 결과가 없으면 키워드를 줄이고 의미 연결 저장을 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 51,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=51",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-assist.jpg",
+          "screenshotWidth": 1599,
+          "screenshotHeight": 1232,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:16:26.424Z",
+            "url": "http://127.0.0.1:5189/workbench?View=ontology&SelectedId=10919d37-66a3-4d58-8395-f568f13c7aa5&Ask=%EB%A7%A4%EB%89%B4%EC%96%BC+%EC%98%A8%EB%8F%84",
+            "observed": "매뉴얼 온도 검색1건: source owner/key/instance/version/validity 확인, 실제 값·품질·원본 시각 미제공 표시.",
+            "sha256": "becaf0d81b00b2c00b9d5ced7ff68f56e40247b3e05db064a702dab6a59e66cb"
+          },
+          "focus": {
+            "x": 0.1626,
+            "y": 0.22727,
+            "w": 0.81301,
+            "h": 0.36526
+          },
+          "focusTargets": [
+            "온톨로지 어시스트",
+            "근거 조회",
+            "소스"
+          ]
+        },
+        {
+          "id": "assethub-monitor",
+          "order": 7,
+          "title": "Host 상태와 준비 상태 확인",
+          "shortTitle": "Host 상태와 운영 준비 구분",
+          "goal": "실행 중인 Host와 운영 준비 상태를 구분합니다.",
+          "oneLineGoal": "실행 상태와 운영에 필요한 준비 항목을 따로 읽습니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/monitor.svg",
+              "iconName": "monitor",
+              "label": "시스템 모니터링 열기",
+              "detail": "시스템 모니터링"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "상태 새로고침",
+              "detail": "상태 새로고침"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "관측값과 준비 항목 읽기",
+              "detail": "메모리·가동 시간·체크리스트"
+            }
+          ],
+          "steps": [
+            "시스템 모니터링을 엽니다.",
+            "상태 새로고침을 누릅니다.",
+            "메모리, 가동 시간과 관측 시각을 확인하고 준비 상태 체크리스트를 읽습니다."
+          ],
+          "expected": "Host 실행과 서비스 미준비를 별도로 표시합니다. 현재 운영 원장, 인증과 표준 runtime은 준비 중입니다.",
+          "resultShort": "Host 실행과 서비스 준비 상태가 따로 보입니다.\n운영 원장·인증·표준 runtime은 준비 중입니다.",
+          "troubleshooting": [
+            "상태 요청 실패 시 최근 성공값을 현재 관측으로 해석하지 않습니다."
+          ],
+          "cautionShort": "상태 요청에 실패하면 최근 성공값을 현재 관측값으로 해석하지 않습니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 52,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=52",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-monitor.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:15:44.385Z",
+            "url": "http://127.0.0.1:5189/workbench?View=monitor",
+            "observed": "시스템 모니터링의 Gateway/OEE/AAS 상태와 미연결 정보 확인.",
+            "sha256": "77df0ec312a0fccc7fd1cff3e5cd0440c836896341e8518fd0479e8528bf7189"
+          },
+          "focus": {
+            "x": 0.16233,
+            "y": 0.35531,
+            "w": 0.82404,
+            "h": 0.58199
+          },
+          "focusTargets": [
+            "상태 새로고침",
+            "관측 시각",
+            "준비 상태"
+          ]
+        },
+        {
+          "id": "assethub-suite",
+          "order": 8,
+          "title": "일곱 솔루션 연결 상태 확인",
+          "shortTitle": "일곱 솔루션의 HTTP 상태 확인",
+          "goal": "로컬 솔루션으로 이동하고 HTTP 응답을 확인합니다.",
+          "oneLineGoal": "로컬 작업공간으로 이동하며 응답 근거를 확인합니다.",
+          "stages": [
+            {
+              "icon": "assets/icons/lucide/network.svg",
+              "iconName": "network",
+              "label": "솔루션 연결 열기",
+              "detail": "솔루션 연결"
+            },
+            {
+              "icon": "assets/icons/lucide/refresh-cw.svg",
+              "iconName": "refresh",
+              "label": "연결 상태 확인",
+              "detail": "연결 상태 확인"
+            },
+            {
+              "icon": "assets/icons/lucide/clock.svg",
+              "iconName": "clock",
+              "label": "응답과 관측 시각 읽기",
+              "detail": "HTTP·지연·UTC 관측 시각"
+            },
+            {
+              "icon": "assets/icons/lucide/external-link.svg",
+              "iconName": "external",
+              "label": "작업공간으로 이동",
+              "detail": "작업공간 열기"
+            }
+          ],
+          "steps": [
+            "솔루션 연결을 엽니다.",
+            "연결 상태 확인을 누릅니다.",
+            "HTTP 응답 코드, 지연과 UTC 관측 시각을 읽고 작업공간 열기로 이동합니다."
+          ],
+          "expected": "고정된 loopback 경로를 최대 2초씩 조회합니다. HTTP 응답만으로 데이터 전송이나 운영 승인을 입증하지 않습니다.",
+          "resultShort": "고정된 loopback 경로를 최대 2초씩 조회합니다.\n현재 Gateway·OEE API는 응답 없음입니다.",
+          "troubleshooting": [
+            "Gateway와 OEE API가 중지된 현재 환경에서는 응답 없음이 정상 진단입니다.",
+            "각 UI가 열리는지와 해당 backend의 수집 상태를 별도로 확인합니다."
+          ],
+          "cautionShort": "HTTP 응답은 데이터 전송·운영 승인 증거가 아닙니다. UI 접근과 backend 수집 상태를 따로 확인합니다.",
+          "evidenceState": "full",
+          "verified": true,
+          "pdfPage": 53,
+          "pdfUrl": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf#page=53",
+          "screenshot": "assets/screenshots/manuals/2026-10-24/assethub-suite.jpg",
+          "screenshotWidth": 1614,
+          "screenshotHeight": 1244,
+          "captureNote": null,
+          "evidence": {
+            "capturedAtUtc": "2026-10-23T17:16:03.983Z",
+            "url": "http://127.0.0.1:5189/workbench/suite",
+            "observed": "연결 상태 확인 완료:7개 중5개 HTTP응답, Gateway/OEE백엔드 응답없음.",
+            "sha256": "e284de7207d3026cf6f87366c781f52884163bf70830c5a64cc4b9a608616dd6"
+          },
+          "focus": {
+            "x": 0.04709,
+            "y": 0.34727,
+            "w": 0.90706,
+            "h": 0.55627
+          },
+          "focusTargets": [
+            "연결 상태 확인",
+            "HTTP",
+            "관측 시각",
+            "작업공간 열기"
+          ]
+        }
+      ]
+    }
+  ]
+}

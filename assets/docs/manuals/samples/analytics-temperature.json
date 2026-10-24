@@ -1,0 +1,29 @@
+[
+  {
+    "Id": "IM-1792775084341-00001",
+    "Source": "manual-process.csv",
+    "Metric": "Temperature",
+    "Value": 72.5,
+    "Delta": 0,
+    "Status": "Ok",
+    "Timestamp": "2026-10-24T09:00:00+09:00"
+  },
+  {
+    "Id": "IM-1792775084341-00003",
+    "Source": "manual-process.csv",
+    "Metric": "Temperature",
+    "Value": 74.1,
+    "Delta": 2.21,
+    "Status": "Ok",
+    "Timestamp": "2026-10-24T09:01:00+09:00"
+  },
+  {
+    "Id": "IM-1792775084341-00005",
+    "Source": "manual-process.csv",
+    "Metric": "Temperature",
+    "Value": 73.2,
+    "Delta": -1.21,
+    "Status": "Ok",
+    "Timestamp": "2026-10-24T09:02:00+09:00"
+  }
+]

@@ -1,192 +1,179 @@
-"""Create one reviewed 10-page Korean portfolio; copy the same PDF to the site.
-Uses existing bundled ReportLab/Pillow/pypdf and OS fonts with embedding checks.
-No software installation, font redistribution, external request or AI inference.
+"""Create the current 11-page landscape portfolio from owned local captures.
+Uses bundled ReportLab/Pillow/pypdf and embedded OS fonts. No network calls.
 """
 import json
 import shutil
 import struct
-from pathlib import Path
 from html import escape
+from pathlib import Path
 
 from PIL import Image
-from reportlab.pdfgen import canvas
+from pypdf import PdfReader
+from reportlab.lib.colors import HexColor, white
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.colors import HexColor, white
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
-from pypdf import PdfReader
 
-ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT.parent / '포트폴리오/산업_소프트웨어_포트폴리오_2026-10-05.pdf'
-DATA = json.loads((ROOT/'content/projects.json').read_text(encoding='utf-8'))
-PROJECTS = DATA['projects']
-W,H = A4
-INK,TEAL,PAPER,MUTED,LINE = [HexColor(x) for x in ['#17211f','#145d50','#f5f4ef','#59645f','#d9ded7']]
+ROOT=Path(__file__).resolve().parents[1]
+DATA=json.loads((ROOT/'content/projects.json').read_text(encoding='utf-8'))
+PROJECTS=DATA['projects']
+DATE=DATA['date']
+DISPLAY_DATE=DATE.replace('-','.')
+OUTPUT=ROOT.parent/f'포트폴리오/산업_소프트웨어_포트폴리오_{DATE}.pdf'
+SITE_PDF=ROOT/f'assets/docs/industrial-platform-portfolio-{DATE}.pdf'
+SHOTS=ROOT/f'assets/screenshots/{DATE}'
+W,H=landscape(A4)
+INK,TEAL,PAPER,MUTED,LINE=[HexColor(v) for v in ['#152338','#096c69','#f6f8fa','#627184','#dce3e9']]
+PAGE_COUNT=len(PROJECTS)+4
 
 
-def font(name, path):
-    data = path.read_bytes()
-    flags = None
+def font(name,path):
+    data=path.read_bytes();flags=None
     for i in range(struct.unpack_from('>H',data,4)[0]):
-        tag, _, offset, _ = struct.unpack_from('>4sIII',data,12+i*16)
-        if tag == b'OS/2':
-            flags = struct.unpack_from('>H',data,offset+8)[0]
-    # Only installable or editable embedding; refuse restricted/no-subset/bitmap flags.
-    if flags not in (0,8):
-        raise ValueError(f'Font embedding permission requires review: {path.name}: {flags}')
+        tag,_,offset,_=struct.unpack_from('>4sIII',data,12+i*16)
+        if tag==b'OS/2':flags=struct.unpack_from('>H',data,offset+8)[0]
+    if flags not in (0,8):raise ValueError(f'Embedding permission requires review: {path.name}: {flags}')
     pdfmetrics.registerFont(TTFont(name,str(path)))
 
 
 def main():
+    for p in PROJECTS:
+        if not (SHOTS/f'{p["id"]}.jpg').is_file():
+            raise FileNotFoundError(f'Fresh local capture required: {SHOTS/p["id"]}.jpg')
     font('Body',Path('C:/Windows/Fonts/malgun.ttf'))
     font('Bold',Path('C:/Windows/Fonts/malgunbd.ttf'))
     pdfmetrics.registerFontFamily('Body',normal='Body',bold='Bold')
-    OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    c = canvas.Canvas(str(OUTPUT),pagesize=A4,pageCompression=1)
-    c.setTitle('Industrial Systems Portfolio - Six Projects - 2026-10-05')
+    staging=ROOT/'.local-preview';staging.mkdir(exist_ok=True)
+    temporary=staging/'current-portfolio.pdf'
+    c=canvas.Canvas(str(temporary),pagesize=(W,H),pageCompression=1)
+    c.setTitle(f'Industrial Systems Portfolio - Seven Projects - {DATE}')
     c.setAuthor('')
-    c.setSubject('Verified local industrial software portfolio; scope and limitations included')
+    c.setSubject('Local industrial software workspaces, ownership and evidence')
 
     def text(value,x,y,size=10,color=INK,bold=False):
-        c.setFillColor(color);c.setFont('Bold' if bold else 'Body',size)
-        c.drawString(x,y,value)
+        c.setFillColor(color);c.setFont('Bold' if bold else 'Body',size);c.drawString(x,y,value)
 
-    def para(value,x,top,width,size=10,color=INK,bold=False,leading=None,min_bottom=64):
-        style=ParagraphStyle('local',fontName='Bold' if bold else 'Body',fontSize=size,
-                             leading=leading or size*1.6,textColor=color,wordWrap='CJK')
-        p=Paragraph(escape(value).replace('\n','<br/>'),style)
-        _,height=p.wrap(width,H)
-        if top-height < min_bottom:
-            raise ValueError('Text would overflow page: '+value[:50])
-        p.drawOn(c,x,top-height)
-        return top-height
+    def para(value,x,top,width,size=9,color=MUTED,bold=False,leading=None,min_bottom=51):
+        style=ParagraphStyle('local',fontName='Bold' if bold else 'Body',fontSize=size,leading=leading or size*1.6,textColor=color,wordWrap='CJK')
+        p=Paragraph(escape(value).replace('\n','<br/>'),style);_,height=p.wrap(width,H)
+        if top-height<min_bottom:raise ValueError('Text overflow: '+value[:70])
+        p.drawOn(c,x,top-height);return top-height
 
-    def box(x,y,w,h,color=PAPER):
-        c.setFillColor(color);c.setStrokeColor(LINE)
-        c.roundRect(x,y,w,h,10,fill=1,stroke=1)
+    def box(x,y,width,height,color=PAPER,radius=8):
+        c.setFillColor(color);c.setStrokeColor(LINE);c.roundRect(x,y,width,height,radius,stroke=1,fill=1)
 
     def frame(number,label):
         c.setFillColor(white);c.rect(0,0,W,H,fill=1,stroke=0)
-        text('INDUSTRIAL SYSTEMS / PORTFOLIO',38,H-35,8,TEAL,True)
-        text(label,38,H-61,9,MUTED)
-        c.setStrokeColor(LINE);c.line(38,54,W-38,54)
-        text('2026.10.05 · LOCAL VERIFICATION',38,36,7,MUTED)
-        text(f'{number:02d} / 10',W-83,36,8,MUTED)
+        text('INDUSTRIAL SYSTEMS / PORTFOLIO',43,H-30,7,TEAL,True)
+        text(label,43,H-48,8,MUTED)
+        c.setStrokeColor(LINE);c.line(43,37,W-43,37)
+        text(f'{DISPLAY_DATE} / LOCAL WORKSPACES & EVIDENCE',43,23,6.5,MUTED)
+        text(f'{number:02d} / {PAGE_COUNT:02d}',W-85,23,7,MUTED)
 
-    # 01: cover
+    # Cover.
     c.setFillColor(INK);c.rect(0,0,W,H,fill=1,stroke=0)
-    text('INDUSTRIAL SOFTWARE / SIX PROJECTS',42,783,10,HexColor('#ddedb6'),True)
-    text('현장 데이터에서',42,701,38,white,True)
-    text('근거 있는 판단까지.',42,646,38,white,True)
-    para('PLC · IIoT Gateway · OEEAnalyzer\nTwinForge · DataNexus · Industrial Assistant',43,598,W-86,13,HexColor('#d5ddd6'),leading=22)
-    para('역할의 경계, 구현한 작업 공간, 확인된 동작을 담은\n개인 산업 소프트웨어 포트폴리오',43,516,W-86,12,HexColor('#a9b9b0'))
-    for i,(value,label) in enumerate([('06','독립 프로젝트'),('30','HTTP / WebSocket PASS'),('25','MySQL 인증 PASS')]):
-        x=43+i*172
-        c.setFillColor(HexColor('#23342d'));c.roundRect(x,330,160,107,10,fill=1,stroke=0)
-        text(value,x+16,390,31,HexColor('#ddedb6'),True)
-        para(label,x+16,368,133,8,white)
-    para('실장비·전체 6개 출처 데이터 통합·외부 AI 품질은 이번 검증 범위에 포함하지 않습니다. 데모, 미수신, Fake/Mock 화면을 구분해 제시합니다.',43,264,W-86,10,HexColor('#b7c7bf'))
-    text('VERIFIED 2026.10.05',43,86,11,white,True)
-    text('github.com/dubukimch',43,61,9,HexColor('#a9b9b0'))
-    c.linkURL('https://github.com/dubukimch',(42,52,245,76),relative=0)
+    text('INDEPENDENT ENGINEERING / 2026',45,H-43,9,HexColor('#9ed3c8'),True)
+    text('현장과 데이터를,',44,445,37,white,True)
+    text('하나의 흐름으로.',44,389,37,white,True)
+    para('신호를 만들고, 연결하고, 해석하는\n일곱 개의 산업 소프트웨어 포트폴리오',47,343,425,13,HexColor('#bfd0da'),leading=22)
+    text('07',W-218,391,89,HexColor('#9ed3c8'),True)
+    text('CONNECTED WORKSPACES',W-218,366,8,HexColor('#bfd0da'),True)
+    c.setStrokeColor(HexColor('#3b4b5f'));c.line(46,252,W-46,252)
+    names=['PLC Simulation · IIoT Gateway','TwinForge · OEEAnalyzer','DataNexus · Industrial Assistant','Industrial AssetHub']
+    for i,name in enumerate(names):text(name,47,222-i*24,10,HexColor('#d4dfe5'))
+    para('직접 캡처한 로컬 화면, 제품별 책임과 설계 판단,\n확인한 읽기 경로와 아직 남아 있는 구현 범위를 담았습니다.',W-350,228,302,10,HexColor('#a9becb'),leading=18)
+    text(DISPLAY_DATE,47,57,11,white,True)
+    text('github.com/dubukimch',W-207,57,8,HexColor('#bfd0da'))
+    c.linkURL('https://github.com/dubukimch',(W-210,48,W-45,72),relative=0)
     c.showPage()
 
-    # 02: ownership and proposed paths
-    frame(2,'SYSTEM ARCHITECTURE')
-    text('여섯 제품, 분명한 소유권',38,735,24,INK,True)
-    para('아래 연결은 설계된 경로입니다. 전체 통합 실행 성공을 의미하지 않습니다.',38,710,W-76,10,MUTED)
+    # Architecture. The seven boxes express ownership, not live service status.
+    frame(2,'ARCHITECTURE / OWNERSHIP')
+    text('서로 다른 역할, 연결되는 작업 경험',43,510,26,INK,True)
+    para('기존 여섯 제품의 실행 책임에 공통 자산 식별·의미 작업 공간을 더했습니다.',44,489,W-88,10)
     for i,p in enumerate(PROJECTS):
-        col,row=i%3,i//3;x=38+col*178;y=500-row*147
-        box(x,y,163,130)
-        text(f'0{i+1} / {p["category"].split(" / ")[0]}',x+13,y+108,8,TEAL,True)
-        para(p['label'],x+13,y+93,137,12,bold=True)
-        role=p['role'].replace('기간 A/P/Q/OEE·coverage·revision 계산','기간 A/P/Q/OEE 계산\ncoverage · revision')
-        para(role,x+13,y+53,137,9,MUTED)
-    para('계측: PLC → Gateway → OEEAnalyzer\n생산 맥락: TwinForge → OEEAnalyzer\n조회·설명: OEE 권위 결과 → TwinForge / DataNexus / Assistant',38,316,W-76,11,TEAL,bold=True,leading=22)
-    para('설계 원칙',38,224,W-76,13,bold=True)
-    para('원본 상태와 계산 결과의 책임을 나누고 OEE 재계산을 중복하지 않습니다. 데이터가 없으면 0이나 임의 값 대신 결측·미수신 상태를 보여줍니다. 조회 adapter와 제어 경계를 분리하고 출처·품질·원본 시각을 보존하는 방향으로 발전시킵니다.',38,194,W-76,10,MUTED)
-    para('다음 계약 검증',38,126,W-76,11,bold=True)
-    para('schemaVersion, 원본 시각, quality, 중복·지연·결측에 대한 6개 출처의 실제 읽기 경로를 후속 fixture로 검증합니다.',38,102,W-76,9,MUTED)
+        col,row=i%4,i//4;x=43+col*192;y=296-row*133
+        box(x,y,180,116)
+        text(p['category'].split(' / ')[0]+' / '+p['group'].upper(),x+13,y+94,7,TEAL,True)
+        para(p['label'],x+13,y+79,153,12,INK,True,leading=18)
+        para(p['role'],x+13,y+43,153,8,MUTED,leading=13)
+    para('원본과 계산의 경계\nPLC → Gateway → Twin 읽기는 확인했습니다. OEE sample/context와 Kafka를 포함한 전체 생산 흐름은 추가 검증이 필요합니다.',624,274,174,8.5,MUTED,leading=14)
+    para('AssetHub는 로컬 자산·개념·소스 매핑 초안입니다. 기존 실행 경로의 필수 의존성이 아니며 승인 API·운영 원장·표준 AAS runtime은 미완료입니다.',44,132,W-88,9,TEAL,leading=15)
+    para('값과 함께 quality, 원본·수신 시각과 명시적 binding을 보존합니다. 미수신 값을 임의 수치로 대체하지 않습니다.',44,87,W-88,8.5,MUTED)
     c.showPage()
 
-    # 03-08: product case studies
+    # Product pages. Images retain their full native aspect ratio.
     for number,p in enumerate(PROJECTS,3):
         frame(number,p['category'])
-        text(p['label'],38,735,24,INK,True)
-        para(p['headline'],38,713,W-76,11,MUTED)
-        path=ROOT/'assets/images/current-2026-10-05'/f'{p["id"]}.jpg'
-        with Image.open(path) as image:
-            iw,ih=image.size
-        scale=min(310/iw,340/ih);dw,dh=iw*scale,ih*scale
-        box(38,337,310,350,HexColor('#e9eddf'))
-        c.drawImage(str(path),38+(310-dw)/2,342+(340-dh)/2,dw,dh)
-        top=683
-        for heading,body in [('소유하는 역할',p['role']),('해결하려는 과제',p['problem']),('구현과 설계',p['solution'])]:
-            top=para(heading,367,top,190,10,TEAL,True)-8
-            top=para(body,367,top,190,9,MUTED,leading=14)-15
-        para('주요 기술\n'+p['stack'],367,top,190,8,MUTED,leading=13)
-        para(p['caption'],38,323,W-76,8,MUTED,leading=12)
-        para('구현: '+' · '.join(p['features']),38,282,W-76,8.7,MUTED,leading=13)
-        para('확인된 동작',38,236,W-76,12,TEAL,True)
-        para(p['verified'],38,214,W-76,10,leading=15)
-        para('다음 개선',38,146,W-76,11,bold=True)
-        para(p['improvement'],38,125,W-76,9,MUTED,leading=14)
-        c.linkURL('https://github.com/dubukimch/'+p['name'],(38,724,W-38,759),relative=0)
+        text(p['label'],43,509,25,INK,True)
+        para(p['headline'],44,488,W-88,10,MUTED)
+        path=SHOTS/f'{p["id"]}.jpg'
+        with Image.open(path) as image:iw,ih=image.size
+        x,y,bw,bh=43,153,468,314
+        box(x,y,bw,bh,HexColor('#edf2f6'))
+        scale=min((bw-8)/iw,(bh-8)/ih);dw,dh=iw*scale,ih*scale
+        c.drawImage(str(path),x+(bw-dw)/2,y+(bh-dh)/2,dw,dh,mask='auto')
+        para(p['caption'],44,141,466,7.4,MUTED,leading=11,min_bottom=100)
+        top=465
+        copy_x=536
+        copy_width=W-copy_x-60
+        assert copy_x+copy_width<=W-60
+        for heading,body in [('소유하는 역할',p['role']),('문제와 구현',p['problem']+' '+p['solution']),('확인된 근거',p['verified'])]:
+            top=para(heading,copy_x,top,copy_width,9,TEAL,True,leading=13)-6
+            top=para(body,copy_x,top,copy_width,8.5,MUTED,leading=13.3,min_bottom=102)-15
+        para('다음 개선 / '+p['improvement'],44,85,W-88,8,MUTED,leading=12)
+        c.linkURL('https://github.com/dubukimch/'+p['name'],(43,499,510,530),relative=0)
         c.showPage()
 
-    # 09: verification evidence
-    frame(9,'VERIFICATION / 2026.10.05')
-    text('동작 검사는 범위와 함께',38,735,24,INK,True)
-    top=700
-    for title,result,body in [
-        ('Docker HTTP / WebSocket','30 PASS','6개 저장소 / 8개 서비스. 웹 응답, health, BlazorPack 호출 바인딩, OEE 401/400/503와 CORS, Assistant Fake/Mock·CSP·키·세션·길이 경계.'),
-        ('실제 MySQL 인증','25 PASS','기본 Bootstrap 비활성, 명시적 관리자, Admin/Viewer, 잘못된 암호·토큰·비활성·손상 해시 거부, 기존 계정/해시 보존, 생성한 볼륨·컨테이너 정리.'),
-        ('OEE .NET 회귀','35 PASS','기존 보안 초기화와 회귀 검사를 재실행. 손상된 저장 해시의 500 오류를 수정하고 정상 기존 해시 및 Unicode 암호를 보존.'),
-        ('TwinForge .NET / OPC UA','45 PASS','실제 두 로컬 OPC UA 서버를 포함한 namespace·quality·재연결 fixture. MIT 버전 전환 후 API 호환성과 2048비트 최소 인증서 키 조건 검증.')]:
-        box(38,top-111,W-76,111)
-        text(title,52,top-24,12,INK,True)
-        text(result,W-126,top-24,10,TEAL,True)
-        para(body,52,top-44,W-104,9,MUTED,leading=14)
-        top-=129
-    para('브라우저 확인',38,180,W-76,12,TEAL,True)
-    para('PLC 가상 RUN/X0 입력/모터 ON, DataNexus CSV 4행/SVG/그리드 추가, Gateway 채널 폼, OEE 로그인 UI, Twin 3D 미리보기·미수신·제어 비활성, Assistant 조회 전용·빈 키 보호를 확인했습니다.',38,158,W-76,9,MUTED,leading=14)
-    para('전체 서비스의 정상 데이터 연동·실장비·외부 LLM 성능·운영 배포 준비를 판정한 검사가 아닙니다.',38,92,W-76,9,TEAL,True,leading=14)
+    # Evidence, explicitly dated.
+    frame(PAGE_COUNT-1,'EVIDENCE / REPRODUCIBLE SCOPE')
+    text('확인한 경로를, 날짜와 함께',43,510,26,INK,True)
+    para('과거 fixture의 통과 수와 현재 UI 캡처는 서로 다른 근거입니다.',44,488,W-88,10)
+    items=[
+        ('2026.10.09','READ PATH / 29 PASS','PLC → Gateway Modbus → Twin OPC UA','격리 Docker fixture에서 실제 시뮬레이터 값, Good 품질과 원본·수신 시각을 확인했습니다. PLC 중단 시 Bad 품질 전이도 확인했습니다.'),
+        (DISPLAY_DATE,'CURRENT REGRESSION','AssetHub 75 · Assistant 52 · smoke','AssetHub 기반·Host 75개와 Assistant C# 52개, 결정적 채팅 smoke를 확인했습니다. PLC/Twin HTTP 소스 설정과 다른 네 출처의 Mock, Fake 생성 방식을 구분합니다.'),
+        ('2026.10.05','REGRESSION / DATED','MySQL 25 · OEE 35 · Twin 45','실제 MySQL 인증과 권한, OEE .NET, Twin의 두 로컬 OPC UA 서버를 포함한 회귀입니다. 각각의 fixture이며 통과 수를 전체 운영 통합으로 확대하지 않습니다.'),
+        (DISPLAY_DATE,'LOCAL UI / 7 PRODUCTS','현재 작업 공간과 공통 식별','일곱 로컬 UI 화면과 제품별 설명을 최신화했습니다. AssetHub는 자산·의미·관계의 로컬 초안이며 운영 승인과 표준 적합성은 미완료입니다.')]
+    for i,(date,label,title,body) in enumerate(items):
+        top=451-i*84
+        c.setStrokeColor(LINE);c.line(43,top+2,W-43,top+2)
+        text(date,44,top-18,8,MUTED)
+        text(label,44,top-35,6.5,TEAL,True)
+        text(title,205,top-19,12,INK,True)
+        para(body,205,top-32,W-250,8.5,MUTED,leading=13)
+    para(DATA['scope'],44,91,W-88,8,TEAL,leading=13)
     c.showPage()
 
-    # 10: cost/license/remaining work
-    frame(10,'DELIVERY / BOUNDARIES')
-    text('완성도는 근거와 남은 일로',38,735,24,INK,True)
-    top=697
-    for heading,body in [
-        ('무료 실행과 재료','새 유료 서비스, 외부 LLM API, 모델 다운로드, 클라우드 자원, npm/NuGet 의존성을 추가하지 않았습니다. 정적 사이트·도식은 자체 작성하고 현재 로컬 UI를 직접 캡처했습니다.'),
-        ('라이선스 확인과 한계','Gateway/Twin의 구형 OPC UA를 실제 원문이 MIT인 1.5.378.145로 전환했습니다. 전체 메타데이터 1195행 중 원문 검토 대상 197행은 남아 있으며 SNI.runtime의 독자 조건, native 구성 요소·자산·NOTICE는 별도 검토가 필요합니다. 이 PDF는 앱 바이너리/컨테이너 배포 승인을 선언하지 않습니다.'),
-        ('PDF 글꼴과 제작 도구','기존 ReportLab/Pillow/pypdf를 사용했습니다. Windows 맑은 고딕 두 파일의 OS/2 fsType=8(editable embedding)을 확인한 뒤 문서에 부분 임베딩했습니다. 글꼴 파일을 웹이나 저장소에 복사하지 않았습니다.'),
-        ('다음 개발 우선순위','6개 출처 읽기 통합과 원본 시각·품질·중복·지연·결측, Gateway 비명령 노드 Write 거부, Twin UUID/TTL/ACK 감사, 정상 시계열 DB, Data 대용량·동시 import, Assistant provenance를 확대 검증합니다.'),
-        ('공개와 제출 상태','현재 PDF와 정적 사이트는 로컬에서 검증합니다. GitHub 원격 업로드는 기존 저장소 인증·권한 확보가 필요하며 게시 완료로 표시하지 않습니다. 화면과 문서에는 사용자 계정 비밀값·AI 키·운영 데이터가 없습니다.')]:
-        top=para(heading,38,top,W-76,12,TEAL,True)-8
-        top=para(body,38,top,W-76,9.5,MUTED,leading=15)-21
-    links=[('OPC Foundation MIT','https://opcfoundation.org/license/mit.html'),
-           ('MySQL Community','https://www.mysql.com/products/community/'),
-           ('Windows font embedding','https://learn.microsoft.com/en-us/typography/fonts/font-faq')]
-    top=para('공식 사용 조건 / 클릭 가능한 근거',38,top,W-76,10,bold=True)-8
-    for label,url in links:
-        text(label+' ↗',38,top-10,8,TEAL)
-        c.linkURL(url,(38,top-15,340,top+3),relative=0)
-        top-=20
+    # Delivery and next work.
+    frame(PAGE_COUNT,'DELIVERY / NEXT ITERATION')
+    text('구현한 것과, 다음에 연결할 것',43,510,26,INK,True)
+    columns=[
+        ('데이터 경로','정상 OEE sample/context와 Timescale/Redis 경로, DataNexus Kafka, 지연·중복·결측 회귀를 확대합니다. 연결 상태와 실제 관측값을 분리하는 원칙을 유지합니다.'),
+        ('자산과 의미','AssetHub의 운영 인증·승인 API·원장, 승인된 knowledge release와 소스 매핑 소비 계약을 단계적으로 구현합니다. 로컬 검토를 운영 승인으로 표현하지 않습니다.'),
+        ('조회와 운영','명시적 논리 자산 매핑, provenance·staleness, 상류 권한 오류와 일시적 장애의 재시도 정책을 검증합니다. 읽기 경계와 제어 책임을 보존합니다.'),
+        ('화면과 접근성','일곱 제품의 작업 구조를 명확하게 다듬고 검색·필터·상태 안내·반응형 화면을 개선합니다. 포트폴리오는 역할 필터와 검색, 키보드 갤러리와 원본 비율 확대를 제공합니다.')]
+    for i,(heading,body) in enumerate(columns):
+        col,row=i%2,i//2;x=43+col*389;top=459-row*139
+        box(x,top-120,367,120)
+        text(heading,x+17,top-25,13,TEAL,True)
+        para(body,x+17,top-42,333,9,MUTED,leading=15)
+    para('제작과 실행',44,171,W-88,11,INK,True)
+    para('자체 HTML/CSS/JavaScript와 직접 캡처한 로컬 UI, 기존 ReportLab/Pillow/pypdf를 사용했습니다. 외부 AI API·새 유료 서비스·외부 폰트·새 의존성을 추가하지 않았습니다. 맑은 고딕의 임베딩 허용 플래그를 확인해 문서에 부분 임베딩하며 글꼴 파일 자체는 배포하지 않습니다.',44,151,W-88,8.5,MUTED,leading=14)
+    para('운영 인증·표준 적합성·의존성 및 native 자산의 배포 조건은 별도 검토 대상입니다. 이 포트폴리오는 로컬 결과이며 GitHub 원격 게시나 제품 운영 배포 승인을 의미하지 않습니다.',44,92,W-88,8,MUTED,leading=13)
     c.showPage();c.save()
-    reader=PdfReader(OUTPUT)
-    assert len(reader.pages)==10
+    reader=PdfReader(temporary)
+    assert len(reader.pages)==PAGE_COUNT
     text_all='\n'.join(p.extract_text() or '' for p in reader.pages)
-    for p in PROJECTS:
-        assert p['label'] in text_all
+    for p in PROJECTS:assert p['label'] in text_all
     assert '\ufffd' not in text_all
-    site_pdf=ROOT/'assets/docs/industrial-platform-portfolio-2026-10-05.pdf'
-    site_pdf.parent.mkdir(parents=True,exist_ok=True)
-    shutil.copyfile(OUTPUT,site_pdf)
-    print(f'Created 10 pages / {OUTPUT.stat().st_size:,} bytes; identical site copy. Render all pages before delivery.')
+    OUTPUT.parent.mkdir(exist_ok=True);SITE_PDF.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(temporary,OUTPUT);shutil.copyfile(temporary,SITE_PDF)
+    mirror_pdf=ROOT.parent/'포트폴리오'/f'assets/docs/industrial-platform-portfolio-{DATE}.pdf'
+    mirror_pdf.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(temporary,mirror_pdf)
+    print(f'Created {PAGE_COUNT} landscape pages / {OUTPUT.stat().st_size:,} bytes; identical portfolio/site copies. Render before delivery.')
 
 
-if __name__=='__main__':
-    main()
+if __name__=='__main__':main()

@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-23",
+  "capture_format": "Native browser JPEG; dimensions recorded from each available image",
+  "screenshots": [
+    {
+      "id": "plc",
+      "file": "assets/screenshots/2026-10-23/plc.jpg",
+      "size": [
+        1280,
+        720
+      ],
+      "endpoint": "http://127.0.0.1:5180",
+      "caption": "로컬 PLC 시뮬레이터 작업 화면. 가상 설비와 테스트 태그이며 실장비 접속 화면이 아닙니다."
+    },
+    {
+      "id": "gateway",
+      "file": "assets/screenshots/2026-10-23/gateway.jpg",
+      "size": [
+        1614,
+        1244
+      ],
+      "endpoint": "http://127.0.0.1:5181",
+      "caption": "로컬 ConfigUI의 구성·모니터링 화면. 서비스 준비 상태와 장비 연결 상태는 구분해 읽습니다."
+    },
+    {
+      "id": "twin",
+      "file": "assets/screenshots/2026-10-23/twin.jpg",
+      "size": [
+        1599,
+        1232
+      ],
+      "endpoint": "http://127.0.0.1:5182",
+      "caption": "로컬 TwinForge 현장 UI. 미리보기와 미수신 표시를 실제 공장 실시간 데이터로 해석하지 않습니다."
+    },
+    {
+      "id": "oee",
+      "file": "assets/screenshots/2026-10-23/oee.jpg",
+      "size": [
+        1614,
+        1244
+      ],
+      "endpoint": "http://127.0.0.1:5185",
+      "caption": "2026-10-23 새 로그인 UI. 프런트엔드 화면이며 API 실행·DB 연동 성공이나 실제 생산 효율을 뜻하지 않습니다."
+    },
+    {
+      "id": "data",
+      "file": "assets/screenshots/2026-10-23/data.jpg",
+      "size": [
+        1614,
+        1244
+      ],
+      "endpoint": "http://127.0.0.1:5186/industrial-integration",
+      "caption": "로컬 분석 작업 공간. 합성·데모 데이터와 연결 상태는 실제 운영 데이터와 구분합니다."
+    },
+    {
+      "id": "assistant",
+      "file": "assets/screenshots/2026-10-23/assistant.jpg",
+      "size": [
+        1614,
+        1244
+      ],
+      "endpoint": "http://127.0.0.1:5187/chat-test/",
+      "caption": "읽기 전용 Assistant UI. PLC/Twin은 구성된 HTTP 소스, 다른 네 출처는 Mock이며 생성·지식·음성은 Fake입니다. 각 답변의 실제 출처와 품질을 확인합니다."
+    },
+    {
+      "id": "assethub",
+      "file": "assets/screenshots/2026-10-23/assethub.jpg",
+      "size": [
+        1599,
+        1232
+      ],
+      "endpoint": "http://127.0.0.1:5189/workbench",
+      "caption": "격리된 local-workbench / fixture-lab의 온톨로지 초안 화면. 로컬 검토는 운영 승인이나 AAS 표준 적합성 판정이 아닙니다."
+    }
+  ],
+  "integration_capture": {
+    "file": "assets/screenshots/2026-10-23/suite.jpg",
+    "size": [
+      1614,
+      1244
+    ],
+    "endpoint": "http://127.0.0.1:5189/workbench/suite",
+    "caption": "고정된 일곱 로컬 경로의 HTTP 응답 관측. 제품 사이 데이터 전송 성공과는 별개입니다."
+  }
+}

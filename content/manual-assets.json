@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "sourceManifestSha256": "112364ac9c66b8a64ec0282ac3a8bb14d31f04c8d8b2ff51c91dd47e77cc04a3",
+  "files": [
+    {
+      "kind": "sample",
+      "source": "samples/manual-process.csv",
+      "path": "assets/docs/manuals/samples/manual-process.csv",
+      "sha256": "0e6c48fb41cc44e487070532236f9709a5c8552c666d4e2d27fc7b4ba20ff663"
+    },
+    {
+      "kind": "sample",
+      "source": "samples/twin-robot-filtered.csv",
+      "path": "assets/docs/manuals/samples/twin-robot-filtered.csv",
+      "sha256": "8a3c6af62c441febad1feba105bff6431b5efe70b893800b6c332c7adca9d9ab"
+    },
+    {
+      "kind": "sample",
+      "source": "samples/analytics-temperature.csv",
+      "path": "assets/docs/manuals/samples/analytics-temperature.csv",
+      "sha256": "fc0004b0472fb083e77061aa241329788f14b859c63cf299280fc0c83a2a54ca"
+    },
+    {
+      "kind": "sample",
+      "source": "samples/analytics-temperature.json",
+      "path": "assets/docs/manuals/samples/analytics-temperature.json",
+      "sha256": "3c3719cbfa8f72c47e880cac6536483db89200cd4488504f1decf959db7e83ac"
+    },
+    {
+      "kind": "sample",
+      "source": "samples/assistant-conversation.md",
+      "path": "assets/docs/manuals/samples/assistant-conversation.md",
+      "sha256": "7d0bd806f78eab18237dfdb216167eb251a18f7bff3484ff17fbbccfa66758c1"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/plc-overview.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/plc-overview.jpg",
+      "sha256": "cfcd5e9dfea29a1baa0d4081c1229b22cc32faa5e28694dd4358126e5138c0f8"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/plc-tags.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/plc-tags.jpg",
+      "sha256": "c362c4394d8823b5e799f69d2b1ec10d5829ca03552a48c98089dfb6f7077762"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/plc-filter.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/plc-filter.jpg",
+      "sha256": "742b909fac11fc483964a4f1b599c052169ae47548a72cc5d152abbdcacaa881"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/plc-ladder.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/plc-ladder.jpg",
+      "sha256": "2da8e084ee8ba5c44411dcf876c1d465d574dfdaf6c180d6cfe5d09a41c0ca0d"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/plc-logs.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/plc-logs.jpg",
+      "sha256": "078461a403e7fbb6abd8965c68075cc25db782b50f2898d798946999ee0867d5"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/gateway-overview.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/gateway-overview.jpg",
+      "sha256": "225bf3e1cee604e29f5488e10abfa2f2781150a04abe0ca94d01f09366ee2e57"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/gateway-channel.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/gateway-channel.jpg",
+      "sha256": "a7f068ce6cb57c923d4924bca7231accc206d16d6d05f687928317278d9c728c"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/gateway-filter.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/gateway-filter.jpg",
+      "sha256": "3e43c9fc7518c1db011605028a0279dbd5340a0ba7e8ab3cf352c379dbbb416c"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/gateway-monitoring.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/gateway-monitoring.jpg",
+      "sha256": "49a902030d2dd9762a1ce7de57ab2aeb6b58b32094e01992f0fe3a94eb42b748"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-overview.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-overview.jpg",
+      "sha256": "efc7277f54638760f21b138ddfc1d08ab064c7793873ad9b04677961550bf676"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-running.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-running.jpg",
+      "sha256": "2c382c6e6521b3c6f295720ed1bfec2111edeaaa0c6f52d9910a5be22d391dee"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-search.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-search.jpg",
+      "sha256": "d86e93e2ba85da2f018932bc949949c551658143e898dc91fb0cebea0cdf2992"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-equipment.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-equipment.jpg",
+      "sha256": "054b040bede42df1049b3b86f647e2e4e1e083b29a5f60955beacd7522753300"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-csv.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-csv.jpg",
+      "sha256": "c17816b30d5f7a806cee996a292bcf60c099053e830fbbaef3de45693813484d"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/twin-navigation.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/twin-navigation.jpg",
+      "sha256": "1cab64de95eec05f466e26cc5110a6b22b458b32b491957752336986a35debfb"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/oee-login.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/oee-login.jpg",
+      "sha256": "94926647904c3c88132bdaaa500b72e75f9e87e3c4584facadedf214abe4a328"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/oee-account.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/oee-account.jpg",
+      "sha256": "cf31b8aa0d0942b065ec5fbf6de1ea088f8f6db6a604bc5d5fb514e7404deda4"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/oee-api-error.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/oee-api-error.jpg",
+      "sha256": "c456a31420b5e1e7390957af09ec440991f75c8818190f6bac7a81afe0ae60cd"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/data-overview.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/data-overview.jpg",
+      "sha256": "516fc3c0006e4dfd1ad8261e2e1cd4ce3265935e15bbb501076f025482d7d4cb"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/data-ingestion.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/data-ingestion.jpg",
+      "sha256": "dc053c065b9e9df35cfedc51d6aa96a5e9fcf3d65083e4ba0323fc9dbcfa87d4"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/data-grid.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/data-grid.jpg",
+      "sha256": "589f0c6623c3ec2ab0fb4be82366eb590ce48e12d74a6e08fa8c84483318795f"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/data-report.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/data-report.jpg",
+      "sha256": "482508e2538581be6b9d8081f72ba6ce8d7262a8e583848f6dadcbd65d83e396"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/data-integration.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/data-integration.jpg",
+      "sha256": "3a0fc125bbdd84f68785ab15c73e9680ea3f5aa333b581cc77c88b8f39ffa0f0"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-connect.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-connect.jpg",
+      "sha256": "a3b9155c70e5e06e84363203ba3d594e9afa1d0c859037a125f8d78e514c1437"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-question.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-question.jpg",
+      "sha256": "334c072c70b5237444e34734a41024adbc773ac0e6f74e991fdfc4648154238d"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-answer.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-answer.jpg",
+      "sha256": "7783cac47e0d0cb74fab79189f95a4792796a0dc1c61c06ddcbfe7531bf5bd55"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-evidence.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-evidence.jpg",
+      "sha256": "9bda923d65d7cd6efccea9066766c451daf580b7a336f3fe954d1347e621efd3"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-copy.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-copy.jpg",
+      "sha256": "56d90b81e7dba75b60b744defcbb2344808c25c5c33e0d5e3e92abfb87dd2b90"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-export.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-export.jpg",
+      "sha256": "4a8ea6dcd6b292a7fa11ab8cfd390b728f595428946f7a3b03f06d58973f1c5a"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assistant-reset.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assistant-reset.jpg",
+      "sha256": "fdaa4f257a1043a56d29d30687067409a46171f2eb2b8c750d309c8008e6ee47"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-overview.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-overview.jpg",
+      "sha256": "bb87ab2d2fe1eb14de0e687ac72b08dbf3cdbb4cd7b8407448602288ddc9cd90"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-create.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-create.jpg",
+      "sha256": "c84966501d2379e1f2f01b39942e1a5d7c1a5f6d4292e76426af39510278d8d1"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-asset.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-asset.jpg",
+      "sha256": "8b99938b7508b00f876431b988645129a7858c02700f9a50541f4f118b42f918"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-matching.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-matching.jpg",
+      "sha256": "044bd05dd31353fceb69a0e4b7478ae659fc1c767ed592818a853245f63de899"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-semantic.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-semantic.jpg",
+      "sha256": "7c8f4fa8599b9ee632064c7a8ab18c0c1334d8facc910095cb2ccae292d9a4fc"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-assist.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-assist.jpg",
+      "sha256": "becaf0d81b00b2c00b9d5ced7ff68f56e40247b3e05db064a702dab6a59e66cb"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-monitor.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-monitor.jpg",
+      "sha256": "77df0ec312a0fccc7fd1cff3e5cd0440c836896341e8518fd0479e8528bf7189"
+    },
+    {
+      "kind": "screenshot",
+      "source": "assets/screenshots/assethub-suite.jpg",
+      "path": "assets/screenshots/manuals/2026-10-24/assethub-suite.jpg",
+      "sha256": "e284de7207d3026cf6f87366c781f52884163bf70830c5a64cc4b9a608616dd6"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/alert-triangle.svg",
+      "path": "assets/icons/lucide/alert-triangle.svg",
+      "sha256": "4866f38b8560d410f21e3226413e0b77997b6dfbb6931fadfe0a0d5aef9ffeb4"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/book-open.svg",
+      "path": "assets/icons/lucide/book-open.svg",
+      "sha256": "9b9bed0ff057283d5c5c5a1c71f8d3e927db26a56639603a92fdf7b25961510e"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/boxes.svg",
+      "path": "assets/icons/lucide/boxes.svg",
+      "sha256": "7e301f6c38337389f5a96675d14cb9d8ef8a613329e99c3dfcf7c635bdd1faae"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/camera.svg",
+      "path": "assets/icons/lucide/camera.svg",
+      "sha256": "ebbb3178dd80dfd942770a2237fe7bfc3515c55c7daa9d3666933a656d2790e3"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/chart.svg",
+      "path": "assets/icons/lucide/chart.svg",
+      "sha256": "80664a4c5ca1bca10bcb88c1a99f62593c94d61d72d3a4bbf577eb3f3ea4da57"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/check-circle.svg",
+      "path": "assets/icons/lucide/check-circle.svg",
+      "sha256": "9711e045a5999f8a3b0782eb88e09b04e0559bc7b379dcc0a4ae645223e10345"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/check.svg",
+      "path": "assets/icons/lucide/check.svg",
+      "sha256": "7f33acc9a77a61659531044525fc008edebe215bf4dcf1c789c8674ad3277db0"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/chevron-right.svg",
+      "path": "assets/icons/lucide/chevron-right.svg",
+      "sha256": "2758143d7b2434e4aa7307dfd34405c87909ff4052f21b5f3f40d45224b4f19b"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/clock.svg",
+      "path": "assets/icons/lucide/clock.svg",
+      "sha256": "e9d3e3acf4d1c280fcf8092293439dc0a4756a908ceb859de144b12451cd1cb9"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/copy.svg",
+      "path": "assets/icons/lucide/copy.svg",
+      "sha256": "ea80e566c7a12628a447cb53179b19aea4f60b9143e2becd0d0f20bf260e5718"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/cpu.svg",
+      "path": "assets/icons/lucide/cpu.svg",
+      "sha256": "ec83bb69ec029d367d749afc445b39c8e95891ebf99b0400652677c2b149b99c"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/database.svg",
+      "path": "assets/icons/lucide/database.svg",
+      "sha256": "471eb14bc8d144896a82dfc4aa9daf350f769f0896f4bef33e50aabdbb51130d"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/external-link.svg",
+      "path": "assets/icons/lucide/external-link.svg",
+      "sha256": "3891241b8c3bfc3a8a930078f26ffc5a7e9763da6d0162ace2050b28d4c1d1fe"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/eye.svg",
+      "path": "assets/icons/lucide/eye.svg",
+      "sha256": "5bf90197dd7629cad64a2e48d1186a71559deb6121207d10e3dc5b19ebaffdcf"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/factory.svg",
+      "path": "assets/icons/lucide/factory.svg",
+      "sha256": "5482b8d73276e072a951f4c1be530d31efa584c8d1a7affbeec22a560f0d5cc0"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/file-down.svg",
+      "path": "assets/icons/lucide/file-down.svg",
+      "sha256": "ef04b1758104a3e8231f2926ddaad2101205c14e4a842d238946f5dee7fcdb29"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/file-text.svg",
+      "path": "assets/icons/lucide/file-text.svg",
+      "sha256": "52ca55846c202335fb870c8aa23e9345630ec10489303756d62e750f7109605c"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/file-up.svg",
+      "path": "assets/icons/lucide/file-up.svg",
+      "sha256": "0bd753699aed9b50bcbde59b12e1409329bb9291c0aa523dd4553497cd665c0b"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/filter.svg",
+      "path": "assets/icons/lucide/filter.svg",
+      "sha256": "288f869330602e29a640099ffc5d6ac01caadad2ef6f8aac1138b8bf91ccd752"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/gauge.svg",
+      "path": "assets/icons/lucide/gauge.svg",
+      "sha256": "d7710543a5085c5a61d0bbac1da8b89ef28e541b38ed739357991dff33d475b5"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/info.svg",
+      "path": "assets/icons/lucide/info.svg",
+      "sha256": "bc977a64eb96f3e9c1041ffd09a3fceb70e3e65c02b571f76064062ed31f3cb9"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/layout-dashboard.svg",
+      "path": "assets/icons/lucide/layout-dashboard.svg",
+      "sha256": "281ab865b4c04dab32a04023473e448f58be6a7ad90769450ac3349d79dc4aed"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/link.svg",
+      "path": "assets/icons/lucide/link.svg",
+      "sha256": "4f3237183dcaabfac92f4e94c776a9a9e45c3c5e77a921061a6b34b61eb5413f"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/list.svg",
+      "path": "assets/icons/lucide/list.svg",
+      "sha256": "ff97a7379eb962ddc3863bb59f0f45875ac8da91aac8a38a67361e7118d2d627"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/lock-keyhole.svg",
+      "path": "assets/icons/lucide/lock-keyhole.svg",
+      "sha256": "fc0b8b7590d1d9e9bb0112c5c2e15a78ade0bfeca6d6f8c79fbbe149236d74be"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/log-out.svg",
+      "path": "assets/icons/lucide/log-out.svg",
+      "sha256": "f24b5b45c05a3acc346af8095408f6ba197ff58ea1641a4f2cb25a9702d2c0ac"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/message-square.svg",
+      "path": "assets/icons/lucide/message-square.svg",
+      "sha256": "5812a3be783fdcd73efd2b6026e03131e4b8c6649e7d52aa2dc7bf2e2023a59d"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/monitor.svg",
+      "path": "assets/icons/lucide/monitor.svg",
+      "sha256": "d1a443233345724859de8e4fb48968ba91e885e12ddbd710701548bd91b39428"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/mouse-pointer-2.svg",
+      "path": "assets/icons/lucide/mouse-pointer-2.svg",
+      "sha256": "a87128b1d33024c22ab598d1ce313081ce8942efd1a70274215bcc53421b7c7e"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/network.svg",
+      "path": "assets/icons/lucide/network.svg",
+      "sha256": "626be730feea1e5ea7539fbf78b4a3fcb927ce5d7dc43364f2216908672ac792"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/pause.svg",
+      "path": "assets/icons/lucide/pause.svg",
+      "sha256": "f122ec4ea7f5693a0b1baafa9c708b53980dc87b4aacb297c6e6f71c1a4c115c"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/pencil.svg",
+      "path": "assets/icons/lucide/pencil.svg",
+      "sha256": "7e1ca7a6f5c1eb949671df762f2baadd32f5bd841d43153c3a15279af7d78d0c"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/play.svg",
+      "path": "assets/icons/lucide/play.svg",
+      "sha256": "d7c34786135922a92b6896f6c2384ceeb0346afbf6041dc79982011411409833"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/plus.svg",
+      "path": "assets/icons/lucide/plus.svg",
+      "sha256": "7f6af73bf1ff6c4bca3f18351c8d1bdec6749c0c2530c4de5da85d520c21df17"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/refresh-cw.svg",
+      "path": "assets/icons/lucide/refresh-cw.svg",
+      "sha256": "2e10dd403c85a24f163d59fc6151aa21147fe9402e1305dfc8979208caee8944"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/save.svg",
+      "path": "assets/icons/lucide/save.svg",
+      "sha256": "ee9d56a7fec4b20dd6689546d41f68219ea8cbd67f99bd17a1bdaff5be6edb53"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/search.svg",
+      "path": "assets/icons/lucide/search.svg",
+      "sha256": "283d371c2e433817bb9c0c8310caa6c77fa4177c0f4f1168d9c83b97af7389dc"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/send.svg",
+      "path": "assets/icons/lucide/send.svg",
+      "sha256": "a489257f447b808ab6b258ae888fa49686885bbc30a7a2774d97a01f11f9cd5e"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/settings.svg",
+      "path": "assets/icons/lucide/settings.svg",
+      "sha256": "0ae27fd0f81999229e3127ac96c5b32edfea448e291d509e76212b917551d66b"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/shield-check.svg",
+      "path": "assets/icons/lucide/shield-check.svg",
+      "sha256": "8d4fcdbde5bba4abb1a2f6fe53e37ceb6343a1d5449a9d88f6f97c1971d26c4e"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/square.svg",
+      "path": "assets/icons/lucide/square.svg",
+      "sha256": "bd979354f0ab184b95cecf03eedefe40c2dc65830ac6d7e60017b2b25a354acb"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/table-2.svg",
+      "path": "assets/icons/lucide/table-2.svg",
+      "sha256": "7b1808e170670d644af828bed77022fc8baba27a654e0805f3fb98e0bec62077"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/tag.svg",
+      "path": "assets/icons/lucide/tag.svg",
+      "sha256": "85e11c07b29f5b67410e0f14c84799d9406320cd4575b7c8322f31910e0582cc"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/thermometer.svg",
+      "path": "assets/icons/lucide/thermometer.svg",
+      "sha256": "a56c95062445d52d95c51a77c4959d5a022539a0194205cc2ce2e9ce8f35847b"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/trash-2.svg",
+      "path": "assets/icons/lucide/trash-2.svg",
+      "sha256": "27299f69ad7c6272be64b1b8e2d48cbd6dcf0ef0d4f92827a1affa945c91700e"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/users.svg",
+      "path": "assets/icons/lucide/users.svg",
+      "sha256": "eeed488a1ec95ba730dd69996536fb65061d6ea273afb2429ae47e65eebf401c"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/waypoints.svg",
+      "path": "assets/icons/lucide/waypoints.svg",
+      "sha256": "97f4eefc2548f3886749778befcdfb0620c8d9619799cbe3f1d2bb566b67dea9"
+    },
+    {
+      "kind": "icon",
+      "source": "assets/design/icons/workflow.svg",
+      "path": "assets/icons/lucide/workflow.svg",
+      "sha256": "ae99ea8f56a2835a2cca35b2fbb57643ab73443610970dba23e24bd9df75cfec"
+    }
+  ]
+}

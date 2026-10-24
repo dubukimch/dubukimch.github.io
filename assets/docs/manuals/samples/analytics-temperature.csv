@@ -1,0 +1,4 @@
+Id,Source,Metric,Value,Delta%,Status,Timestamp
+"IM-1792775084341-00001","manual-process.csv","Temperature",72.5,0,"Ok","2026-10-24 09:00:00"
+"IM-1792775084341-00003","manual-process.csv","Temperature",74.1,2.21,"Ok","2026-10-24 09:01:00"
+"IM-1792775084341-00005","manual-process.csv","Temperature",73.2,-1.21,"Ok","2026-10-24 09:02:00"

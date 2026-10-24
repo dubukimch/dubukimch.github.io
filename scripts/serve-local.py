@@ -10,6 +10,8 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 class Handler(SimpleHTTPRequestHandler):
+    extensions_map = {**SimpleHTTPRequestHandler.extensions_map, '.pdf': 'application/pdf', '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'}
+
     def __init__(self,*args,**kwargs):
         super().__init__(*args,directory=str(ROOT),**kwargs)
 
@@ -39,7 +41,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--port',type=int,default=4174)
+    parser.add_argument('--port',type=int,default=5190)
     parser.add_argument('--stop',action='store_true')
     args=parser.parse_args()
     stage=ROOT/'.local-preview';stage.mkdir(exist_ok=True)

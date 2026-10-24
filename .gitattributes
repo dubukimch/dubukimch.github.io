@@ -1,2 +1,9 @@
-assets/docs/industrial-platform-portfolio-2026-10-05.pdf binary
-assets/images/current-2026-10-05/*.jpg binary
+# Preserve the reviewed downloadable evidence and upstream icon bytes.
+assets/docs/industrial-platform-portfolio-2026-10-23.pdf binary
+assets/docs/manuals/** -text
+assets/docs/manuals/*.pdf binary
+assets/docs/manuals/*.pptx binary
+assets/docs/manuals/samples/** binary
+assets/icons/lucide/** -text
+assets/screenshots/2026-10-23/* binary
+assets/screenshots/manuals/** binary

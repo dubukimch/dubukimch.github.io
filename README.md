@@ -1,53 +1,67 @@
 # Industrial Systems Portfolio
 
-여섯 산업 소프트웨어 프로젝트의 역할, 설계 판단, 현재 화면과 실제 검증 범위를 소개하는 정적 포트폴리오다. 현재판은 **2026-10-05** 기준이다. 로컬 검증을 실제 설비 또는 여섯 출처의 전체 데이터 통합 성공으로 표현하지 않는다.
+일곱 산업 소프트웨어의 화면, 역할과 설계 판단을 소개하는 정적 포트폴리오다. 제품 화면과 포트폴리오 PDF는 **2026-10-23**, 사용 매뉴얼 연결은 **2026-10-24**판이다. 공개 주소는 `https://dubukimch.github.io/`다.
 
-## 구성
+## 현재 원본
 
-- `index.html`: 여섯 역할, 프로젝트 카드와 검증 근거
-- PLC / Gateway / OEE / Twin / DataNexus / Assistant: 프로젝트별 상세 페이지
-- `technical.html`: 역할 경계, 검증과 미완료 범위, 비용·라이선스 기준
-- `presentation.html`: 현재 제출용 PDF 안내
-- `assets/docs/industrial-platform-portfolio-2026-10-05.pdf`: 10쪽 PDF. 상위 `포트폴리오` 폴더의 현재판과 동일
-- `content/projects.json`: 웹과 PDF에서 공유하는 콘텐츠 원본
-- `assets/images/current-2026-10-05/`: 직접 실행하여 캡처한 여섯 프로젝트 화면
-- `작업진행현황/`: 검증 결과, 수정 사항과 다음 작업 프롬프트
+- `content/projects.json`: 일곱 제품의 문제·구현·역할·검증 범위와 남은 개선
+- `content/screenshots.json`: 로컬 캡처 경로·엔드포인트·설명 manifest
+- `assets/screenshots/2026-10-23/`: 직접 실행한 로컬 UI 7개
+- `assets/css/styles.css`, `assets/js/main.js`: 반응형 디자인·검색·역할 필터·키보드 갤러리
+- `scripts/build-current-site.py`: 홈·상세 7개·아키텍처·문서 안내·매뉴얼 모음·솔루션별 웹 매뉴얼 7개, 총 18페이지 생성
+- `scripts/build-current-pdf.py`: 같은 원본으로 가로형 A4 11쪽 PDF 생성
+- `assets/docs/industrial-platform-portfolio-2026-10-23.pdf`: 현재 제출본
+- `assets/docs/manuals/`: 2026-10-24 사용 매뉴얼 PDF·PPTX 다운로드 사본. 원본 MD·캡처·그림은 상위 `솔루션_사용매뉴얼/2026-10-24`에 보존한다.
+- `content/manuals.json`, `content/manual-assets.json`: 41개 동작과 PDF 페이지·원본 캡처·공개 자산 SHA 기록
+- `manuals.html`, `manual-*.html`: 검색 가능한 매뉴얼 모음과 실제 캡처 38장을 담은 솔루션별 안내
+- `scripts/sync-manual-content.py`, `scripts/manual_pages.py`: 확정된 매뉴얼의 공개 자산 동기화와 웹 렌더링
+- `assets/css/manuals.css`, `assets/js/manuals.js`: 반응형 읽기 화면·동작 목차·매뉴얼 검색
 
-기존 화면, PDF와 이전 생성 스크립트는 이력 보존을 위해 유지한다. 현재 페이지는 새 PDF와 새 화면만 참조한다. `scripts/build-portfolio-pdfs.py`와 기존 캡처 스크립트는 현재판 재생성 도구가 아니다.
+정적 페이지는 설비나 AI 서비스에 접속하지 않는다. 제품별 로컬 작업 공간 링크는 loopback에서 미리 볼 때만 표시한다. 필터·검색은 브라우저에서만 처리하며 사용자 입력을 외부로 보내지 않는다. JavaScript가 없으면 모든 프로젝트와 내비게이션을 볼 수 있다.
 
-## 로컬 실행과 검사
+## 로컬 실행과 확인
 
-저장소 루트에서 실행한다. Python 표준 라이브러리만 사용하며 외부 API와 연결하지 않는다.
+저장소 루트에서 실행한다. Python 표준 라이브러리만 필요하다.
 
 ```powershell
-python scripts/serve-local.py
+python scripts/serve-local.py --port 5190
 ```
 
-`http://127.0.0.1:4174/`에서 확인한다. 루프백에만 바인딩하며 `.git` 등 숨김 경로는 GET/HEAD 모두 404다. 미리보기 보안 헤더는 GitHub Pages 배포에 자동 적용되지 않는다.
-
-다른 터미널에서 확인하거나 종료한다.
+미리보기는 `http://127.0.0.1:5190/`다. 서버는 loopback에 바인딩하고 숨김 경로를 GET/HEAD 모두 404로 처리한다. 미리보기 보안 헤더가 GitHub Pages에 자동 적용되는 것은 아니다.
 
 ```powershell
-python scripts/verify-current-site.py
+python scripts/verify-current-site.py --port 5190
+python scripts/verify-manual-site.py
 node --check assets/js/main.js
-python scripts/serve-local.py --stop
+node --check assets/js/manuals.js
+python scripts/serve-local.py --port 5190 --stop
 ```
 
-검사는 9개 HTML, 18개 로컬 리소스, 34개 앵커와 PDF 사본의 SHA256 일치를 확인한다. 외부 링크 9개는 요청하지 않는다. 모바일 메뉴, 확대 화면, 320/390px 모바일과 기본 데스크톱 레이아웃은 브라우저에서 별도로 확인했다.
+검사는 로컬 링크·리소스·앵커, 7개 캡처 manifest, 제출 PDF와 사이트 PDF의 SHA256, 상위 `포트폴리오` 미러의 HTML/CSS/JS/이미지/PDF 일치를 확인한다. 외부 GitHub와 로컬 제품 링크는 요청하지 않는다. 검색·필터·갤러리·모바일 메뉴와 반응형 레이아웃은 브라우저에서 별도로 확인한다.
 
-## 콘텐츠 재생성
+## 재생성
 
 ```powershell
 python scripts/build-current-site.py
 python scripts/build-current-pdf.py
+python scripts/build-current-site.py
 ```
 
-웹 생성에는 Python 표준 라이브러리만 필요하다. PDF 생성은 기존 ReportLab, Pillow, pypdf와 Windows `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. 이번에는 Codex에 포함된 기존 Python 런타임을 사용했으며 새 패키지를 설치하지 않았다. 글꼴 임베딩 플래그가 허용된 값(0 또는 8)이 아니면 중단한다. 글꼴 파일 자체를 사이트에 복사하지 않는다. 재생성 후 PDF 모든 페이지를 렌더링하여 한글·표·이미지 비율·페이지 경계를 육안 확인해야 한다.
+사이트 생성기는 기존 캡처를 덮어쓰지 않는다. `assets/screenshots/{date}/{id}.jpg`와 `suite.jpg`를 준비한 뒤 실행한다. PDF 생성기는 현재 프로젝트 7개 캡처가 모두 준비되지 않으면 중단하며 과거 이미지를 새 캡처로 복사하지 않는다. 마지막 사이트 생성은 현재 PDF·캡처까지 상위 `포트폴리오` 폴더에 동기화한다. 과거 자산과 PDF는 이력으로 보존한다.
 
-정적 HTML/CSS/JS이므로 GitHub Pages는 별도 npm 빌드 없이 제공할 수 있다. 저장소 커밋과 GitHub 원격 반영은 별도 상태이며, 원격 인증이 확보되지 않은 상태를 배포 완료로 표현하지 않는다.
+사용 매뉴얼 원본이 상위 `솔루션_사용매뉴얼/2026-10-24`에 있으면 사이트 생성기가 절차·원본 JPEG·공식 아이콘·샘플·개별 Markdown을 동기화한다. 원본 폴더가 없는 공개 저장소 체크아웃에서는 함께 제공된 `content/manuals.json`과 공개 자산으로 재생성한다. PDF·PPTX 원본이 있으면 ASCII 파일명의 다운로드 사본도 갱신한다.
 
-## 검증 범위와 제약
+각 제품 상세 페이지의 ‘직접 사용하는 순서’에서 웹 매뉴얼·PDF 해당 장·개별 Markdown·통합 PPTX로 이동한다. 웹 매뉴얼은 아이콘 절차·캡처 확대·전체 단계 더보기·결과·문제 해결·실행 확인 범위를 제공한다. PDF 장 시작은 PLC 6 / Gateway 12 / Twin 17 / OEE 24 / Data 31 / Assistant 37 / AssetHub 45쪽이다. 원문과 캡처는 새 실행 결과로 바꾸지 않는다. 사이트와 상위 `포트폴리오` 미러의 매뉴얼 자산도 동일하게 유지한다.
 
-2026-10-05 재검증: Docker HTTP/WebSocket 30개, 실제 일회성 MySQL 인증 25개, OEE .NET 35개, TwinForge .NET 45개 PASS. Assistant는 Fake/Mock만 시험했다. 여섯 출처 전체 통합, 정상 Timescale/Redis 경로, 실장비 제어 및 실제 LLM 응답은 검증하지 않았다.
+웹 생성에는 Python 표준 라이브러리, PDF에는 기존 ReportLab·Pillow·pypdf와 `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. OS/2 임베딩 플래그가 허용값 0 또는 8일 때만 글꼴을 부분 임베딩한다. 글꼴 파일 자체를 사이트에 복사하지 않는다. PDF는 전 페이지를 렌더링해 시각 확인한다. 새 패키지·외부 폰트·외부 AI API가 필요하지 않다.
 
-새 유료 서비스, CDN, 외부 폰트, 스톡 이미지, 라이브러리 다운로드 및 외부 LLM API를 사용하지 않았다. 기존 제품 의존성의 원문 라이선스 검토 필요 197행은 여전히 후속 과제이며, 전체 배포 권리를 승인했다는 의미가 아니다.
+## 검증 근거의 날짜와 범위
+
+- **2026-10-23**: AssetHub 기반·Host 75개, Assistant C# 52개와 결정적 채팅 smoke PASS. 현재 Assistant는 PLC/Twin HTTP adapter를 구성하고 나머지 네 출처를 Mock으로 유지한다. 답변·지식·음성은 Fake다. Suite는 일곱 고정 로컬 경로의 HTTP 응답을 관측하며 데이터 전송 성공과 구분한다.
+- **2026-10-09**: 격리 Docker fixture 29개 PASS, Assistant C# 계약 51개 PASS. PLC → Gateway Modbus → Twin OPC UA의 값·품질·원본/수신 시각과 다섯 제품의 제한된 로그 → Fake 답변 출처를 확인했다.
+- **2026-10-05**: 실제 MySQL 인증 25개, OEE .NET 35개, Twin .NET 45개 PASS. 각기 다른 fixture의 과거 검증 기록이다.
+- **현재 화면**: 일곱 로컬 UI의 캡처와 역할 설명. 화면에서 확인한 서비스 상태와 과거 통합 검증을 혼합하지 않는다.
+
+OEE sample/context가 없는 NoData와 DataNexus Kafka 미연결은 전체 생산 흐름 성공을 의미하지 않는다. AssetHub는 로컬 자산·의미·관계 초안 구현 단계이며 운영 승인 API·원장·표준 AAS runtime·외부 Assistant 연동은 미완료다. 실장비·실제 외부 LLM 답변 품질·표준 적합성·운영 배포 승인은 별도 범위다.
+
+GitHub 원격 반영이나 게시 완료는 로컬 파일 생성과 별개다. 기존 `capture-industrial-portfolio.mjs`, `build-portfolio-pdfs.py`와 2026-10-05 자산은 보존 자료이며 현재판 재생성 도구가 아니다.
