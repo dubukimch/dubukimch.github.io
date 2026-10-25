@@ -1,4 +1,4 @@
-/* Manual reading layer. Uses the portfolio's existing navy and teal tokens. */
+/* Manual reading layer. Shares the portfolio's paper, forest and sage palette. */
 .manual-hub,
 .manual-intro,
 .manual-guide-hero,
@@ -6,16 +6,16 @@
 .manual-files,
 .manual-page-nav,
 .manual-strip {
-  --manual-accent: var(--accent, #096c69);
-  --manual-ink: var(--ink, #152338);
-  --manual-muted: #536477;
-  --manual-line: var(--line, #dce3e9);
+  --manual-accent: var(--accent, #285f4c);
+  --manual-ink: var(--ink, #172b29);
+  --manual-muted: #5b6965;
+  --manual-line: var(--line, #d9dfd7);
   font-size: 16px;
   overflow-wrap: anywhere;
 }
 
 .manual-intro {
-  max-width: 950px;
+  max-width: 1320px;
   padding-block: 72px 40px;
 }
 
@@ -106,7 +106,7 @@
   min-width: 0;
   min-height: 50px;
   padding: 12px 15px;
-  border: 1px solid #b9c8d2;
+  border: 1px solid #c4cebc;
   border-radius: 8px;
   background: white;
   color: var(--manual-ink);
@@ -115,7 +115,7 @@
 }
 
 .manual-search-tools input::placeholder {
-  color: #68788b;
+  color: #64705f;
   opacity: 1;
 }
 
@@ -139,12 +139,12 @@
   align-items: center;
   gap: 9px;
   min-height: 44px;
-  margin-top: 10px;
-  color: var(--accent, #096c69);
-  font-size: 15px;
-  font-weight: 650;
+  margin-top: 0;
+  color: var(--accent, #285f4c);
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1.7;
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 4px;
 }
 
@@ -218,9 +218,9 @@
   width: 64px;
   height: 64px;
   flex: 0 0 64px;
-  border: 1px solid #cadeda;
+  border: 1px solid #d1dcc5;
   border-radius: 16px;
-  background: var(--mint, #e5f2ef);
+  background: var(--mint, #e8eee3);
 }
 
 .manual-catalog-item > .manual-product-icon {
@@ -411,7 +411,7 @@ img.manual-product-icon {
   align-items: center;
   gap: 9px;
   margin: 30px 0;
-  color: #536477;
+  color: #5b6965;
   font-size: 14px;
   line-height: 1.7;
 }
@@ -496,7 +496,7 @@ img.manual-product-icon {
 .manual-toc a:hover,
 .manual-toc a[aria-current] {
   color: var(--manual-accent);
-  background: var(--mint, #e5f2ef);
+  background: var(--mint, #e8eee3);
   border-left-color: var(--manual-accent);
 }
 
@@ -627,7 +627,7 @@ img.manual-product-icon {
   overflow: hidden;
   border: 1px solid var(--manual-line);
   border-radius: 10px;
-  background: #eaf0f4;
+  background: #ecf0e5;
   color: inherit;
   box-shadow: none;
 }
@@ -657,7 +657,7 @@ img.manual-product-icon {
   display: block;
   margin-top: 6px;
   font-size: 13px;
-  color: #627184;
+  color: #5b6965;
   font-variant-numeric: tabular-nums;
 }
 
@@ -896,7 +896,7 @@ img.manual-product-icon {
 .manual-actions a:focus-visible,
 .manual-page-nav a:focus-visible,
 .manual-file-grid a:focus-visible {
-  outline: 3px solid #2779c3;
+  outline: 3px solid #397566;
   outline-offset: 4px;
 }
 
