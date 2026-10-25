@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 1,
-  "date": "2026-10-24",
+  "schemaVersion": 2,
+  "date": "2026-10-25",
+  "sourceEdition": "2026-10-24",
   "sourceManifestSha256": "112364ac9c66b8a64ec0282ac3a8bb14d31f04c8d8b2ff51c91dd47e77cc04a3",
   "files": [
     {
@@ -32,6 +33,13 @@
       "source": "samples/assistant-conversation.md",
       "path": "assets/docs/manuals/samples/assistant-conversation.md",
       "sha256": "7d0bd806f78eab18237dfdb216167eb251a18f7bff3484ff17fbbccfa66758c1"
+    },
+    {
+      "kind": "refreshed-sample",
+      "sourceEdition": "2026-10-25",
+      "source": "samples/report-manual-process.md",
+      "path": "assets/docs/manuals/samples/report-manual-process.md",
+      "sha256": "6116e37b003d7bc0d5db2fa66e11b20ae37b6035add6dd74f011c012a3b6d039"
     },
     {
       "kind": "screenshot",
@@ -260,6 +268,27 @@
       "source": "assets/screenshots/assethub-suite.jpg",
       "path": "assets/screenshots/manuals/2026-10-24/assethub-suite.jpg",
       "sha256": "e284de7207d3026cf6f87366c781f52884163bf70830c5a64cc4b9a608616dd6"
+    },
+    {
+      "kind": "refreshed-screenshot",
+      "sourceEdition": "2026-10-25",
+      "source": "assets/screenshots/data-ingestion-20261025.jpg",
+      "path": "assets/screenshots/manuals/2026-10-25/data-ingestion-20261025.jpg",
+      "sha256": "e00a757b860e4ff400128b7b8108b1546e050008fedcf00e0b16c00979098955"
+    },
+    {
+      "kind": "refreshed-screenshot",
+      "sourceEdition": "2026-10-25",
+      "source": "assets/screenshots/data-grid-20261025.jpg",
+      "path": "assets/screenshots/manuals/2026-10-25/data-grid-20261025.jpg",
+      "sha256": "77565fb3f3e2b2e674cce34e512cc7808c956089f67982cd2d703c915909fa54"
+    },
+    {
+      "kind": "refreshed-screenshot",
+      "sourceEdition": "2026-10-25",
+      "source": "assets/screenshots/data-report-20261025.jpg",
+      "path": "assets/screenshots/manuals/2026-10-25/data-report-20261025.jpg",
+      "sha256": "f42ff0d5bfdf6b0df24c999ac11ceaac54a5e4964a503868b120b77a0e898e91"
     },
     {
       "kind": "icon",

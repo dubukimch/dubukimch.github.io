@@ -55,13 +55,13 @@
 
 기대 결과: Timestamp에 따른 Temperature 3개 점이 차트로 표시됩니다. 그리드 추가 시 Source는 파일명, ID는 IM- 접두이며 Temperature·Speed 총 6개 레코드가 생성됩니다. 이 수치는 교육용 가상값입니다.
 
-관측 결과: 교육용 3행 CSV와 Timestamp/Temperature 선택, Line 차트 렌더 및 분석 레코드 6건 추가를 확인.
+관측 결과: manual-process.csv 3행을 업로드하고 Timestamp/Temperature/Line으로 차트를 렌더링한 뒤 분석 그리드에 추가했습니다. 화면의 '6 analytics records were added from manual-process.csv' 성공 배너를 확인했습니다.
 
 캡처 시각(UTC): 2026-10-23T17:04:44.289Z
 
-![교육용 CSV 업로드·차트 작성·그리드로 추가](../../../screenshots/manuals/2026-10-24/data-ingestion.jpg)
+![교육용 CSV 업로드·차트 작성·그리드로 추가](../../../screenshots/manuals/2026-10-25/data-ingestion-20261025.jpg)
 
-캡처 안내: 이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.
+캡처 안내: 2026-10-25 대비 보정 후 실제 재촬영. 교육용 CSV 실습이며 실제 생산 데이터가 아닙니다.
 
 문제 해결:
 
@@ -74,26 +74,28 @@
 
 검증 상태: 실행 확인
 
-1. 왼쪽 '분석 그리드' 또는 /analytics-grid을 엽니다. DN- 초기 행은 로컬 데모라는 안내를 먼저 읽습니다.
-2. 'Search source…'에 'manual-process'를 입력하고 필요하면 'Search metric…'에 'Temperature'를 입력합니다. 앞 단계에서 파일을 추가했다면 Temperature 3건이 남습니다.
-3. 기본 'Neon threshold ≥'는 80입니다. 교육용 데이터의 강조를 비교하려면 74로 바꿉니다. 이 기준은 화면 강조용이며 PLC 알람이나 OEE 계산을 변경하지 않습니다.
-4. 필요하면 컬럼 제목을 눌러 정렬합니다. 'CSV' 또는 'JSON'을 눌러 analytics-export.csv / analytics-export.json을 다운로드합니다. 내보내기는 현재 페이지뿐 아니라 필터에 맞는 모든 행을 대상으로 합니다.
-5. 원복: 'Clear'를 눌러 검색·정렬 조건을 지우고 강조 기준을 80으로 되돌립니다. 기본 페이지 크기는 25입니다.
+1. 분석 그리드에서 Source에 manual-process, Metric에 Temperature를 입력합니다.
+2. Neon threshold ≥ 값 80을 확인합니다. 이번 캡처는 기준 80이며 강조된 행이 없습니다.
+3. Temperature 3행의 72.50, 74.10, 73.20과 Source·Status·Timestamp를 함께 비교합니다.
+4. CSV 또는 JSON으로 현재 필터 결과 전체를 내려받을 수 있습니다.
+5. Clear로 필터를 초기화하고 강조 기준을 기본값 80으로 유지합니다.
 
-기대 결과: 파일명·지표 조건에 맞는 행과 수치만 표시됩니다. 임계값 74에서는 예시 Temperature 74.1이 강조됩니다. 원본 레코드 값은 바뀌지 않습니다.
+기대 결과: Temperature 3행과 Source·값·Status·Timestamp를 함께 확인합니다.
 
-관측 결과: 필터Temperature3건, 강조기준74에서74.1강조. CSV/JSON각3건 다운로드 및 값정렬/Clear동작 검증.
+관측 결과: Search source=manual-process, Search metric=Temperature 필터로 1–3 of 3을 확인했습니다. 값은 72.50, 74.10, 73.20이며 Source·Status·Timestamp·CSV/JSON 버튼이 보입니다.
 
 캡처 시각(UTC): 2026-10-23T17:17:53.470Z
 
-![분석 그리드 필터·강조 기준·내보내기](../../../screenshots/manuals/2026-10-24/data-grid.jpg)
+![분석 그리드 필터·강조 기준·내보내기](../../../screenshots/manuals/2026-10-25/data-grid-20261025.jpg)
 
-캡처 안내: 이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.
+캡처 안내: 2026-10-25 실제 재촬영. 강조 기준 80에서 파일·지표 필터 3행을 확인했으며 강조된 행은 없습니다.
 
 문제 해결:
 
 - 검색 결과가 없으면 Clear 후 Source 열을 확인합니다. 업로드만 하고 Add to Analytics Grid를 누르지 않았다면 IM- 행은 생성되지 않습니다.
 - 다운로드가 보이지 않으면 브라우저 다운로드 목록을 확인합니다. CSV/JSON 저장은 분석 그리드의 로컬 파일 내보내기입니다.
+
+이전 자료 안내: 원문의 기준 74와 74.1 강조는 이전 절차와 연습 예시입니다. 이번 기준 80 캡처의 실행 근거로 사용하지 않습니다.
 
 ## 4. 로컬 템플릿 보고서 생성과 Markdown 저장
 
@@ -109,15 +111,15 @@
 
 기대 결과: 입력한 제목·작성자·목적·요약이 로컬 보고서 템플릿에 채워집니다. 이 기능은 외부 AI 분석이나 입력 수치의 진위 검증을 수행하지 않습니다.
 
-관측 결과: 입력한 교육용 요약을 보존하는 로컬 템플릿 보고서 생성 및 Preview 확인
+관측 결과: 제목·작성자·목적·교육용 데이터 요약을 입력해 로컬 템플릿 보고서를 생성하고 Preview를 확인했습니다. Copy MD 후 브라우저 세션 클립보드의 524자 보고서 제목과 온도값을 확인했고, Download .md의 실제 파일을 저장했습니다. 복사한 문자열과 다운로드 파일의 내용이 일치합니다.
 
 캡처 시각(UTC): 2026-10-23T17:08:13.380Z
 
-![로컬 템플릿 보고서 생성과 Markdown 저장](../../../screenshots/manuals/2026-10-24/data-report.jpg)
+![로컬 템플릿 보고서 생성과 Markdown 저장](../../../screenshots/manuals/2026-10-25/data-report-20261025.jpg)
 
-캡처 안내: 이 원본 화면은 대비 보정 전 캡처입니다. 이후 표·입력·미리보기의 색상 대비를 수정했으며 재촬영은 브라우저 연결 복구 후 필요합니다. 조작 순서는 위의 본문을 함께 확인하세요.
+캡처 안내: 2026-10-25 대비 보정 후 실제 재촬영. 생성·Preview·Copy MD·Download .md 실행을 확인했습니다.
 
-검증 범위: 보고서 생성과 Preview를 확인했습니다. Copy MD와 Download .md는 구현을 바탕으로 안내하며 이번 실행에서는 추가 확인하지 못했습니다.
+검증 범위: 2026-10-25 대비 보정 후 실제 재촬영. 생성·Preview·Copy MD·Download .md 실행을 확인했습니다.
 
 문제 해결:
 

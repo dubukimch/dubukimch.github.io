@@ -1,0 +1,363 @@
+{
+  "edition": "2026-10-25",
+  "sourceEdition": "2026-10-24",
+  "sourceManifestSha256": "a55544260af741eaf5fc7857e9b770a4a6bc88960cf1c2165ce81f1fa95fc097",
+  "integrated": {
+    "id": "integrated",
+    "label": "산업 솔루션 통합 사용 매뉴얼",
+    "slides": 56,
+    "chapterPage": null,
+    "prerequisitesPage": null,
+    "resourcesPage": null,
+    "operationPages": {
+      "plc-overview": 7,
+      "plc-tags": 8,
+      "plc-filter": 9,
+      "plc-ladder": 10,
+      "plc-logs": 11,
+      "gateway-overview": 13,
+      "gateway-channel": 14,
+      "gateway-filter": 15,
+      "gateway-monitoring": 16,
+      "twin-overview": 18,
+      "twin-running": 19,
+      "twin-search": 20,
+      "twin-equipment": 21,
+      "twin-csv": 22,
+      "twin-navigation": 23,
+      "oee-login": 25,
+      "oee-account": 26,
+      "oee-api-error": 27,
+      "oee-analysis": 28,
+      "oee-export": 29,
+      "oee-viewer": 30,
+      "data-overview": 32,
+      "data-ingestion": 33,
+      "data-grid": 34,
+      "data-report": 35,
+      "data-integration": 36,
+      "assistant-connect": 38,
+      "assistant-question": 39,
+      "assistant-answer": 40,
+      "assistant-evidence": 41,
+      "assistant-copy": 42,
+      "assistant-export": 43,
+      "assistant-reset": 44,
+      "assethub-overview": 46,
+      "assethub-create": 47,
+      "assethub-asset": 48,
+      "assethub-matching": 49,
+      "assethub-semantic": 50,
+      "assethub-assist": 51,
+      "assethub-monitor": 52,
+      "assethub-suite": 53
+    },
+    "pdf": {
+      "path": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-25.pdf",
+      "bytes": 32462880,
+      "sha256": "ecdcbb3feeadb3baa0cfd0853ab941a6859d7efc065ff401a33e3d45559168d5",
+      "pages": 56
+    },
+    "pptx": {
+      "path": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-25.pptx",
+      "bytes": 10061292,
+      "sha256": "56d6697521bd9944cf9dcd19d1d742198c68e2120b4d074eef0730c9d46fe6e9",
+      "pages": 56
+    }
+  },
+  "solutions": [
+    {
+      "id": "plc",
+      "label": "PLC Simulation 사용 매뉴얼",
+      "slides": 8,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 8,
+      "operationPages": {
+        "plc-overview": 3,
+        "plc-tags": 4,
+        "plc-filter": 5,
+        "plc-ladder": 6,
+        "plc-logs": 7
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/plc-user-manual-2026-10-25.pdf",
+        "bytes": 6496863,
+        "sha256": "0d09f37dd9be158c4f5637f7e7aa83b0ee3c13dba7fdab5adc6bbcb02fe3b47b",
+        "pages": 8
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/plc-user-manual-2026-10-25.pptx",
+        "bytes": 1573490,
+        "sha256": "72ad65ef274501b2f0b00d2179333bfe8f93d1b16e3d01e54c33931329d76c53",
+        "pages": 8
+      }
+    },
+    {
+      "id": "gateway",
+      "label": "IIoT Gateway 사용 매뉴얼",
+      "slides": 7,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 7,
+      "operationPages": {
+        "gateway-overview": 3,
+        "gateway-channel": 4,
+        "gateway-filter": 5,
+        "gateway-monitoring": 6
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/gateway-user-manual-2026-10-25.pdf",
+        "bytes": 2889367,
+        "sha256": "491c7548cf157d4cfe473b73f5c0c13574ff69ae331f6dc40fe92216c110214d",
+        "pages": 7
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/gateway-user-manual-2026-10-25.pptx",
+        "bytes": 838369,
+        "sha256": "cc5592c6f71bb087ee1e35c80e21839cd327e9a1fba845984f0b03d46ff7c5f4",
+        "pages": 7
+      }
+    },
+    {
+      "id": "twin",
+      "label": "TwinForge 사용 매뉴얼",
+      "slides": 9,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 9,
+      "operationPages": {
+        "twin-overview": 3,
+        "twin-running": 4,
+        "twin-search": 5,
+        "twin-equipment": 6,
+        "twin-csv": 7,
+        "twin-navigation": 8
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/twin-user-manual-2026-10-25.pdf",
+        "bytes": 7563689,
+        "sha256": "61ec865e4abd66ce021513bf8808193b47d5e1bebeed169b3f38dc8add670030",
+        "pages": 9
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/twin-user-manual-2026-10-25.pptx",
+        "bytes": 1667031,
+        "sha256": "2ca85da53596d1e3d58bbbe46d1dc7738d2ffdd7f90ba2926d4091be7d0ccfb3",
+        "pages": 9
+      }
+    },
+    {
+      "id": "oee",
+      "label": "OEEAnalyzer 사용 매뉴얼",
+      "slides": 9,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 9,
+      "operationPages": {
+        "oee-login": 3,
+        "oee-account": 4,
+        "oee-api-error": 5,
+        "oee-analysis": 6,
+        "oee-export": 7,
+        "oee-viewer": 8
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/oee-user-manual-2026-10-25.pdf",
+        "bytes": 2735968,
+        "sha256": "aca9ef8f298ef12af67560df5c0aae46ac711de85e8810743d0d66cbf2091928",
+        "pages": 9
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/oee-user-manual-2026-10-25.pptx",
+        "bytes": 1067802,
+        "sha256": "e80206a4f08e70732f873d3d7e4e1aa557908333b9925f8727dd95ae8ed3f218",
+        "pages": 9
+      }
+    },
+    {
+      "id": "data",
+      "label": "DataNexus 사용 매뉴얼",
+      "slides": 8,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 8,
+      "operationPages": {
+        "data-overview": 3,
+        "data-ingestion": 4,
+        "data-grid": 5,
+        "data-report": 6,
+        "data-integration": 7
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/data-user-manual-2026-10-25.pdf",
+        "bytes": 4255845,
+        "sha256": "6459380e1e105652e5067da6439a9110a63f47c91f2637376d3789414fd9f918",
+        "pages": 8
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/data-user-manual-2026-10-25.pptx",
+        "bytes": 1038645,
+        "sha256": "54842f6cf3161dc41f92d821226d88ca8ea0376fa5819772fb04cec9ca2da160",
+        "pages": 8
+      }
+    },
+    {
+      "id": "assistant",
+      "label": "Industrial Assistant 사용 매뉴얼",
+      "slides": 10,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 10,
+      "operationPages": {
+        "assistant-connect": 3,
+        "assistant-question": 4,
+        "assistant-answer": 5,
+        "assistant-evidence": 6,
+        "assistant-copy": 7,
+        "assistant-export": 8,
+        "assistant-reset": 9
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/assistant-user-manual-2026-10-25.pdf",
+        "bytes": 3492582,
+        "sha256": "06b01d9d0ea54a28f275a696143cbfadad7dc10a4192d5db7428ac02de1c3a12",
+        "pages": 10
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/assistant-user-manual-2026-10-25.pptx",
+        "bytes": 1779688,
+        "sha256": "347c50dfba4a1039bebe89197ebd72a65be68d8855f1c69f64d3c79ce4bb5d6c",
+        "pages": 10
+      }
+    },
+    {
+      "id": "assethub",
+      "label": "Industrial AssetHub 사용 매뉴얼",
+      "slides": 11,
+      "chapterPage": 1,
+      "prerequisitesPage": 2,
+      "resourcesPage": 11,
+      "operationPages": {
+        "assethub-overview": 3,
+        "assethub-create": 4,
+        "assethub-asset": 5,
+        "assethub-matching": 6,
+        "assethub-semantic": 7,
+        "assethub-assist": 8,
+        "assethub-monitor": 9,
+        "assethub-suite": 10
+      },
+      "pdf": {
+        "path": "assets/docs/manuals/solutions/assethub-user-manual-2026-10-25.pdf",
+        "bytes": 5403038,
+        "sha256": "b3274fde5784651ec7347497901202713b73fbbaae24793a97d4d820e7c74932",
+        "pages": 11
+      },
+      "pptx": {
+        "path": "assets/docs/manuals/solutions/assethub-user-manual-2026-10-25.pptx",
+        "bytes": 1731301,
+        "sha256": "5efefa49d17b2058fb04e6e97b35ea486be1502c7a32920a30cbe761e562a45c",
+        "pages": 11
+      }
+    }
+  ],
+  "legacyDownloads": {
+    "pdf": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pdf",
+    "pptx": "assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.pptx"
+  },
+  "captureRefresh": [
+    {
+      "id": "data-ingestion",
+      "screenshot": "assets/screenshots/manuals/2026-10-25/data-ingestion-20261025.jpg",
+      "evidence": {
+        "capturedAtUtc": "2026-10-25T07:00:37.407Z",
+        "url": "http://127.0.0.1:5186/file-ingestion",
+        "observed": "manual-process.csv 3행을 업로드하고 Timestamp/Temperature/Line으로 차트를 렌더링한 뒤 분석 그리드에 추가했습니다. 화면의 '6 analytics records were added from manual-process.csv' 성공 배너를 확인했습니다.",
+        "sha256": "e00a757b860e4ff400128b7b8108b1546e050008fedcf00e0b16c00979098955",
+        "bytes": 117999
+      },
+      "evidenceState": "full",
+      "captureNote": "2026-10-25 대비 보정 후 실제 재촬영. 교육용 CSV 실습이며 실제 생산 데이터가 아닙니다."
+    },
+    {
+      "id": "data-grid",
+      "screenshot": "assets/screenshots/manuals/2026-10-25/data-grid-20261025.jpg",
+      "evidence": {
+        "capturedAtUtc": "2026-10-25T07:01:07.830Z",
+        "url": "http://127.0.0.1:5186/analytics-grid",
+        "observed": "Search source=manual-process, Search metric=Temperature 필터로 1–3 of 3을 확인했습니다. 값은 72.50, 74.10, 73.20이며 Source·Status·Timestamp·CSV/JSON 버튼이 보입니다.",
+        "sha256": "77565fb3f3e2b2e674cce34e512cc7808c956089f67982cd2d703c915909fa54",
+        "bytes": 80609
+      },
+      "evidenceState": "full",
+      "captureNote": "2026-10-25 실제 재촬영. 강조 기준 80에서 파일·지표 필터 3행을 확인했으며 강조된 행은 없습니다.",
+      "currentSteps": [
+        "분석 그리드에서 Source에 manual-process, Metric에 Temperature를 입력합니다.",
+        "Neon threshold ≥ 값 80을 확인합니다. 이번 캡처는 기준 80이며 강조된 행이 없습니다.",
+        "Temperature 3행의 72.50, 74.10, 73.20과 Source·Status·Timestamp를 함께 비교합니다.",
+        "CSV 또는 JSON으로 현재 필터 결과 전체를 내려받을 수 있습니다.",
+        "Clear로 필터를 초기화하고 강조 기준을 기본값 80으로 유지합니다."
+      ],
+      "currentExpected": "Temperature 3행과 Source·값·Status·Timestamp를 함께 확인합니다.",
+      "stages": [
+        {
+          "icon": "assets/icons/lucide/search.svg",
+          "iconName": "search",
+          "label": "파일과 지표 검색",
+          "detail": "manual-process·Temperature"
+        },
+        {
+          "icon": "assets/icons/lucide/filter.svg",
+          "iconName": "filter",
+          "label": "화면 강조 기준 읽기",
+          "detail": "Neon threshold ≥: 80"
+        },
+        {
+          "icon": "assets/icons/lucide/table-2.svg",
+          "iconName": "table",
+          "label": "값과 상태 비교",
+          "detail": "Temperature 3행 · 72.5~74.1"
+        },
+        {
+          "icon": "assets/icons/lucide/file-down.svg",
+          "iconName": "download",
+          "label": "필터 전체 내보내기",
+          "detail": "CSV 또는 JSON"
+        },
+        {
+          "icon": "assets/icons/lucide/refresh-cw.svg",
+          "iconName": "reset",
+          "label": "조건 원복",
+          "detail": "Clear → 강조 기준 80"
+        }
+      ],
+      "legacyEvidenceNote": "원문의 기준 74와 74.1 강조는 이전 절차와 연습 예시입니다. 이번 기준 80 캡처의 실행 근거로 사용하지 않습니다."
+    },
+    {
+      "id": "data-report",
+      "screenshot": "assets/screenshots/manuals/2026-10-25/data-report-20261025.jpg",
+      "evidence": {
+        "capturedAtUtc": "2026-10-25T07:04:58.239Z",
+        "url": "http://127.0.0.1:5186/report",
+        "observed": "제목·작성자·목적·교육용 데이터 요약을 입력해 로컬 템플릿 보고서를 생성하고 Preview를 확인했습니다. Copy MD 후 브라우저 세션 클립보드의 524자 보고서 제목과 온도값을 확인했고, Download .md의 실제 파일을 저장했습니다. 복사한 문자열과 다운로드 파일의 내용이 일치합니다.",
+        "sha256": "f42ff0d5bfdf6b0df24c999ac11ceaac54a5e4964a503868b120b77a0e898e91",
+        "bytes": 65053
+      },
+      "evidenceState": "full",
+      "captureNote": "2026-10-25 대비 보정 후 실제 재촬영. 생성·Preview·Copy MD·Download .md 실행을 확인했습니다."
+    }
+  ],
+  "productOverrides": {
+    "oee": {
+      "prerequisites": [
+        "React UI는 http://127.0.0.1:5185, 분석 API 목표 주소는 http://127.0.0.1:5184다. /api와 /hubs는 UI 개발 서버에서 API로 프록시된다.",
+        "현재 OEE API·DB의 격리 실행 및 인증 이후 분석은 확인하지 못했습니다. 로그인 화면만으로 인증·계산·데이터 연동을 확인하지 않습니다.",
+        "정상 분석에는 API와 기존 MySQL·TimescaleDB·Redis 등 구성된 데이터 서비스, 유효 계정과 역할, 생산 증거 및 TwinForge 생산 맥락이 필요하다.",
+        "개발 계정 선택 버튼은 개발 서버(import.meta.env.DEV)에서만 표시된다. 버튼은 입력값을 채우며 계정을 생성하거나 자동 인증하지 않는다. 기존 DB에서 해당 계정의 존재를 보장하지 않는다.",
+        "새 운영 계정 초기화·비밀번호 변경은 관리자가 기존 인증 및 Bootstrap 정책에 따라 수행한다. 본 매뉴얼은 인증 우회나 계정 재생성을 안내하지 않는다."
+      ],
+      "reason": "Docker Engine 29.3.1 is running. OEE API/database and authenticated analysis were not started or verified in this run."
+    }
+  }
+}

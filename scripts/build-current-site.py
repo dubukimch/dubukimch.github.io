@@ -2,6 +2,7 @@
 import json
 import runpy
 import shutil
+import sys
 from html import escape as e
 from pathlib import Path
 from manual_pages import manual_strip, manual_hub, manual_guide
@@ -14,15 +15,14 @@ DISPLAY_DATE = DATE.replace('-', '.')
 PDF = f'assets/docs/industrial-platform-portfolio-{DATE}.pdf'
 SHOTS = f'assets/screenshots/{DATE}'
 MIRROR = ROOT.parent / '포트폴리오'
-MANUAL_DATE = '2026-10-24'
-MANUAL_ROOT = ROOT.parent / '솔루션_사용매뉴얼' / MANUAL_DATE
-MANUALS = [(f'assets/docs/manuals/industrial-solutions-user-manual-{MANUAL_DATE}.{extension}', MANUAL_ROOT / f'산업솔루션_통합사용매뉴얼.{extension}', label) for extension, label in [('pdf', '사용 매뉴얼 PDF'), ('pptx', '사용 매뉴얼 PPTX')]]
+MANUAL_DATE = '2026-10-25'
+MANUAL_ROOT = ROOT.parent / '솔루션_사용매뉴얼' / '2026-10-24'
 GROUPS = [('all', '전체 프로젝트'), ('collect', '수집·연결'), ('operate', '운영·디지털 트윈'), ('analyze', '분석·설명'), ('identity', '자산·의미')]
 MANUAL_DATA = {}
 
 
 def manual_downloads():
-    links = ''.join(f'<a class="button" href="{path}" download>{label} <span aria-hidden="true">↓</span></a>' for path, _, label in MANUALS if (ROOT / path).is_file())
+    links = ''.join(f'<a class="button" href="{path}" download>통합 사용 매뉴얼 {extension.upper()} <span aria-hidden="true">↓</span></a>' for extension, path in MANUAL_DATA.get('downloads', {}).items() if (ROOT / path).is_file())
     return f'<div class="actions manual-downloads" aria-label="솔루션 사용 매뉴얼 다운로드">{links}</div>' if links else ''
 
 
@@ -102,17 +102,17 @@ def architecture():
 
 def build():
     global MANUAL_DATA
-    if (MANUAL_ROOT/'data/manual-manifest.json').is_file():
+    saved_manuals = json.loads((ROOT/'content/manuals.json').read_text(encoding='utf-8')) if (ROOT/'content/manuals.json').is_file() else {}
+    explicit_publication = any(argument.startswith('--publication-manifest') for argument in sys.argv[1:])
+    official_publication = ROOT.parent/'솔루션_사용매뉴얼'/MANUAL_DATE/'publication-manifest.json'
+    can_refresh = official_publication.is_file() or explicit_publication or saved_manuals.get('schemaVersion', 0) < 2
+    if (MANUAL_ROOT/'data/manual-manifest.json').is_file() and can_refresh:
         runpy.run_path(str(ROOT/'scripts/sync-manual-content.py'), run_name='__main__')
     elif not (ROOT/'content/manuals.json').is_file():
         raise FileNotFoundError('Provide the reviewed manual source or the published content/manuals.json and assets.')
     MANUAL_DATA = json.loads((ROOT/'content/manuals.json').read_text(encoding='utf-8'))
     guides = {product['id']: product for product in MANUAL_DATA['products']}
     (ROOT/SHOTS).mkdir(parents=True,exist_ok=True)
-    for path, source, _ in MANUALS:
-        if source.is_file():
-            destination=ROOT/path;destination.parent.mkdir(parents=True,exist_ok=True)
-            shutil.copyfile(source,destination)
     home_html = home()
     for product in PROJECTS:
         anchor = f'<a class="text-link" href="{product["page"]}">문제 · 구현 · 검증 살펴보기 <span aria-hidden="true">→</span></a>'
@@ -136,12 +136,14 @@ def build():
     MIRROR.mkdir(exist_ok=True)
     for filename in pages:
         shutil.copyfile(ROOT/filename,MIRROR/filename)
-    for path in ['assets/css/styles.css','assets/js/main.js',PDF,f'{SHOTS}/suite.jpg']+[f'{SHOTS}/{p["id"]}.jpg' for p in PROJECTS]+[path for path, _, _ in MANUALS]:
+    for path in ['assets/css/styles.css','assets/js/main.js',PDF,f'{SHOTS}/suite.jpg']+[f'{SHOTS}/{p["id"]}.jpg' for p in PROJECTS]:
         if (ROOT/path).is_file():
             target=MIRROR/path;target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(ROOT/path,target)
     guide_assets = [ROOT/'assets/css/manuals.css', ROOT/'assets/js/manuals.js', ROOT/'content/manuals.json', ROOT/'content/manual-assets.json']
-    for folder in ['assets/docs/manuals/chapters', 'assets/docs/manuals/samples', 'assets/icons/lucide', 'assets/screenshots/manuals']:
+    if (ROOT/'content/manual-publication.json').is_file():
+        guide_assets.append(ROOT/'content/manual-publication.json')
+    for folder in ['assets/docs/manuals', 'assets/icons/lucide', 'assets/screenshots/manuals']:
         guide_assets.extend(path for path in (ROOT/folder).rglob('*') if path.is_file())
     for source in guide_assets:
         target = MIRROR/source.relative_to(ROOT)

@@ -1,6 +1,6 @@
 # Industrial Systems Portfolio
 
-일곱 산업 소프트웨어의 화면, 역할과 설계 판단을 소개하는 정적 포트폴리오다. 제품 화면과 포트폴리오 PDF는 **2026-10-23**, 사용 매뉴얼 연결은 **2026-10-24**판이다. 공개 주소는 `https://dubukimch.github.io/`다.
+일곱 산업 소프트웨어의 화면, 역할과 설계 판단을 소개하는 정적 포트폴리오다. 제품 소개와 포트폴리오 PDF는 **2026-10-23**, 통합·솔루션별 사용 매뉴얼은 **2026-10-25 이미지 호환성 복구판**이다. 공개 주소는 `https://dubukimch.github.io/`다.
 
 ## 현재 원본
 
@@ -11,7 +11,8 @@
 - `scripts/build-current-site.py`: 홈·상세 7개·아키텍처·문서 안내·매뉴얼 모음·솔루션별 웹 매뉴얼 7개, 총 18페이지 생성
 - `scripts/build-current-pdf.py`: 같은 원본으로 가로형 A4 11쪽 PDF 생성
 - `assets/docs/industrial-platform-portfolio-2026-10-23.pdf`: 현재 제출본
-- `assets/docs/manuals/`: 2026-10-24 사용 매뉴얼 PDF·PPTX 다운로드 사본. 원본 MD·캡처·그림은 상위 `솔루션_사용매뉴얼/2026-10-24`에 보존한다.
+- `assets/docs/manuals/`: 통합 PDF·PPTX와 `solutions/`의 솔루션별 PDF·PPTX 14개, 총 16개 문서. 예전 2026-10-24 통합 URL도 복구판 바이트로 연결한다.
+- `content/manual-publication.json`: 16개 문서의 SHA·파일 크기·슬라이드 수·솔루션별 실제 동작 페이지와 새 캡처 근거
 - `content/manuals.json`, `content/manual-assets.json`: 41개 동작과 PDF 페이지·원본 캡처·공개 자산 SHA 기록
 - `manuals.html`, `manual-*.html`: 검색 가능한 매뉴얼 모음과 실제 캡처 38장을 담은 솔루션별 안내
 - `scripts/sync-manual-content.py`, `scripts/manual_pages.py`: 확정된 매뉴얼의 공개 자산 동기화와 웹 렌더링
@@ -21,7 +22,7 @@
 
 ## 로컬 실행과 확인
 
-저장소 루트에서 실행한다. Python 표준 라이브러리만 필요하다.
+저장소 루트에서 실행한다. 정적 서버는 Python 표준 라이브러리만 필요하며, 문서 검증에는 기존 번들 런타임의 pypdf·Pillow를 사용한다.
 
 ```powershell
 python scripts/serve-local.py --port 5190
@@ -49,9 +50,11 @@ python scripts/build-current-site.py
 
 사이트 생성기는 기존 캡처를 덮어쓰지 않는다. `assets/screenshots/{date}/{id}.jpg`와 `suite.jpg`를 준비한 뒤 실행한다. PDF 생성기는 현재 프로젝트 7개 캡처가 모두 준비되지 않으면 중단하며 과거 이미지를 새 캡처로 복사하지 않는다. 마지막 사이트 생성은 현재 PDF·캡처까지 상위 `포트폴리오` 폴더에 동기화한다. 과거 자산과 PDF는 이력으로 보존한다.
 
-사용 매뉴얼 원본이 상위 `솔루션_사용매뉴얼/2026-10-24`에 있으면 사이트 생성기가 절차·원본 JPEG·공식 아이콘·샘플·개별 Markdown을 동기화한다. 원본 폴더가 없는 공개 저장소 체크아웃에서는 함께 제공된 `content/manuals.json`과 공개 자산으로 재생성한다. PDF·PPTX 원본이 있으면 ASCII 파일명의 다운로드 사본도 갱신한다.
+기존 상세 절차 원문과 38개 원본 캡처는 상위 `솔루션_사용매뉴얼/2026-10-24`에 동결 보존한다. 새 문서와 재촬영의 정식 원본은 `솔루션_사용매뉴얼/2026-10-25/publication-manifest.json`이다. 사이트 생성기는 이 manifest의 16개 문서 해시를 확인해 ASCII 다운로드 경로로 복사하며, `captureOverrides`의 실제 새 캡처와 실행 근거를 웹 안내·공개 Markdown에 반영한다. 원문 절차나 과거 증거 파일은 변경하지 않는다. 원본 폴더가 없는 공개 체크아웃에서는 함께 제공된 `content/manuals.json`과 공개 자산으로 재생성한다. 임시 검수본은 `python scripts/build-current-site.py --publication-manifest <manifest 경로>`로 지정할 수 있다.
 
-각 제품 상세 페이지의 ‘직접 사용하는 순서’에서 웹 매뉴얼·PDF 해당 장·개별 Markdown·통합 PPTX로 이동한다. 웹 매뉴얼은 아이콘 절차·캡처 확대·전체 단계 더보기·결과·문제 해결·실행 확인 범위를 제공한다. PDF 장 시작은 PLC 6 / Gateway 12 / Twin 17 / OEE 24 / Data 31 / Assistant 37 / AssetHub 45쪽이다. 원문과 캡처는 새 실행 결과로 바꾸지 않는다. 사이트와 상위 `포트폴리오` 미러의 매뉴얼 자산도 동일하게 유지한다.
+각 제품 상세 페이지의 ‘직접 사용하는 순서’에서 **해당 솔루션의 PDF·PPTX**를 먼저 제공하고, 웹 매뉴얼·Markdown·통합본 해당 장도 연결한다. 웹의 각 동작은 솔루션 전용 PDF의 정확한 로컬 페이지로 이동하며 통합본 페이지도 함께 안내한다. 통합본 장 시작은 PLC 6 / Gateway 12 / Twin 17 / OEE 24 / Data 31 / Assistant 37 / AssetHub 45쪽이다. 사이트와 상위 `포트폴리오` 미러의 모든 문서는 동일하다.
+
+복구판은 잘못된 SVG 대체 이미지에 의존하지 않고 실제 PNG 아이콘을 PPTX에 내장한다. 검증기는 8개 PPTX의 모든 래스터 이미지 디코딩, 8개 PDF의 페이지 수, 문서 해시와 동작별 페이지를 검사한다. DataNexus의 파일 수집·그리드·보고서는 대비 보정 후 2026-10-25 다시 촬영했다. 보고서 생성·Preview·Copy MD·Download .md와 복사/저장 내용 일치를 확인했으며 실제 저장 파일도 실습 자료에 포함한다. OEE 인증 이후 3개 절차는 미실행 상태로 유지한다.
 
 웹 생성에는 Python 표준 라이브러리, PDF에는 기존 ReportLab·Pillow·pypdf와 `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. OS/2 임베딩 플래그가 허용값 0 또는 8일 때만 글꼴을 부분 임베딩한다. 글꼴 파일 자체를 사이트에 복사하지 않는다. PDF는 전 페이지를 렌더링해 시각 확인한다. 새 패키지·외부 폰트·외부 AI API가 필요하지 않다.
 

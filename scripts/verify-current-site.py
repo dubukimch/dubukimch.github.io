@@ -31,6 +31,9 @@ def main():
     base=f'http://127.0.0.1:{args.port}/'
     data=json.loads((ROOT/'content/projects.json').read_text(encoding='utf-8'))
     guide_data=json.loads((ROOT/'content/manuals.json').read_text(encoding='utf-8'))
+    publication=json.loads((ROOT/guide_data['publication']).read_text(encoding='utf-8')) if guide_data.get('publication') else None
+    publication_entries=[publication['integrated'],*publication['solutions']] if publication else []
+    pdf_limits={entry['pdf']['path']:entry['slides'] for entry in publication_entries} if publication else {guide_data['downloads']['pdf']:guide_data['stats']['pdfPages']}
     date=data['date']
     assert len(data['projects'])==7,'Seven project records are required'
     assert len({p['id'] for p in data['projects']})==7,'Duplicate project identity'
@@ -50,11 +53,13 @@ def main():
             if parts.fragment:
                 if path.endswith('.pdf'):
                     assert re.fullmatch(r'page=[1-9]\d*', parts.fragment), 'Invalid PDF page link '+link
-                    assert int(parts.fragment.split('=')[1]) <= guide_data['stats']['pdfPages'], 'PDF page out of range '+link
+                    assert path in pdf_limits and int(parts.fragment.split('=')[1]) <= pdf_limits[path], 'PDF page out of range '+link
                 else:
                     assert path in documents and unquote(parts.fragment) in documents[path].ids, 'Missing anchor '+link
                 anchors+=1
             urls.add(urljoin(base,path)+(('?' + parts.query) if parts.query else ''))
+    for alias in (publication or {}).get('legacyDownloads', {}).values():
+        urls.add(urljoin(base,alias))
     for url in sorted(urls):
         with opener.open(url,timeout=5) as response:
             assert response.status==200,url
@@ -78,19 +83,17 @@ def main():
     assets=['assets/css/styles.css','assets/js/main.js',str(pdf.relative_to(ROOT))]
     assets += [f'assets/screenshots/{date}/{p["id"]}.jpg' for p in data['projects']]
     assets += [f'assets/screenshots/{date}/suite.jpg']
-    manuals=list((ROOT/'assets/docs/manuals').glob('industrial-solutions-user-manual-2026-10-24.*'))
-    for extension in ['pdf','pptx']:
-        source=ROOT.parent/'솔루션_사용매뉴얼/2026-10-24'/f'산업솔루션_통합사용매뉴얼.{extension}'
-        if source.is_file():
-            destination=ROOT/f'assets/docs/manuals/industrial-solutions-user-manual-2026-10-24.{extension}'
-            assert destination.is_file(), 'Manual source is ready; rebuild the site to copy it'
-            assert hashlib.sha256(source.read_bytes()).digest()==hashlib.sha256(destination.read_bytes()).digest(), 'Stale manual download: '+extension
+    manuals=[ROOT/entry[extension]['path'] for entry in publication_entries for extension in ('pdf','pptx')] if publication else [ROOT/path for path in guide_data['downloads'].values()]
     for manual in manuals:
-        relative=manual.relative_to(ROOT).as_posix()
-        assert manual.suffix in ('.pdf','.pptx')
+        assert manual.is_file() and manual.suffix in ('.pdf','.pptx')
+        assets.append(manual.relative_to(ROOT).as_posix())
+    for relative in guide_data['downloads'].values():
         for page in ['index.html','presentation.html']:
-            assert relative in documents[page].links, 'Manual download missing: '+page
-        assets.append(relative)
+            assert relative in documents[page].links, 'Integrated manual download missing: '+page
+    if publication:
+        for extension, relative in publication['legacyDownloads'].items():
+            assert hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()==publication['integrated'][extension]['sha256'], 'Legacy manual URL serves stale bytes'
+            assets.append(relative)
     assets=sorted((set(assets)|{unquote(urlsplit(url).path.lstrip('/')) for url in urls})-set(documents))
     for name in list(documents)+assets:
         assert hashlib.sha256((ROOT/name).read_bytes()).digest()==hashlib.sha256((mirror/name).read_bytes()).digest(),'Stale portfolio mirror: '+name
@@ -100,6 +103,7 @@ def main():
             'external_links_not_fetched':len(external),'pdf_sha256':digest,'hidden_git_path':'404',
             'projects':len(data['projects']),'mirror_files':len(documents)+len(assets),
             'manual_downloads':len(manuals),
+            'legacy_download_aliases':len((publication or {}).get('legacyDownloads', {})),
             'scope':'Static local links/assets/HTML and PDF anchors, manual captures and site-mirror identity; browser rendering not verified in this run'}
     stage=ROOT/'.local-preview';stage.mkdir(exist_ok=True)
     (stage/'link-result.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
