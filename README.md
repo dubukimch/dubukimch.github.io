@@ -4,12 +4,17 @@
 
 ## 웹 디자인 · 2026-10-26
 
-따뜻한 오프화이트·포리스트·세이지 색상과 `dubukimch` 워드마크를 사용한다. 홈은 TwinForge의 실제 화면을 대표 이미지로 제공하고, 일곱 프로젝트에 역할별 Lucide 아이콘과 상세·매뉴얼 링크를 배치한다. 18페이지가 같은 헤더·타이포그래피·버튼·모바일 스타일을 공유한다. `DESIGN_VERSION`은 웹 스타일 캐시 버전이며 캡처와 PDF의 근거 날짜는 그대로 유지한다. 외부 폰트·이미지 생성·새 의존성은 사용하지 않는다.
+따뜻한 오프화이트·포리스트·세이지 색상과 `dubukimch` 워드마크를 사용한다. 홈은 TwinForge의 실제 화면을 대표 이미지로 제공하고, 일곱 프로젝트에 역할별 Lucide 아이콘과 상세·매뉴얼 링크를 배치한다. 18페이지가 같은 헤더·타이포그래피·버튼·모바일 스타일을 공유한다. `DESIGN_VERSION`은 웹 스타일 캐시 버전이며 캡처와 PDF의 근거 날짜는 그대로 유지한다.
+
+2026-10-27부터 Pretendard Variable v1.3.9를 같은 사이트에서 제공한다. 제목의 굵기·자간을 완화하고 본문·메뉴·입력 요소까지 통일했다. 원본 글꼴과 SIL OFL 1.1 라이선스는 `assets/fonts/pretendard/`에 함께 보관하며 폰트 CDN에는 접속하지 않는다. 새 패키지 의존성과 이미지 생성은 사용하지 않는다.
+
+OEEAnalyzer의 홈 카드·상세 대표 화면은 2026-09-16의 실제 Final 분석 캡처다. 상세에는 Data Sources·Processing Rules·Window Ledger·TwinForge External OEE와 2026-10-23 로그인 화면을 추가했다. `content/oee-screens.json`에 설명·원본 경로·각 캡처 날짜를 보관한다. 과거 캡처를 새 실행으로 표현하지 않으며 TwinForge의 Provisional 결과와 Final 조회 결과를 구분한다. 10월 사용 매뉴얼·PDF의 실행 검증 범위와 원본은 그대로 보존한다.
 
 ## 현재 원본
 
 - `content/projects.json`: 일곱 제품의 문제·구현·역할·검증 범위와 남은 개선
 - `content/screenshots.json`: 로컬 캡처 경로·엔드포인트·설명 manifest
+- `content/oee-screens.json`: OEE 상세의 실제 동작 화면·설명·촬영일과 출처
 - `assets/screenshots/2026-10-23/`: 직접 실행한 로컬 UI 7개
 - `assets/css/styles.css`, `assets/js/main.js`: 반응형 디자인·검색·역할 필터·키보드 갤러리
 - `scripts/build-current-site.py`: 홈·상세 7개·아키텍처·문서 안내·매뉴얼 모음·솔루션별 웹 매뉴얼 7개, 총 18페이지 생성
@@ -60,7 +65,7 @@ python scripts/build-current-site.py
 
 복구판은 잘못된 SVG 대체 이미지에 의존하지 않고 실제 PNG 아이콘을 PPTX에 내장한다. 검증기는 8개 PPTX의 모든 래스터 이미지 디코딩, 8개 PDF의 페이지 수, 문서 해시와 동작별 페이지를 검사한다. DataNexus의 파일 수집·그리드·보고서는 대비 보정 후 2026-10-25 다시 촬영했다. 보고서 생성·Preview·Copy MD·Download .md와 복사/저장 내용 일치를 확인했으며 실제 저장 파일도 실습 자료에 포함한다. OEE 인증 이후 3개 절차는 미실행 상태로 유지한다.
 
-웹 생성에는 Python 표준 라이브러리, PDF에는 기존 ReportLab·Pillow·pypdf와 `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. OS/2 임베딩 플래그가 허용값 0 또는 8일 때만 글꼴을 부분 임베딩한다. 글꼴 파일 자체를 사이트에 복사하지 않는다. PDF는 전 페이지를 렌더링해 시각 확인한다. 새 패키지·외부 폰트·외부 AI API가 필요하지 않다.
+웹 생성에는 Python 표준 라이브러리, PDF에는 기존 ReportLab·Pillow·pypdf와 `C:/Windows/Fonts/malgun.ttf`, `malgunbd.ttf`를 사용한다. OS/2 임베딩 플래그가 허용값 0 또는 8일 때만 PDF에 부분 임베딩한다. Windows 글꼴 파일 자체는 사이트에 복사하지 않는다. PDF는 전 페이지를 렌더링해 시각 확인한다. 새 패키지·외부 AI API는 사용하지 않는다.
 
 ## 검증 근거의 날짜와 범위
 

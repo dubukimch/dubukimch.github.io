@@ -2,6 +2,7 @@
 import json
 import runpy
 import shutil
+import struct
 import sys
 from html import escape as e
 from pathlib import Path
@@ -16,7 +17,8 @@ PDF = f'assets/docs/industrial-platform-portfolio-{DATE}.pdf'
 SHOTS = f'assets/screenshots/{DATE}'
 MIRROR = ROOT.parent / '포트폴리오'
 MANUAL_DATE = '2026-10-25'
-DESIGN_VERSION = '2026-10-26'
+DESIGN_VERSION = '2026-10-27'
+OEE_SCREENS = json.loads((ROOT / 'content/oee-screens.json').read_text(encoding='utf-8'))
 PROJECT_ICONS = {'plc': 'cpu', 'gateway': 'network', 'twin': 'boxes', 'oee': 'gauge', 'data': 'chart', 'assistant': 'message-square', 'assethub': 'waypoints'}
 MANUAL_ROOT = ROOT.parent / '솔루션_사용매뉴얼' / '2026-10-24'
 GROUPS = [('all', '전체 프로젝트'), ('collect', '수집·연결'), ('operate', '운영·디지털 트윈'), ('analyze', '분석·설명'), ('identity', '자산·의미')]
@@ -45,9 +47,13 @@ def manual_downloads():
 
 
 def image_size(path):
-    """Read JPEG SOF dimensions without installing an image dependency."""
+    """Read PNG IHDR or JPEG SOF dimensions without an image dependency."""
     if path.is_file():
         with path.open('rb') as stream:
+            header = stream.read(24)
+            if header[:8] == b'\x89PNG\r\n\x1a\n':
+                return struct.unpack('>II', header[16:24])
+            stream.seek(0)
             if stream.read(2)==b'\xff\xd8':
                 while True:
                     marker=stream.read(1)
@@ -69,7 +75,7 @@ def page(title, content, description, active=''):
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f7f7f2"><title>{e(title)} · dubukimch</title>
 <meta name="description" content="{e(description)}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="assets/icons/brand.svg"><link rel="stylesheet" href="assets/css/styles.css?v={DESIGN_VERSION}"><link rel="stylesheet" href="assets/css/manuals.css?v={DESIGN_VERSION}"><script defer src="assets/js/main.js?v={DATE}"></script><script defer src="assets/js/manuals.js?v={MANUAL_DATE}"></script></head>
+<link rel="icon" type="image/svg+xml" href="assets/icons/brand.svg"><link rel="preload" href="assets/fonts/pretendard/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="assets/css/styles.css?v={DESIGN_VERSION}"><link rel="stylesheet" href="assets/css/manuals.css?v={DESIGN_VERSION}"><script defer src="assets/js/main.js?v={DATE}"></script><script defer src="assets/js/manuals.js?v={MANUAL_DATE}"></script></head>
 <body><a class="skip-link" href="#main">본문 바로가기</a>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Industrial Systems Portfolio 홈">{brand_mark()}<span class="brand-name">dubukimch<span class="brand-period">.</span><small>Software &amp; industrial systems</small></span></a>
 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" hidden>메뉴 {ui_icon("list")}</button>
@@ -85,8 +91,24 @@ def diagram():
 
 
 def shot(p, detail=False):
+    if p['id'] == 'oee':
+        return screen_figure(OEE_SCREENS['primary'], detailed=detail)
     width,height=image_size(ROOT/SHOTS/f'{p["id"]}.jpg')
     return f'''<figure class="product-shot{' detailed' if detail else ''}"><div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>{e(p['name'])}</span><span class="window-local">LOCAL</span></div><button type="button" class="shot" data-lightbox="{SHOTS}/{p['id']}.jpg" data-title="{e(p['label'])}" data-caption="{e(p['caption'])}" aria-label="{e(p['label'])} 화면 확대"><img src="{SHOTS}/{p['id']}.jpg" width="{width}" height="{height}" alt="{e(p['label'])} 로컬 UI 캡처" loading="lazy"><span class="expand-shot" aria-hidden="true">화면 확대 ↗</span></button><figcaption>{e(p['caption'])}</figcaption></figure>'''
+
+
+def screen_figure(screen, detailed=True):
+    width, height = image_size(ROOT / screen['file'])
+    caption = screen['caption']
+    return f'''<figure class="product-shot{' detailed' if detailed else ''}"><div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>{e(screen['title'])}</span><span class="window-local">LOCAL · {e(screen['date'])}</span></div><button type="button" class="shot" data-lightbox="{e(screen['file'])}" data-title="{e(screen['title'])}" data-caption="{e(caption)} · {e(screen['date'])}" aria-label="{e(screen['title'])} 화면 확대"><img src="{e(screen['file'])}" width="{width}" height="{height}" alt="{e(screen['alt'])}" loading="lazy"><span class="expand-shot" aria-hidden="true">화면 확대 ↗</span></button><figcaption>{e(caption)}</figcaption></figure>'''
+
+
+def oee_walkthrough():
+    rows = []
+    for screen in OEE_SCREENS['workflow']:
+        rows.append(f'''<article class="screen-story"><div class="screen-story-copy"><p class="eyebrow">{e(screen['eyebrow'])}</p><h3>{e(screen['title'])}</h3><p>{e(screen['description'])}</p><p class="screen-detail">{e(screen['detail'])}</p></div>{screen_figure(screen)}</article>''')
+    supporting = ''.join(f'''<article class="screen-support"><div><p class="eyebrow">{e(screen['eyebrow'])}</p><h3>{e(screen['title'])}</h3><p>{e(screen['description'])}</p></div>{screen_figure(screen)}</article>''' for screen in OEE_SCREENS['supporting'])
+    return f'''<section class="section shell screen-walkthrough" aria-labelledby="oee-screens-title"><div class="section-head"><div><p class="eyebrow">INSIDE OEEANALYZER</p><h2 id="oee-screens-title">화면으로 살펴보는 분석 흐름</h2></div><p>{e(OEE_SCREENS['intro'])}</p></div><div class="screen-stories">{''.join(rows)}</div><div class="screen-supports">{supporting}</div></section>'''
 
 
 def evidence():
@@ -137,7 +159,8 @@ def build():
         detail_html = detail(p,index)
         marker = '<section class="section shell"><div class="verification-grid">'
         assert detail_html.count(marker) == 1, 'Project guide must precede verification section'
-        detail_html = detail_html.replace(marker, manual_strip(guides[p['id']], MANUAL_DATA) + marker, 1)
+        walkthrough = oee_walkthrough() if p['id'] == 'oee' else ''
+        detail_html = detail_html.replace(marker, walkthrough + manual_strip(guides[p['id']], MANUAL_DATA) + marker, 1)
         pages[p['page']]=page(p['label'],detail_html,p['headline']+' · '+p['role'])
     pages['manuals.html'] = page('솔루션 사용 매뉴얼', manual_hub(MANUAL_DATA), '일곱 산업 솔루션의 41개 동작과 38개 실제 화면, PDF·PPTX·Markdown 사용 안내', 'manuals')
     for guide in MANUAL_DATA['products']:
@@ -147,6 +170,11 @@ def build():
     for filename,html in pages.items():
         (ROOT/filename).write_text(html,encoding='utf-8')
     manifest={'date':DATE,'capture_format':'Native browser JPEG; dimensions recorded from each available image','screenshots':[{'id':p['id'],'file':f'{SHOTS}/{p["id"]}.jpg','size':image_size(ROOT/SHOTS/f'{p["id"]}.jpg') if (ROOT/SHOTS/f'{p["id"]}.jpg').is_file() else None,'endpoint':p['endpoint'],'caption':p['caption']} for p in PROJECTS], 'integration_capture':{'file':f'{SHOTS}/suite.jpg','size':image_size(ROOT/SHOTS/'suite.jpg') if (ROOT/SHOTS/'suite.jpg').is_file() else None,'endpoint':'http://127.0.0.1:5189/workbench/suite','caption':'고정된 일곱 로컬 경로의 HTTP 응답 관측. 제품 사이 데이터 전송 성공과는 별개입니다.'}}
+    primary = OEE_SCREENS['primary']
+    oee_capture = next(capture for capture in manifest['screenshots'] if capture['id'] == 'oee')
+    oee_capture.update(file=primary['file'], size=image_size(ROOT/primary['file']), date=primary['date'], caption=primary['caption'])
+    manifest['oee_gallery'] = [dict(screen, size=image_size(ROOT/screen['file'])) for screen in [primary, *OEE_SCREENS['workflow'], *OEE_SCREENS['supporting']]]
+    manifest['capture_format'] = 'Original local browser PNG/JPEG; individual capture dates and dimensions retained'
     (ROOT/'content/screenshots.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     MIRROR.mkdir(exist_ok=True)
     for filename in pages:
@@ -158,7 +186,9 @@ def build():
     guide_assets = [ROOT/'assets/css/manuals.css', ROOT/'assets/js/manuals.js', ROOT/'content/manuals.json', ROOT/'content/manual-assets.json']
     if (ROOT/'content/manual-publication.json').is_file():
         guide_assets.append(ROOT/'content/manual-publication.json')
-    for folder in ['assets/docs/manuals', 'assets/icons/lucide', 'assets/screenshots/manuals']:
+    guide_assets += [ROOT/entry['file'] for entry in manifest['oee_gallery']]
+    guide_assets += [ROOT/'content/oee-screens.json', ROOT/'content/screenshots.json']
+    for folder in ['assets/docs/manuals', 'assets/icons/lucide', 'assets/screenshots/manuals', 'assets/fonts']:
         guide_assets.extend(path for path in (ROOT/folder).rglob('*') if path.is_file())
     for source in guide_assets:
         target = MIRROR/source.relative_to(ROOT)

@@ -79,7 +79,7 @@
   color: var(--manual-ink);
   font-size: 30px;
   font-weight: 650;
-  letter-spacing: -.045em;
+  letter-spacing: -.025em;
 }
 
 .manual-catalog {
@@ -169,7 +169,7 @@
   font-size: 25px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -.04em;
+  letter-spacing: -.025em;
 }
 
 .manual-catalog-copy {
